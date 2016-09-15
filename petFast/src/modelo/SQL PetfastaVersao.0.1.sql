@@ -18,7 +18,7 @@ telefone VARCHAR(20)not null,
 RG VARCHAR(16),
 CPF VARCHAR(18)not null primary key
 )
-
+go
 
 -- DROP TABLE ENDCEP
 --dia 15-09-2016

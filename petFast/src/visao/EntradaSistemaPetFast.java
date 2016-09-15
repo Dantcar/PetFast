@@ -48,6 +48,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         subMenuSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         menuAtendimento.setText("Atendimento");
         menuAtendimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N

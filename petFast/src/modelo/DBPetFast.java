@@ -129,7 +129,7 @@ public class DBPetFast {
         //Connection con3;
         con3=null;
         Class.forName("org.apache.derby.jdbc.ClientDriver");
-        con3 = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
+        con3 = DriverManager.getConnection("jdbc:derby://localhost:1527/Petfast", "DAC", "12345");
         //con = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
         return con3;
     }
@@ -141,7 +141,7 @@ public class DBPetFast {
         msg="";
         try {
         Class.forName("org.apache.derby.jdbc.ClientDriver"); 
-        con4 = DriverManager.getConnection("jdbc:derby://localhost:1527/Aerofast", "DAC", "12345");
+        con4 = DriverManager.getConnection("jdbc:derby://localhost:1527/Petfast", "DAC", "12345");
         }catch (ClassNotFoundException ecl){
         msg = msg+ecl;
         JOptionPane.showMessageDialog(null,reduzString(msg) );
