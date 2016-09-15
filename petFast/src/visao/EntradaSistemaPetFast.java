@@ -5,6 +5,8 @@
  */
 package visao;
 
+import javax.swing.JLayeredPane;
+
 /**
  *
  * @author Décio
@@ -198,11 +200,11 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 729, Short.MAX_VALUE)
+            .addGap(0, 894, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+            .addGap(0, 602, Short.MAX_VALUE)
         );
 
         pack();
@@ -225,7 +227,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
     private void subMenuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuClienteActionPerformed
         // Cadastro.montaTelaCliente();
-        /*
+        
         String tituloCliente;
         tituloCliente = "Gestão Cliente";
 

@@ -33,7 +33,7 @@ public class DBPetFast {
       
       String msg;
       msg="";
-      url ="jdbc:derby://localhost:1527/Aerofast";
+      url ="jdbc:derby://localhost:1527/Petfast";
       //usuario ="DAC"; //EM CASA
       usuario ="DAC";
       //senha = "123456";
@@ -100,7 +100,7 @@ public class DBPetFast {
       startDerby();
       
       boolean con1=false;
-      url ="jdbc:derby://localhost:1527/Aerofast";
+      url ="jdbc:derby://localhost:1527/Petfast";
       usuario ="DAC"; //em casa alterar para "DAC"
       senha = "12345";
       
