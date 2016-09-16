@@ -18,6 +18,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
      */
     public EntradaSistemaPetFast() {
         initComponents();
+        setExtendedState(MAXIMIZED_BOTH); //maximizar a tela principal
     }
 
     /**
@@ -383,6 +384,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EntradaSistemaPetFast().setVisible(true);
+                
             }
         });
     }

@@ -15,7 +15,7 @@ uf VARCHAR(2)not null,
 cep VARCHAR(10)not null,
 email VARCHAR(60)not null,
 telefone VARCHAR(20)not null,
-RG VARCHAR(16),
+RG VARCHAR(16)not null,
 CPF VARCHAR(18)not null primary key
 )
 go
@@ -46,6 +46,11 @@ referenciaPagamento VARCHAR(20) not null
 )
 
 
+CREATE TABLE USUARIO (
+LOGIN VARCHAR(30) NOT NULL, 
+SENHA VARCHAR(12) NOT NULL, 
+PODER DECIMAL(1) NOT NULL, 
+PRIMARY KEY (LOGIN));
 
 
 
@@ -64,4 +69,7 @@ INSERT INTO DAC.CLIENTE (IDCLIENTE, NOME, NASCIMENTO, ENDERECO, NUMERO, BAIRRO, 
 INSERT INTO DAC.CLIENTE (IDCLIENTE, NOME, NASCIMENTO, ENDERECO, NUMERO, BAIRRO, CIDADE, UF, CEP, EMAIL, TELEFONE, RG, CPF) 
 	VALUES (4, 'Custódio Mesquita', '10/10/1960', 'Rua Leandro Dupré', '690', 'Vila Clementino', 'São Paulo', 'SP', '04025-010', 'Custodio@Globo.com', '(11)98585-6321', '12.345.678-9', '899.999.999-99');
 
-
+--tabela DAC.USUARIO
+--dia 16-09-2016
+INSERT INTO DAC.USUARIO (LOGIN, SENHA, PODER) 
+	VALUES ('Teste', '12345abc', 1);

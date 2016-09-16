@@ -43,6 +43,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         tctLogin = new javax.swing.JTextField();
         lblUsuarioSenha = new javax.swing.JLabel();
         tctSenha = new javax.swing.JTextField();
+        lblLogoPet = new javax.swing.JLabel();
 
         btnUsuarioVoltar.setBackground(new java.awt.Color(204, 204, 204));
         btnUsuarioVoltar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -91,34 +92,44 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         tctSenha.setForeground(new java.awt.Color(51, 51, 51));
         tctSenha.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
+        lblLogoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/petCatDog.jpg"))); // NOI18N
+        lblLogoPet.setText(" ");
+
         javax.swing.GroupLayout panelUsuarioLayout = new javax.swing.GroupLayout(panelUsuario);
         panelUsuario.setLayout(panelUsuarioLayout);
         panelUsuarioLayout.setHorizontalGroup(
             panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUsuarioLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
                 .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelUsuarioLayout.createSequentialGroup()
-                        .addComponent(btnNovoUsuarioBd, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(btnUsuarioVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelUsuarioLayout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addComponent(lblUsuarioSenha)
-                            .addGap(18, 18, 18)
-                            .addComponent(tctSenha))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelUsuarioLayout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(lblLogin)
-                            .addGap(18, 18, 18)
-                            .addComponent(tctLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(41, 41, 41)
+                        .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelUsuarioLayout.createSequentialGroup()
+                                .addComponent(btnNovoUsuarioBd, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(btnUsuarioVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelUsuarioLayout.createSequentialGroup()
+                                    .addGap(14, 14, 14)
+                                    .addComponent(lblUsuarioSenha)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tctSenha))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelUsuarioLayout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblLogin)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tctLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(panelUsuarioLayout.createSequentialGroup()
+                        .addGap(208, 208, 208)
+                        .addComponent(lblLogoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         panelUsuarioLayout.setVerticalGroup(
             panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUsuarioLayout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(lblLogoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tctLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogin))
@@ -138,16 +149,16 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 101, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 101, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,6 +200,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovoUsuarioBd;
     private javax.swing.JButton btnUsuarioVoltar;
     private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblLogoPet;
     private javax.swing.JLabel lblUsuarioSenha;
     private javax.swing.JPanel panelUsuario;
     private static javax.swing.JTextField tctLogin;

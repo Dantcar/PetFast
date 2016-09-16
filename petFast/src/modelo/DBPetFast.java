@@ -12,12 +12,20 @@ package modelo;
 import static controle.Util.reduzString;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class DBPetFast {
+ 
+ private Connection conexao;
+ private Statement stmt;
+ private ResultSet rs;
+ //public int idClienteNow = 0;
  
   public static Connection con;
   public static Connection con1;
@@ -162,6 +170,53 @@ public class DBPetFast {
         return con2;
     }
     */
+   
+    
+    //Realizar login no sistema
+    public boolean realizarLoginPetfast(String user, String password){
+        boolean resposta = false ;  
+      String msg;
+        msg="";
+        conexao = DBPetFast.getConnection();
+        ResultSet rs;
+        rs = null;
+            try {
+                 stmt =conexao.createStatement(
+                 ResultSet.TYPE_SCROLL_INSENSITIVE,
+                 ResultSet.CONCUR_READ_ONLY);
+            } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+                 Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                rs = stmt.executeQuery("SELECT * FROM usuario ORDER BY 1 DESC"); //select * from DAC.CLIENTE order BY 1 DESC
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+     try {
+         if (rs.first()) {
+           //entra no sistema
+             resposta = true;
+            
+             
+            } else{
+             
+         }
+     } catch (SQLException ex) {
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+         msg=""+ex;
+         JOptionPane.showMessageDialog(null, reduzString(msg));
+         resposta = false;
+     }
+     
+     return resposta;
+    }//final metodo realizarLoginPetfast
+    
+    
     
   /**
      * 
