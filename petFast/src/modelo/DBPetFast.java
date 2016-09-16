@@ -36,6 +36,7 @@ public class DBPetFast {
   private static String usuario;
   private static String senha;
   public static boolean acesso;
+  public static int tentativa = 0;
   
   public DBPetFast(){
       
@@ -173,9 +174,15 @@ public class DBPetFast {
    
     
     //Realizar login no sistema
+    
+    /*
+    select * from DAC.USUARIO
+    WHERE LOGIN = 'Teste' AND SENHA = '12345abc';
+    */
     public boolean realizarLoginPetfast(String user, String password){
-        boolean resposta = false ;  
-      String msg;
+        boolean resposta = false ;
+        
+        String msg;
         msg="";
         conexao = DBPetFast.getConnection();
         ResultSet rs;
@@ -190,7 +197,9 @@ public class DBPetFast {
             }
             
             try {
-                rs = stmt.executeQuery("SELECT * FROM usuario ORDER BY 1 DESC"); //select * from DAC.CLIENTE order BY 1 DESC
+                rs = stmt.executeQuery("SELECT * FROM usuario WHERE LOGIN "
+                     + "= "+user+ "AND SENHA ="+password); 
+                //select * from DAC.USUARIO WHERE LOGIN = 'Teste' AND SENHA = '12345abc';
                 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, reduzString(msg + ex));
@@ -201,10 +210,8 @@ public class DBPetFast {
          if (rs.first()) {
            //entra no sistema
              resposta = true;
-            
-             
             } else{
-             
+          // msg = "tentativa "  + tentativa;
          }
      } catch (SQLException ex) {
          Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);

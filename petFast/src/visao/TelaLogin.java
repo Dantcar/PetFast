@@ -9,22 +9,22 @@
 package visao;
 
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static controle.UsuarioCtrl.logarUsuario;
 import javax.swing.JOptionPane;
-import static modelo.DBPetFast.criarUsuarioDerby;
 
 /**
  *
  * @author deciodecarvalho
  */
-public class TelaUsuario extends javax.swing.JInternalFrame {
+public class TelaLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaUsuario
      */
-    public TelaUsuario() {
+    public TelaLogin() {
+        
         initComponents();
+        
     }
 
     /**
@@ -42,13 +42,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         lblLogin = new javax.swing.JLabel();
         tctLogin = new javax.swing.JTextField();
         lblUsuarioSenha = new javax.swing.JLabel();
-        tctSenha = new javax.swing.JTextField();
         lblLogoPet = new javax.swing.JLabel();
+        lblMensagem = new javax.swing.JLabel();
+        tctSenha = new javax.swing.JPasswordField();
 
         btnUsuarioVoltar.setBackground(new java.awt.Color(204, 204, 204));
         btnUsuarioVoltar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnUsuarioVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
-        btnUsuarioVoltar.setText("Voltar");
+        btnUsuarioVoltar.setText("Sair");
         btnUsuarioVoltar.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnUsuarioVoltar.setPreferredSize(new java.awt.Dimension(100, 50));
         btnUsuarioVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +61,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         btnNovoUsuarioBd.setBackground(new java.awt.Color(204, 204, 204));
         btnNovoUsuarioBd.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnNovoUsuarioBd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/bdVerdeAlvo.png"))); // NOI18N
-        btnNovoUsuarioBd.setText("Inserir Usuário BD");
+        btnNovoUsuarioBd.setText("Login Usuário");
         btnNovoUsuarioBd.setIconTextGap(2);
         btnNovoUsuarioBd.setInheritsPopupMenu(true);
         btnNovoUsuarioBd.setMargin(new java.awt.Insets(2, 0, 2, 0));
@@ -88,60 +89,62 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         lblUsuarioSenha.setForeground(new java.awt.Color(102, 102, 102));
         lblUsuarioSenha.setText("Senha: ");
 
-        tctSenha.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        tctSenha.setForeground(new java.awt.Color(51, 51, 51));
-        tctSenha.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-
         lblLogoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/petCatDog.jpg"))); // NOI18N
         lblLogoPet.setText(" ");
+
+        tctSenha.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout panelUsuarioLayout = new javax.swing.GroupLayout(panelUsuario);
         panelUsuario.setLayout(panelUsuarioLayout);
         panelUsuarioLayout.setHorizontalGroup(
             panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUsuarioLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(btnNovoUsuarioBd, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnUsuarioVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+            .addGroup(panelUsuarioLayout.createSequentialGroup()
                 .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelUsuarioLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelUsuarioLayout.createSequentialGroup()
-                                .addComponent(btnNovoUsuarioBd, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(btnUsuarioVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelUsuarioLayout.createSequentialGroup()
-                                    .addGap(14, 14, 14)
-                                    .addComponent(lblUsuarioSenha)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tctSenha))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelUsuarioLayout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
+                    .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelUsuarioLayout.createSequentialGroup()
+                            .addGap(27, 27, 27)
+                            .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelUsuarioLayout.createSequentialGroup()
                                     .addComponent(lblLogin)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tctLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tctLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panelUsuarioLayout.createSequentialGroup()
+                                    .addComponent(lblUsuarioSenha)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tctSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(7, 7, 7)))
                     .addGroup(panelUsuarioLayout.createSequentialGroup()
-                        .addGap(208, 208, 208)
+                        .addGap(204, 204, 204)
                         .addComponent(lblLogoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelUsuarioLayout.setVerticalGroup(
             panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLogoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tctLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tctSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuarioSenha))
-                .addGap(71, 71, 71)
+                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUsuarioSenha)
+                    .addComponent(tctSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUsuarioVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovoUsuarioBd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(105, 105, 105))
+                .addGap(48, 48, 48))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,8 +152,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -176,18 +178,22 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         login = tctLogin.getText().trim();
         password = tctSenha.getText().trim();
         
-        boolean CriarUsuarioDerby = false;
-        try {
-            CriarUsuarioDerby = criarUsuarioDerby(login, password);
-        } catch (ClassNotFoundException ex) {
-            
-            Logger.getLogger(TelaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            msg ="Ocorreu um erro ao tentar criar novo usuário do Banco de dados \n";
-            JOptionPane.showMessageDialog(null, msg+ex );
+        boolean logarUsuarioPet = false;
+        logarUsuarioPet = logarUsuario(login, password);
+        if (logarUsuarioPet){
+            this.dispose();
+            msg ="Usuário: "+login+ " logado com sucesso";
+            String tituloPrincipal;
+        tituloPrincipal = "Gestão Petfast";
+        
+        EntradaSistemaPetFast telaPrincipal = new EntradaSistemaPetFast();
+        telaPrincipal.setTitle(tituloPrincipal);
+        telaPrincipal.setVisible(true);
+           // JOptionPane.showMessageDialog(null, msg );
         }
-        if (CriarUsuarioDerby){
-            msg ="Usuário: "+login+ " inserido com sucesso";
-            JOptionPane.showMessageDialog(null, msg );
+        else{
+           msg ="Usuário: "+login+ " falha login";
+            JOptionPane.showMessageDialog(null, msg ); 
         }
     }//GEN-LAST:event_btnNovoUsuarioBdActionPerformed
 
@@ -195,15 +201,53 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tctLoginMouseReleased
 
+/**
+         * @param args the command line arguments
+         */
+        public static void main(String args[]) {
+            /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+             */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        //</editor-fold>
+            //</editor-fold>
+        //</editor-fold>
+            //</editor-fold>
 
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new TelaLogin().setVisible(true);
+                }
+            });
+        }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovoUsuarioBd;
     private javax.swing.JButton btnUsuarioVoltar;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblLogoPet;
+    private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblUsuarioSenha;
     private javax.swing.JPanel panelUsuario;
     private static javax.swing.JTextField tctLogin;
-    private static javax.swing.JTextField tctSenha;
+    private javax.swing.JPasswordField tctSenha;
     // End of variables declaration//GEN-END:variables
 }

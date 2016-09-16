@@ -45,7 +45,8 @@ formaPagamento VARCHAR(20)not null,
 referenciaPagamento VARCHAR(20) not null
 )
 
-
+-- DROP TABLE USUARIO
+--dia 15-09-2016
 CREATE TABLE USUARIO (
 LOGIN VARCHAR(30) NOT NULL, 
 SENHA VARCHAR(12) NOT NULL, 
