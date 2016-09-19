@@ -10,6 +10,8 @@ package visao;
 
 
 import static controle.UsuarioCtrl.logarUsuario;
+import static controle.ValidaCampos.validaLogin;
+import static controle.ValidaCampos.validaSenhaForte;
 import javax.swing.JOptionPane;
 
 /**
@@ -174,27 +176,45 @@ public class TelaLogin extends javax.swing.JFrame {
         //meu codigo aqui
         String login;
         String password;
-        String msg;
+        String msg="";
         login = tctLogin.getText().trim();
         password = tctSenha.getText().trim();
         
         boolean logarUsuarioPet = false;
-        logarUsuarioPet = logarUsuario(login, password);
-        if (logarUsuarioPet){
-            this.dispose();
-            msg ="Usuário: "+login+ " logado com sucesso";
-            String tituloPrincipal;
-        tituloPrincipal = "Gestão Petfast";
         
-        EntradaSistemaPetFast telaPrincipal = new EntradaSistemaPetFast();
-        telaPrincipal.setTitle(tituloPrincipal);
-        telaPrincipal.setVisible(true);
-           // JOptionPane.showMessageDialog(null, msg );
-        }
+        
+        if (validaSenhaForte(password) && validaLogin(login)) {
+        
+            logarUsuarioPet = logarUsuario(login, password);
+                if (logarUsuarioPet){
+                    this.dispose();
+                    msg ="Usuário: "+login+ " logado com sucesso";
+                    String tituloPrincipal;
+                    tituloPrincipal = "Gestão Petfast";
+        
+                    EntradaSistemaPetFast telaPrincipal = new EntradaSistemaPetFast();
+                    telaPrincipal.setTitle(tituloPrincipal);
+                     telaPrincipal.setVisible(true);
+                    // JOptionPane.showMessageDialog(null, msg );
+                }
         else{
-           msg ="Usuário: "+login+ " falha login";
-            JOptionPane.showMessageDialog(null, msg ); 
+             msg ="Usuário: "+login+ " falha login";
+             JOptionPane.showMessageDialog(null, msg ); 
+            }
+        
+        } else {
+            msg = msg + "A Senha não atende o requisito: \n"
+                    +"pelo menos uma letra minúscula\n"
+                    +"pelo menos uma letra maiúscula\n"
+                    +"pelo menos um número\n"
+                    +"pelo menos um caractere especial\n"
+                    +"minímo de 8 caracteres e máximo de 15\n"
+                    +"ou usuário invalido"
+                    ;
+            JOptionPane.showMessageDialog(null, msg );
         }
+        
+        
     }//GEN-LAST:event_btnNovoUsuarioBdActionPerformed
 
     private void tctLoginMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tctLoginMouseReleased
