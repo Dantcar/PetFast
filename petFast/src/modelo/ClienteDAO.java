@@ -1,9 +1,9 @@
 /*
  * Este Software tem Objetivo Educacional
  * Para fins de aprendizagem e avaliacao na
- * Na Disciplina de Programacao Orientada a Objetos - Avancada
+ * Na Disciplina de Laboratório Engenharia
  *  do Curso de Analise de Sistemas da Fatec - Ipiranga
- * Ano 2016 - Janeiro a Junho 
+ * Ano 2016 - julho a Dezembro 2016 
  * Aluno Decio Antonio de Carvalho  * 
  */
 package modelo;
@@ -198,8 +198,8 @@ public class ClienteDAO {
             return cliente;
            
         } else {
-           msg="Cliente não encontrado";
-           JOptionPane.showMessageDialog(null, msg);
+           //msg="Cliente não encontrado";
+           //JOptionPane.showMessageDialog(null, msg);
            close();
            return null;
        }
@@ -572,6 +572,69 @@ public class ClienteDAO {
         return listaCliente;
     }
     
+    /**
+     * 
+     * @param nomeCliente
+     * @return cliente
+     */
+    public Cliente buscarClienteNome(String nomeCliente) {
+        Cliente cl = new Cliente();
+        
+        String msg = "";
+        String sql = "SELECT * FROM cliente WHERE nome LIKE "+"'"+nomeCliente+"'";
+        System.out.println(sql);
+        conexao = DBPetFast.getConnection();
+        ResultSet rs;
+        rs = null;
+                
+     try {
+         stmt = conexao.createStatement(
+                 ResultSet.TYPE_SCROLL_INSENSITIVE,
+                 ResultSet.CONCUR_READ_ONLY);
+     } catch (SQLException ex) {
+         msg = msg + ex + "\n";
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        
+     try {
+         rs = stmt.executeQuery(sql);
+     } catch (SQLException ex) {
+         msg = msg + ex + "\n";
+         msg = reduzString(msg);
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     
+     try {
+         if(rs.first()){
+             //Cliente cl = new Cliente();
+             cl.setIdCliente(rs.getString("idcliente"));
+             cl.setNome(rs.getString("nome"));
+             cl.setNascimento(rs.getString("nascimento"));
+             cl.setEndereco(rs.getString("endereco"));
+             cl.setNumero(rs.getString("numero"));
+             cl.setBairro(rs.getString("bairro"));
+             cl.setCidade(rs.getString("cidade"));
+             cl.setUf(rs.getString("uf"));
+             cl.setCep(rs.getString("cep"));
+             cl.setEmail(rs.getString("email"));
+             cl.setTelefone(rs.getString("telefone"));
+             cl.setRg(rs.getString("rg"));
+             cl.setCpf(rs.getString("cpf"));    
+         }
+         else{
+         msg = msg + "Cliente não encontrado \n";
+         }
+         
+     } catch (SQLException ex) {
+         Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        return cl;
+    }//Fim método buscarrClientesNomes()
     
     
 } // final da classe ClienteDAO

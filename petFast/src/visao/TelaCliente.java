@@ -1,15 +1,16 @@
 /*
  * Este Software tem Objetivo Educacional
  * Para fins de aprendizagem e avaliacao na
- * Na Disciplina de Programacao Orientada a Objetos - Avancada
+ * Na Disciplina de Laboratório Engenharia
  *  do Curso de Analise de Sistemas da Fatec - Ipiranga
- * Ano 2016 - Janeiro a Junho 
+ * Ano 2016 - julho a Dezembro 2016 
  * Aluno Decio Antonio de Carvalho  * 
  */
 package visao;
 
 import controle.ClienteCtrl;
 import static controle.ClienteCtrl.receberClienteCPF;
+import static controle.ClienteCtrl.receberClienteNome;
 import controle.Util;
 import static controle.Util.reduzString;
 import controle.ValidaCampos;
@@ -832,8 +833,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         Cliente cliente;
 
         try {
-
+            
+            
             cliente = receberClienteCPF(tftCPF.getText());
+            if (cliente == null){
+            cliente = receberClienteNome(tctNome.getText());  
+            }
+            
             if (cliente != null) {
                 oldCPF = tftCPF.getText();
                 /**

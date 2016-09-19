@@ -1,9 +1,9 @@
 /*
  * Este Software tem Objetivo Educacional
  * Para fins de aprendizagem e avaliacao na
- * Na Disciplina de Programa��o Orientada a Objetos - Avan�ada
+ * Na Disciplina de Laboratório Engenharia
  *  do Curso de Analise de Sistemas da Fatec - Ipiranga
- * Ano 2016 - Janeiro a Junho 
+ * Ano 2016 - julho a Dezembro 2016 
  * Aluno Decio Antonio de Carvalho  * 
  */
 package controle;
@@ -68,6 +68,13 @@ public class ClienteCtrl {
        List<Cliente> lista = clienteDAO.listarClienteNome(nomeCliente);
        return lista;
     
+    }
+    
+    public static Cliente receberClienteNome(String nomeCliente){
+        ClienteDAO cliDAO = new ClienteDAO();
+        Cliente cliente = cliDAO.buscarClienteNome(nomeCliente);
+        return cliente;   
+        
     }
         
 }

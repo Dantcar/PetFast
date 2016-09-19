@@ -1,9 +1,9 @@
 /*
  * Este Software tem Objetivo Educacional
  * Para fins de aprendizagem e avaliacao na
- * Na Disciplina de Programacao Orientada a Objetos - Avancada
+ * Na Disciplina de Laboratório Engenharia
  *  do Curso de Analise de Sistemas da Fatec - Ipiranga
- * Ano 2016 - Janeiro a Junho 
+ * Ano 2016 - julho a Dezembro 2016 
  * Aluno Decio Antonio de Carvalho  * 
  */
 package controle;
