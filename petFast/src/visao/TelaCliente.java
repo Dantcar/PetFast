@@ -804,7 +804,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 boolean flag = false; //verificar esta flag
 
                 try {
+                    
                     cCliente.alterarClienteCtrl(objCli, oldCPF);
+                   // JOptionPane.showMessageDialog(this, msg, "Dados Alterados", JOptionPane.INFORMATION_MESSAGE);
                 } catch (ClassNotFoundException | SQLException ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -964,6 +966,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         String msg = "";
         // TODO add your handling code here:
         //btnSalvarPassageiro.doClick();
+        
         btnSalvarClienteActionPerformed(evt);
     }//GEN-LAST:event_btnAlterarClienteActionPerformed
 
@@ -988,7 +991,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         if (!tctNome.isEditable()) {
             
             habilitarDadosCliente();
-            
+            oldCPF = tftCPF.getText();
         }
         btnAlterarCliente.setEnabled(true);
         btnEditarCliente.setEnabled(false);

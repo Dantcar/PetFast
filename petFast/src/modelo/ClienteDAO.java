@@ -312,6 +312,7 @@ public class ClienteDAO {
         stmt = conexao.createStatement();
         
         //String sql = "UPDATE cliente SET " + "CPF = '"+ cliente.getCpf()+ "' WHERE CPF = '" + vcpf + "'" ;    
+        
         String sql = "UPDATE cliente SET "
                 //+ "idCliente = "+ parseInt(cliente.getIdCliente())+", "
                 + "nome = '" + cliente.getNome() + "', "
@@ -332,7 +333,7 @@ public class ClienteDAO {
             stmt.executeUpdate(sql);
            
             msg = msg+"Dados do cliente alterados com sucesso \n";
-           // JOptionPane.showMessageDialog(null, msg );
+            //JOptionPane.showMessageDialog(null, reduzString(sql) );
         } catch (SQLException | HeadlessException e) {
             msg = reduzString(msg+e);
             msg = reduzString(msg);
@@ -581,7 +582,7 @@ public class ClienteDAO {
         Cliente cl = new Cliente();
         
         String msg = "";
-        String sql = "SELECT * FROM cliente WHERE nome LIKE "+"'"+nomeCliente+"'";
+        String sql = "SELECT * FROM cliente WHERE upper(nome) LIKE upper('"+nomeCliente+"')";
         System.out.println(sql);
         conexao = DBPetFast.getConnection();
         ResultSet rs;
