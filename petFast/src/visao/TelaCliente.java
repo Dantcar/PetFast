@@ -11,6 +11,7 @@ package visao;
 import controle.ClienteCtrl;
 import static controle.ClienteCtrl.receberClienteCPF;
 import static controle.ClienteCtrl.receberClienteNome;
+import static controle.ClienteCtrl.receberClienteTelefone;
 import controle.Util;
 import static controle.Util.reduzString;
 import controle.ValidaCampos;
@@ -833,12 +834,18 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         Cliente cliente;
 
         try {
+           
+            cliente = receberClienteCPF(tftCPF.getText()); 
             
-            
-            cliente = receberClienteCPF(tftCPF.getText());
             if (cliente == null){
-            cliente = receberClienteNome(tctNome.getText());  
+            cliente = receberClienteTelefone(tftTelefone.getText());
             }
+            
+            if (cliente.getTelefone() == null){
+            cliente = receberClienteNome(tctNome.getText());
+            }
+           
+                    
             
             if (cliente != null) {
                 oldCPF = tftCPF.getText();

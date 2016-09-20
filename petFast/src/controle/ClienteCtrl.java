@@ -55,7 +55,11 @@ public class ClienteCtrl {
        return lista = clienteDAO.findComboClienteNome();
     
     }
-
+    
+    /**
+     * Método Controle para receber uma lista de clientes
+     * @return 
+     */
     public List<Cliente> listarClientes() {
        ClienteDAO clienteDAO = new ClienteDAO();
        List<Cliente> lista = clienteDAO.listarClientes();
@@ -63,6 +67,12 @@ public class ClienteCtrl {
     
     }
 
+    /**
+     * Método Controle para receber a busca de uma lista de clientes
+     * enviando o nome
+     * @param nomeCliente
+     * @return 
+     */
     public List<Cliente> listaClientesNome(String nomeCliente) {
        ClienteDAO clienteDAO = new ClienteDAO();
        List<Cliente> lista = clienteDAO.listarClienteNome(nomeCliente);
@@ -70,9 +80,26 @@ public class ClienteCtrl {
     
     }
     
+    /**
+     * Método Controle para receber a busca de um cliente enviando o nome
+     * @param nomeCliente
+     * @return 
+     */
     public static Cliente receberClienteNome(String nomeCliente){
         ClienteDAO cliDAO = new ClienteDAO();
         Cliente cliente = cliDAO.buscarClienteNome(nomeCliente);
+        return cliente;   
+        
+    }
+    
+    /**
+     * Método Controle para receber a busca de um cliente enviando o telefone
+     * @param telefoneCliente
+     * @return 
+     */
+     public static Cliente receberClienteTelefone(String telefoneCliente){
+        ClienteDAO cliDAO = new ClienteDAO();
+        Cliente cliente = cliDAO.buscarClienteTelefone(telefoneCliente);
         return cliente;   
         
     }
