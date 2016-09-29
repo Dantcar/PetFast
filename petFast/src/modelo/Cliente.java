@@ -1,9 +1,8 @@
 /*
  * Este Software tem Objetivo Educacional
- * Para fins de aprendizagem e avaliacao na
- * Na Disciplina de Programacao Orientada a Objetos - Avancada
+ * Para fins de TCC
  *  do Curso de Analise de Sistemas da Fatec - Ipiranga
- * Ano 2016 - Janeiro a Junho 
+ * Ano 2016 - Julho a Dezembnro  
  * Aluno Decio Antonio de Carvalho  * 
  */
 package modelo;
@@ -28,6 +27,7 @@ public class Cliente {
    private String rg;
    private String cpf;
    public static int vidCliente;
+   
     public Cliente() {
     }
     
