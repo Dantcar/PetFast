@@ -568,7 +568,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(JPanelClienteTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JPanelClienteCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(JPanelClienteCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(JPanelClienteBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -586,38 +586,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSairClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairClienteActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnSairClienteActionPerformed
-
-    private void btnLimparClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparClienteActionPerformed
-        habilitarDadosCliente();
-        btnSalvarCliente.setEnabled(true);
-        btnAlterarCliente.setEnabled(false);
-        btnEditarCliente.setEnabled(false);
-        btnExcluirCliente.setEnabled(false);
-        tctBairro.setText(null);
-        tftCep.setText(null);
-        tctCidade.setText(null);
-        cbxUF.setSelectedIndex(-1);
-        tftCPF.setText(null);
-        tftRG.setText(null);
-        tftEmail.setText(null);
-        tftTelefone.setText(null);
-
-        //jspNascimento.setEnabled(false);
-        jspNascimento.getEditor().setBackground(Color.yellow);  //funciona
-        jspNascimento.getEditor().setForeground(Color.red);
-        jspNascimento.setValue(dtCliente);
-       // altera a cor da fonte;
-        //jspNascimento.getEditor();
-        tctNome.setText(null);
-        tctNumeroEndCliente.setText(null);
-        tctEndereco.setText(null);
-
-
-    }//GEN-LAST:event_btnLimparClienteActionPerformed
 
         /**
          * método para desabilitar edição dos dados da tela cliente.
@@ -656,6 +624,123 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             btnAlterarCliente.setEnabled(true);
         }
 
+    private void btnPesquisarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarCepActionPerformed
+        // TODO add your handling code here:
+        if (Util.VerificaEndereco(tftCep.getText())) {
+            tctEndereco.setText(Util.vEnd);
+            tctBairro.setText(Util.vBairro);
+            tctCidade.setText(Util.vCidade);
+            cbxUF.setSelectedItem(Util.vUf);
+            tctNumeroEndCliente.grabFocus(); //coloca foco no campo numero endereço após buscar cep.
+        }
+
+    }//GEN-LAST:event_btnPesquisarCepActionPerformed
+
+    private void tftCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftCPFActionPerformed
+
+    }//GEN-LAST:event_tftCPFActionPerformed
+
+    private void jspNascimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jspNascimentoMouseClicked
+        jspNascimento.getEditor().setBackground(Color.black);
+        jspNascimento.getEditor().setForeground(Color.black);
+    }//GEN-LAST:event_jspNascimentoMouseClicked
+
+    private void jspNascimentoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jspNascimentoMouseReleased
+        // TODO add your handling code here:
+        jspNascimento.getEditor().setBackground(Color.black);
+        jspNascimento.getEditor().setForeground(Color.black);
+    }//GEN-LAST:event_jspNascimentoMouseReleased
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here
+        this.moveToFront();
+    }//GEN-LAST:event_formMouseClicked
+
+    private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClienteActionPerformed
+        // TODO add your handling code here:
+        if (!tctNome.isEditable()) {
+
+            habilitarDadosCliente();
+            oldCPF = tftCPF.getText();
+        }
+        btnAlterarCliente.setEnabled(true);
+        btnEditarCliente.setEnabled(false);
+        btnPesquisarCep.setEnabled(true);
+    }//GEN-LAST:event_btnEditarClienteActionPerformed
+
+    private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
+        @SuppressWarnings("UnusedAssignment")
+        String msg = "";
+        // TODO add your handling code here:
+        //btnSalvarPassageiro.doClick();
+
+        btnSalvarClienteActionPerformed(evt);
+    }//GEN-LAST:event_btnAlterarClienteActionPerformed
+
+    private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
+        btnSalvarCliente.setEnabled(false);
+        btnAlterarCliente.setEnabled(false);
+        btnEditarCliente.setEnabled(false);
+        boolean flag = false;
+
+        //inicio
+        //ClienteCtrl controller = new ClienteCtrl();
+        Cliente cliente;
+
+        try {
+
+            cliente = receberClienteCPF(tftCPF.getText());
+            if (cliente != null) {
+                oldCPF = tftCPF.getText();
+                /**
+                * Tratamento do campo tipo jSpinner
+                */
+                String sdataNascimento = cliente.getNascimento();
+
+                try {
+                    calNascimentoCliente = Util.retornaData(sdataNascimento);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jspNascimento.setValue(calNascimentoCliente);
+
+                tctBairro.setText(cliente.getBairro());
+
+                tftCep.setText(cliente.getCep());
+                tctCidade.setText(cliente.getCidade());
+
+                //Como pesquisar comboBox
+                cbxUF.setSelectedItem(cliente.getUf());
+
+                tftCPF.setText(cliente.getCpf());
+                tftRG.setText(cliente.getRg());
+                tftEmail.setText(cliente.getEmail());
+                //tftNascimento.setText(arrayCli.get(i).getNascimento());
+                tftTelefone.setText(cliente.getTelefone());
+                tctNome.setText(cliente.getNome());
+                tctEndereco.setText(cliente.getEndereco());
+                tctNumeroEndCliente.setText(cliente.getNumero());
+
+                //desabilitar edição
+                desabilitarDadosCliente();
+                //chamar método em control para deletar o cliente
+                ClienteCtrl cCliente = new ClienteCtrl();
+                cCliente.deletarClienteCtrl(cliente, oldCPF);
+                btnLimparCliente.doClick(); //Limpar tela
+                flag = true;
+
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //fim método
+
+        //fim método
+    }//GEN-LAST:event_btnExcluirClienteActionPerformed
+
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
         ClienteCtrl cCliente = new ClienteCtrl();
         Cliente objCli;
@@ -677,7 +762,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         objCli.setCidade(tctCidade.getText().trim());
         //objCli.setUf(Arrays.toString(cbxUF.getSelectedObjects()));
         objCli.setUf((String) cbxUF.getSelectedItem());
-      //objCli.setUf(cbxUF.getSelectedObjects());
+        //objCli.setUf(cbxUF.getSelectedObjects());
 
         String nome = tctNome.getText().trim();
         //String nasc = tftNascimento.getText();
@@ -693,7 +778,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         String cidade = tctCidade.getText().trim();
         String uf = Arrays.toString(cbxUF.getSelectedObjects());
 
-      //int i = arrayCli.indexOf(tctNome.getText ());
+        //int i = arrayCli.indexOf(tctNome.getText ());
         String msg;
         msg = "";
 
@@ -786,7 +871,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         }
 
         if ("".equals(msg)) {
-           // msg = "Dados Enviados ao banco de dados do sistema!";
+            // msg = "Dados Enviados ao banco de dados do sistema!";
 
             if (btnSalvarCliente.isEnabled()) {
 
@@ -804,9 +889,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 boolean flag = false; //verificar esta flag
 
                 try {
-                    
+
                     cCliente.alterarClienteCtrl(objCli, oldCPF);
-                   // JOptionPane.showMessageDialog(this, msg, "Dados Alterados", JOptionPane.INFORMATION_MESSAGE);
+                    // JOptionPane.showMessageDialog(this, msg, "Dados Alterados", JOptionPane.INFORMATION_MESSAGE);
                 } catch (ClassNotFoundException | SQLException ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -820,7 +905,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, msg, "Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_btnSalvarClienteActionPerformed
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
@@ -836,85 +920,22 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         Cliente cliente;
 
         try {
-           
-            cliente = receberClienteCPF(tftCPF.getText()); 
-            
-            if (cliente == null){
-            cliente = receberClienteTelefone(tftTelefone.getText());
-            }
-            
-            if (cliente.getTelefone() == null){
-            cliente = receberClienteNome(tctNome.getText());
-            }
-           
-                    
-            
-            if (cliente != null) {
-                oldCPF = tftCPF.getText();
-                /**
-                 * Tratamento do campo tipo jSpinner
-                 */
-                String sdataNascimento = cliente.getNascimento();
-
-                try {
-                    calNascimentoCliente = Util.retornaData(sdataNascimento);
-                } catch (Exception ex) {
-                    Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                jspNascimento.setValue(calNascimentoCliente);
-
-                tctBairro.setText(cliente.getBairro());
-
-                tftCep.setText(cliente.getCep());
-                tctCidade.setText(cliente.getCidade());
-
-                //Como pesquisar comboBox
-                cbxUF.setSelectedItem(cliente.getUf());
-
-                tftCPF.setText(cliente.getCpf());
-                tftRG.setText(cliente.getRg());
-                tftEmail.setText(cliente.getEmail());
-                //tftNascimento.setText(arrayCli.get(i).getNascimento());
-                tftTelefone.setText(cliente.getTelefone());
-                tctNome.setText(cliente.getNome());
-                tctEndereco.setText(cliente.getEndereco());
-                tctNumeroEndCliente.setText(cliente.getNumero());
-
-                //desabilitar edição
-                desabilitarDadosCliente();
-                flag = true;
-
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        //fim método
-
-        //fim método
-
-    }//GEN-LAST:event_btnPesquisarClienteActionPerformed
-
-    private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
-        btnSalvarCliente.setEnabled(false);
-        btnAlterarCliente.setEnabled(false);
-        btnEditarCliente.setEnabled(false);
-        boolean flag = false;
-
-        //inicio
-        //ClienteCtrl controller = new ClienteCtrl();
-        Cliente cliente;
-
-        try {
 
             cliente = receberClienteCPF(tftCPF.getText());
+
+            if (cliente == null){
+                cliente = receberClienteTelefone(tftTelefone.getText());
+            }
+
+            if (cliente.getTelefone() == null){
+                cliente = receberClienteNome(tctNome.getText());
+            }
+
             if (cliente != null) {
                 oldCPF = tftCPF.getText();
                 /**
-                 * Tratamento do campo tipo jSpinner
-                 */
+                * Tratamento do campo tipo jSpinner
+                */
                 String sdataNascimento = cliente.getNascimento();
 
                 try {
@@ -943,10 +964,6 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
                 //desabilitar edição
                 desabilitarDadosCliente();
-                //chamar método em control para deletar o cliente
-                ClienteCtrl cCliente = new ClienteCtrl();
-                cCliente.deletarClienteCtrl(cliente, oldCPF);
-                btnLimparCliente.doClick(); //Limpar tela
                 flag = true;
 
             }
@@ -956,63 +973,41 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //fim método        
+        //fim método
 
-        //fim método        
-    }//GEN-LAST:event_btnExcluirClienteActionPerformed
+        //fim método
+    }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
-    private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
-        @SuppressWarnings("UnusedAssignment")
-        String msg = "";
-        // TODO add your handling code here:
-        //btnSalvarPassageiro.doClick();
-        
-        btnSalvarClienteActionPerformed(evt);
-    }//GEN-LAST:event_btnAlterarClienteActionPerformed
-
-    private void btnPesquisarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarCepActionPerformed
-        // TODO add your handling code here:
-        if (Util.VerificaEndereco(tftCep.getText())) {
-            tctEndereco.setText(Util.vEnd);
-            tctBairro.setText(Util.vBairro);
-            tctCidade.setText(Util.vCidade);
-            cbxUF.setSelectedItem(Util.vUf);
-            tctNumeroEndCliente.grabFocus(); //coloca foco no campo numero endereço após buscar cep.
-        }
-
-    }//GEN-LAST:event_btnPesquisarCepActionPerformed
-
-    private void tftCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftCPFActionPerformed
-
-    }//GEN-LAST:event_tftCPFActionPerformed
-
-    private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClienteActionPerformed
-        // TODO add your handling code here:
-        if (!tctNome.isEditable()) {
-            
-            habilitarDadosCliente();
-            oldCPF = tftCPF.getText();
-        }
-        btnAlterarCliente.setEnabled(true);
+    private void btnLimparClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparClienteActionPerformed
+        habilitarDadosCliente();
+        btnSalvarCliente.setEnabled(true);
+        btnAlterarCliente.setEnabled(false);
         btnEditarCliente.setEnabled(false);
-        btnPesquisarCep.setEnabled(true);
-    }//GEN-LAST:event_btnEditarClienteActionPerformed
+        btnExcluirCliente.setEnabled(false);
+        tctBairro.setText(null);
+        tftCep.setText(null);
+        tctCidade.setText(null);
+        cbxUF.setSelectedIndex(-1);
+        tftCPF.setText(null);
+        tftRG.setText(null);
+        tftEmail.setText(null);
+        tftTelefone.setText(null);
 
-    private void jspNascimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jspNascimentoMouseClicked
-        jspNascimento.getEditor().setBackground(Color.black);
-        jspNascimento.getEditor().setForeground(Color.black);
-    }//GEN-LAST:event_jspNascimentoMouseClicked
+        //jspNascimento.setEnabled(false);
+        jspNascimento.getEditor().setBackground(Color.yellow);  //funciona
+        jspNascimento.getEditor().setForeground(Color.red);
+        jspNascimento.setValue(dtCliente);
+        // altera a cor da fonte;
+        //jspNascimento.getEditor();
+        tctNome.setText(null);
+        tctNumeroEndCliente.setText(null);
+        tctEndereco.setText(null);
 
-    private void jspNascimentoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jspNascimentoMouseReleased
-        // TODO add your handling code here:
-        jspNascimento.getEditor().setBackground(Color.black);
-        jspNascimento.getEditor().setForeground(Color.black);
-    }//GEN-LAST:event_jspNascimentoMouseReleased
+    }//GEN-LAST:event_btnLimparClienteActionPerformed
 
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // TODO add your handling code here
-        this.moveToFront();
-    }//GEN-LAST:event_formMouseClicked
+    private void btnSairClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairClienteActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairClienteActionPerformed
 
         /**
          * @param args the command line arguments
@@ -1057,7 +1052,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel JPanelClienteBotoes;
     private javax.swing.JPanel JPanelClienteCadastro;
     private javax.swing.JPanel JPanelClienteTitulo;
-    private static javax.swing.JButton btnAlterarCliente;
+    private javax.swing.JButton btnAlterarCliente;
     private javax.swing.JButton btnEditarCliente;
     private javax.swing.JButton btnExcluirCliente;
     private javax.swing.JButton btnLimparCliente;
