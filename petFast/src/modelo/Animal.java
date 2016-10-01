@@ -5,7 +5,6 @@
  * Ano 2016 - Julho a Dezembnro  
  * Aluno Decio Antonio de Carvalho  * 
  */
-
 package modelo;
 
 /**
@@ -21,7 +20,8 @@ public class Animal {
     public static void setVidAnimal(int aVidAnimal) {
         vidAnimal = aVidAnimal;
     }
-    private String idCliente;
+    private String idCliente; //chave estrangeira do dono do animal
+    private String idAnimal;
     private String nome;
     private String especie;
     private String nascimento;
@@ -31,15 +31,16 @@ public class Animal {
     private String cor;
     private String caracteristica;
     private String sexo;
-    private static int vidAnimal;   
+    private static int vidAnimal;
 
     public Animal() {
     }
 
     /**
      * Método Construtor
-     * 
+     *
      * @param idCliente
+     * @param idAnimal
      * @param nome
      * @param especie
      * @param nascimento
@@ -48,10 +49,11 @@ public class Animal {
      * @param altura
      * @param cor
      * @param caracteristica
-     * @param sexo 
+     * @param sexo
      */
     public Animal(String idCliente, String nome, String especie, String nascimento, String raca, String peso, String altura, String cor, String caracteristica, String sexo) {
         this.idCliente = idCliente;
+        this.idAnimal = idAnimal;
         this.nome = nome;
         this.especie = especie;
         this.nascimento = nascimento;
@@ -63,12 +65,16 @@ public class Animal {
         this.sexo = sexo;
     }
 
-    public String getIdCliente() {
-        return idCliente;
-    }
-
+    /**
+     * métodos set Animal
+     *
+     */
     public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
+    }
+    
+    public void setIdAnimal(String idAnimal) {
+        this.idAnimal = idAnimal;
     }
 
     public String getNome() {
@@ -135,6 +141,18 @@ public class Animal {
         this.caracteristica = caracteristica;
     }
 
+    /**
+     * métodos get Animal
+     *
+     */
+    public String getIdCliente() {
+        return idCliente;
+    }
+
+    public String getIdAnimal() {
+        return idAnimal;
+    }
+
     public String getSexo() {
         return sexo;
     }
@@ -142,11 +160,6 @@ public class Animal {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-    
-    
 
-
-}
-
-
+}//final classe Animal
 

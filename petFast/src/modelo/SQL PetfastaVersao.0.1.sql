@@ -4,7 +4,7 @@
 USE Petfast.DAC
 GO
 CREATE TABLE CLIENTE (
-idCliente int not null, 
+idCliente int not null,
 nome VARCHAR(60)not null,
 nascimento VARCHAR(10)not null,
 endereco VARCHAR(60)not null,
@@ -90,6 +90,7 @@ WHERE LOGIN = 'Teste'
 --DROP TABLE ANIMAL
 CREATE TABLE ANIMAL (
 IDANIMAL int not null,
+IDCLIENTE int not null,
 NOME VARCHAR(60) NOT NULL, 
 ESPECIE VARCHAR(60) NOT NULL, 
 NASCIMENTO VARCHAR(10) NOT NULL,

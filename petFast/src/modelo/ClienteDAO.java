@@ -459,7 +459,7 @@ public class ClienteDAO {
         conexao = DBPetFast.getConnection();
         ResultSet rs;
         rs = null;
-        ArrayList lista;
+        ArrayList lista; //remover?
         lista = null;
                 
      try {
