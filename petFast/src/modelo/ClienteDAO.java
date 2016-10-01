@@ -110,11 +110,12 @@ public class ClienteDAO {
      */
     public boolean buscarExisteClienteCPF(String cpf){
       boolean resposta = true;
-      String msg;
+      String msg,sql;
         msg="";
         conexao = DBPetFast.getConnection();
         ResultSet rs;
         rs = null;
+        sql ="";
             try {
                  stmt =conexao.createStatement(
                  ResultSet.TYPE_SCROLL_INSENSITIVE,

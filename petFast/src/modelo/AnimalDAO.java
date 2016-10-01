@@ -72,7 +72,7 @@ public class AnimalDAO {
         conexao = DBPetFast.getConnection();
         ResultSet rs;
         rs = null;
-        sql = "SELECT * FROM animal ORDER BY 1 DESC";
+        sql = "SELECT * FROM animal ORDER BY idanimal DESC";
 
         try {
             stmt = conexao.createStatement(
@@ -173,6 +173,12 @@ public class AnimalDAO {
 
     }//final método buscarAnimalNome
 
+    /**
+     * Método para buscar uma lista de animais fornecendo o idCliente
+     *
+     * @param cliente
+     * @return
+     */
     public List<Animal> listarAnimaisCliente(int cliente) {
         Animal animal = new Animal();   //objeto animal que será utilizado para preencher a lista
         List<Animal> lista = new ArrayList<>(); //lista de animais pertencentes ao cliente
@@ -237,5 +243,124 @@ public class AnimalDAO {
 
         return lista;
     }//final método listarAnimaisCliente
+
+    /**
+     * Método boolean que retorna true se existir o animal informado pelo idanimal
+     * @param animal
+     * @return 
+     */
+    public boolean buscarAnimalByIdAnimal(int idanimal) {
+        boolean resposta = true;
+        String msg,sql;
+        msg ="";
+        sql = "SELECT * FROM cliente WHERE idanimal = " + idanimal;
+        conexao = DBPetFast.getConnection();
+        ResultSet rs;
+        rs = null;
+
+        try {
+            //conexao com o banco Petfast
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+            //Enviando o comando sql
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Utilizando o resultado da consulta sql
+        try {
+            if (rs.first()) {
+                close();
+                resposta = false;
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "/n";
+            close();
+            resposta = false;
+            
+        }
+       
+        //envia mensagem na tela caso ocorra alguma execessao ou nao encontre o animal
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        
+        return resposta;
+    }//final método buscarAnimalByIdAnimal
+    
+    /**
+     * Método para buscar um objeto animal informando o idAnimal
+     * @param id
+     * @return 
+     */
+    public Animal buscarAnimalId(int id){
+        Animal animal = new Animal();
+        
+        //Variáveis do método
+        String msg, sql;
+        msg="";
+        conexao = DBPetFast.getConnection();
+        ResultSet rs = null;
+        sql = "SELECT * FROM cliente WHERE idanimal = " + id;
+        
+        //enviando o comando sql
+        try {
+            //Conectando com banco petfast
+            stmt =conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            if (rs.first()) {
+                //utilizando o objeto animal estanciado no início do método
+
+                animal.setIdAnimal(rs.getString("idanimal"));
+                animal.setIdCliente(rs.getString("idcliente"));
+                animal.setNome(rs.getString("nome"));
+                animal.setEspecie(rs.getString("especie"));
+                animal.setNascimento(rs.getString("nascimento"));
+                animal.setRaca(rs.getString("raca"));
+                animal.setPeso(rs.getString("peso"));
+                animal.setAltura(rs.getString("altura"));
+                animal.setCor(rs.getString("cor"));
+                animal.setCaracteristica(rs.getString("caracteristica"));
+                animal.setCaracteristica(rs.getString("sexo"));
+
+            } else {
+                msg = msg + "Animal Pet não encontrado \n";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Qualquer falha mostra as mensagens respectivas
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        return animal;
+    }//Final do método buscarAnimalId
+    
 
 }//final Classe AnimalDAO
