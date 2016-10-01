@@ -254,6 +254,20 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
     private void subMenuPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuPetActionPerformed
         // Cadastro.montaTelaNovoPassageiro();
+        String tituloCliente;
+        tituloCliente = "Gestão Cliente";
+
+        TelaClientePet telaClientePet = new TelaClientePet();
+        telaClientePet.setTitle(tituloCliente);
+        telaClientePet.setVisible(true);
+        
+        add(telaClientePet, JLayeredPane.DRAG_LAYER);
+
+        telaClientePet.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+        telaClientePet.setLocation(250, 100); //(ponto inicial apartir lateral,altura)
+        //setLocationRelativeTo(null);
+        
+        
         /*
         String tituloPassageiro ;
         tituloPassageiro = "Gestão Passageiro";

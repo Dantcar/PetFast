@@ -24,8 +24,11 @@ public class TelaLogin extends javax.swing.JFrame {
      * Creates new form TelaUsuario
      */
     public TelaLogin() {
+        int vert,hor;
         
         initComponents();
+        setLocationRelativeTo(null);
+        //setLocation(250,100); //(ponto inicial apartir lateral,altura)
         
     }
 

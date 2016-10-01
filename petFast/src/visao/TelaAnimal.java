@@ -5,6 +5,12 @@
  */
 package visao;
 
+import java.awt.Color;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+
 /**
  *
  * @author Décio
@@ -29,11 +35,12 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
 
         jPanelPetAnimalTitulo1 = new javax.swing.JPanel();
         lblTituloPet1 = new javax.swing.JLabel();
-        lblTelaPetNomePet = new javax.swing.JPanel();
         lblTelaPetNomeCliente = new javax.swing.JLabel();
+        tctPetAnimalCliente = new javax.swing.JTextField();
+        lblTelaPetNomePet = new javax.swing.JPanel();
+        lblTelaPetNome = new javax.swing.JLabel();
         tctPetAnimal = new javax.swing.JTextField();
         lblTelaPetNascimento = new javax.swing.JLabel();
-        tctPetNascimento = new javax.swing.JTextField();
         tctPetCor = new javax.swing.JTextField();
         lblTelaPetCor = new javax.swing.JLabel();
         lblTelaPetEspecie = new javax.swing.JLabel();
@@ -50,7 +57,6 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         txaPetCaracteristica = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         tctPetFoto = new javax.swing.JTextField();
-        lblTelaPetUrlFoto = new javax.swing.JLabel();
         lblTelaPetPesoUnidade = new javax.swing.JLabel();
         lblTelaPetAlturaUnidade = new javax.swing.JLabel();
         rbMacho = new javax.swing.JRadioButton();
@@ -58,6 +64,17 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         btnPetSalvar = new javax.swing.JButton();
         btnPetExcluir = new javax.swing.JButton();
         btnPetVoltar = new javax.swing.JButton();
+        btnPetBuscarFoto = new javax.swing.JButton();
+        Date dtIntegradaNP = new Date();
+
+        SpinnerDateModel smIntegradaNP = new 
+        SpinnerDateModel(dtIntegradaNP,null,null,Calendar.MONTH + Calendar.DAY_OF_MONTH 
+            + Calendar.YEAR );
+        jspNascimentoPet = 
+        jspNascimentoPet = new javax.swing.JSpinner(smIntegradaNP);
+        JSpinner.DateEditor deIntegradaNP = new 
+        JSpinner.DateEditor(jspNascimentoPet,"dd/MM/yyyy");
+        jspNascimentoPet.setEditor(deIntegradaNP);
 
         jPanelPetAnimalTitulo1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -66,29 +83,45 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         lblTituloPet1.setForeground(new java.awt.Color(102, 102, 102));
         lblTituloPet1.setText("Pet-Animal");
 
+        lblTelaPetNomeCliente.setBackground(new java.awt.Color(102, 102, 102));
+        lblTelaPetNomeCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblTelaPetNomeCliente.setForeground(new java.awt.Color(102, 102, 102));
+        lblTelaPetNomeCliente.setText("Cliente:");
+
+        tctPetAnimalCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tctPetAnimalCliente.setForeground(new java.awt.Color(51, 51, 51));
+        tctPetAnimalCliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
         javax.swing.GroupLayout jPanelPetAnimalTitulo1Layout = new javax.swing.GroupLayout(jPanelPetAnimalTitulo1);
         jPanelPetAnimalTitulo1.setLayout(jPanelPetAnimalTitulo1Layout);
         jPanelPetAnimalTitulo1Layout.setHorizontalGroup(
             jPanelPetAnimalTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPetAnimalTitulo1Layout.createSequentialGroup()
-                .addContainerGap(517, Short.MAX_VALUE)
+            .addGroup(jPanelPetAnimalTitulo1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lblTituloPet1)
-                .addGap(408, 408, 408))
+                .addGap(148, 148, 148)
+                .addComponent(lblTelaPetNomeCliente)
+                .addGap(18, 18, 18)
+                .addComponent(tctPetAnimalCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelPetAnimalTitulo1Layout.setVerticalGroup(
             jPanelPetAnimalTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPetAnimalTitulo1Layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(lblTituloPet1)
+                .addGroup(jPanelPetAnimalTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTituloPet1)
+                    .addComponent(lblTelaPetNomeCliente)
+                    .addComponent(tctPetAnimalCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         lblTelaPetNomePet.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        lblTelaPetNomeCliente.setBackground(new java.awt.Color(102, 102, 102));
-        lblTelaPetNomeCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblTelaPetNomeCliente.setForeground(new java.awt.Color(102, 102, 102));
-        lblTelaPetNomeCliente.setText("Nome Pet:");
+        lblTelaPetNome.setBackground(new java.awt.Color(102, 102, 102));
+        lblTelaPetNome.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblTelaPetNome.setForeground(new java.awt.Color(102, 102, 102));
+        lblTelaPetNome.setText("Nome Pet:");
 
         tctPetAnimal.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tctPetAnimal.setForeground(new java.awt.Color(51, 51, 51));
@@ -98,10 +131,6 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         lblTelaPetNascimento.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblTelaPetNascimento.setForeground(new java.awt.Color(102, 102, 102));
         lblTelaPetNascimento.setText("Nascimento:");
-
-        tctPetNascimento.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        tctPetNascimento.setForeground(new java.awt.Color(51, 51, 51));
-        tctPetNascimento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         tctPetCor.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tctPetCor.setForeground(new java.awt.Color(51, 51, 51));
@@ -169,11 +198,6 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         tctPetFoto.setForeground(new java.awt.Color(51, 51, 51));
         tctPetFoto.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        lblTelaPetUrlFoto.setBackground(new java.awt.Color(102, 102, 102));
-        lblTelaPetUrlFoto.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblTelaPetUrlFoto.setForeground(new java.awt.Color(102, 102, 102));
-        lblTelaPetUrlFoto.setText("Url:");
-
         lblTelaPetPesoUnidade.setBackground(new java.awt.Color(102, 102, 102));
         lblTelaPetPesoUnidade.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblTelaPetPesoUnidade.setForeground(new java.awt.Color(102, 102, 102));
@@ -210,71 +234,85 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         btnPetVoltar.setText("Voltar");
         btnPetVoltar.setMargin(new java.awt.Insets(1, 1, 1, 1));
 
+        btnPetBuscarFoto.setBackground(new java.awt.Color(255, 255, 255));
+        btnPetBuscarFoto.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        btnPetBuscarFoto.setForeground(new java.awt.Color(102, 102, 0));
+        btnPetBuscarFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/dog3 amarelo.gif"))); // NOI18N
+        btnPetBuscarFoto.setText("Localizar Foto");
+        btnPetBuscarFoto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPetBuscarFoto.setMargin(new java.awt.Insets(1, 1, 1, 1));
+
+        jspNascimentoPet.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jspNascimentoPet.setToolTipText("Escolha Dia, Mês e Ano");
+        jspNascimentoPet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jspNascimentoPetMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jspNascimentoPetMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout lblTelaPetNomePetLayout = new javax.swing.GroupLayout(lblTelaPetNomePet);
         lblTelaPetNomePet.setLayout(lblTelaPetNomePetLayout);
         lblTelaPetNomePetLayout.setHorizontalGroup(
             lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblTelaPetNascimento)
+                        .addComponent(lblTelaPetRaca)
+                        .addComponent(lblTelaPetCor)
+                        .addComponent(lblTelaPetPeso)
+                        .addComponent(lblTelaPetCaracteristica))
+                    .addComponent(lblTelaPetEspecie, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTelaPetNome, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tctPetAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tctPetEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
+                            .addComponent(tctPetPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblTelaPetPesoUnidade)
+                            .addGap(58, 58, 58)
+                            .addComponent(lblTelaPetAltura)
+                            .addGap(18, 18, 18)
+                            .addComponent(tctPetAltura))
+                        .addComponent(tctPetCor)
+                        .addComponent(tctPetRaca)
+                        .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
+                            .addComponent(jspNascimentoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(66, 66, 66)
+                            .addComponent(lblTelaPetSexo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(rbMacho)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(rbFemea))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(lblTelaPetNomeCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tctPetAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblTelaPetNomePetLayout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(lblTelaPetEspecie)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tctPetEspecie))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblTelaPetNomePetLayout.createSequentialGroup()
-                                .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblTelaPetNascimento)
-                                    .addComponent(lblTelaPetRaca)
-                                    .addComponent(lblTelaPetCor)
-                                    .addComponent(lblTelaPetPeso)
-                                    .addComponent(lblTelaPetCaracteristica))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                                        .addComponent(tctPetPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblTelaPetPesoUnidade)
-                                        .addGap(58, 58, 58)
-                                        .addComponent(lblTelaPetAltura)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tctPetAltura))
-                                    .addComponent(tctPetCor)
-                                    .addComponent(tctPetRaca)
-                                    .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                                        .addComponent(tctPetNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(lblTelaPetSexo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(rbMacho)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(rbFemea))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(lblTelaPetAlturaUnidade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lblTelaPetUrlFoto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(241, 241, 241)
+                        .addComponent(btnPetExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                        .addComponent(btnPetVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblTelaPetNomePetLayout.createSequentialGroup()
                         .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tctPetFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                             .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                                .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(108, 108, 108)
-                                .addComponent(btnPetExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(lblTelaPetAlturaUnidade)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblTelaPetNomePetLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPetVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnPetBuscarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tctPetFoto, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         lblTelaPetNomePetLayout.setVerticalGroup(
@@ -284,7 +322,7 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
                         .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTelaPetNomeCliente)
+                            .addComponent(lblTelaPetNome)
                             .addComponent(tctPetAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,15 +331,16 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
                         .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
                                 .addGap(16, 16, 16)
-                                .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tctPetNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblTelaPetNascimento)))
+                                .addComponent(lblTelaPetNascimento))
                             .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblTelaPetSexo)
                                     .addComponent(rbMacho)
-                                    .addComponent(rbFemea))))
+                                    .addComponent(rbFemea)))
+                            .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jspNascimentoPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(16, 16, 16)
                         .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tctPetRaca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,22 +357,26 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
                             .addComponent(tctPetAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTelaPetPesoUnidade)
                             .addComponent(lblTelaPetAlturaUnidade))
-                        .addGap(66, 66, 66)
                         .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblTelaPetNomePetLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                                .addComponent(lblTelaPetCaracteristica)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(45, 45, 45))
+                                .addGap(66, 66, 66)
+                                .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblTelaPetNomePetLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
+                                        .addComponent(lblTelaPetCaracteristica)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(45, 45, 45))
+                            .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(btnPetBuscarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTelaPetUrlFoto)
-                            .addComponent(tctPetFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
+                        .addGap(27, 27, 27)
+                        .addComponent(tctPetFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnPetExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,36 +408,49 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jspNascimentoPetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jspNascimentoPetMouseClicked
+        jspNascimentoPet.getEditor().setBackground(Color.black);
+        jspNascimentoPet.getEditor().setForeground(Color.black);
+    }//GEN-LAST:event_jspNascimentoPetMouseClicked
+
+    private void jspNascimentoPetMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jspNascimentoPetMouseReleased
+        // TODO add your handling code here:
+        jspNascimentoPet.getEditor().setBackground(Color.black);
+        jspNascimentoPet.getEditor().setForeground(Color.black);
+    }//GEN-LAST:event_jspNascimentoPetMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPetBuscarFoto;
     private javax.swing.JButton btnPetExcluir;
     private javax.swing.JButton btnPetSalvar;
     private javax.swing.JButton btnPetVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanelPetAnimalTitulo1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jspNascimentoPet;
     private javax.swing.JLabel lblTelaPetAltura;
     private javax.swing.JLabel lblTelaPetAlturaUnidade;
     private javax.swing.JLabel lblTelaPetCaracteristica;
     private javax.swing.JLabel lblTelaPetCor;
     private javax.swing.JLabel lblTelaPetEspecie;
     private javax.swing.JLabel lblTelaPetNascimento;
+    private javax.swing.JLabel lblTelaPetNome;
     private javax.swing.JLabel lblTelaPetNomeCliente;
     private javax.swing.JPanel lblTelaPetNomePet;
     private javax.swing.JLabel lblTelaPetPeso;
     private javax.swing.JLabel lblTelaPetPesoUnidade;
     private javax.swing.JLabel lblTelaPetRaca;
     private javax.swing.JLabel lblTelaPetSexo;
-    private javax.swing.JLabel lblTelaPetUrlFoto;
     private javax.swing.JLabel lblTituloPet1;
     private javax.swing.JRadioButton rbFemea;
     private javax.swing.JRadioButton rbMacho;
     private static javax.swing.JTextField tctPetAltura;
     private static javax.swing.JTextField tctPetAnimal;
+    private static javax.swing.JTextField tctPetAnimalCliente;
     private static javax.swing.JTextField tctPetCor;
     private static javax.swing.JTextField tctPetEspecie;
     private static javax.swing.JTextField tctPetFoto;
-    private static javax.swing.JTextField tctPetNascimento;
     private static javax.swing.JTextField tctPetPeso;
     private static javax.swing.JTextField tctPetRaca;
     private javax.swing.JTextArea txaPetCaracteristica;
