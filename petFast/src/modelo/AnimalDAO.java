@@ -245,14 +245,16 @@ public class AnimalDAO {
     }//final método listarAnimaisCliente
 
     /**
-     * Método boolean que retorna true se existir o animal informado pelo idanimal
+     * Método boolean que retorna true se existir o animal informado pelo
+     * idanimal
+     *
      * @param animal
-     * @return 
+     * @return
      */
     public boolean buscarAnimalByIdAnimal(int idanimal) {
         boolean resposta = true;
-        String msg,sql;
-        msg ="";
+        String msg, sql;
+        msg = "";
         sql = "SELECT * FROM cliente WHERE idanimal = " + idanimal;
         conexao = DBPetFast.getConnection();
         ResultSet rs;
@@ -268,14 +270,14 @@ public class AnimalDAO {
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            //Enviando o comando sql
+        //Enviando o comando sql
         try {
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //Utilizando o resultado da consulta sql
         try {
             if (rs.first()) {
@@ -283,54 +285,55 @@ public class AnimalDAO {
                 resposta = false;
             }
         } catch (SQLException ex) {
-            msg = msg + ex + "/n";
+            msg = msg + ex + "\n";
             close();
             resposta = false;
-            
+
         }
-       
+
         //envia mensagem na tela caso ocorra alguma execessao ou nao encontre o animal
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);
         }
-        
+
         return resposta;
     }//final método buscarAnimalByIdAnimal
-    
+
     /**
      * Método para buscar um objeto animal informando o idAnimal
+     *
      * @param id
-     * @return 
+     * @return
      */
-    public Animal buscarAnimalId(int id){
+    public Animal buscarAnimalId(int id) {
         Animal animal = new Animal();
-        
+
         //Variáveis do método
         String msg, sql;
-        msg="";
+        msg = "";
         conexao = DBPetFast.getConnection();
         ResultSet rs = null;
         sql = "SELECT * FROM cliente WHERE idanimal = " + id;
-        
+
         //enviando o comando sql
         try {
             //Conectando com banco petfast
-            stmt =conexao.createStatement(
+            stmt = conexao.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             if (rs.first()) {
                 //utilizando o objeto animal estanciado no início do método
@@ -353,7 +356,7 @@ public class AnimalDAO {
         } catch (SQLException ex) {
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //Qualquer falha mostra as mensagens respectivas
         if ("".equals(msg)) {
         } else {
@@ -361,6 +364,140 @@ public class AnimalDAO {
         }
         return animal;
     }//Final do método buscarAnimalId
+    
+    /**
+     * Método para incluir um novo animal
+     * @param animal 
+     */
+    public void inserirAnimal(Animal animal) {
+        String msg;
+        int idAnimal = buscarIdPetAtual();
+        idAnimal = idAnimal + 1;
+
+        msg = "";
+        conexao = DBPetFast.getConnection();
+
+        String sql = "INSERT INTO animal VALUES ("
+                //+ parseInt(cliente.getIdCliente()) +", "
+                + idAnimal + ", "
+                + Integer.parseInt(animal.getIdCliente())
+                + "'" + animal.getNome() + "', "
+                + "'" + animal.getEspecie() + "', "
+                + "'" + animal.getNascimento() + "', "
+                + "'" + animal.getRaca() + "', "
+                + "'" + animal.getPeso() + "', "
+                + "'" + animal.getAltura() + "', "
+                + "'" + animal.getCor() + "', "
+                + "'" + animal.getCaracteristica() + "', "
+                + "'" + animal.getSexo() + "')";
+        
+        //Preparação do comando sql
+        try {
+            stmt = conexao.createStatement();
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            stmt.executeUpdate(sql);
+              msg = msg+"Dados do cliente inseridos com sucesso \n";
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        close();
+        try {
+            if (conexao.isClosed()){
+                // msg = msg+"Conexão ao banco fechada";
+                JOptionPane.showMessageDialog(null,msg );
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            JOptionPane.showMessageDialog(null,msg );
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//Final método inserirAnimal
+    
+    /**
+     * Método para alterar um animal cadastrado
+     * @param animal
+     * @param vid 
+     */
+    public void alterarAnimal(Animal animal, String vid){
+     String msg;
+        msg="";
+        conexao = DBPetFast.getConnection();
+        String sql = "UPDATE animal SET "
+                + "idCliente = '" + Integer.parseInt(animal.getIdCliente())
+                + "nome = '" + animal.getNome() + "', "
+                + "especie = '" + animal.getEspecie() + "', "
+                + "nascimento = '" + animal.getNascimento() + "', "
+                + "raca = '" + animal.getRaca() + "', "
+                + "peso = '" + animal.getPeso() + "', "
+                + "altura = '" + animal.getAltura() + "', "
+                + "cor = '" + animal.getCor() + "', "
+                + "caracteristica = '" + animal.getCaracteristica() + "', "
+                + "sexo = '" + animal.getSexo() + "', "
+           + " WHERE IDANIMAL = "+Integer.parseInt(vid);
+        
+        try {
+            stmt.executeUpdate(sql);
+            msg = msg+"Dados do animal alterados com sucesso \n";
+        } catch (SQLException ex) {
+            msg = reduzString(msg+ex);
+            msg = reduzString(msg);
+            msg = msg+"Erro de gravação no BD \n";
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+    }//Final método alterarAnimal
+    
+    /**
+     * Método para excluir um animal do cadastro
+     * @param animal
+     * @param vid 
+     */
+    public void deletarAnimal(Animal animal, String vid){
+       String msg;
+        msg="";
+        
+        conexao = DBPetFast.getConnection();
+        String sql ="DELETE FROM animal WHERE IDANIMAL = " +Integer.parseInt(vid);
+        
+        int n = JOptionPane.showConfirmDialog(
+            null,
+            "Confirma Deletar Animal?",
+            "Confirmar Deletar Animal",
+            JOptionPane.YES_NO_OPTION);
+           
+            if(true){
+           try {
+               stmt.executeUpdate(sql);
+               msg = msg+"Dados do cliente excluidos com sucesso \n";
+                } catch (SQLException ex) {
+                msg = reduzString(msg+ex);
+                 msg = reduzString(msg);
+                msg = msg+"Erro de gravação no BD \n";
+               Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+           }
+            
+         if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+         
+    }//Final método deletarAnimal
+    
+    
     
 
 }//final Classe AnimalDAO

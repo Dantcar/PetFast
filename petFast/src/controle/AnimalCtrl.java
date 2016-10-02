@@ -81,5 +81,31 @@ public class AnimalCtrl {
        return animal; 
     }
     
+    /**
+     * Método controle enviar animal para cadastro
+     * @param animal 
+     */
+    public void cInserirAnimal(Animal animal){
+        AnimalDAO animalDAO = new AnimalDAO();
+        animalDAO.inserirAnimal(animal);        
+    }//Final método cInserirAnimal
+    
+    /**
+     * Método controle para enviar alteração de animal cadastrado
+     * @param animal 
+     */
+    public void cAlterarAnimal(Animal animal, String id){
+        AnimalDAO animalDAO = new AnimalDAO();
+        animalDAO.alterarAnimal(animal, id);        
+    }//Final método cAlterarAnimal
+    
+    /**
+     * Método controle para enviar remoção de animal cadastrado
+     * @param animal 
+     */
+    public void cDelerarAnimal(Animal animal, String id){
+        AnimalDAO animalDAO = new AnimalDAO();
+        animalDAO.deletarAnimal(animal, id);        
+    }//Final método cDeletarAnimal
     
 }//Final classe AnimalCtrl
