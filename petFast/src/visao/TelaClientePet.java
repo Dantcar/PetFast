@@ -441,7 +441,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void btnIncluirPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirPetActionPerformed
         // TODO add your handling code here:
-        
+        this.dispose();
         //passar pelo control??
          String tituloCliente;
         tituloCliente = "Gestão Animal Pet";
@@ -450,13 +450,13 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         telaAnimal.setTitle(tituloCliente);
         telaAnimal.setVisible(true);
         
-        add(telaAnimal, JLayeredPane.DRAG_LAYER);
+        //add(telaAnimal, JLayeredPane.DRAG_LAYER);
 
         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
         telaAnimal.setLocation(50, 10); //(ponto inicial apartir lateral,altura)
         //chamar a tela inclusão pet
         //chamarTelaAnimal(tctPetAnimalCliente.getText(), tctPetAnimalCpfCliente.getText());
-        //this.dispose();
+        
     }//GEN-LAST:event_btnIncluirPetActionPerformed
 
     
