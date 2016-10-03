@@ -103,5 +103,18 @@ public class ClienteCtrl {
         return cliente;   
         
     }
+     
+     /**
+     * Método Controle para receber a busca de uma lista de clientes
+     * enviando o nome
+     * @param nomeCliente
+     * @return 
+     */
+    public List<Cliente> listaClientesPorNome(String nomeCliente) {
+       ClienteDAO clienteDAO = new ClienteDAO();
+       List<Cliente> lista = clienteDAO.listarClientePorNome(nomeCliente);
+       return lista;
+    
+    }
         
 }

@@ -253,7 +253,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuClienteActionPerformed
 
     private void subMenuPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuPetActionPerformed
-        // Cadastro.montaTelaNovoPassageiro();
+        
         String tituloCliente;
         tituloCliente = "Gestão Cliente";
 

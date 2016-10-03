@@ -113,7 +113,7 @@
                                       <Component id="btnNextCli" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="tctPetAnimalCliente1" max="32767" attributes="0"/>
+                                  <Component id="tctPetAnimalCpfCliente" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -133,7 +133,7 @@
                       <EmptySpace pref="19" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblTelaPetCodigoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tctPetAnimalCliente1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="tctPetAnimalCpfCliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="btnPesquisarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -165,10 +165,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
+                <Property name="text" type="java.lang.String" value="Cpf:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tctPetAnimalCliente1">
+            <Component class="javax.swing.JTextField" name="tctPetAnimalCpfCliente">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="18" style="1"/>
@@ -231,6 +231,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="|&lt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInicioCliActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnPrevCli">
               <Properties>
@@ -239,6 +242,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&lt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrevCliActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnNextCli">
               <Properties>
@@ -247,6 +253,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&gt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextCliActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnLastCli">
               <Properties>
@@ -255,6 +264,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&gt;|"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLastCliActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -401,6 +413,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Incluir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIncluirPetActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
