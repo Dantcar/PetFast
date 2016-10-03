@@ -5,11 +5,10 @@
  */
 package controle;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import modelo.Animal;
 import modelo.AnimalDAO;
+import visao.EntradaSistemaPetFast;
 
 /**
  *
@@ -107,5 +106,12 @@ public class AnimalCtrl {
         AnimalDAO animalDAO = new AnimalDAO();
         animalDAO.deletarAnimal(animal, id);        
     }//Final método cDeletarAnimal
+    
+    public void chamarTelaAnimal(){
+        System.out.println("Estou no método: chamarTelaAnimal");
+        
+        EntradaSistemaPetFast telaPrincipal = new EntradaSistemaPetFast();
+        telaPrincipal.chamarTelaAnimal();
+    }//Final método chamarTelaAnimal
     
 }//Final classe AnimalCtrl

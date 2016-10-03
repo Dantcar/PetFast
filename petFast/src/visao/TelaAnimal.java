@@ -15,13 +15,16 @@ import javax.swing.SpinnerDateModel;
  *
  * @author Décio
  */
-public class TelaAnimal extends javax.swing.JInternalFrame {
-
+//public class TelaAnimal extends javax.swing.JInternalFrame {
+public class TelaAnimal extends javax.swing.JFrame{
     /**
      * Creates new form TelaAnimal
      */
-    public TelaAnimal() {
+    public TelaAnimal(String nomeCliente, int id) {
         initComponents();
+        
+        tctPetAnimalCliente.setText(nomeCliente);
+        tctPetAnimalClienteId.setText(id +"");
     }
 
     /**
@@ -37,6 +40,8 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         lblTituloPet1 = new javax.swing.JLabel();
         lblTelaPetNomeCliente = new javax.swing.JLabel();
         tctPetAnimalCliente = new javax.swing.JTextField();
+        lblTelaPetNomeClienteId = new javax.swing.JLabel();
+        tctPetAnimalClienteId = new javax.swing.JTextField();
         lblTelaPetNomePet = new javax.swing.JPanel();
         lblTelaPetNome = new javax.swing.JLabel();
         tctPetAnimal = new javax.swing.JTextField();
@@ -76,6 +81,8 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         JSpinner.DateEditor(jspNascimentoPet,"dd/MM/yyyy");
         jspNascimentoPet.setEditor(deIntegradaNP);
 
+        setVisible(true);
+
         jPanelPetAnimalTitulo1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         lblTituloPet1.setBackground(new java.awt.Color(102, 102, 102));
@@ -91,6 +98,17 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         tctPetAnimalCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tctPetAnimalCliente.setForeground(new java.awt.Color(51, 51, 51));
         tctPetAnimalCliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tctPetAnimalCliente.setEnabled(false);
+
+        lblTelaPetNomeClienteId.setBackground(new java.awt.Color(102, 102, 102));
+        lblTelaPetNomeClienteId.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblTelaPetNomeClienteId.setForeground(new java.awt.Color(102, 102, 102));
+        lblTelaPetNomeClienteId.setText("Cliente Id:");
+
+        tctPetAnimalClienteId.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tctPetAnimalClienteId.setForeground(new java.awt.Color(51, 51, 51));
+        tctPetAnimalClienteId.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tctPetAnimalClienteId.setEnabled(false);
 
         javax.swing.GroupLayout jPanelPetAnimalTitulo1Layout = new javax.swing.GroupLayout(jPanelPetAnimalTitulo1);
         jPanelPetAnimalTitulo1.setLayout(jPanelPetAnimalTitulo1Layout);
@@ -103,16 +121,22 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
                 .addComponent(lblTelaPetNomeCliente)
                 .addGap(18, 18, 18)
                 .addComponent(tctPetAnimalCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblTelaPetNomeClienteId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tctPetAnimalClienteId, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelPetAnimalTitulo1Layout.setVerticalGroup(
             jPanelPetAnimalTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPetAnimalTitulo1Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelPetAnimalTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTituloPet1)
                     .addComponent(lblTelaPetNomeCliente)
-                    .addComponent(tctPetAnimalCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tctPetAnimalCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTelaPetNomeClienteId)
+                    .addComponent(tctPetAnimalClienteId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -230,6 +254,11 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         btnPetVoltar.setForeground(new java.awt.Color(0, 0, 102));
         btnPetVoltar.setText("Voltar");
         btnPetVoltar.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btnPetVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPetVoltarActionPerformed(evt);
+            }
+        });
 
         btnPetBuscarFoto.setBackground(new java.awt.Color(255, 255, 255));
         btnPetBuscarFoto.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -416,6 +445,11 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         jspNascimentoPet.getEditor().setForeground(Color.black);
     }//GEN-LAST:event_jspNascimentoPetMouseReleased
 
+    private void btnPetVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetVoltarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnPetVoltarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPetBuscarFoto;
@@ -434,6 +468,7 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTelaPetNascimento;
     private javax.swing.JLabel lblTelaPetNome;
     private javax.swing.JLabel lblTelaPetNomeCliente;
+    private javax.swing.JLabel lblTelaPetNomeClienteId;
     private javax.swing.JPanel lblTelaPetNomePet;
     private javax.swing.JLabel lblTelaPetPeso;
     private javax.swing.JLabel lblTelaPetPesoUnidade;
@@ -445,6 +480,7 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
     private static javax.swing.JTextField tctPetAltura;
     private static javax.swing.JTextField tctPetAnimal;
     private static javax.swing.JTextField tctPetAnimalCliente;
+    private static javax.swing.JTextField tctPetAnimalClienteId;
     private static javax.swing.JTextField tctPetCor;
     private static javax.swing.JTextField tctPetEspecie;
     private static javax.swing.JTextField tctPetFoto;
