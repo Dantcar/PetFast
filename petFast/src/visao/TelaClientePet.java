@@ -5,30 +5,12 @@
  */
 package visao;
 
-import controle.AnimalCtrl;
 import controle.ClienteCtrl;
-import controle.Util;
-import controle.ValidaCampos;
-import controle.Util;
-import static controle.Util.reduzString;
-import controle.ValidaCampos;
-import java.awt.Color;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
 import modelo.Cliente;
-import modelo.Animal;
         
 
 /**
@@ -65,7 +47,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelCliente = new javax.swing.JPanel();
         lblTelaPetCodigoCliente = new javax.swing.JLabel();
         tctPetAnimalCpfCliente = new javax.swing.JTextField();
         btnPesquisarCliente = new javax.swing.JButton();
@@ -75,7 +57,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         btnPrevCli = new javax.swing.JButton();
         btnNextCli = new javax.swing.JButton();
         btnLastCli = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelPet = new javax.swing.JPanel();
         lblTelaPetNomeCliente2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListPet = new javax.swing.JList();
@@ -85,7 +67,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         btnConsultarPet = new javax.swing.JButton();
         btnVoltarMenu = new javax.swing.JButton();
         btnIncluirPet = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        jPanelTitulo = new javax.swing.JPanel();
         lblTituloPet1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -93,7 +75,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.setForeground(new java.awt.Color(102, 102, 102));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
+        jPanelCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
         lblTelaPetCodigoCliente.setBackground(new java.awt.Color(102, 102, 102));
         lblTelaPetCodigoCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -154,20 +136,20 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelClienteLayout = new javax.swing.GroupLayout(jPanelCliente);
+        jPanelCliente.setLayout(jPanelClienteLayout);
+        jPanelClienteLayout.setHorizontalGroup(
+            jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelClienteLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblTelaPetNomeCliente)
                     .addComponent(lblTelaPetCodigoCliente))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelClienteLayout.createSequentialGroup()
+                        .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelClienteLayout.createSequentialGroup()
                                 .addComponent(btnInicioCli)
                                 .addGap(92, 92, 92)
                                 .addComponent(btnPrevCli)
@@ -176,26 +158,26 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(tctPetAnimalCpfCliente))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnPesquisarCliente)
                             .addComponent(btnLastCli, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addComponent(tctPetAnimalCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        jPanelClienteLayout.setVerticalGroup(
+            jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClienteLayout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelaPetCodigoCliente)
                     .addComponent(tctPetAnimalCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisarCliente))
                 .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelaPetNomeCliente)
                     .addComponent(tctPetAnimalCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInicioCli)
                     .addComponent(btnPrevCli)
                     .addComponent(btnNextCli)
@@ -203,7 +185,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pet Animal"));
+        jPanelPet.setBorder(javax.swing.BorderFactory.createTitledBorder("Pet Animal"));
 
         lblTelaPetNomeCliente2.setBackground(new java.awt.Color(102, 102, 102));
         lblTelaPetNomeCliente2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -241,18 +223,18 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelPetLayout = new javax.swing.GroupLayout(jPanelPet);
+        jPanelPet.setLayout(jPanelPetLayout);
+        jPanelPetLayout.setHorizontalGroup(
+            jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPetLayout.createSequentialGroup()
+                .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelPetLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblTelaPetNomeCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanelPetLayout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(btnIncluirPet)
                         .addGap(56, 56, 56)
@@ -264,26 +246,26 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                         .addGap(52, 52, 52)
                         .addComponent(btnConsultarPet)))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanelPetLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnVoltarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAlterarPet, btnConsultarPet, btnEditarPet, btnExcluirPet, btnIncluirPet});
+        jPanelPetLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAlterarPet, btnConsultarPet, btnEditarPet, btnExcluirPet, btnIncluirPet});
 
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanelPetLayout.setVerticalGroup(
+            jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPetLayout.createSequentialGroup()
+                .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelPetLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanelPetLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(lblTelaPetNomeCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditarPet)
                     .addComponent(btnAlterarPet)
                     .addComponent(btnExcluirPet)
@@ -294,29 +276,29 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanelTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         lblTituloPet1.setBackground(new java.awt.Color(102, 102, 102));
         lblTituloPet1.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         lblTituloPet1.setForeground(new java.awt.Color(102, 102, 102));
         lblTituloPet1.setText("Pet-Animal");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
+        jPanelTitulo.setLayout(jPanelTituloLayout);
+        jPanelTituloLayout.setHorizontalGroup(
+            jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelTituloLayout.createSequentialGroup()
                     .addGap(288, 288, 288)
                     .addComponent(lblTituloPet1)
                     .addContainerGap(289, Short.MAX_VALUE)))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelTituloLayout.setVerticalGroup(
+            jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 74, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelTituloLayout.createSequentialGroup()
                     .addGap(23, 23, 23)
                     .addComponent(lblTituloPet1)
                     .addContainerGap(23, Short.MAX_VALUE)))
@@ -329,22 +311,22 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanelPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -441,16 +423,29 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void btnIncluirPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirPetActionPerformed
         // TODO add your handling code here:
+        /*
+        modelo:
+                    this.dispose();
+                    msg ="Usuário: "+login+ " logado com sucesso";
+                    String tituloPrincipal;
+                    tituloPrincipal = "Gestão Petfast";
+        
+                    EntradaSistemaPetFast telaPrincipal = new EntradaSistemaPetFast();
+                    telaPrincipal.setTitle(tituloPrincipal);
+                    telaPrincipal.setVisible(true);
+        */
+        
+        
         this.dispose();
         //passar pelo control??
-         String tituloCliente;
+        String tituloCliente;
         tituloCliente = "Gestão Animal Pet";
 
         TelaAnimal telaAnimal = new TelaAnimal();
         telaAnimal.setTitle(tituloCliente);
         telaAnimal.setVisible(true);
         
-        //add(telaAnimal, JLayeredPane.DRAG_LAYER);
+        add(telaAnimal, JLayeredPane.DRAG_LAYER);
 
         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
         telaAnimal.setLocation(50, 10); //(ponto inicial apartir lateral,altura)
@@ -475,9 +470,9 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnVoltarMenu;
     private javax.swing.JList jListPet;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelCliente;
+    private javax.swing.JPanel jPanelPet;
+    private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTelaPetCodigoCliente;
     private javax.swing.JLabel lblTelaPetNomeCliente;

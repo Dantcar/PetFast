@@ -197,7 +197,7 @@ public class TelaLogin extends javax.swing.JFrame {
         
                     EntradaSistemaPetFast telaPrincipal = new EntradaSistemaPetFast();
                     telaPrincipal.setTitle(tituloPrincipal);
-                     telaPrincipal.setVisible(true);
+                    telaPrincipal.setVisible(true);
                     // JOptionPane.showMessageDialog(null, msg );
                 }
         else{

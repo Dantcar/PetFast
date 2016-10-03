@@ -218,26 +218,22 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
         btnPetSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnPetSalvar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         btnPetSalvar.setForeground(new java.awt.Color(0, 102, 0));
-        btnPetSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/inserir.png"))); // NOI18N
         btnPetSalvar.setText("Salvar");
         btnPetSalvar.setMargin(new java.awt.Insets(1, 1, 1, 1));
 
         btnPetExcluir.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         btnPetExcluir.setForeground(new java.awt.Color(102, 0, 0));
-        btnPetExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/remover.png"))); // NOI18N
         btnPetExcluir.setText("Excluir");
         btnPetExcluir.setMargin(new java.awt.Insets(1, 1, 1, 1));
 
         btnPetVoltar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         btnPetVoltar.setForeground(new java.awt.Color(0, 0, 102));
-        btnPetVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/voltarAzul.png"))); // NOI18N
         btnPetVoltar.setText("Voltar");
         btnPetVoltar.setMargin(new java.awt.Insets(1, 1, 1, 1));
 
         btnPetBuscarFoto.setBackground(new java.awt.Color(255, 255, 255));
         btnPetBuscarFoto.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         btnPetBuscarFoto.setForeground(new java.awt.Color(102, 102, 0));
-        btnPetBuscarFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/dog3 amarelo.gif"))); // NOI18N
         btnPetBuscarFoto.setText("Localizar Foto");
         btnPetBuscarFoto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPetBuscarFoto.setMargin(new java.awt.Insets(1, 1, 1, 1));
@@ -377,10 +373,11 @@ public class TelaAnimal extends javax.swing.JInternalFrame {
                         .addGap(27, 27, 27)
                         .addComponent(tctPetFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPetExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPetVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnPetExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnPetVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
