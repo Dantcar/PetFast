@@ -186,7 +186,7 @@ public class AnimalDAO {
 
         //variáveis do método
         String msg = "";
-        String sql = "SELECT * FROM animal WHERE idcliente = " + cliente + "ORDER BY 1 ASC";
+        String sql = "SELECT * FROM animal WHERE idcliente = " + cliente ;
         System.out.println(sql);
         conexao = DBPetFast.getConnection();
         ResultSet rs;
@@ -217,7 +217,7 @@ public class AnimalDAO {
             while (rs.next()) {
                 //usando o objeto animal estanciado no início do método
 
-                animal.setIdAnimal(rs.getNString(rs.getString("idanimal")));
+                animal.setIdAnimal(rs.getString(rs.getString("idanimal")));
                 animal.setIdCliente(rs.getString("idcliente"));
                 animal.setNome(rs.getString("nome"));
                 animal.setEspecie(rs.getString("especie"));

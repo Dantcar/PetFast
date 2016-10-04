@@ -5,24 +5,28 @@
  */
 package visao;
 
+import controle.AnimalCtrl;
 import controle.ClienteCtrl;
+import java.awt.PopupMenu;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
-        
 
 /**
  *
  * @author Décio
  */
 public class TelaClientePet extends javax.swing.JInternalFrame {
-        
-        private static ArrayList listaNome;
-        private static int pos=0,tam=0;
-        private String idCliente,nomeCliente;
-        private List animal = null;
+
+    private DefaultListModel lista = new DefaultListModel();
+    private static ArrayList listaNome, listaAnimal;
+    private static int pos = 0, tam = 0;
+    private String idCliente, nomeCliente;
+    private List animal = null;
+
     /**
      * Creates new form TelaClientePet
      */
@@ -33,9 +37,11 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         tctPetAnimalCpfCliente.setEditable(false);
         desabilitarBotoesPet();
         desabilitarBotoesCliente();
-         
-        
-        
+
+        jListPet.setModel(lista);
+        jListPet.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jListPet);
+
     }
 
     /**
@@ -362,30 +368,45 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         // Pesquisar Cliente e buscar lista animais por cliente
-        
+
         ClienteCtrl ccliente = new ClienteCtrl();
-         
+        AnimalCtrl canimal = new AnimalCtrl();
         listaNome = (ArrayList) ccliente.listaClientesPorNome(tctPetAnimalCliente.getText());
-        
-        if (!listaNome.isEmpty()){
-          pos = 0;
-          tam = listaNome.size()-1;
-          Cliente cli =  (Cliente) listaNome.get(0);
-        tctPetAnimalCpfCliente.setText(cli.getCpf());
-        tctPetAnimalCliente.setText(cli.getNome());
-        tctIdCliente.setText(cli.getIdCliente());
-        abilitarBotoesCliente();
-        btnIncluirPet.setEnabled(true);
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Cliente não localizado!");
+
+        if (!listaNome.isEmpty()) {
+
+            pos = 0;
+            tam = listaNome.size() - 1;
+            Cliente cli = (Cliente) listaNome.get(0);
+            tctPetAnimalCpfCliente.setText(cli.getCpf());
+            tctPetAnimalCliente.setText(cli.getNome());
+            tctIdCliente.setText(cli.getIdCliente());
+            abilitarBotoesCliente();
+            btnIncluirPet.setEnabled(true);
+            
+            //preenche lista animal se houver
+            int idPesquisa = parseInt(tctIdCliente.getText());
+            listaAnimal = (ArrayList) canimal.receberListaAnimaisCliente(idPesquisa);
+            if (!listaAnimal.isEmpty()) {
+
+                for (int i = 0; i < listaAnimal.size(); i++) {
+                    jListPet.add((PopupMenu) listaAnimal.get(i));
+
+                }
+            }
+            //Final lista animal
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Cliente não localizado!");
             tctPetAnimalCpfCliente.setText("");
             tctPetAnimalCliente.setText("");
             desabilitarBotoesCliente();
             desabilitarBotoesPet();
         }
-        
-        
+
+        /*
+         */
+
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
     private void btnVoltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarMenuActionPerformed
@@ -395,18 +416,18 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void btnLastCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastCliActionPerformed
         // TODO add your handling code here:
-        pos=tam;
-       Cliente cli =  (Cliente) listaNome.get(tam);
+        pos = tam;
+        Cliente cli = (Cliente) listaNome.get(tam);
         tctPetAnimalCpfCliente.setText(cli.getCpf());
         tctPetAnimalCliente.setText(cli.getNome());
         tctIdCliente.setText(cli.getIdCliente());
-        
+
     }//GEN-LAST:event_btnLastCliActionPerformed
 
     private void btnInicioCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioCliActionPerformed
         // TODO add your handling code here:
-        pos=0;
-         Cliente cli =  (Cliente) listaNome.get(pos);
+        pos = 0;
+        Cliente cli = (Cliente) listaNome.get(pos);
         tctPetAnimalCpfCliente.setText(cli.getCpf());
         tctPetAnimalCliente.setText(cli.getNome());
         tctIdCliente.setText(cli.getIdCliente());
@@ -414,60 +435,57 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void btnPrevCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevCliActionPerformed
         // TODO add your handling code here:
-        if (pos>0){
-        pos--;    
-        Cliente cli =  (Cliente) listaNome.get(pos);
-        tctPetAnimalCpfCliente.setText(cli.getCpf());
-        tctPetAnimalCliente.setText(cli.getNome());
-        tctIdCliente.setText(cli.getIdCliente());
-           
+        if (pos > 0) {
+            pos--;
+            Cliente cli = (Cliente) listaNome.get(pos);
+            tctPetAnimalCpfCliente.setText(cli.getCpf());
+            tctPetAnimalCliente.setText(cli.getNome());
+            tctIdCliente.setText(cli.getIdCliente());
+
         }
-        
+
     }//GEN-LAST:event_btnPrevCliActionPerformed
 
     private void btnNextCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextCliActionPerformed
         // TODO add your handling code here:
-         if (pos<tam){
-        pos++;     
-        Cliente cli =  (Cliente) listaNome.get(pos);
-        tctPetAnimalCpfCliente.setText(cli.getCpf());
-        tctPetAnimalCliente.setText(cli.getNome());
-        tctIdCliente.setText(cli.getIdCliente());
-          
+        if (pos < tam) {
+            pos++;
+            Cliente cli = (Cliente) listaNome.get(pos);
+            tctPetAnimalCpfCliente.setText(cli.getCpf());
+            tctPetAnimalCliente.setText(cli.getNome());
+            tctIdCliente.setText(cli.getIdCliente());
+
         }
     }//GEN-LAST:event_btnNextCliActionPerformed
 
     private void btnIncluirPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirPetActionPerformed
         // TODO add your handling code here:
-       
-        
+
         this.dispose();
-                    
+
         String tituloPet;
         tituloPet = "Gestão Pet";
         String nome = tctPetAnimalCliente.getText();
         int id;
         id = parseInt(tctIdCliente.getText());
-        TelaAnimal telaAnimal = new TelaAnimal(nome,id,"i");
+        TelaAnimal telaAnimal = new TelaAnimal(nome, id, "i");
         telaAnimal.setTitle(tituloPet);
         telaAnimal.setVisible(true);
-        
-        //add(telaAnimal, JLayeredPane.DRAG_LAYER);
 
+        //add(telaAnimal, JLayeredPane.DRAG_LAYER);
         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaAnimal.setLocation(40, 5); 
-       
+        telaAnimal.setLocation(40, 5);
+
         /*
-        //modelo:  
+         //modelo:  
         
-        this.dispose();
-        AnimalCtrl animal = new AnimalCtrl(); 
-        animal.chamarTelaAnimal();
-        */ 
-        
+         this.dispose();
+         AnimalCtrl animal = new AnimalCtrl(); 
+         animal.chamarTelaAnimal();
+         */
+
     }//GEN-LAST:event_btnIncluirPetActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarPet;
@@ -503,23 +521,23 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         btnExcluirPet.setEnabled(false);
         btnConsultarPet.setEnabled(false);
     }
-    
-    private void desabilitarBotoesCliente(){
+
+    private void desabilitarBotoesCliente() {
         btnInicioCli.setEnabled(false);
         btnPrevCli.setEnabled(false);
         btnNextCli.setEnabled(false);
         btnLastCli.setEnabled(false);
     }
-    
-     private void abilitarBotoesCliente(){
+
+    private void abilitarBotoesCliente() {
         btnInicioCli.setEnabled(true);
         btnPrevCli.setEnabled(true);
         btnNextCli.setEnabled(true);
         btnLastCli.setEnabled(true);
     }
-     
-    private void chamarTelaAnimal(String nome, String cpf){
-        
+
+    private void chamarTelaAnimal(String nome, String cpf) {
+
     }
-    
+
 }

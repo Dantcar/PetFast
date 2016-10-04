@@ -36,7 +36,6 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         menuCadastroCliente_Pet = new javax.swing.JMenu();
         subMenuCliente = new javax.swing.JMenuItem();
         subMenuPet = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         menuBox_Especialista = new javax.swing.JMenu();
         subMenuBox = new javax.swing.JMenuItem();
         MenuVooAeronaveCadastrar = new javax.swing.JMenuItem();
@@ -97,14 +96,6 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
             }
         });
         menuCadastroCliente_Pet.add(subMenuPet);
-
-        jMenuItem1.setText("Animal");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        menuCadastroCliente_Pet.add(jMenuItem1);
 
         jMenuBar1.add(menuCadastroCliente_Pet);
 
@@ -376,23 +367,6 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_subMenuSairActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        
-        String tituloPet;
-        tituloPet = "Gestão Pet";
-
-        TelaAnimal telaAnimal = new TelaAnimal("teste",1,"i");
-        telaAnimal.setTitle(tituloPet);
-        telaAnimal.setVisible(true);
-        add(telaAnimal, JLayeredPane.DRAG_LAYER);
-
-        telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaAnimal.setLocation(40, 5); 
-        
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -432,7 +406,6 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuVooAeronaveCadastrar;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuAtendimento;
     private javax.swing.JMenu menuBox_Especialista;
     private javax.swing.JMenu menuCadastroCliente_Pet;
