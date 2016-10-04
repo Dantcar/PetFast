@@ -448,7 +448,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         String nome = tctPetAnimalCliente.getText();
         int id;
         id = parseInt(tctIdCliente.getText());
-        TelaAnimal telaAnimal = new TelaAnimal(nome,id);
+        TelaAnimal telaAnimal = new TelaAnimal(nome,id,"i");
         telaAnimal.setTitle(tituloPet);
         telaAnimal.setVisible(true);
         

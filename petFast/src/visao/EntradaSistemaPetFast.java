@@ -382,7 +382,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         String tituloPet;
         tituloPet = "Gestão Pet";
 
-        TelaAnimal telaAnimal = new TelaAnimal("teste",1);
+        TelaAnimal telaAnimal = new TelaAnimal("teste",1,"i");
         telaAnimal.setTitle(tituloPet);
         telaAnimal.setVisible(true);
         add(telaAnimal, JLayeredPane.DRAG_LAYER);
@@ -455,7 +455,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
          String tituloPet;
         tituloPet = "Gestão Pet";
 
-        TelaAnimal telaAnimal = new TelaAnimal("Teste",1);
+        TelaAnimal telaAnimal = new TelaAnimal("Teste",1,"i");
         telaAnimal.setTitle(tituloPet);
         telaAnimal.setVisible(true);
         add(telaAnimal, JLayeredPane.DRAG_LAYER);

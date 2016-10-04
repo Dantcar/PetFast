@@ -13,6 +13,7 @@ import java.sql.Connection;     //variavel conexao
 import java.sql.ResultSet;      //variavel rs
 import java.sql.SQLException;
 import java.sql.Statement;      //variavel stmt
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -373,25 +374,36 @@ public class AnimalDAO {
         String msg;
         int idAnimal = buscarIdPetAtual();
         idAnimal = idAnimal + 1;
-
+        double peso = Double.parseDouble(animal.getPeso());
+        DecimalFormat formato = new DecimalFormat("#.##");      
+        peso = Double.valueOf(formato.format(peso));
+        double altura = Double.parseDouble(animal.getAltura());
+        altura = Double.valueOf(formato.format(altura));
+        System.out.println("Peso = "+ peso+   " altura: "+altura);
+        
         msg = "";
         conexao = DBPetFast.getConnection();
 
+        /*Modelo de sql:
+        INSERT INTO DAC.ANIMAL (IDANIMAL, IDCLIENTE, NOME, ESPECIE, NASCIMENTO, RACA, PESO, ALTURA, COR, CARACTERISTICA, SEXO) 
+	VALUES (1, 1, 'Caçarola', 'Canina', '12/05/2006', 'Viralata', 21.0, 12.0, 'Marrom', 'Pelo caindo', 'M');
+        */
         String sql = "INSERT INTO animal VALUES ("
                 //+ parseInt(cliente.getIdCliente()) +", "
                 + idAnimal + ", "
-                + Integer.parseInt(animal.getIdCliente())
+                + Integer.parseInt(animal.getIdCliente())+ ", "
                 + "'" + animal.getNome() + "', "
                 + "'" + animal.getEspecie() + "', "
                 + "'" + animal.getNascimento() + "', "
                 + "'" + animal.getRaca() + "', "
-                + "'" + animal.getPeso() + "', "
-                + "'" + animal.getAltura() + "', "
+                +  peso + ", "
+                +  altura + ", "
                 + "'" + animal.getCor() + "', "
                 + "'" + animal.getCaracteristica() + "', "
                 + "'" + animal.getSexo() + "')";
         
         //Preparação do comando sql
+        System.out.println(sql);
         try {
             stmt = conexao.createStatement();
         } catch (SQLException ex) {

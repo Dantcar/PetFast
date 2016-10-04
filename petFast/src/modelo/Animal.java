@@ -32,13 +32,14 @@ public class Animal {
     private String caracteristica;
     private String sexo;
     private static int vidAnimal;
-
+    private String Foto;
+    
     public Animal() {
     }
 
+   
     /**
-     * Método Construtor
-     *
+     * 
      * @param idCliente
      * @param idAnimal
      * @param nome
@@ -50,8 +51,9 @@ public class Animal {
      * @param cor
      * @param caracteristica
      * @param sexo
+     * @param Foto 
      */
-    public Animal(String idCliente, String nome, String especie, String nascimento, String raca, String peso, String altura, String cor, String caracteristica, String sexo) {
+    public Animal(String idCliente, String idAnimal, String nome, String especie, String nascimento, String raca, String peso, String altura, String cor, String caracteristica, String sexo, String Foto) {
         this.idCliente = idCliente;
         this.idAnimal = idAnimal;
         this.nome = nome;
@@ -63,16 +65,21 @@ public class Animal {
         this.cor = cor;
         this.caracteristica = caracteristica;
         this.sexo = sexo;
+        this.Foto = Foto;
     }
 
-    /**
-     * métodos set Animal
-     *
-     */
+    public String getIdCliente() {
+        return idCliente;
+    }
+
     public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
-    
+
+    public String getIdAnimal() {
+        return idAnimal;
+    }
+
     public void setIdAnimal(String idAnimal) {
         this.idAnimal = idAnimal;
     }
@@ -141,18 +148,6 @@ public class Animal {
         this.caracteristica = caracteristica;
     }
 
-    /**
-     * métodos get Animal
-     *
-     */
-    public String getIdCliente() {
-        return idCliente;
-    }
-
-    public String getIdAnimal() {
-        return idAnimal;
-    }
-
     public String getSexo() {
         return sexo;
     }
@@ -160,6 +155,16 @@ public class Animal {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+
+    public String getFoto() {
+        return Foto;
+    }
+
+    public void setFoto(String Foto) {
+        this.Foto = Foto;
+    }
+
+   
 
 }//final classe Animal
 
