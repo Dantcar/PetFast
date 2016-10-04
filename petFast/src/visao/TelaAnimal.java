@@ -58,8 +58,9 @@ public class TelaAnimal extends javax.swing.JFrame{
         tctPetAnimalClienteId.setText(id +"");
         //habilitar botoes incluir
         btnPetSalvar.setEnabled(true);
-        String idAnimal = cAnimal.receberIdAnimalAtual()+"";
-        tctPetAnimalId.setText(idAnimal);
+        
+        int idAnimal = cAnimal.receberIdAnimalAtual(); //pega o próximo id para cadastro
+        tctPetAnimalId.setText(idAnimal+1+"");
         }
         else if(operacao == "a"){
         tctPetAnimalCliente.setText(nomeCliente);
@@ -334,9 +335,11 @@ public class TelaAnimal extends javax.swing.JFrame{
             }
         });
 
-        tftPesoPet.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#.###"))));
+        tftPesoPet.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        tftPesoPet.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        tftAlturaPet.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#.###"))));
+        tftAlturaPet.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        tftAlturaPet.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         lblTelaPetNome1.setBackground(new java.awt.Color(102, 102, 102));
         lblTelaPetNome1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -538,6 +541,7 @@ public class TelaAnimal extends javax.swing.JFrame{
        
        dataNascimentoPetAnimal = Util.DataFormatadaS(jspNascimentoPet.getValue().toString());
        animal.setNascimento(dataNascimentoPetAnimal);
+       animal.setRaca(tctPetRaca.getText());
        animal.setPeso(tftPesoPet.getText());
        animal.setAltura(tftAlturaPet.getText());
        animal.setCaracteristica(txaPetCaracteristica.getText());
@@ -554,6 +558,8 @@ public class TelaAnimal extends javax.swing.JFrame{
        }
        
         cAnimal.cInserirAnimal(animal);
+        this.dispose();
+        //limparTelaAnimal();
     }//GEN-LAST:event_btnPetSalvarActionPerformed
 
 
@@ -608,5 +614,28 @@ public class TelaAnimal extends javax.swing.JFrame{
 
     private void gravarAnimal(Animal animal) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void limparTelaAnimal(){
+    rbFemea.setSelected(false);
+    rbMacho.setSelected(false);
+    tctPetAnimalCliente.setText("");
+    tctPetAnimalClienteId.setText("");
+    tctPetAnimalId.setText("");
+    tctPetAnimalNome.setText("");
+    
+    try {
+            hojePet = sdfNascimentoPet.parse(dataHojePet);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    tctPetCor.setText("");
+    tctPetEspecie.setText("");
+    tctPetFoto.setText("");
+    tctPetRaca.setText("");
+    tftAlturaPet.setText("");
+    tftPesoPet.setText("");
+    txaPetCaracteristica.setText("");
     }
 }

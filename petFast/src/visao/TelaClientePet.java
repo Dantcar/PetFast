@@ -7,7 +7,6 @@ package visao;
 
 import controle.AnimalCtrl;
 import controle.ClienteCtrl;
-import java.awt.PopupMenu;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.List;
@@ -143,6 +142,8 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                 btnLastCliActionPerformed(evt);
             }
         });
+
+        tctIdCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanelClienteLayout = new javax.swing.GroupLayout(jPanelCliente);
         jPanelCliente.setLayout(jPanelClienteLayout);
@@ -381,20 +382,8 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             tctPetAnimalCpfCliente.setText(cli.getCpf());
             tctPetAnimalCliente.setText(cli.getNome());
             tctIdCliente.setText(cli.getIdCliente());
-            abilitarBotoesCliente();
+            habilitarBotoesCliente();
             btnIncluirPet.setEnabled(true);
-            
-            //preenche lista animal se houver
-            int idPesquisa = parseInt(tctIdCliente.getText());
-            listaAnimal = (ArrayList) canimal.receberListaAnimaisCliente(idPesquisa);
-            if (!listaAnimal.isEmpty()) {
-
-                for (int i = 0; i < listaAnimal.size(); i++) {
-                    jListPet.add((PopupMenu) listaAnimal.get(i));
-
-                }
-            }
-            //Final lista animal
             
         } else {
             JOptionPane.showMessageDialog(null, "Cliente não localizado!");
@@ -476,14 +465,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
         telaAnimal.setLocation(40, 5);
 
-        /*
-         //modelo:  
         
-         this.dispose();
-         AnimalCtrl animal = new AnimalCtrl(); 
-         animal.chamarTelaAnimal();
-         */
-
     }//GEN-LAST:event_btnIncluirPetActionPerformed
 
 
@@ -529,7 +511,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         btnLastCli.setEnabled(false);
     }
 
-    private void abilitarBotoesCliente() {
+    private void habilitarBotoesCliente() {
         btnInicioCli.setEnabled(true);
         btnPrevCli.setEnabled(true);
         btnNextCli.setEnabled(true);

@@ -7,18 +7,16 @@
  */
 package modelo;
 
-import static controle.Util.reduzString;    //reduzir String das mensagens
-import java.awt.HeadlessException;
-import java.sql.Connection;     //variavel conexao
-import java.sql.ResultSet;      //variavel rs
-import java.sql.SQLException;
-import java.sql.Statement;      //variavel stmt
-import java.text.DecimalFormat;
+import static controle.Util.reduzString;    
+import java.sql.Connection;
+import java.sql.ResultSet;     
+import java.sql.SQLException;      
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;     //mensagens de erro
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -73,7 +71,8 @@ public class AnimalDAO {
         conexao = DBPetFast.getConnection();
         ResultSet rs;
         rs = null;
-        sql = "SELECT * FROM animal ORDER BY idanimal DESC";
+        
+        //sql = "SELECT * FROM animal ORDER BY 1 DESC";
 
         try {
             stmt = conexao.createStatement(
@@ -85,17 +84,19 @@ public class AnimalDAO {
         }
 
         try {
-            rs = stmt.executeQuery(sql); //select * from DAC.ANIMAL order BY 1 DESC
+            rs = stmt.executeQuery("SELECT * FROM animal ORDER BY 1 DESC"); //select * from DAC.ANIMAL order BY 1 DESC
+            System.out.println("ok");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        try {
+        try { 
             if (rs.first()) {
                 idPetNow = rs.getInt(1);
                 resposta = idPetNow;
-
+                
+                System.out.println(idPetNow); //remover depois dos testes
                 close();
             }
         } catch (SQLException ex) {
@@ -109,6 +110,8 @@ public class AnimalDAO {
         return resposta;
     }//final método buscarIdPetAtual
 
+    
+    
     public Animal buscarAnimalNome(String nomeAnimal) {
         Animal animal = new Animal();
 
@@ -217,7 +220,7 @@ public class AnimalDAO {
             while (rs.next()) {
                 //usando o objeto animal estanciado no início do método
 
-                animal.setIdAnimal(rs.getString(rs.getString("idanimal")));
+                animal.setIdAnimal(rs.getString("idanimal"));                
                 animal.setIdCliente(rs.getString("idcliente"));
                 animal.setNome(rs.getString("nome"));
                 animal.setEspecie(rs.getString("especie"));
@@ -228,9 +231,10 @@ public class AnimalDAO {
                 animal.setCor(rs.getString("cor"));
                 animal.setCaracteristica(rs.getString("caracteristica"));
                 animal.setCaracteristica(rs.getString("sexo"));
+                animal.setFoto(rs.getString("foto"));
 
                 lista.add(animal);
-
+                System.out.println(lista.size());
             }
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
@@ -372,14 +376,15 @@ public class AnimalDAO {
      */
     public void inserirAnimal(Animal animal) {
         String msg;
-        int idAnimal = buscarIdPetAtual();
-        idAnimal = idAnimal + 1;
-        double peso = Double.parseDouble(animal.getPeso());
-        DecimalFormat formato = new DecimalFormat("#.##");      
-        peso = Double.valueOf(formato.format(peso));
-        double altura = Double.parseDouble(animal.getAltura());
-        altura = Double.valueOf(formato.format(altura));
-        System.out.println("Peso = "+ peso+   " altura: "+altura);
+        //int idAnimal = buscarIdPetAtual();
+        //idAnimal = idAnimal + 1;
+       
+        //double peso = Double.parseDouble(animal.getPeso());
+        //DecimalFormat formato = new DecimalFormat("#.##");      
+        //peso = Double.valueOf(formato.format(peso));
+        //double altura = Double.parseDouble(animal.getAltura());
+        //altura = Double.valueOf(formato.format(altura));
+        //System.out.println("Peso = "+ peso+   " altura: "+altura);
         
         msg = "";
         conexao = DBPetFast.getConnection();
@@ -390,18 +395,18 @@ public class AnimalDAO {
         */
         String sql = "INSERT INTO animal VALUES ("
                 //+ parseInt(cliente.getIdCliente()) +", "
-                + idAnimal + ", "
+                + Integer.parseInt(animal.getIdAnimal())+ ", "
                 + Integer.parseInt(animal.getIdCliente())+ ", "
                 + "'" + animal.getNome() + "', "
                 + "'" + animal.getEspecie() + "', "
                 + "'" + animal.getNascimento() + "', "
                 + "'" + animal.getRaca() + "', "
-                +  peso + ", "
-                +  altura + ", "
+                + "'" + animal.getPeso() + "', "
+                + "'" + animal.getAltura() + "', "
                 + "'" + animal.getCor() + "', "
                 + "'" + animal.getCaracteristica() + "', "
-                + "'" + animal.getSexo() + "')";
-        
+                + "'" + animal.getSexo() +  "', "
+                + "'" + animal.getFoto() + "')";
         //Preparação do comando sql
         System.out.println(sql);
         try {
@@ -453,6 +458,7 @@ public class AnimalDAO {
                 + "cor = '" + animal.getCor() + "', "
                 + "caracteristica = '" + animal.getCaracteristica() + "', "
                 + "sexo = '" + animal.getSexo() + "', "
+                + "foto = '" + animal.getFoto() + "', "
            + " WHERE IDANIMAL = "+Integer.parseInt(vid);
         
         try {
