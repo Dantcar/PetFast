@@ -158,8 +158,8 @@ public class AnimalDAO {
                 animal.setAltura(rs.getString("altura"));
                 animal.setCor(rs.getString("cor"));
                 animal.setCaracteristica(rs.getString("caracteristica"));
-                animal.setCaracteristica(rs.getString("sexo"));
-
+                animal.setSexo(rs.getString("sexo"));
+                animal.setFoto(rs.getString("foto"));
             } else {
                 msg = msg + "Animal Pet não encontrado \n";
             }
@@ -185,7 +185,7 @@ public class AnimalDAO {
      */
     public List<Animal> listarAnimaisCliente(int cliente) {
         Animal animal = new Animal();   //objeto animal que será utilizado para preencher a lista
-        List<Animal> lista = new ArrayList<>(); //lista de animais pertencentes ao cliente
+        List<Animal> listaAnimal = new ArrayList<>(); //lista de animais pertencentes ao cliente
 
         //variáveis do método
         String msg = "";
@@ -194,7 +194,7 @@ public class AnimalDAO {
         conexao = DBPetFast.getConnection();
         ResultSet rs;
         rs = null;
-        lista = null;
+        //listaAnimal = null;
 
         //preparando a conexao com o banco Petfast
         try {
@@ -219,10 +219,12 @@ public class AnimalDAO {
         try {
             while (rs.next()) {
                 //usando o objeto animal estanciado no início do método
-
-                animal.setIdAnimal(rs.getString("idanimal"));                
+                animal = new Animal();
+                animal.setIdAnimal(rs.getString("idanimal"));   
+                System.out.println(animal.getIdAnimal());   //remover           
                 animal.setIdCliente(rs.getString("idcliente"));
                 animal.setNome(rs.getString("nome"));
+                System.out.println(animal.getNome());   //remover  
                 animal.setEspecie(rs.getString("especie"));
                 animal.setNascimento(rs.getString("nascimento"));
                 animal.setRaca(rs.getString("raca"));
@@ -230,11 +232,12 @@ public class AnimalDAO {
                 animal.setAltura(rs.getString("altura"));
                 animal.setCor(rs.getString("cor"));
                 animal.setCaracteristica(rs.getString("caracteristica"));
-                animal.setCaracteristica(rs.getString("sexo"));
+                animal.setSexo(rs.getString("sexo"));
+                 System.out.println(animal.getSexo());   //remover  
                 animal.setFoto(rs.getString("foto"));
-
-                lista.add(animal);
-                System.out.println(lista.size());
+                 System.out.println(animal.getFoto());   //remover  
+                listaAnimal.add(animal);
+               
             }
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
@@ -246,7 +249,7 @@ public class AnimalDAO {
             JOptionPane.showMessageDialog(null, msg);
         }
 
-        return lista;
+        return listaAnimal;
     }//final método listarAnimaisCliente
 
     /**
@@ -515,7 +518,131 @@ public class AnimalDAO {
          
     }//Final método deletarAnimal
     
+    /**
+     * Método para buscar uma lista de animais fornecendo o idCliente
+     *
+     * @param cliente
+     * @return
+     */
+    public ArrayList<Animal> ArraylistAnimaisCliente(int cliente) {
+        Animal animal = new Animal();   //objeto animal que será utilizado para preencher a lista
+        ArrayList<Animal> listaAnimal = new ArrayList<Animal>(); //lista de animais pertencentes ao cliente
+
+        //variáveis do método
+        String msg = "";
+        String sql = "SELECT * FROM animal WHERE idcliente = " + cliente ;
+        System.out.println(sql);
+        conexao = DBPetFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        //listaAnimal = null;
+
+        //preparando a conexao com o banco Petfast
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //executando o comando sql
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            while (rs.next()) {
+                //usando o objeto animal estanciado no início do método
+                animal = new Animal();
+                animal.setIdAnimal(rs.getString("idanimal"));   
+                //System.out.println(animal.getIdAnimal());   //remover           
+                animal.setIdCliente(rs.getString("idcliente"));
+                animal.setNome(rs.getString("nome"));
+                //System.out.println(animal.getNome());   //remover  
+                animal.setEspecie(rs.getString("especie"));
+                animal.setNascimento(rs.getString("nascimento"));
+                animal.setRaca(rs.getString("raca"));
+                animal.setPeso(rs.getString("peso"));
+                animal.setAltura(rs.getString("altura"));
+                animal.setCor(rs.getString("cor"));
+                animal.setCaracteristica(rs.getString("caracteristica"));
+                animal.setSexo(rs.getString("sexo"));
+                // System.out.println(animal.getSexo());   //remover  
+                animal.setFoto(rs.getString("foto"));
+                // System.out.println(animal.getFoto());   //remover  
+                listaAnimal.add(animal);
+               
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
+        return listaAnimal;
+    }//final método listarAnimaisCliente
+
+    public ArrayList findComboAnimalNome(int id) {
+        String msg = "";
+        String sql = "SELECT nome FROM animal WHERE idCliente = "+id+ " ORDER BY 1 ASC";
+         System.out.println(sql);
+        conexao = DBPetFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        //listaAnimal = null;
+        ArrayList lista;
+        lista = null;
+        //preparando a conexao com o banco Petfast
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //executando o comando sql
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        lista = new ArrayList();
+        
+        try {
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        
+         return lista;
+    }//fim método findComboAnimalNome
     
-    
+ 
 
 }//final Classe AnimalDAO

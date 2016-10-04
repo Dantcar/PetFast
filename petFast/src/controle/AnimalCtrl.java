@@ -5,6 +5,7 @@
  */
 package controle;
 
+import java.util.ArrayList;
 import java.util.List;
 import modelo.Animal;
 import modelo.AnimalDAO;
@@ -113,5 +114,29 @@ public class AnimalCtrl {
         EntradaSistemaPetFast telaPrincipal = new EntradaSistemaPetFast();
         telaPrincipal.chamarTelaAnimal();
     }//Final método chamarTelaAnimal
+    
+     /**
+     * 3
+     * Método controle receber lista de animais pertencentes a um cliente 
+     * informando o id do cliente.
+     * @param idCliente
+     * @return Lista de animais do cliente
+     */
+    public ArrayList<Animal> receberArrayListAnimaisCliente(int idCliente){
+        AnimalDAO animalDAO = new AnimalDAO();
+        ArrayList<Animal> lista = animalDAO.ArraylistAnimaisCliente(idCliente);
+        return lista;
+    }
+
+    public ArrayList populaComboAnimaisCliente(int id) {
+       ArrayList lista;
+        AnimalDAO animalDAO = new AnimalDAO();
+        return lista = animalDAO.findComboAnimalNome(id);
+        //return lista = aeronaveDAO.findComboAeronave();
+   
+    
+    
+    }
+    
     
 }//Final classe AnimalCtrl

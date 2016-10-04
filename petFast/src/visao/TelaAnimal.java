@@ -638,4 +638,6 @@ public class TelaAnimal extends javax.swing.JFrame{
     tftPesoPet.setText("");
     txaPetCaracteristica.setText("");
     }
+    
+    
 }

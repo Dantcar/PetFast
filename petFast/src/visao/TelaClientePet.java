@@ -9,7 +9,9 @@ import controle.AnimalCtrl;
 import controle.ClienteCtrl;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
@@ -21,11 +23,11 @@ import modelo.Cliente;
 public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private DefaultListModel lista = new DefaultListModel();
-    private static ArrayList listaNome, listaAnimal;
+    private static ArrayList listaNome, listaAnimal, arrayListAnimal;
     private static int pos = 0, tam = 0;
     private String idCliente, nomeCliente;
-    private List animal = null;
-
+    private List lAnimal ;
+    private JList listAnimal ;
     /**
      * Creates new form TelaClientePet
      */
@@ -34,12 +36,12 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         idCliente = "";
         nomeCliente = "";
         tctPetAnimalCpfCliente.setEditable(false);
+        tctIdCliente.setEditable(false);
         desabilitarBotoesPet();
         desabilitarBotoesCliente();
 
-        jListPet.setModel(lista);
-        jListPet.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jListPet);
+        
+       // jScrollPane1.setViewportView(jListPet);
 
     }
 
@@ -66,14 +68,13 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         tctIdCliente = new javax.swing.JTextField();
         jPanelPet = new javax.swing.JPanel();
         lblTelaPetNomeCliente2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListPet = new javax.swing.JList();
         btnEditarPet = new javax.swing.JButton();
         btnAlterarPet = new javax.swing.JButton();
         btnExcluirPet = new javax.swing.JButton();
         btnConsultarPet = new javax.swing.JButton();
         btnVoltarMenu = new javax.swing.JButton();
         btnIncluirPet = new javax.swing.JButton();
+        cbxClienteAnimal = new javax.swing.JComboBox();
         jPanelTitulo = new javax.swing.JPanel();
         lblTituloPet1 = new javax.swing.JLabel();
 
@@ -210,14 +211,6 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         lblTelaPetNomeCliente2.setForeground(new java.awt.Color(102, 102, 102));
         lblTelaPetNomeCliente2.setText("Lista Pet");
 
-        jListPet.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jListPet.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jListPet);
-
         btnEditarPet.setText("Editar");
 
         btnAlterarPet.setText("Alterar");
@@ -241,6 +234,15 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        cbxClienteAnimal.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        cbxClienteAnimal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxClienteAnimal.setSelectedIndex(-1);
+        cbxClienteAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxClienteAnimalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPetLayout = new javax.swing.GroupLayout(jPanelPet);
         jPanelPet.setLayout(jPanelPetLayout);
         jPanelPetLayout.setHorizontalGroup(
@@ -250,24 +252,27 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                     .addGroup(jPanelPetLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblTelaPetNomeCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
-                    .addGroup(jPanelPetLayout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(btnIncluirPet)
-                        .addGap(56, 56, 56)
-                        .addComponent(btnEditarPet)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                        .addComponent(btnAlterarPet)
-                        .addGap(50, 50, 50)
-                        .addComponent(btnExcluirPet)
-                        .addGap(52, 52, 52)
+                        .addGap(30, 30, 30)
+                        .addComponent(cbxClienteAnimal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(163, 163, 163))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPetLayout.createSequentialGroup()
+                        .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelPetLayout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addComponent(btnIncluirPet)
+                                .addGap(56, 56, 56)
+                                .addComponent(btnEditarPet)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                                .addComponent(btnAlterarPet)
+                                .addGap(50, 50, 50)
+                                .addComponent(btnExcluirPet)
+                                .addGap(52, 52, 52))
+                            .addGroup(jPanelPetLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnVoltarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(btnConsultarPet)))
                 .addContainerGap())
-            .addGroup(jPanelPetLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnVoltarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelPetLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAlterarPet, btnConsultarPet, btnEditarPet, btnExcluirPet, btnIncluirPet});
@@ -275,14 +280,11 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         jPanelPetLayout.setVerticalGroup(
             jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPetLayout.createSequentialGroup()
-                .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelPetLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelPetLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(lblTelaPetNomeCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
+                .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTelaPetNomeCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxClienteAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditarPet)
                     .addComponent(btnAlterarPet)
@@ -290,8 +292,8 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                     .addComponent(btnIncluirPet)
                     .addComponent(btnConsultarPet))
                 .addGap(37, 37, 37)
-                .addComponent(btnVoltarMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
+                .addComponent(btnVoltarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanelTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -369,11 +371,13 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         // Pesquisar Cliente e buscar lista animais por cliente
-
+        int idClienteP;
+        DefaultListModel model = new DefaultListModel();
+       
         ClienteCtrl ccliente = new ClienteCtrl();
         AnimalCtrl canimal = new AnimalCtrl();
         listaNome = (ArrayList) ccliente.listaClientesPorNome(tctPetAnimalCliente.getText());
-
+        //Jlist listaAnimais = canimal.receberListaAnimaisCliente(WIDTH);
         if (!listaNome.isEmpty()) {
 
             pos = 0;
@@ -382,8 +386,20 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             tctPetAnimalCpfCliente.setText(cli.getCpf());
             tctPetAnimalCliente.setText(cli.getNome());
             tctIdCliente.setText(cli.getIdCliente());
+            idClienteP = Integer.parseInt(cli.getIdCliente());
             habilitarBotoesCliente();
             btnIncluirPet.setEnabled(true);
+            
+            //buscar listas de animais deste 
+            //arrayListAnimal = canimal.receberArrayListAnimaisCliente(idClienteP);
+           // jScrollPaneAnimais.add(listAnimal);
+            //jListPet.add();
+            //lAnimal = canimal.receberListaAnimaisCliente(idClienteP);
+            //listAnimal = new JList(model);
+            populaJComboBoxAnimalCliente(idClienteP);
+            
+            
+            
             
         } else {
             JOptionPane.showMessageDialog(null, "Cliente não localizado!");
@@ -405,45 +421,57 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void btnLastCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastCliActionPerformed
         // TODO add your handling code here:
+        int idClienteP;
         pos = tam;
         Cliente cli = (Cliente) listaNome.get(tam);
         tctPetAnimalCpfCliente.setText(cli.getCpf());
         tctPetAnimalCliente.setText(cli.getNome());
         tctIdCliente.setText(cli.getIdCliente());
+        idClienteP = Integer.parseInt(cli.getIdCliente());
+        populaJComboBoxAnimalCliente(idClienteP);
 
     }//GEN-LAST:event_btnLastCliActionPerformed
 
     private void btnInicioCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioCliActionPerformed
         // TODO add your handling code here:
+        int idClienteP;
         pos = 0;
         Cliente cli = (Cliente) listaNome.get(pos);
         tctPetAnimalCpfCliente.setText(cli.getCpf());
         tctPetAnimalCliente.setText(cli.getNome());
         tctIdCliente.setText(cli.getIdCliente());
+        idClienteP = Integer.parseInt(cli.getIdCliente());
+        populaJComboBoxAnimalCliente(idClienteP);
     }//GEN-LAST:event_btnInicioCliActionPerformed
 
     private void btnPrevCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevCliActionPerformed
         // TODO add your handling code here:
+         
         if (pos > 0) {
+            int idClienteP;
             pos--;
             Cliente cli = (Cliente) listaNome.get(pos);
             tctPetAnimalCpfCliente.setText(cli.getCpf());
             tctPetAnimalCliente.setText(cli.getNome());
             tctIdCliente.setText(cli.getIdCliente());
-
+            idClienteP = Integer.parseInt(cli.getIdCliente());
+            populaJComboBoxAnimalCliente(idClienteP);
         }
 
     }//GEN-LAST:event_btnPrevCliActionPerformed
 
     private void btnNextCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextCliActionPerformed
         // TODO add your handling code here:
+        
         if (pos < tam) {
+            int idClienteP;
             pos++;
             Cliente cli = (Cliente) listaNome.get(pos);
             tctPetAnimalCpfCliente.setText(cli.getCpf());
             tctPetAnimalCliente.setText(cli.getNome());
             tctIdCliente.setText(cli.getIdCliente());
-
+            idClienteP = Integer.parseInt(cli.getIdCliente());
+            populaJComboBoxAnimalCliente(idClienteP);
         }
     }//GEN-LAST:event_btnNextCliActionPerformed
 
@@ -468,6 +496,17 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnIncluirPetActionPerformed
 
+    private void cbxClienteAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteAnimalActionPerformed
+       if ((cbxClienteAnimal.getSelectedIndex()) != -1) {
+            //habilitar os botoes 
+           //btnListarRelAeronave.setEnabled(true);
+        } else {
+            //desabilitar os botoes 
+           //btnListarRelAeronave.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_cbxClienteAnimalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarPet;
@@ -481,12 +520,11 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPesquisarCliente;
     private javax.swing.JButton btnPrevCli;
     private javax.swing.JButton btnVoltarMenu;
-    private javax.swing.JList jListPet;
+    private javax.swing.JComboBox cbxClienteAnimal;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCliente;
     private javax.swing.JPanel jPanelPet;
     private javax.swing.JPanel jPanelTitulo;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTelaPetCodigoCliente;
     private javax.swing.JLabel lblTelaPetNomeCliente;
     private javax.swing.JLabel lblTelaPetNomeCliente2;
@@ -520,6 +558,19 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void chamarTelaAnimal(String nome, String cpf) {
 
+    }
+
+    private void populaJComboBoxAnimalCliente(int id) {
+        
+       AnimalCtrl cAnimal = new AnimalCtrl();
+        cbxClienteAnimal.removeAllItems(); //remove os itens atuais do comboBox.
+        //ArrayList lista = cAeronave.populaComboPrefixoAeronave(); //retorna os prefixos das aeronaves.
+        ArrayList lista = cAnimal.populaComboAnimaisCliente(id); //retorna os animais do cliente.
+        Iterator i = lista.iterator();
+        while (i.hasNext()) {
+            cbxClienteAnimal.addItem(String.valueOf(i.next()));
+        } 
+       
     }
 
 }
