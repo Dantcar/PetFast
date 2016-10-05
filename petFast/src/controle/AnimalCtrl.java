@@ -103,9 +103,9 @@ public class AnimalCtrl {
      * Método controle para enviar remoção de animal cadastrado
      * @param animal 
      */
-    public void cDelerarAnimal(Animal animal, String id){
+    public void cDelerarAnimal(String nomeAnimal, int id){
         AnimalDAO animalDAO = new AnimalDAO();
-        animalDAO.deletarAnimal(animal, id);        
+        animalDAO.deletarAnimal(nomeAnimal, id);        
     }//Final método cDeletarAnimal
     
     public void chamarTelaAnimal(){

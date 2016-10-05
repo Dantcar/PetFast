@@ -61,16 +61,102 @@ public class TelaAnimal extends javax.swing.JFrame {
             
             int idAnimal = cAnimal.receberIdAnimalAtual(); //pega o próximo id para cadastro
             tctPetAnimalId.setText(idAnimal + 1 + "");
+        
+            /**
+         * Botão Alterar
+         */
+        
         } else if (operacao == "a") {
-            tctPetAnimalCliente.setText(nomeCliente);
-            tctPetAnimalClienteId.setText(id + "");
-            tctPetAnimalNome.setText(nomeAnimal);
+            Animal animal = new Animal();
+            animal = cAnimal.receberAnimalNome(nomeAnimal);
+           
+            if (animal != null) {
+                
+                tctPetAnimalCliente.setText(nomeCliente);
+                tctPetAnimalClienteId.setText(id + "");
+                tctPetAnimalClienteId.setEditable(true);
+                tctPetAnimalNome.setText(nomeAnimal);
+                
+                if (animal.getSexo() == "M") {
+                    rbMacho.setSelected(true);
+                } else {
+                    rbFemea.setSelected(true);
+                }
+                
+                tctPetAnimalId.setText(animal.getIdAnimal());
+                
+                //tratamento data
+                 String sdataNascimento = animal.getNascimento();
+                try {
+                    calNascimentoPet = Util.retornaData(sdataNascimento);                    
+                } catch (ParseException ex) {
+                    Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jspNascimentoPet.setValue(calNascimentoPet);
+                //fim tratamento data
+                
+                tctPetCor.setText(animal.getCor());
+                tctPetEspecie.setText(animal.getEspecie());
+                tctPetFoto.setText(animal.getFoto());
+                tctPetRaca.setText(animal.getRaca());
+                tftAlturaPet.setText(animal.getAltura());
+                tftPesoPet.setText(animal.getPeso());
+                txaPetCaracteristica.setText(animal.getCaracteristica());
+                btnPetAlterar.setEnabled(true);
+            } else {
+                limparTelaAnimal();
+            }
             
+         /**
+          * Botao Excluir
+          */   
         } else if (operacao == "e") { //eliminar
-            tctPetAnimalCliente.setText(nomeCliente);
-            tctPetAnimalClienteId.setText(id + "");
-            tctPetAnimalNome.setText(nomeAnimal);
+             Animal animal = new Animal();
+            animal = cAnimal.receberAnimalNome(nomeAnimal);
+           
+            if (animal != null) {
+                
+                tctPetAnimalCliente.setText(nomeCliente);
+                tctPetAnimalClienteId.setText(id + "");
+                tctPetAnimalNome.setText(nomeAnimal);
+                
+                if (animal.getSexo() == "M") {
+                    rbMacho.setSelected(true);
+                } else {
+                    rbFemea.setSelected(true);
+                }
+                
+                tctPetAnimalId.setText(animal.getIdAnimal());
+                
+                //tratamento data
+                 String sdataNascimento = animal.getNascimento();
+                try {
+                    calNascimentoPet = Util.retornaData(sdataNascimento);                    
+                } catch (ParseException ex) {
+                    Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jspNascimentoPet.setValue(calNascimentoPet);
+                //fim tratamento data
+                
+                tctPetCor.setText(animal.getCor());
+                tctPetEspecie.setText(animal.getEspecie());
+                tctPetFoto.setText(animal.getFoto());
+                tctPetRaca.setText(animal.getRaca());
+                tftAlturaPet.setText(animal.getAltura());
+                tftPesoPet.setText(animal.getPeso());
+                txaPetCaracteristica.setText(animal.getCaracteristica());
+                
+                desabilitarEdiçãoTelaAnimal();
+                btnPetExcluir.setEnabled(true);
+                
+            } else {
+                limparTelaAnimal();
+            }
+        
             
+            /**
+             * Botão Consultar
+             */
         } else if (operacao == "c") {
             Animal animal = new Animal();
             animal = cAnimal.receberAnimalNome(nomeAnimal);
@@ -106,7 +192,10 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tftAlturaPet.setText(animal.getAltura());
                 tftPesoPet.setText(animal.getPeso());
                 txaPetCaracteristica.setText(animal.getCaracteristica());
-                btnPetSalvar.setEnabled(true);
+                
+                desabilitarEdiçãoTelaAnimal();
+                //btnPetSalvar.setEnabled(true);
+                
             } else {
                 limparTelaAnimal();
             }
@@ -340,6 +429,11 @@ public class TelaAnimal extends javax.swing.JFrame {
         btnPetExcluir.setForeground(new java.awt.Color(102, 0, 0));
         btnPetExcluir.setText("Excluir");
         btnPetExcluir.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btnPetExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPetExcluirActionPerformed(evt);
+            }
+        });
 
         btnPetVoltar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         btnPetVoltar.setForeground(new java.awt.Color(0, 0, 102));
@@ -430,8 +524,8 @@ public class TelaAnimal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                                        .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(49, 49, 49)
+                                        .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(36, 36, 36)
                                         .addComponent(btnPetAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnPetExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -528,10 +622,10 @@ public class TelaAnimal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPetExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPetAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnPetExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                            .addComponent(btnPetAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                            .addComponent(btnPetSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 45, Short.MAX_VALUE))))
         );
 
@@ -640,6 +734,14 @@ public class TelaAnimal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnPetAlterarActionPerformed
 
+    private void btnPetExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetExcluirActionPerformed
+        // Código Botão excluir
+        AnimalCtrl cAnimal = new AnimalCtrl();
+        String nomeAnimal = tctPetAnimalNome.getText();
+        int idAnimal = Integer.parseInt(tctPetAnimalId.getText());
+        cAnimal.cDelerarAnimal(nomeAnimal, idAnimal);
+    }//GEN-LAST:event_btnPetExcluirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPetAlterar;
@@ -687,7 +789,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         //desabilitar os botoes da tela no método construtor
         btnPetSalvar.setEnabled(false);
         btnPetExcluir.setEnabled(false);
-        //btnPetVoltar.setEnabled(false);
+        btnPetAlterar.setEnabled(false);
         btnPetBuscarFoto.setEnabled(false);
     }
     
@@ -717,5 +819,25 @@ public class TelaAnimal extends javax.swing.JFrame {
         tftPesoPet.setText("");
         txaPetCaracteristica.setText("");
     }
+    
+     private void desabilitarEdiçãoTelaAnimal() {
+        rbFemea.setEnabled(false);
+        rbMacho.setEnabled(false);
+        tctPetAnimalCliente.setEnabled(false);
+        tctPetAnimalClienteId.setEnabled(false);
+        tctPetAnimalId.setEnabled(false);
+        tctPetAnimalNome.setEnabled(false);
+        
+       
+        
+        tctPetCor.setEnabled(false);
+        tctPetEspecie.setEnabled(false);
+        tctPetFoto.setEnabled(false);
+        tctPetRaca.setEnabled(false);
+        tftAlturaPet.setEnabled(false);
+        tftPesoPet.setEnabled(false);
+        txaPetCaracteristica.setEnabled(false);
+    }
+    
     
 }

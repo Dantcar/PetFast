@@ -492,13 +492,21 @@ public class AnimalDAO {
      * @param animal
      * @param vid 
      */
-    public void deletarAnimal(Animal animal, String vid){
+    public void deletarAnimal(String nomeAnimal, int vid){
        String msg;
         msg="";
         
         conexao = DBPetFast.getConnection();
-        String sql ="DELETE FROM animal WHERE IDANIMAL = " +Integer.parseInt(vid);
         
+        try {
+            stmt = conexao.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String sql ="DELETE FROM animal WHERE IDANIMAL = " + vid +" AND NOME = "+"'"+nomeAnimal+"'";
+        
+        System.out.println(sql);
         int n = JOptionPane.showConfirmDialog(
             null,
             "Confirma Deletar Animal?",
