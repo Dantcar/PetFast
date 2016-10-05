@@ -75,6 +75,8 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         btnVoltarMenu = new javax.swing.JButton();
         btnIncluirPet = new javax.swing.JButton();
         cbxClienteAnimal = new javax.swing.JComboBox();
+        lblTelaPetNomeCliente3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanelTitulo = new javax.swing.JPanel();
         lblTituloPet1 = new javax.swing.JLabel();
 
@@ -212,12 +214,22 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         lblTelaPetNomeCliente2.setText("Lista Pet");
 
         btnEditarPet.setText("Editar");
+        btnEditarPet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarPetActionPerformed(evt);
+            }
+        });
 
         btnAlterarPet.setText("Alterar");
 
         btnExcluirPet.setText("Excluir");
 
         btnConsultarPet.setText("Consultar");
+        btnConsultarPet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarPetActionPerformed(evt);
+            }
+        });
 
         btnVoltarMenu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnVoltarMenu.setText("Voltar");
@@ -243,18 +255,19 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        lblTelaPetNomeCliente3.setBackground(new java.awt.Color(102, 102, 102));
+        lblTelaPetNomeCliente3.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblTelaPetNomeCliente3.setForeground(new java.awt.Color(102, 102, 102));
+        lblTelaPetNomeCliente3.setText("Quantidade:");
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout jPanelPetLayout = new javax.swing.GroupLayout(jPanelPet);
         jPanelPet.setLayout(jPanelPetLayout);
         jPanelPetLayout.setHorizontalGroup(
             jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPetLayout.createSequentialGroup()
                 .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelPetLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblTelaPetNomeCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(cbxClienteAnimal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(163, 163, 163))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPetLayout.createSequentialGroup()
                         .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelPetLayout.createSequentialGroup()
@@ -271,7 +284,17 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                                 .addContainerGap()
                                 .addComponent(btnVoltarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(btnConsultarPet)))
+                        .addComponent(btnConsultarPet))
+                    .addGroup(jPanelPetLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblTelaPetNomeCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(cbxClienteAnimal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(30, 30, 30)
+                        .addComponent(lblTelaPetNomeCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addGap(7, 7, 7)))
                 .addContainerGap())
         );
 
@@ -283,8 +306,10 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelaPetNomeCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxClienteAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(cbxClienteAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTelaPetNomeCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(29, 29, 29)
                 .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditarPet)
                     .addComponent(btnAlterarPet)
@@ -388,6 +413,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             tctIdCliente.setText(cli.getIdCliente());
             idClienteP = Integer.parseInt(cli.getIdCliente());
             habilitarBotoesCliente();
+            
             btnIncluirPet.setEnabled(true);
             
             //buscar listas de animais deste 
@@ -429,7 +455,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         tctIdCliente.setText(cli.getIdCliente());
         idClienteP = Integer.parseInt(cli.getIdCliente());
         populaJComboBoxAnimalCliente(idClienteP);
-
+        
     }//GEN-LAST:event_btnLastCliActionPerformed
 
     private void btnInicioCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioCliActionPerformed
@@ -442,6 +468,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         tctIdCliente.setText(cli.getIdCliente());
         idClienteP = Integer.parseInt(cli.getIdCliente());
         populaJComboBoxAnimalCliente(idClienteP);
+                
     }//GEN-LAST:event_btnInicioCliActionPerformed
 
     private void btnPrevCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevCliActionPerformed
@@ -456,8 +483,10 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             tctIdCliente.setText(cli.getIdCliente());
             idClienteP = Integer.parseInt(cli.getIdCliente());
             populaJComboBoxAnimalCliente(idClienteP);
+           
         }
-
+        
+ 
     }//GEN-LAST:event_btnPrevCliActionPerformed
 
     private void btnNextCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextCliActionPerformed
@@ -472,7 +501,10 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             tctIdCliente.setText(cli.getIdCliente());
             idClienteP = Integer.parseInt(cli.getIdCliente());
             populaJComboBoxAnimalCliente(idClienteP);
+            
         }
+        
+        
     }//GEN-LAST:event_btnNextCliActionPerformed
 
     private void btnIncluirPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirPetActionPerformed
@@ -483,9 +515,10 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         String tituloPet;
         tituloPet = "Gestão Pet";
         String nome = tctPetAnimalCliente.getText();
+        String nomeAnimal = cbxClienteAnimal.getSelectedItem()+"";
         int id;
         id = parseInt(tctIdCliente.getText());
-        TelaAnimal telaAnimal = new TelaAnimal(nome, id, "i");
+        TelaAnimal telaAnimal = new TelaAnimal(nome, id, "i",nomeAnimal);
         telaAnimal.setTitle(tituloPet);
         telaAnimal.setVisible(true);
 
@@ -499,13 +532,55 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     private void cbxClienteAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteAnimalActionPerformed
        if ((cbxClienteAnimal.getSelectedIndex()) != -1) {
             //habilitar os botoes 
-           //btnListarRelAeronave.setEnabled(true);
+           habilitarBotoesPet();
         } else {
             //desabilitar os botoes 
-           //btnListarRelAeronave.setEnabled(false);
+           desabilitarBotoesPet();
         }
         
     }//GEN-LAST:event_cbxClienteAnimalActionPerformed
+
+    private void btnEditarPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPetActionPerformed
+        // Botão Editar Animal
+        
+        this.dispose();
+
+        String tituloPet;
+        tituloPet = "Gestão Pet";
+        String nome = tctPetAnimalCliente.getText();
+        String nomeAnimal = cbxClienteAnimal.getSelectedItem()+"";
+        int id;
+        id = parseInt(tctIdCliente.getText());
+        TelaAnimal telaAnimal = new TelaAnimal(nome, id, "e",nomeAnimal);
+        telaAnimal.setTitle(tituloPet);
+        telaAnimal.setVisible(true);
+
+        //add(telaAnimal, JLayeredPane.DRAG_LAYER);
+        telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+        telaAnimal.setLocation(40, 5);
+        
+    }//GEN-LAST:event_btnEditarPetActionPerformed
+
+    private void btnConsultarPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarPetActionPerformed
+        //Botã Consultar Animal
+        this.dispose();
+
+        String tituloPet;
+        tituloPet = "Gestão Pet";
+        String nome = tctPetAnimalCliente.getText();
+        String nomeAnimal = cbxClienteAnimal.getSelectedItem()+"";
+        int id;
+        id = parseInt(tctIdCliente.getText());
+        TelaAnimal telaAnimal = new TelaAnimal(nome, id, "c",nomeAnimal);
+        telaAnimal.setTitle(tituloPet);
+        telaAnimal.setVisible(true);
+
+        //add(telaAnimal, JLayeredPane.DRAG_LAYER);
+        telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+        telaAnimal.setLocation(140, 50);
+        
+        
+    }//GEN-LAST:event_btnConsultarPetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -521,6 +596,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPrevCli;
     private javax.swing.JButton btnVoltarMenu;
     private javax.swing.JComboBox cbxClienteAnimal;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCliente;
     private javax.swing.JPanel jPanelPet;
@@ -528,6 +604,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTelaPetCodigoCliente;
     private javax.swing.JLabel lblTelaPetNomeCliente;
     private javax.swing.JLabel lblTelaPetNomeCliente2;
+    private javax.swing.JLabel lblTelaPetNomeCliente3;
     private javax.swing.JLabel lblTituloPet1;
     private javax.swing.JTextField tctIdCliente;
     private static javax.swing.JTextField tctPetAnimalCliente;
@@ -535,11 +612,19 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void desabilitarBotoesPet() {
-        btnIncluirPet.setEnabled(false);
+        //btnIncluirPet.setEnabled(false);
         btnEditarPet.setEnabled(false);
         btnAlterarPet.setEnabled(false);
         btnExcluirPet.setEnabled(false);
         btnConsultarPet.setEnabled(false);
+    }
+    
+     private void habilitarBotoesPet() {
+        //btnIncluirPet.setEnabled(false);
+        btnEditarPet.setEnabled(true);
+        btnAlterarPet.setEnabled(true);
+        btnExcluirPet.setEnabled(true);
+        btnConsultarPet.setEnabled(true);
     }
 
     private void desabilitarBotoesCliente() {

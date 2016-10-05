@@ -450,8 +450,13 @@ public class AnimalDAO {
      String msg;
         msg="";
         conexao = DBPetFast.getConnection();
+        try {
+            stmt = conexao.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String sql = "UPDATE animal SET "
-                + "idCliente = '" + Integer.parseInt(animal.getIdCliente())
+                + "idCliente = " + Integer.parseInt(animal.getIdCliente()) +", "
                 + "nome = '" + animal.getNome() + "', "
                 + "especie = '" + animal.getEspecie() + "', "
                 + "nascimento = '" + animal.getNascimento() + "', "
@@ -461,8 +466,9 @@ public class AnimalDAO {
                 + "cor = '" + animal.getCor() + "', "
                 + "caracteristica = '" + animal.getCaracteristica() + "', "
                 + "sexo = '" + animal.getSexo() + "', "
-                + "foto = '" + animal.getFoto() + "', "
+                + "foto = '" + animal.getFoto() + "' "
            + " WHERE IDANIMAL = "+Integer.parseInt(vid);
+        System.out.println(sql);
         
         try {
             stmt.executeUpdate(sql);

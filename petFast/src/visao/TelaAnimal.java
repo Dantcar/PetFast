@@ -23,7 +23,8 @@ import modelo.Animal;
  * @author Décio
  */
 //public class TelaAnimal extends javax.swing.JInternalFrame {
-public class TelaAnimal extends javax.swing.JFrame{
+public class TelaAnimal extends javax.swing.JFrame {
+
     /**
      * Creates new form TelaAnimal
      */
@@ -33,55 +34,87 @@ public class TelaAnimal extends javax.swing.JFrame{
     private SimpleDateFormat sdfNascimentoPet;
     private int dataIntNascimentoPet;
     
-    
-    public TelaAnimal(String nomeCliente, int id, String operacao) {
+    public TelaAnimal(String nomeCliente, int id, String operacao, String nomeAnimal) {
         initComponents();
         AnimalCtrl cAnimal = new AnimalCtrl();
         desabilitarBotoesAnimal();
         
         dtPet = new Date();
-
+        
         jspNascimentoPet.setValue(dtPet);
         hojePet = new Date();
         dataHojePet = Util.DataFormatada(hojePet);
         sdfNascimentoPet = new SimpleDateFormat("dd/MM/yyyy");
         
+       
         try {
             hojePet = sdfNascimentoPet.parse(dataHojePet);
         } catch (ParseException ex) {
             Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
         
-        if(operacao == "i"){
-        tctPetAnimalCliente.setText(nomeCliente);
-        tctPetAnimalClienteId.setText(id +"");
-        //habilitar botoes incluir
-        btnPetSalvar.setEnabled(true);
-        
-        int idAnimal = cAnimal.receberIdAnimalAtual(); //pega o próximo id para cadastro
-        tctPetAnimalId.setText(idAnimal+1+"");
-        }
-        else if(operacao == "a"){
-        tctPetAnimalCliente.setText(nomeCliente);
-        tctPetAnimalClienteId.setText(id +"");
-        
-        }
-        else if(operacao == "e"){
-         tctPetAnimalCliente.setText(nomeCliente);
-        tctPetAnimalClienteId.setText(id +""); 
-        
-        }
-        else if(operacao == "c"){
-         tctPetAnimalCliente.setText(nomeCliente);
-        tctPetAnimalClienteId.setText(id +"");
-        
-        }else{
+        if (operacao == "i") {
+            tctPetAnimalCliente.setText(nomeCliente);
+            tctPetAnimalClienteId.setText(id + "");
+            //habilitar botoes incluir
+            btnPetSalvar.setEnabled(true);
+            
+            int idAnimal = cAnimal.receberIdAnimalAtual(); //pega o próximo id para cadastro
+            tctPetAnimalId.setText(idAnimal + 1 + "");
+        } else if (operacao == "a") {
+            tctPetAnimalCliente.setText(nomeCliente);
+            tctPetAnimalClienteId.setText(id + "");
+            tctPetAnimalNome.setText(nomeAnimal);
+            
+        } else if (operacao == "e") { //eliminar
+            tctPetAnimalCliente.setText(nomeCliente);
+            tctPetAnimalClienteId.setText(id + "");
+            tctPetAnimalNome.setText(nomeAnimal);
+            
+        } else if (operacao == "c") {
+            Animal animal = new Animal();
+            animal = cAnimal.receberAnimalNome(nomeAnimal);
+           
+            if (animal != null) {
+                
+                tctPetAnimalCliente.setText(nomeCliente);
+                tctPetAnimalClienteId.setText(id + "");
+                tctPetAnimalNome.setText(nomeAnimal);
+                
+                if (animal.getSexo() == "M") {
+                    rbMacho.setSelected(true);
+                } else {
+                    rbFemea.setSelected(true);
+                }
+                
+                tctPetAnimalId.setText(animal.getIdAnimal());
+                
+                //tratamento data
+                 String sdataNascimento = animal.getNascimento();
+                try {
+                    calNascimentoPet = Util.retornaData(sdataNascimento);                    
+                } catch (ParseException ex) {
+                    Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jspNascimentoPet.setValue(calNascimentoPet);
+                //fim tratamento data
+                
+                tctPetCor.setText(animal.getCor());
+                tctPetEspecie.setText(animal.getEspecie());
+                tctPetFoto.setText(animal.getFoto());
+                tctPetRaca.setText(animal.getRaca());
+                tftAlturaPet.setText(animal.getAltura());
+                tftPesoPet.setText(animal.getPeso());
+                txaPetCaracteristica.setText(animal.getCaracteristica());
+                btnPetSalvar.setEnabled(true);
+            } else {
+                limparTelaAnimal();
+            }
+            
+        } else {
             
         }
-    
-    
-    
+        
     }
 
     /**
@@ -140,6 +173,7 @@ public class TelaAnimal extends javax.swing.JFrame{
         tftAlturaPet = new javax.swing.JFormattedTextField();
         lblTelaPetNome1 = new javax.swing.JLabel();
         tctPetAnimalNome = new javax.swing.JTextField();
+        btnPetAlterar = new javax.swing.JButton();
 
         jPanelPetAnimalTitulo1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -294,7 +328,7 @@ public class TelaAnimal extends javax.swing.JFrame{
         btnPetSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnPetSalvar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         btnPetSalvar.setForeground(new java.awt.Color(0, 102, 0));
-        btnPetSalvar.setText("Salvar");
+        btnPetSalvar.setText("Salvar Novo");
         btnPetSalvar.setMargin(new java.awt.Insets(1, 1, 1, 1));
         btnPetSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -350,6 +384,17 @@ public class TelaAnimal extends javax.swing.JFrame{
         tctPetAnimalNome.setForeground(new java.awt.Color(51, 51, 51));
         tctPetAnimalNome.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
+        btnPetAlterar.setBackground(new java.awt.Color(255, 255, 255));
+        btnPetAlterar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        btnPetAlterar.setForeground(new java.awt.Color(0, 102, 0));
+        btnPetAlterar.setText("Alterar");
+        btnPetAlterar.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btnPetAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPetAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout lblTelaPetNomePetLayout = new javax.swing.GroupLayout(lblTelaPetNomePet);
         lblTelaPetNomePet.setLayout(lblTelaPetNomePetLayout);
         lblTelaPetNomePetLayout.setHorizontalGroup(
@@ -385,7 +430,9 @@ public class TelaAnimal extends javax.swing.JFrame{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                                        .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(49, 49, 49)
+                                        .addComponent(btnPetAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnPetExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -483,8 +530,9 @@ public class TelaAnimal extends javax.swing.JFrame{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnPetExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPetAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 45, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -530,40 +578,71 @@ public class TelaAnimal extends javax.swing.JFrame{
     }//GEN-LAST:event_btnPetVoltarActionPerformed
 
     private void btnPetSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetSalvarActionPerformed
-       
-       Animal animal = new Animal(); 
-       AnimalCtrl cAnimal = new AnimalCtrl();    
-       // animalc = new AnimalCtrl();
-       animal.setIdCliente(tctPetAnimalClienteId.getText());
-       animal.setIdAnimal(tctPetAnimalId.getText());
-       animal.setNome(tctPetAnimalNome.getText());
-       animal.setEspecie(tctPetEspecie.getText());
-       
-       dataNascimentoPetAnimal = Util.DataFormatadaS(jspNascimentoPet.getValue().toString());
-       animal.setNascimento(dataNascimentoPetAnimal);
-       animal.setRaca(tctPetRaca.getText());
-       animal.setPeso(tftPesoPet.getText());
-       animal.setAltura(tftAlturaPet.getText());
-       animal.setCaracteristica(txaPetCaracteristica.getText());
-       animal.setCor(tctPetCor.getText());
-       animal.setFoto(tctPetFoto.getText());
-             
-       
-        if(rbMacho.isSelected()){
-       //JOptionPane.showMessageDialog(null,"O sexo Masculino foi selecionado");
-        animal.setSexo("M");     
-       }else if(rbFemea.isSelected()){
-       //JOptionPane.showMessageDialog(null,"O sexo Feminino foi selecionado");
-        animal.setSexo("F");   
-       }
-       
+        
+        Animal animal = new Animal();
+        AnimalCtrl cAnimal = new AnimalCtrl();
+        // animalc = new AnimalCtrl();
+        animal.setIdCliente(tctPetAnimalClienteId.getText());
+        animal.setIdAnimal(tctPetAnimalId.getText());
+        animal.setNome(tctPetAnimalNome.getText());
+        animal.setEspecie(tctPetEspecie.getText());
+        
+        dataNascimentoPetAnimal = Util.DataFormatadaS(jspNascimentoPet.getValue().toString());
+        animal.setNascimento(dataNascimentoPetAnimal);
+        animal.setRaca(tctPetRaca.getText());
+        animal.setPeso(tftPesoPet.getText());
+        animal.setAltura(tftAlturaPet.getText());
+        animal.setCaracteristica(txaPetCaracteristica.getText());
+        animal.setCor(tctPetCor.getText());
+        animal.setFoto(tctPetFoto.getText());
+        
+        if (rbMacho.isSelected()) {
+            //JOptionPane.showMessageDialog(null,"O sexo Masculino foi selecionado");
+            animal.setSexo("M");
+        } else if (rbFemea.isSelected()) {
+            //JOptionPane.showMessageDialog(null,"O sexo Feminino foi selecionado");
+            animal.setSexo("F");
+        }
+        
         cAnimal.cInserirAnimal(animal);
         this.dispose();
         //limparTelaAnimal();
     }//GEN-LAST:event_btnPetSalvarActionPerformed
 
+    private void btnPetAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetAlterarActionPerformed
+        // Botao alterar animal
+        Animal animal = new Animal();
+        AnimalCtrl cAnimal = new AnimalCtrl();
+        // animalc = new AnimalCtrl();
+        animal.setIdCliente(tctPetAnimalClienteId.getText());
+        animal.setIdAnimal(tctPetAnimalId.getText());
+        animal.setNome(tctPetAnimalNome.getText());
+        animal.setEspecie(tctPetEspecie.getText());
+        
+        dataNascimentoPetAnimal = Util.DataFormatadaS(jspNascimentoPet.getValue().toString());
+        animal.setNascimento(dataNascimentoPetAnimal);
+        animal.setRaca(tctPetRaca.getText());
+        animal.setPeso(tftPesoPet.getText());
+        animal.setAltura(tftAlturaPet.getText());
+        animal.setCaracteristica(txaPetCaracteristica.getText());
+        animal.setCor(tctPetCor.getText());
+        animal.setFoto(tctPetFoto.getText());
+        
+        if (rbMacho.isSelected()) {
+            //JOptionPane.showMessageDialog(null,"O sexo Masculino foi selecionado");
+            animal.setSexo("M");
+        } else if (rbFemea.isSelected()) {
+            //JOptionPane.showMessageDialog(null,"O sexo Feminino foi selecionado");
+            animal.setSexo("F");
+        }
+        
+        cAnimal.cAlterarAnimal(animal, animal.getIdAnimal());
+        this.dispose();
+    }//GEN-LAST:event_btnPetAlterarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPetAlterar;
     private javax.swing.JButton btnPetBuscarFoto;
     private javax.swing.JButton btnPetExcluir;
     private javax.swing.JButton btnPetSalvar;
@@ -611,33 +690,32 @@ public class TelaAnimal extends javax.swing.JFrame{
         //btnPetVoltar.setEnabled(false);
         btnPetBuscarFoto.setEnabled(false);
     }
-
+    
     private void gravarAnimal(Animal animal) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    private void limparTelaAnimal(){
-    rbFemea.setSelected(false);
-    rbMacho.setSelected(false);
-    tctPetAnimalCliente.setText("");
-    tctPetAnimalClienteId.setText("");
-    tctPetAnimalId.setText("");
-    tctPetAnimalNome.setText("");
-    
-    try {
+    private void limparTelaAnimal() {
+        rbFemea.setSelected(false);
+        rbMacho.setSelected(false);
+        tctPetAnimalCliente.setText("");
+        tctPetAnimalClienteId.setText("");
+        tctPetAnimalId.setText("");
+        tctPetAnimalNome.setText("");
+        
+        try {
             hojePet = sdfNascimentoPet.parse(dataHojePet);
         } catch (ParseException ex) {
             Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-    tctPetCor.setText("");
-    tctPetEspecie.setText("");
-    tctPetFoto.setText("");
-    tctPetRaca.setText("");
-    tftAlturaPet.setText("");
-    tftPesoPet.setText("");
-    txaPetCaracteristica.setText("");
+        
+        tctPetCor.setText("");
+        tctPetEspecie.setText("");
+        tctPetFoto.setText("");
+        tctPetRaca.setText("");
+        tftAlturaPet.setText("");
+        tftPesoPet.setText("");
+        txaPetCaracteristica.setText("");
     }
-    
     
 }
