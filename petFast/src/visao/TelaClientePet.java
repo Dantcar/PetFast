@@ -41,7 +41,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         tctIdCliente.setEditable(false);
         desabilitarBotoesPet();
         desabilitarBotoesCliente();
-        btnIncluirPet.setEnabled(true);//arrumar depois
+        
         
        // jScrollPane1.setViewportView(jListPet);
 
@@ -406,7 +406,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         listaNome = (ArrayList) ccliente.listaClientesPorNome(tctPetAnimalCliente.getText());
         //Jlist listaAnimais = canimal.receberListaAnimaisCliente(WIDTH);
         if (!listaNome.isEmpty()) {
-
+            btnIncluirPet.setEnabled(true);
             pos = 0;
             btnIncluirPet.setEnabled(true);
             tam = listaNome.size() - 1;
