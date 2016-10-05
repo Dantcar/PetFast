@@ -38,6 +38,7 @@ public class TelaAnimal extends javax.swing.JFrame {
 
     public TelaAnimal(String nomeCliente, int id, String operacao, String nomeAnimal) {
         initComponents();
+        this.setLocation(250, 100); //(ponto inicial apartir lateral,altura)
         AnimalCtrl cAnimal = new AnimalCtrl();
         desabilitarBotoesAnimal();
         tctPetAnimalId.setEditable(false);
