@@ -264,7 +264,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         add(telaClientePet, JLayeredPane.DRAG_LAYER);
 
         telaClientePet.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaClientePet.setLocation(250, 100); //(ponto inicial apartir lateral,altura)
+        telaClientePet.setLocation(50, 50); //(ponto inicial apartir lateral,altura)
         //setLocationRelativeTo(null);
         
         

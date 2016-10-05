@@ -34,14 +34,14 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     public TelaClientePet() {
         
         initComponents();
-        this.setLocation(250, 100); //(ponto inicial apartir lateral,altura)
+        this.setLocation(50, 100); //(ponto inicial apartir lateral,altura)
         idCliente = "";
         nomeCliente = "";
         tctPetAnimalCpfCliente.setEditable(false);
         tctIdCliente.setEditable(false);
         desabilitarBotoesPet();
         desabilitarBotoesCliente();
-        
+        btnIncluirPet.setEnabled(true);//arrumar depois
         
        // jScrollPane1.setViewportView(jListPet);
 
@@ -408,6 +408,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         if (!listaNome.isEmpty()) {
 
             pos = 0;
+            btnIncluirPet.setEnabled(true);
             tam = listaNome.size() - 1;
             Cliente cli = (Cliente) listaNome.get(0);
             tctPetAnimalCpfCliente.setText(cli.getCpf());
@@ -416,7 +417,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             idClienteP = Integer.parseInt(cli.getIdCliente());
             habilitarBotoesCliente();
             
-            btnIncluirPet.setEnabled(true);
+            
             
             //buscar listas de animais deste 
             //arrayListAnimal = canimal.receberArrayListAnimaisCliente(idClienteP);
@@ -537,7 +538,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         //add(telaAnimal, JLayeredPane.DRAG_LAYER);
         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaAnimal.setLocation(150, 100);
+        telaAnimal.setLocation(50, 50);
 
         
     }//GEN-LAST:event_btnIncluirPetActionPerformed
@@ -569,7 +570,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         //add(telaAnimal, JLayeredPane.DRAG_LAYER);
         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaAnimal.setLocation(150, 100);
+        telaAnimal.setLocation(50, 50);
         
         
     }//GEN-LAST:event_btnConsultarPetActionPerformed
@@ -590,7 +591,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         //add(telaAnimal, JLayeredPane.DRAG_LAYER);
         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaAnimal.setLocation(150, 100);
+        telaAnimal.setLocation(50, 50);
         
     }//GEN-LAST:event_btnAlterarPetActionPerformed
 
@@ -610,7 +611,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         //add(telaAnimal, JLayeredPane.DRAG_LAYER);
         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaAnimal.setLocation(150, 100);
+        telaAnimal.setLocation(50, 50);
         
         
     }//GEN-LAST:event_btnExcluirPetActionPerformed
@@ -660,7 +661,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     }
 
     private void desabilitarBotoesCliente() {
-        btnInicioCli.setEnabled(false);
+        //btnInicioCli.setEnabled(false);
         btnPrevCli.setEnabled(false);
         btnNextCli.setEnabled(false);
         btnLastCli.setEnabled(false);
