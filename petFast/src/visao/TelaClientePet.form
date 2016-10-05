@@ -96,60 +96,63 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblTelaPetNomeCliente" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTelaPetCodigoCliente" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="btnInicioCli" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="btnPrevCli" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                                      <Component id="btnNextCli" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="tctPetAnimalCpfCliente" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnPesquisarCliente" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnLastCli" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblTelaPetNomeCliente" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="tctPetAnimalCliente" min="-2" pref="505" max="-2" attributes="0"/>
+                          <Component id="lblTelaPetCodigoCliente" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tctIdCliente" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="btnInicioCli" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                              <Component id="btnPrevCli" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                              <Component id="btnNextCli" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnLastCli" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="tctPetAnimalCliente" min="-2" pref="505" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="tctPetAnimalCpfCliente" min="-2" pref="406" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="lblTelaPetCodigoCliente1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnPesquisarCliente" max="32767" attributes="0"/>
+                                  <Component id="tctIdCliente" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="37" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblTelaPetCodigoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tctPetAnimalCpfCliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="btnPesquisarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace pref="39" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblTelaPetNomeCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tctPetAnimalCliente" linkSize="2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="tctPetAnimalCpfCliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="lblTelaPetCodigoCliente1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tctIdCliente" linkSize="2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="tctIdCliente" linkSize="2" min="-2" pref="32" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblTelaPetCodigoCliente" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblTelaPetNomeCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tctPetAnimalCliente" linkSize="2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnPesquisarCliente" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -280,9 +283,24 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tctIdCliente">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="18" style="1"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblTelaPetCodigoCliente1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="3"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Id Cliente:"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -305,27 +323,30 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                      <Component id="btnIncluirPet" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
+                      <Component id="btnAlterarPet" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                              <Component id="btnIncluirPet" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="62" max="32767" attributes="0"/>
-                              <Component id="btnAlterarPet" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="386" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                               <Component id="btnExcluirPet" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                               <Component id="btnConsultarPet" linkSize="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblTelaPetNomeCliente2" min="-2" pref="66" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="cbxClienteAnimal" max="32767" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblTelaPetNomeCliente2" min="-2" pref="66" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="cbxClienteAnimal" min="-2" pref="467" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -346,8 +367,8 @@
                           <Component id="btnConsultarPet" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="btnVoltarMenu" min="-2" pref="46" max="-2" attributes="0"/>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <Component id="btnVoltarMenu" pref="55" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

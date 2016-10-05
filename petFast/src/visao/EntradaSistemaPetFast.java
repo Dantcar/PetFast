@@ -255,7 +255,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     private void subMenuPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuPetActionPerformed
         
         String tituloCliente;
-        tituloCliente = "Gestão Cliente";
+        tituloCliente = "Gestão Pet / Cliente";
 
         TelaClientePet telaClientePet = new TelaClientePet();
         telaClientePet.setTitle(tituloCliente);

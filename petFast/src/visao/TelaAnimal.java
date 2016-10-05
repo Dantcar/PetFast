@@ -7,6 +7,7 @@ package visao;
 
 import controle.AnimalCtrl;
 import controle.Util;
+import controle.ValidaCampos;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import modelo.Animal;
@@ -33,68 +35,67 @@ public class TelaAnimal extends javax.swing.JFrame {
     private String dataHojePet, dataNascimentoPetAnimal;
     private SimpleDateFormat sdfNascimentoPet;
     private int dataIntNascimentoPet;
-    
+
     public TelaAnimal(String nomeCliente, int id, String operacao, String nomeAnimal) {
         initComponents();
         AnimalCtrl cAnimal = new AnimalCtrl();
         desabilitarBotoesAnimal();
-        
+        tctPetAnimalId.setEditable(false);
         dtPet = new Date();
-        
+
         jspNascimentoPet.setValue(dtPet);
         hojePet = new Date();
         dataHojePet = Util.DataFormatada(hojePet);
         sdfNascimentoPet = new SimpleDateFormat("dd/MM/yyyy");
-        
-       
+
         try {
             hojePet = sdfNascimentoPet.parse(dataHojePet);
         } catch (ParseException ex) {
             Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         if (operacao == "i") {
             tctPetAnimalCliente.setText(nomeCliente);
             tctPetAnimalClienteId.setText(id + "");
+            tctPetAnimalClienteId.setEditable(false);
             //habilitar botoes incluir
             btnPetSalvar.setEnabled(true);
-            
+
             int idAnimal = cAnimal.receberIdAnimalAtual(); //pega o próximo id para cadastro
             tctPetAnimalId.setText(idAnimal + 1 + "");
-        
+
             /**
-         * Botão Alterar
-         */
-        
+             * Botão Alterar
+             */
         } else if (operacao == "a") {
             Animal animal = new Animal();
             animal = cAnimal.receberAnimalNome(nomeAnimal);
-           
+
             if (animal != null) {
-                
+
                 tctPetAnimalCliente.setText(nomeCliente);
                 tctPetAnimalClienteId.setText(id + "");
-                tctPetAnimalClienteId.setEditable(true);
+                tctPetAnimalClienteId.setEditable(false);
                 tctPetAnimalNome.setText(nomeAnimal);
-                
+
                 if (animal.getSexo() == "M") {
                     rbMacho.setSelected(true);
                 } else {
                     rbFemea.setSelected(true);
                 }
-                
+
                 tctPetAnimalId.setText(animal.getIdAnimal());
-                
+
                 //tratamento data
-                 String sdataNascimento = animal.getNascimento();
+                String sdataNascimento = animal.getNascimento();
                 try {
-                    calNascimentoPet = Util.retornaData(sdataNascimento);                    
+                    calNascimentoPet = Util.retornaData(sdataNascimento);
                 } catch (ParseException ex) {
                     Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jspNascimentoPet.setValue(calNascimentoPet);
                 //fim tratamento data
-                
+
                 tctPetCor.setText(animal.getCor());
                 tctPetEspecie.setText(animal.getEspecie());
                 tctPetFoto.setText(animal.getFoto());
@@ -106,38 +107,38 @@ public class TelaAnimal extends javax.swing.JFrame {
             } else {
                 limparTelaAnimal();
             }
-            
-         /**
-          * Botao Excluir
-          */   
+
+            /**
+             * Botao Excluir
+             */
         } else if (operacao == "e") { //eliminar
-             Animal animal = new Animal();
+            Animal animal = new Animal();
             animal = cAnimal.receberAnimalNome(nomeAnimal);
-           
+
             if (animal != null) {
-                
+
                 tctPetAnimalCliente.setText(nomeCliente);
                 tctPetAnimalClienteId.setText(id + "");
                 tctPetAnimalNome.setText(nomeAnimal);
-                
+
                 if (animal.getSexo() == "M") {
                     rbMacho.setSelected(true);
                 } else {
                     rbFemea.setSelected(true);
                 }
-                
+
                 tctPetAnimalId.setText(animal.getIdAnimal());
-                
+
                 //tratamento data
-                 String sdataNascimento = animal.getNascimento();
+                String sdataNascimento = animal.getNascimento();
                 try {
-                    calNascimentoPet = Util.retornaData(sdataNascimento);                    
+                    calNascimentoPet = Util.retornaData(sdataNascimento);
                 } catch (ParseException ex) {
                     Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jspNascimentoPet.setValue(calNascimentoPet);
                 //fim tratamento data
-                
+
                 tctPetCor.setText(animal.getCor());
                 tctPetEspecie.setText(animal.getEspecie());
                 tctPetFoto.setText(animal.getFoto());
@@ -145,46 +146,45 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tftAlturaPet.setText(animal.getAltura());
                 tftPesoPet.setText(animal.getPeso());
                 txaPetCaracteristica.setText(animal.getCaracteristica());
-                
+
                 desabilitarEdiçãoTelaAnimal();
                 btnPetExcluir.setEnabled(true);
-                
+
             } else {
                 limparTelaAnimal();
             }
-        
-            
+
             /**
              * Botão Consultar
              */
         } else if (operacao == "c") {
             Animal animal = new Animal();
             animal = cAnimal.receberAnimalNome(nomeAnimal);
-           
+
             if (animal != null) {
-                
+
                 tctPetAnimalCliente.setText(nomeCliente);
                 tctPetAnimalClienteId.setText(id + "");
                 tctPetAnimalNome.setText(nomeAnimal);
-                
+
                 if (animal.getSexo() == "M") {
                     rbMacho.setSelected(true);
                 } else {
                     rbFemea.setSelected(true);
                 }
-                
+
                 tctPetAnimalId.setText(animal.getIdAnimal());
-                
+
                 //tratamento data
-                 String sdataNascimento = animal.getNascimento();
+                String sdataNascimento = animal.getNascimento();
                 try {
-                    calNascimentoPet = Util.retornaData(sdataNascimento);                    
+                    calNascimentoPet = Util.retornaData(sdataNascimento);
                 } catch (ParseException ex) {
                     Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jspNascimentoPet.setValue(calNascimentoPet);
                 //fim tratamento data
-                
+
                 tctPetCor.setText(animal.getCor());
                 tctPetEspecie.setText(animal.getEspecie());
                 tctPetFoto.setText(animal.getFoto());
@@ -192,18 +192,18 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tftAlturaPet.setText(animal.getAltura());
                 tftPesoPet.setText(animal.getPeso());
                 txaPetCaracteristica.setText(animal.getCaracteristica());
-                
+
                 desabilitarEdiçãoTelaAnimal();
                 //btnPetSalvar.setEnabled(true);
-                
+
             } else {
                 limparTelaAnimal();
             }
-            
+
         } else {
-            
+
         }
-        
+
     }
 
     /**
@@ -672,7 +672,7 @@ public class TelaAnimal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPetVoltarActionPerformed
 
     private void btnPetSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetSalvarActionPerformed
-        
+
         Animal animal = new Animal();
         AnimalCtrl cAnimal = new AnimalCtrl();
         // animalc = new AnimalCtrl();
@@ -680,7 +680,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         animal.setIdAnimal(tctPetAnimalId.getText());
         animal.setNome(tctPetAnimalNome.getText());
         animal.setEspecie(tctPetEspecie.getText());
-        
+
         dataNascimentoPetAnimal = Util.DataFormatadaS(jspNascimentoPet.getValue().toString());
         animal.setNascimento(dataNascimentoPetAnimal);
         animal.setRaca(tctPetRaca.getText());
@@ -689,7 +689,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         animal.setCaracteristica(txaPetCaracteristica.getText());
         animal.setCor(tctPetCor.getText());
         animal.setFoto(tctPetFoto.getText());
-        
+
         if (rbMacho.isSelected()) {
             //JOptionPane.showMessageDialog(null,"O sexo Masculino foi selecionado");
             animal.setSexo("M");
@@ -697,9 +697,13 @@ public class TelaAnimal extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(null,"O sexo Feminino foi selecionado");
             animal.setSexo("F");
         }
+
+        boolean resp = validarTelaAnimal(animal);
         
-        cAnimal.cInserirAnimal(animal);
-        this.dispose();
+        if (resp) {
+            cAnimal.cInserirAnimal(animal);     
+            this.dispose();
+        }
         //limparTelaAnimal();
     }//GEN-LAST:event_btnPetSalvarActionPerformed
 
@@ -712,7 +716,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         animal.setIdAnimal(tctPetAnimalId.getText());
         animal.setNome(tctPetAnimalNome.getText());
         animal.setEspecie(tctPetEspecie.getText());
-        
+
         dataNascimentoPetAnimal = Util.DataFormatadaS(jspNascimentoPet.getValue().toString());
         animal.setNascimento(dataNascimentoPetAnimal);
         animal.setRaca(tctPetRaca.getText());
@@ -721,17 +725,25 @@ public class TelaAnimal extends javax.swing.JFrame {
         animal.setCaracteristica(txaPetCaracteristica.getText());
         animal.setCor(tctPetCor.getText());
         animal.setFoto(tctPetFoto.getText());
-        
+
         if (rbMacho.isSelected()) {
             //JOptionPane.showMessageDialog(null,"O sexo Masculino foi selecionado");
             animal.setSexo("M");
-        } else if (rbFemea.isSelected()) {
+        } 
+        if (rbFemea.isSelected()) {
             //JOptionPane.showMessageDialog(null,"O sexo Feminino foi selecionado");
             animal.setSexo("F");
         }
         
-        cAnimal.cAlterarAnimal(animal, animal.getIdAnimal());
-        this.dispose();
+        
+        boolean resp = validarTelaAnimal(animal);
+
+        if (resp) {
+            cAnimal.cAlterarAnimal(animal, animal.getIdAnimal());
+            this.dispose();
+        }
+
+
     }//GEN-LAST:event_btnPetAlterarActionPerformed
 
     private void btnPetExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetExcluirActionPerformed
@@ -740,6 +752,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         String nomeAnimal = tctPetAnimalNome.getText();
         int idAnimal = Integer.parseInt(tctPetAnimalId.getText());
         cAnimal.cDelerarAnimal(nomeAnimal, idAnimal);
+        this.dispose();
     }//GEN-LAST:event_btnPetExcluirActionPerformed
 
 
@@ -792,11 +805,11 @@ public class TelaAnimal extends javax.swing.JFrame {
         btnPetAlterar.setEnabled(false);
         btnPetBuscarFoto.setEnabled(false);
     }
-    
+
     private void gravarAnimal(Animal animal) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     private void limparTelaAnimal() {
         rbFemea.setSelected(false);
         rbMacho.setSelected(false);
@@ -804,13 +817,13 @@ public class TelaAnimal extends javax.swing.JFrame {
         tctPetAnimalClienteId.setText("");
         tctPetAnimalId.setText("");
         tctPetAnimalNome.setText("");
-        
+
         try {
             hojePet = sdfNascimentoPet.parse(dataHojePet);
         } catch (ParseException ex) {
             Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         tctPetCor.setText("");
         tctPetEspecie.setText("");
         tctPetFoto.setText("");
@@ -819,17 +832,15 @@ public class TelaAnimal extends javax.swing.JFrame {
         tftPesoPet.setText("");
         txaPetCaracteristica.setText("");
     }
-    
-     private void desabilitarEdiçãoTelaAnimal() {
+
+    private void desabilitarEdiçãoTelaAnimal() {
         rbFemea.setEnabled(false);
         rbMacho.setEnabled(false);
         tctPetAnimalCliente.setEnabled(false);
         tctPetAnimalClienteId.setEnabled(false);
         tctPetAnimalId.setEnabled(false);
         tctPetAnimalNome.setEnabled(false);
-        
-       
-        
+
         tctPetCor.setEnabled(false);
         tctPetEspecie.setEnabled(false);
         tctPetFoto.setEnabled(false);
@@ -838,6 +849,44 @@ public class TelaAnimal extends javax.swing.JFrame {
         tftPesoPet.setEnabled(false);
         txaPetCaracteristica.setEnabled(false);
     }
-    
-    
+
+    private boolean validarTelaAnimal(Animal animal) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //String dataNascimentoPet = Util.DataFormatadaS(jspNascimentoPet.getValue().toString());
+        int dataIntNascimentoPet = Util.DtAmericana(jspNascimentoPet.getValue().toString());
+        boolean resposta = false;
+        String msg;
+        msg = "";
+                
+        boolean validaNome = ValidaCampos.validaVazio(tctPetAnimalNome.getText());
+        boolean validaDatajsp = ValidaCampos.validaDataNascimento(dataIntNascimentoPet);
+        boolean validaSexo = ValidaCampos.validaVazioComboBox(animal.getSexo());
+        System.out.println("validaNome = " + validaNome);
+        System.out.println("validaDatajsp = " + validaNome);
+
+        //testes da validacao
+        if (validaNome) {
+        } else {
+            msg = msg + "Campo Nome Vazio" + "\n";
+        }
+
+        if (validaDatajsp) {
+        } else {
+            msg = msg + "Campo Nascimento Inválido" + "\n";
+        }
+        
+        if (validaSexo) {
+        } else {
+            msg = msg + "Campo Nascimento Inválido" + "\n";
+        }
+        
+        if ("".equals(msg)) {
+            resposta = true;
+        } else {
+            JOptionPane.showMessageDialog(this, msg, "Campo Inválido ou vazio", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return resposta;
+    }
+
 }
