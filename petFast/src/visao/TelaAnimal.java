@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
@@ -106,6 +107,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tftAlturaPet.setText(animal.getAltura());
                 tftPesoPet.setText(animal.getPeso());
                 txaPetCaracteristica.setText(animal.getCaracteristica());
+                colocarFotoLabel();
                 btnPetAlterar.setEnabled(true);
             } else {
                 limparTelaAnimal();
@@ -152,7 +154,7 @@ public class TelaAnimal extends javax.swing.JFrame {
 
                 desabilitarEdiçãoTelaAnimal();
                 btnPetExcluir.setEnabled(true);
-
+                colocarFotoLabel();
             } else {
                 limparTelaAnimal();
             }
@@ -195,7 +197,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tftAlturaPet.setText(animal.getAltura());
                 tftPesoPet.setText(animal.getPeso());
                 txaPetCaracteristica.setText(animal.getCaracteristica());
-
+                colocarFotoLabel();
                 desabilitarEdiçãoTelaAnimal();
                 //btnPetSalvar.setEnabled(true);
 
@@ -241,7 +243,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         lblTelaPetCaracteristica = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaPetCaracteristica = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        lblFotoPet = new javax.swing.JLabel();
         tctPetFoto = new javax.swing.JTextField();
         lblTelaPetPesoUnidade = new javax.swing.JLabel();
         lblTelaPetAlturaUnidade = new javax.swing.JLabel();
@@ -391,8 +393,8 @@ public class TelaAnimal extends javax.swing.JFrame {
         txaPetCaracteristica.setRows(5);
         jScrollPane1.setViewportView(txaPetCaracteristica);
 
-        jLabel1.setText(" ");
-        jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        lblFotoPet.setText(" ");
+        lblFotoPet.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         tctPetFoto.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         tctPetFoto.setForeground(new java.awt.Color(51, 51, 51));
@@ -529,7 +531,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                                 .addComponent(lblTelaPetAlturaUnidade)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
                                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
                                         .addComponent(btnPetSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -558,14 +560,14 @@ public class TelaAnimal extends javax.swing.JFrame {
                             .addComponent(tctPetAnimalId, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)))
                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFotoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
                             .addComponent(btnPetBuscarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnPetVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(tctPetFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         lblTelaPetNomePetLayout.setVerticalGroup(
             lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,7 +575,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblFotoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tctPetFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -780,6 +782,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         }
 
         jFileChooserFoto.setVisible(false);
+        colocarFotoLabel();
 
     }//GEN-LAST:event_btnPetBuscarFotoActionPerformed
 
@@ -791,10 +794,10 @@ public class TelaAnimal extends javax.swing.JFrame {
     private javax.swing.JButton btnPetSalvar;
     private javax.swing.JButton btnPetVoltar;
     private javax.swing.ButtonGroup buttonGroupSexo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanelPetAnimalTitulo1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jspNascimentoPet;
+    private javax.swing.JLabel lblFotoPet;
     private javax.swing.JLabel lblTelaPetAltura;
     private javax.swing.JLabel lblTelaPetAlturaUnidade;
     private javax.swing.JLabel lblTelaPetCaracteristica;
@@ -915,6 +918,16 @@ public class TelaAnimal extends javax.swing.JFrame {
         }
 
         return resposta;
+    }
+
+    private void colocarFotoLabel() {
+       String urlFoto = tctPetFoto.getText();
+       ImageIcon foto;
+        foto = new ImageIcon(urlFoto);
+       foto.setImage(foto.getImage().getScaledInstance(400, 300, 100));
+       //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
+       lblFotoPet.setIcon(foto);
+       //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
     }
 
 }
