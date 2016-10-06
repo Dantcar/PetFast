@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
@@ -35,6 +36,7 @@ public class TelaAnimal extends javax.swing.JFrame {
     private String dataHojePet, dataNascimentoPetAnimal;
     private SimpleDateFormat sdfNascimentoPet;
     private int dataIntNascimentoPet;
+    private javax.swing.JFileChooser jFileChooserFoto;
 
     public TelaAnimal(String nomeCliente, int id, String operacao, String nomeAnimal) {
         initComponents();
@@ -61,7 +63,7 @@ public class TelaAnimal extends javax.swing.JFrame {
             tctPetAnimalClienteId.setEditable(false);
             //habilitar botoes incluir
             btnPetSalvar.setEnabled(true);
-
+            btnPetBuscarFoto.setEnabled(true);
             int idAnimal = cAnimal.receberIdAnimalAtual(); //pega o próximo id para cadastro
             tctPetAnimalId.setText(idAnimal + 1 + "");
 
@@ -73,7 +75,7 @@ public class TelaAnimal extends javax.swing.JFrame {
             animal = cAnimal.receberAnimalNome(nomeAnimal);
 
             if (animal != null) {
-
+                btnPetBuscarFoto.setEnabled(true);
                 tctPetAnimalCliente.setText(nomeCliente);
                 tctPetAnimalClienteId.setText(id + "");
                 tctPetAnimalClienteId.setEditable(false);
@@ -452,6 +454,11 @@ public class TelaAnimal extends javax.swing.JFrame {
         btnPetBuscarFoto.setText("Localizar Foto");
         btnPetBuscarFoto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPetBuscarFoto.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btnPetBuscarFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPetBuscarFotoActionPerformed(evt);
+            }
+        });
 
         jspNascimentoPet.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jspNascimentoPet.setToolTipText("Escolha Dia, Mês e Ano");
@@ -700,9 +707,9 @@ public class TelaAnimal extends javax.swing.JFrame {
         }
 
         boolean resp = validarTelaAnimal(animal);
-        
+
         if (resp) {
-            cAnimal.cInserirAnimal(animal);     
+            cAnimal.cInserirAnimal(animal);
             this.dispose();
         }
         //limparTelaAnimal();
@@ -730,13 +737,12 @@ public class TelaAnimal extends javax.swing.JFrame {
         if (rbMacho.isSelected()) {
             //JOptionPane.showMessageDialog(null,"O sexo Masculino foi selecionado");
             animal.setSexo("M");
-        } 
+        }
         if (rbFemea.isSelected()) {
             //JOptionPane.showMessageDialog(null,"O sexo Feminino foi selecionado");
             animal.setSexo("F");
         }
-        
-        
+
         boolean resp = validarTelaAnimal(animal);
 
         if (resp) {
@@ -755,6 +761,27 @@ public class TelaAnimal extends javax.swing.JFrame {
         cAnimal.cDelerarAnimal(nomeAnimal, idAnimal);
         this.dispose();
     }//GEN-LAST:event_btnPetExcluirActionPerformed
+
+    private void btnPetBuscarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetBuscarFotoActionPerformed
+        // TODO add your handling code here:
+        jFileChooserFoto = new javax.swing.JFileChooser();
+
+        int retVal;
+
+        //JFileChooser jFileChooser1 = new JFileChooser();
+        jFileChooserFoto.addChoosableFileFilter(new TextFilter());
+
+        retVal = jFileChooserFoto.showOpenDialog(this);
+
+        if (retVal == JFileChooser.APPROVE_OPTION) {
+            //System.out.println(jFileChooserFoto.getSelectedFile().getAbsolutePath());
+            tctPetFoto.setText(jFileChooserFoto.getSelectedFile().getAbsolutePath());
+            //System.out.println(jFileChooserFoto.getSelectedFile().getName());
+        }
+
+        jFileChooserFoto.setVisible(false);
+
+    }//GEN-LAST:event_btnPetBuscarFotoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -858,7 +885,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         boolean resposta = false;
         String msg;
         msg = "";
-                
+
         boolean validaNome = ValidaCampos.validaVazio(tctPetAnimalNome.getText());
         boolean validaDatajsp = ValidaCampos.validaDataNascimento(dataIntNascimentoPet);
         boolean validaSexo = ValidaCampos.validaVazioComboBox(animal.getSexo());
@@ -875,12 +902,12 @@ public class TelaAnimal extends javax.swing.JFrame {
         } else {
             msg = msg + "Campo Nascimento Inválido" + "\n";
         }
-        
+
         if (validaSexo) {
         } else {
             msg = msg + "Campo Nascimento Inválido" + "\n";
         }
-        
+
         if ("".equals(msg)) {
             resposta = true;
         } else {
