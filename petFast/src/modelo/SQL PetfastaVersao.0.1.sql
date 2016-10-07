@@ -110,3 +110,16 @@ INSERT INTO DAC.ANIMAL (IDANIMAL, IDCLIENTE, NOME, ESPECIE, NASCIMENTO, RACA, PE
 	VALUES (1, 1, 'Caçarola', 'Canina', '11/09/2013', 'Viralatas', '12,00', '12,00', 'Marrom', 'Teste', 'F', 'ok');
 INSERT INTO DAC.ANIMAL (IDANIMAL, IDCLIENTE, NOME, ESPECIE, NASCIMENTO, RACA, PESO, ALTURA, COR, CARACTERISTICA, SEXO, FOTO) 
 	VALUES (2, 3, 'Castanhola', 'Canina', '05/10/2014', 'Podlle', '5,30', '17,20', 'Branca', 'Carinhosa e curiosa', 'F', '');
+
+
+--Base pcSamsung
+INSERT INTO DAC.ANIMAL (IDANIMAL, IDCLIENTE, NOME, ESPECIE, NASCIMENTO, RACA, PESO, ALTURA, COR, CARACTERISTICA, SEXO, FOTO) 
+	VALUES (1, 1, 'Caçarola baby', 'Canina', '09/02/2010', 'Viralata', '23,70', '30,80', 'Marrom', 'Dengoza', 'F', '');
+INSERT INTO DAC.ANIMAL (IDANIMAL, IDCLIENTE, NOME, ESPECIE, NASCIMENTO, RACA, PESO, ALTURA, COR, CARACTERISTICA, SEXO, FOTO) 
+	VALUES (2, 4, 'Bola Preta', 'Canina', '12/01/2014', 'Podlle', '12,00', '23,00', 'Preta', 'Feroz e arrogante', 'F', 'c:\tewst');
+INSERT INTO DAC.ANIMAL (IDANIMAL, IDCLIENTE, NOME, ESPECIE, NASCIMENTO, RACA, PESO, ALTURA, COR, CARACTERISTICA, SEXO, FOTO) 
+	VALUES (3, 6, 'Criolla', 'Felina', '04/10/2016', 'Gata', '8,00', '12,00', 'Preta', 'Peluda', 'F', '');
+INSERT INTO DAC.ANIMAL (IDANIMAL, IDCLIENTE, NOME, ESPECIE, NASCIMENTO, RACA, PESO, ALTURA, COR, CARACTERISTICA, SEXO, FOTO) 
+	VALUES (4, 4, 'Maria Mole', 'Passaro', '04/10/2016', 'Canário', '0,20', '8,00', 'Amarelo ouro', 'Canta muito!', 'F', '');
+INSERT INTO DAC.ANIMAL (IDANIMAL, IDCLIENTE, NOME, ESPECIE, NASCIMENTO, RACA, PESO, ALTURA, COR, CARACTERISTICA, SEXO, FOTO) 
+	VALUES (5, 3, 'Porco Pig', 'Suino', '05/10/2016', 'Porco', '120,00', '50,00', 'Rosa', 'Porco gordo', 'M', 'c:/porco.png');

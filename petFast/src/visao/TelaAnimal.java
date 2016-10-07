@@ -9,6 +9,11 @@ import controle.AnimalCtrl;
 import controle.Util;
 import controle.ValidaCampos;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -576,7 +581,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
                         .addComponent(lblFotoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(tctPetFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -767,7 +772,10 @@ public class TelaAnimal extends javax.swing.JFrame {
     private void btnPetBuscarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetBuscarFotoActionPerformed
         // TODO add your handling code here:
         jFileChooserFoto = new javax.swing.JFileChooser();
-
+        String fotoSource = null;
+        String fotoDestino = "C:\\Users\\Décio\\Documents\\NetBeansProjects\\PetFast\\petFast\\ImagensPet\\";
+        String fotoNome = tctPetAnimalCliente.getText() + "-"+tctPetAnimalClienteId.getText();
+         
         int retVal;
 
         //JFileChooser jFileChooser1 = new JFileChooser();
@@ -777,11 +785,16 @@ public class TelaAnimal extends javax.swing.JFrame {
 
         if (retVal == JFileChooser.APPROVE_OPTION) {
             //System.out.println(jFileChooserFoto.getSelectedFile().getAbsolutePath());
-            tctPetFoto.setText(jFileChooserFoto.getSelectedFile().getAbsolutePath());
+            fotoSource = jFileChooserFoto.getSelectedFile().getAbsolutePath();
+            //tctPetFoto.setText(fotoSource); //esta funcionando
             //System.out.println(jFileChooserFoto.getSelectedFile().getName());
+            fotoNome = fotoNome + jFileChooserFoto.getSelectedFile().getName();
+            //copiarFotoToPetfast( fotoSource, fotoDestino, fotNome);
         }
-
+        System.out.println(fotoNome);
         jFileChooserFoto.setVisible(false);
+        copiarFotoToPetfast( fotoSource, fotoDestino, fotoNome);
+        tctPetFoto.setText(fotoDestino + fotoNome);
         colocarFotoLabel();
 
     }//GEN-LAST:event_btnPetBuscarFotoActionPerformed
@@ -891,8 +904,8 @@ public class TelaAnimal extends javax.swing.JFrame {
 
         boolean validaNome = ValidaCampos.validaVazio(tctPetAnimalNome.getText());
         boolean validaDatajsp = ValidaCampos.validaDataNascimento(dataIntNascimentoPet);
-        boolean validaSexo = ValidaCampos.validaVazioComboBox(animal.getSexo());
-        System.out.println("validaNome = " + validaNome);
+        boolean validaSexo = buttonGroupSexo.isSelected(null); //ValidaCampos.validaVazioComboBox(animal.getSexo());
+        System.out.println("validaSexo = " + validaSexo);
         System.out.println("validaDatajsp = " + validaNome);
 
         //testes da validacao
@@ -907,8 +920,8 @@ public class TelaAnimal extends javax.swing.JFrame {
         }
 
         if (validaSexo) {
+            msg = msg + "Campo Sexo não selecionado" + "\n";
         } else {
-            msg = msg + "Campo Nascimento Inválido" + "\n";
         }
 
         if ("".equals(msg)) {
@@ -921,13 +934,55 @@ public class TelaAnimal extends javax.swing.JFrame {
     }
 
     private void colocarFotoLabel() {
-       String urlFoto = tctPetFoto.getText();
-       ImageIcon foto;
+        Dimension d = lblFotoPet.getSize();
+        //int width = tctPetFoto.getWidth();
+        //int height = tctPetFoto.getHeight();
+        //System.out.println("width: "+d.width + " height: "+d.height);
+        String urlFoto = tctPetFoto.getText();
+        ImageIcon foto;
         foto = new ImageIcon(urlFoto);
-       foto.setImage(foto.getImage().getScaledInstance(400, 300, 100));
-       //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
-       lblFotoPet.setIcon(foto);
-       //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
+        
+        foto.setImage(foto.getImage().getScaledInstance(d.width, d.height, 100));
+        //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
+        lblFotoPet.setIcon(foto);
+        //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
     }
+
+    private void copiarFotoToPetfast(String fonte, String destino, String nomeArquivo) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   //long start = new Date().getTime();
+		
+		FileInputStream fis = null;
+                FileOutputStream fos = null;
+            try {
+                fis = new FileInputStream(fonte);
+		fos = new FileOutputStream(destino + nomeArquivo);
+			int i;
+			while((i=fis.read())!=-1){
+			fos.write(i);
+                        } 
+                        System.out.println("Arquivo copiado!"); 
+            } catch (FileNotFoundException ex) {
+            Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+            }catch (IOException ex) {
+            Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                    try {
+                        fis.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        fos.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+		
+            }	//long stop = new Date().getTime();
+		//System.out.println("Tempo de copia:" + (stop - start) + "ms");
+    
+    }
+    
+    
 
 }

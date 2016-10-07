@@ -41,7 +41,8 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         tctIdCliente.setEditable(false);
         desabilitarBotoesPet();
         desabilitarBotoesCliente();
-        
+        cbxClienteAnimal.removeAllItems (); 
+       // cbxClienteAnimal.removeAll();
         
        // jScrollPane1.setViewportView(jListPet);
 
@@ -436,7 +437,6 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             tctPetAnimalCliente.setText("");
             tctIdCliente.setText("");
             cbxClienteAnimal.setSelectedItem(null);
-            cbxClienteAnimal.removeAll();
             cbxClienteAnimal.setSelectedIndex(-1);
             cbxClienteAnimal.removeAllItems (); 
             cbxClienteAnimal.removeAll();
