@@ -773,7 +773,8 @@ public class TelaAnimal extends javax.swing.JFrame {
         // TODO add your handling code here:
         jFileChooserFoto = new javax.swing.JFileChooser();
         String fotoSource = null;
-        String fotoDestino = "C:\\Users\\Décio\\Documents\\NetBeansProjects\\PetFast\\petFast\\ImagensPet\\";
+        //String fotoDestino = "C:\\Users\\Décio\\Documents\\NetBeansProjects\\PetFast\\petFast\\ImagensPet\\";
+        String fotoDestino = System.getProperty("user.dir")+"//";
         String fotoNome = tctPetAnimalCliente.getText() + "-"+tctPetAnimalClienteId.getText();
          
         int retVal;
@@ -791,6 +792,7 @@ public class TelaAnimal extends javax.swing.JFrame {
             fotoNome = fotoNome + jFileChooserFoto.getSelectedFile().getName();
             //copiarFotoToPetfast( fotoSource, fotoDestino, fotNome);
         }
+        System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
         System.out.println(fotoNome);
         jFileChooserFoto.setVisible(false);
         copiarFotoToPetfast( fotoSource, fotoDestino, fotoNome);
