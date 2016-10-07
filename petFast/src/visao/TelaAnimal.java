@@ -395,6 +395,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         lblTelaPetCaracteristica.setText("Características:");
 
         txaPetCaracteristica.setColumns(20);
+        txaPetCaracteristica.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         txaPetCaracteristica.setRows(5);
         jScrollPane1.setViewportView(txaPetCaracteristica);
 
@@ -565,14 +566,15 @@ public class TelaAnimal extends javax.swing.JFrame {
                             .addComponent(tctPetAnimalId, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)))
                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFotoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
-                            .addComponent(btnPetBuscarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPetVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(tctPetFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
+                        .addComponent(btnPetBuscarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(192, 192, 192)
+                        .addComponent(btnPetVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 24, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tctPetFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblFotoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         lblTelaPetNomePetLayout.setVerticalGroup(
             lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,8 +582,9 @@ public class TelaAnimal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lblTelaPetNomePetLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
                         .addComponent(lblFotoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tctPetFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(lblTelaPetNomePetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -641,7 +644,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                             .addComponent(btnPetExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                             .addComponent(btnPetAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                             .addComponent(btnPetSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 45, Short.MAX_VALUE))))
+                        .addGap(0, 70, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -684,6 +687,8 @@ public class TelaAnimal extends javax.swing.JFrame {
     private void btnPetVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetVoltarActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        
+        
     }//GEN-LAST:event_btnPetVoltarActionPerformed
 
     private void btnPetSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetSalvarActionPerformed
@@ -774,9 +779,9 @@ public class TelaAnimal extends javax.swing.JFrame {
         jFileChooserFoto = new javax.swing.JFileChooser();
         String fotoSource = null;
         //String fotoDestino = "C:\\Users\\Décio\\Documents\\NetBeansProjects\\PetFast\\petFast\\ImagensPet\\";
-        String fotoDestino = System.getProperty("user.dir")+"//";
+        String fotoDestino = System.getProperty("user.dir")+"\\ImagensPet\\";
         String fotoNome = tctPetAnimalCliente.getText() + "-"+tctPetAnimalClienteId.getText();
-         
+        //C:\Documents and Settings\deciodecarvalho\Meus documentos\NetBeansProjects\PetFast\petFast
         int retVal;
 
         //JFileChooser jFileChooser1 = new JFileChooser();
@@ -792,8 +797,11 @@ public class TelaAnimal extends javax.swing.JFrame {
             fotoNome = fotoNome + jFileChooserFoto.getSelectedFile().getName();
             //copiarFotoToPetfast( fotoSource, fotoDestino, fotNome);
         }
+        
         System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
-        System.out.println(fotoNome);
+        System.out.println(fotoDestino+fotoNome);
+        
+        
         jFileChooserFoto.setVisible(false);
         copiarFotoToPetfast( fotoSource, fotoDestino, fotoNome);
         tctPetFoto.setText(fotoDestino + fotoNome);

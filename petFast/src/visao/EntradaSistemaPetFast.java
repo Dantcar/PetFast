@@ -5,6 +5,7 @@
  */
 package visao;
 
+import java.awt.Toolkit;
 import javax.swing.JLayeredPane;
 
 /**
@@ -18,6 +19,11 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
      */
     public EntradaSistemaPetFast() {
         initComponents();
+        String pathProjeto = System.getProperty("user.dir")+"//";
+        String iconPetfast = pathProjeto + "src//Icones//petfastIcone.png";
+        System.out.println(iconPetfast);
+        setIconImage(Toolkit.getDefaultToolkit().getImage( iconPetfast ));
+        //setIconImage(new ImageIcon(getClass().getResource(pathProjeto + "src//Icones//petfastIcone.ico")));
         setExtendedState(MAXIMIZED_BOTH); //maximizar a tela principal
     }
 

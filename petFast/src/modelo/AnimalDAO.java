@@ -513,7 +513,7 @@ public class AnimalDAO {
             "Confirmar Deletar Animal",
             JOptionPane.YES_NO_OPTION);
            
-            if(true){
+            if(n == 0){
            try {
                stmt.executeUpdate(sql);
                msg = msg+"Dados do cliente excluidos com sucesso \n";
@@ -523,7 +523,9 @@ public class AnimalDAO {
                 msg = msg+"Erro de gravação no BD \n";
                Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-           }
+           }else{
+              msg = msg+"Dados do cliente inalterados \n";  
+            }
             
          if ("".equals(msg)) {
         } else {

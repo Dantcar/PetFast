@@ -524,7 +524,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     private void btnIncluirPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirPetActionPerformed
         // TODO add your handling code here:
 
-        this.dispose();
+        //this.dispose();
 
         String tituloPet;
         tituloPet = "Gestão Pet Inclusão de Novo Animal Pet";
@@ -556,7 +556,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void btnConsultarPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarPetActionPerformed
         //Botão Consultar Animal
-        this.dispose();
+        //this.dispose();
 
         String tituloPet;
         tituloPet = "Gestão Pet- Consultar ";
@@ -577,7 +577,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void btnAlterarPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarPetActionPerformed
         // Botão alterar
-        this.dispose();
+        //this.dispose();
 
         String tituloPet;
         tituloPet = "Gestão Pet - Alteração";
@@ -597,7 +597,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void btnExcluirPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPetActionPerformed
         // TBotão Excluir Animal
-         this.dispose();
+         //this.dispose();
 
         String tituloPet;
         tituloPet = "Gestão Pet - Exclusão";
