@@ -12,6 +12,7 @@ package visao;
 import static controle.UsuarioCtrl.logarUsuario;
 import static controle.ValidaCampos.validaLogin;
 import static controle.ValidaCampos.validaSenhaForte;
+import java.awt.Point;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,15 +20,18 @@ import javax.swing.JOptionPane;
  * @author deciodecarvalho
  */
 public class TelaLogin extends javax.swing.JFrame {
-
+ private Point pos1,pos2;
+ private int posX, posY;
     /**
      * Creates new form TelaUsuario
      */
     public TelaLogin() {
-        int vert,hor;
+       
         
         initComponents();
         setLocationRelativeTo(null);
+        lblOlhoSenha.setLocation(posX, posY);
+        lblMostraSenha.setVisible(false);
         //setLocation(250,100); //(ponto inicial apartir lateral,altura)
         
     }
@@ -50,6 +54,8 @@ public class TelaLogin extends javax.swing.JFrame {
         lblLogoPet = new javax.swing.JLabel();
         lblMensagem = new javax.swing.JLabel();
         tctSenha = new javax.swing.JPasswordField();
+        lblMostraSenha = new javax.swing.JLabel();
+        lblOlhoSenha = new javax.swing.JLabel();
 
         btnUsuarioVoltar.setBackground(new java.awt.Color(204, 204, 204));
         btnUsuarioVoltar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -99,6 +105,18 @@ public class TelaLogin extends javax.swing.JFrame {
 
         tctSenha.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
+        lblMostraSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        lblOlhoSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/eye-icon.png"))); // NOI18N
+        lblOlhoSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblOlhoSenhaMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblOlhoSenhaMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelUsuarioLayout = new javax.swing.GroupLayout(panelUsuario);
         panelUsuario.setLayout(panelUsuarioLayout);
         panelUsuarioLayout.setHorizontalGroup(
@@ -108,23 +126,27 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addComponent(btnNovoUsuarioBd, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnUsuarioVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(68, 68, 68))
             .addGroup(panelUsuarioLayout.createSequentialGroup()
                 .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelUsuarioLayout.createSequentialGroup()
-                            .addGap(27, 27, 27)
+                            .addGap(25, 25, 25)
                             .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(panelUsuarioLayout.createSequentialGroup()
-                                    .addComponent(lblLogin)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tctLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(10, 10, 10)
+                                    .addComponent(lblOlhoSenha))
                                 .addGroup(panelUsuarioLayout.createSequentialGroup()
-                                    .addComponent(lblUsuarioSenha)
+                                    .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblLogin)
+                                        .addComponent(lblUsuarioSenha))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tctSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(7, 7, 7)))
+                                    .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblMostraSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tctSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tctLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(93, 93, 93)))
                     .addGroup(panelUsuarioLayout.createSequentialGroup()
                         .addGap(204, 204, 204)
                         .addComponent(lblLogoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -135,15 +157,19 @@ public class TelaLogin extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLogoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tctLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogin))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUsuarioSenha)
-                    .addComponent(tctSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tctSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuarioSenha))
+                .addGap(5, 5, 5)
+                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblOlhoSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(lblMostraSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
                 .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -156,9 +182,7 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 561, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,6 +248,32 @@ public class TelaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tctLoginMouseReleased
 
+    private void lblOlhoSenhaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOlhoSenhaMousePressed
+        // mostra senha ao mouse ser pressionado
+         // metodo para mostrar a senha
+        String vsenha ="";
+        vsenha = tctSenha.getText();
+        tctSenha.setVisible(false);
+        lblMostraSenha.setText(vsenha);
+        posX = tctSenha.getWidth();
+        posY = tctSenha.getHeight();
+        //pos1 = tctSenha.getLocation();
+        //lblOlhoSenha.setLocation(posX, posY);
+        //lblMostraSenha.setLocation(pos1);
+        //lblMostraSenha.setSize(posX, posY);
+        lblMostraSenha.setVisible(true);
+        pack();
+    }//GEN-LAST:event_lblOlhoSenhaMousePressed
+
+    private void lblOlhoSenhaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOlhoSenhaMouseReleased
+        // mostra senha ao click mouse ser solto
+        tctSenha.setVisible(true);
+        //lblMostraSenha.setSize(posX, posY);
+        //lblMostraSenha.setLocation(pos1);
+        lblMostraSenha.setVisible(false);
+        pack();
+    }//GEN-LAST:event_lblOlhoSenhaMouseReleased
+
 /**
          * @param args the command line arguments
          */
@@ -268,6 +318,8 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblLogoPet;
     private javax.swing.JLabel lblMensagem;
+    private javax.swing.JLabel lblMostraSenha;
+    private javax.swing.JLabel lblOlhoSenha;
     private javax.swing.JLabel lblUsuarioSenha;
     private javax.swing.JPanel panelUsuario;
     private static javax.swing.JTextField tctLogin;

@@ -147,6 +147,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                     Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jspNascimentoPet.setValue(calNascimentoPet);
+                jspNascimentoPet.setEnabled(false);
                 //fim tratamento data
 
                 tctPetCor.setText(animal.getCor());
@@ -193,6 +194,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                     Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jspNascimentoPet.setValue(calNascimentoPet);
+                jspNascimentoPet.setEnabled(false);
                 //fim tratamento data
 
                 tctPetCor.setText(animal.getCor());
