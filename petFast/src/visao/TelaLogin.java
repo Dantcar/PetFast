@@ -12,6 +12,7 @@ import static controle.UsuarioCtrl.logarUsuario;
 import static controle.ValidaCampos.validaLogin;
 import static controle.ValidaCampos.validaSenhaForte;
 import java.awt.Point;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,6 +30,11 @@ public class TelaLogin extends javax.swing.JFrame {
     public TelaLogin() {
 
         initComponents();
+        
+        String pathProjeto = System.getProperty("user.dir")+"//";
+        String iconPetfast = pathProjeto + "src//Icones//petfastIcone.png";
+        setIconImage(Toolkit.getDefaultToolkit().getImage( iconPetfast ));
+        
         setLocationRelativeTo(null);
         lblOlhoSenha.setLocation(posX, posY);
         lblMostraSenha.setVisible(false);

@@ -113,6 +113,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tctPetCor.setText(animal.getCor());
                 tctPetEspecie.setText(animal.getEspecie());
                 tctPetFoto.setText(animal.getFoto());
+                tctPetFoto.setEditable(false);
                 tctPetRaca.setText(animal.getRaca());
                 tftAlturaPet.setText(animal.getAltura());
                 tftPesoPet.setText(animal.getPeso());
@@ -959,7 +960,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         ImageIcon foto;
         foto = new ImageIcon(urlFoto);
         
-        foto.setImage(foto.getImage().getScaledInstance(d.width, d.height, 100));
+        foto.setImage(foto.getImage().getScaledInstance((d.width-20), (d.height-20), 100));
         //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
         lblFotoPet.setIcon(foto);
         //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
