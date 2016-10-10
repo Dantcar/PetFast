@@ -10,6 +10,7 @@ import controle.Util;
 import controle.ValidaCampos;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -46,6 +47,10 @@ public class TelaAnimal extends javax.swing.JFrame {
 
     public TelaAnimal(String nomeCliente, int id, String operacao, String nomeAnimal) {
         initComponents();
+        String pathProjeto = System.getProperty("user.dir")+"//";
+        String iconPetfast = pathProjeto + "src//Icones//petfastIcone.png";
+        //System.out.println(iconPetfast);
+        setIconImage(Toolkit.getDefaultToolkit().getImage( iconPetfast ));
         this.setLocation(250, 100); //(ponto inicial apartir lateral,altura)
         AnimalCtrl cAnimal = new AnimalCtrl();
         desabilitarBotoesAnimal();
@@ -178,7 +183,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tctPetAnimalClienteId.setText(id + "");
                 tctPetAnimalNome.setText(nomeAnimal);
                 
-                System.out.println("Este é o sexo: "+ animal.getSexo());
+                //System.out.println("Este é o sexo: "+ animal.getSexo());
                
                  if (animal.getSexo().trim().equals("M")) {
                     rbMacho.setSelected(true);
@@ -803,8 +808,8 @@ public class TelaAnimal extends javax.swing.JFrame {
             //copiarFotoToPetfast( fotoSource, fotoDestino, fotNome);
         }
         
-        System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
-        System.out.println(fotoDestino+fotoNome);
+        //System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
+        //System.out.println(fotoDestino+fotoNome);
         
         
         jFileChooserFoto.setVisible(false);
@@ -917,8 +922,8 @@ public class TelaAnimal extends javax.swing.JFrame {
         boolean validaNome = ValidaCampos.validaVazio(tctPetAnimalNome.getText());
         boolean validaDatajsp = ValidaCampos.validaDataNascimento(dataIntNascimentoPet);
         boolean validaSexo = buttonGroupSexo.isSelected(null); //ValidaCampos.validaVazioComboBox(animal.getSexo());
-        System.out.println("validaSexo = " + validaSexo);
-        System.out.println("validaDatajsp = " + validaNome);
+        //System.out.println("validaSexo = " + validaSexo);
+        //System.out.println("validaDatajsp = " + validaNome);
 
         //testes da validacao
         if (validaNome) {
@@ -973,7 +978,7 @@ public class TelaAnimal extends javax.swing.JFrame {
 			while((i=fis.read())!=-1){
 			fos.write(i);
                         } 
-                        System.out.println("Arquivo copiado!"); 
+                       // System.out.println("Arquivo copiado!"); 
             } catch (FileNotFoundException ex) {
             Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
             }catch (IOException ex) {
