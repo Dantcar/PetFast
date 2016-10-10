@@ -134,9 +134,11 @@ public class AnimalCtrl {
         return lista = animalDAO.findComboAnimalNome(id);
         //return lista = aeronaveDAO.findComboAeronave();
    
-    
-    
     }
     
-    
+    public int ReceberContarAnimaisCliente(int cliente) {
+    AnimalDAO animalDAO = new AnimalDAO();
+    int resposta = animalDAO.contarAnimaisCliente(cliente);
+    return resposta;
+    }
 }//Final classe AnimalCtrl

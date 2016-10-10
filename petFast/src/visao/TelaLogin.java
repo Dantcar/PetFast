@@ -8,7 +8,6 @@
  */
 package visao;
 
-
 import static controle.UsuarioCtrl.logarUsuario;
 import static controle.ValidaCampos.validaLogin;
 import static controle.ValidaCampos.validaSenhaForte;
@@ -20,20 +19,21 @@ import javax.swing.JOptionPane;
  * @author deciodecarvalho
  */
 public class TelaLogin extends javax.swing.JFrame {
- private Point pos1,pos2;
- private int posX, posY;
+
+    private Point pos1, pos2;
+    private int posX, posY;
+
     /**
      * Creates new form TelaUsuario
      */
     public TelaLogin() {
-       
-        
+
         initComponents();
         setLocationRelativeTo(null);
         lblOlhoSenha.setLocation(posX, posY);
         lblMostraSenha.setVisible(false);
         //setLocation(250,100); //(ponto inicial apartir lateral,altura)
-        
+
     }
 
     /**
@@ -203,45 +203,42 @@ public class TelaLogin extends javax.swing.JFrame {
         //meu codigo aqui
         String login;
         String password;
-        String msg="";
+        String msg = "";
         login = tctLogin.getText().trim();
-        password = tctSenha.getText().trim();
-        
+        password = String.valueOf(tctSenha.getPassword()).trim(); //de password para String.trim();
+
         boolean logarUsuarioPet = false;
-        
-        
+
         if (validaSenhaForte(password) && validaLogin(login)) {
-        
+
             logarUsuarioPet = logarUsuario(login, password);
-                if (logarUsuarioPet){
-                    this.dispose();
-                    msg ="Usuário: "+login+ " logado com sucesso";
-                    String tituloPrincipal;
-                    tituloPrincipal = "Gestão Petfast";
-        
-                    EntradaSistemaPetFast telaPrincipal = new EntradaSistemaPetFast();
-                    telaPrincipal.setTitle(tituloPrincipal);
-                    telaPrincipal.setVisible(true);
-                    // JOptionPane.showMessageDialog(null, msg );
-                }
-        else{
-             msg ="Usuário: "+login+ " falha login";
-             JOptionPane.showMessageDialog(null, msg ); 
+            if (logarUsuarioPet) {
+                this.dispose();
+                msg = "Usuário: " + login + " logado com sucesso";
+                String tituloPrincipal;
+                tituloPrincipal = "Gestão Petfast";
+
+                EntradaSistemaPetFast telaPrincipal = new EntradaSistemaPetFast();
+                telaPrincipal.setTitle(tituloPrincipal);
+                telaPrincipal.setVisible(true);
+                // JOptionPane.showMessageDialog(null, msg );
+            } else {
+                msg = "Usuário: " + login + " falha login";
+                JOptionPane.showMessageDialog(null, msg);
             }
-        
+
         } else {
             msg = msg + "A Senha não atende o requisito: \n"
-                    +"pelo menos uma letra minúscula\n"
-                    +"pelo menos uma letra maiúscula\n"
-                    +"pelo menos um número\n"
-                    +"pelo menos um caractere especial\n"
-                    +"minímo de 8 caracteres e máximo de 15\n"
-                    +"ou usuário invalido"
-                    ;
-            JOptionPane.showMessageDialog(null, msg );
+                    + "pelo menos uma letra minúscula\n"
+                    + "pelo menos uma letra maiúscula\n"
+                    + "pelo menos um número\n"
+                    + "pelo menos um caractere especial\n"
+                    + "minímo de 8 caracteres e máximo de 15\n"
+                    + "ou usuário invalido";
+            JOptionPane.showMessageDialog(null, msg);
         }
-        
-        
+
+
     }//GEN-LAST:event_btnNovoUsuarioBdActionPerformed
 
     private void tctLoginMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tctLoginMouseReleased
@@ -250,9 +247,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void lblOlhoSenhaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOlhoSenhaMousePressed
         // mostra senha ao mouse ser pressionado
-         // metodo para mostrar a senha
-        String vsenha ="";
-        vsenha = tctSenha.getText();
+        // metodo para mostrar a senha
+        String vsenha = "";
+        vsenha = String.valueOf(tctSenha.getPassword()); //de password para String
         tctSenha.setVisible(false);
         lblMostraSenha.setText(vsenha);
         posX = tctSenha.getWidth();
@@ -262,6 +259,10 @@ public class TelaLogin extends javax.swing.JFrame {
         //lblMostraSenha.setLocation(pos1);
         //lblMostraSenha.setSize(posX, posY);
         lblMostraSenha.setVisible(true);
+
+        //String senha =String.valueOf(tctSenha.getPassword()); //de password para String
+        //System.out.println(senha);
+
         pack();
     }//GEN-LAST:event_lblOlhoSenhaMousePressed
 
@@ -274,44 +275,44 @@ public class TelaLogin extends javax.swing.JFrame {
         pack();
     }//GEN-LAST:event_lblOlhoSenhaMouseReleased
 
-/**
-         * @param args the command line arguments
-         */
-        public static void main(String args[]) {
-            /* Set the Nimbus look and feel */
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-             */
-            try {
-                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                    if ("Nimbus".equals(info.getName())) {
-                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                        break;
-                    }
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
-            } catch (ClassNotFoundException ex) {
-                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-        //</editor-fold>
-            //</editor-fold>
-        //</editor-fold>
-            //</editor-fold>
-
-            /* Create and display the form */
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new TelaLogin().setVisible(true);
-                }
-            });
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new TelaLogin().setVisible(true);
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovoUsuarioBd;
     private javax.swing.JButton btnUsuarioVoltar;

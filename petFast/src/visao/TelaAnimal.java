@@ -131,7 +131,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tctPetAnimalClienteId.setText(id + "");
                 tctPetAnimalNome.setText(nomeAnimal);
 
-                if (animal.getSexo() == "M") {
+                if (animal.getSexo().trim().equals("M")) {
                     rbMacho.setSelected(true);
                 } else {
                     rbFemea.setSelected(true);
@@ -177,8 +177,10 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tctPetAnimalCliente.setText(nomeCliente);
                 tctPetAnimalClienteId.setText(id + "");
                 tctPetAnimalNome.setText(nomeAnimal);
-
-                if (animal.getSexo() == "M") {
+                
+                System.out.println("Este é o sexo: "+ animal.getSexo());
+               
+                 if (animal.getSexo().trim().equals("M")) {
                     rbMacho.setSelected(true);
                 } else {
                     rbFemea.setSelected(true);
@@ -715,7 +717,8 @@ public class TelaAnimal extends javax.swing.JFrame {
         if (rbMacho.isSelected()) {
             //JOptionPane.showMessageDialog(null,"O sexo Masculino foi selecionado");
             animal.setSexo("M");
-        } else if (rbFemea.isSelected()) {
+        } 
+        if (rbFemea.isSelected()) {
             //JOptionPane.showMessageDialog(null,"O sexo Feminino foi selecionado");
             animal.setSexo("F");
         }
@@ -862,10 +865,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         btnPetBuscarFoto.setEnabled(false);
     }
 
-    private void gravarAnimal(Animal animal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     private void limparTelaAnimal() {
         rbFemea.setSelected(false);
         rbMacho.setSelected(false);
