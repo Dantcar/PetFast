@@ -40,6 +40,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         initComponents();
         this.setLocation(50, 100); //(ponto inicial apartir lateral,altura)
+        this.repaint();
         idCliente = "";
         nomeCliente = "";
         tctPetAnimalCpfCliente.setEditable(false);
@@ -48,7 +49,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         desabilitarBotoesCliente();
         cbxClienteAnimal.removeAllItems();
        // cbxClienteAnimal.removeAll();
-
+        
        // jScrollPane1.setViewportView(jListPet);
     }
 

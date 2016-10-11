@@ -19,12 +19,14 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
      */
     public EntradaSistemaPetFast() {
         initComponents();
+        this.pack();
         String pathProjeto = System.getProperty("user.dir")+"//";
         String iconPetfast = pathProjeto + "src//Icones//petfastIcone.png";
         //System.out.println(iconPetfast);
         setIconImage(Toolkit.getDefaultToolkit().getImage( iconPetfast ));
         //setIconImage(new ImageIcon(getClass().getResource(pathProjeto + "src//Icones//petfastIcone.ico")));
         setExtendedState(MAXIMIZED_BOTH); //maximizar a tela principal
+        
     }
 
     /**
@@ -36,6 +38,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanelFundoTela = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAtendimento = new javax.swing.JMenu();
         subMenuNovoAtendimento = new javax.swing.JMenuItem();
@@ -55,12 +58,30 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         subMenuSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(213, 245, 173));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jPanelFundoTela.setBackground(new java.awt.Color(100, 255, 200));
+
+        javax.swing.GroupLayout jPanelFundoTelaLayout = new javax.swing.GroupLayout(jPanelFundoTela);
+        jPanelFundoTela.setLayout(jPanelFundoTelaLayout);
+        jPanelFundoTelaLayout.setHorizontalGroup(
+            jPanelFundoTelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 950, Short.MAX_VALUE)
+        );
+        jPanelFundoTelaLayout.setVerticalGroup(
+            jPanelFundoTelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 679, Short.MAX_VALUE)
+        );
+
+        jMenuBar1.setBackground(new java.awt.Color(245, 245, 245));
+
+        menuAtendimento.setBackground(new java.awt.Color(245, 245, 245));
         menuAtendimento.setText("Atendimento");
         menuAtendimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         subMenuNovoAtendimento.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuNovoAtendimento.setBackground(new java.awt.Color(245, 245, 245));
         subMenuNovoAtendimento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         subMenuNovoAtendimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendimento.jpg"))); // NOI18N
         subMenuNovoAtendimento.setText("Administrar Atendimento");
@@ -73,6 +94,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         jMenuBar1.add(menuAtendimento);
 
+        menuCadastroCliente_Pet.setBackground(new java.awt.Color(245, 245, 245));
         menuCadastroCliente_Pet.setText(" Cliente/Pet ");
         menuCadastroCliente_Pet.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         menuCadastroCliente_Pet.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +127,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         jMenuBar1.add(menuCadastroCliente_Pet);
 
+        menuBox_Especialista.setBackground(new java.awt.Color(245, 245, 245));
         menuBox_Especialista.setText("Box / Especialista");
         menuBox_Especialista.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
@@ -132,6 +155,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         jMenuBar1.add(menuBox_Especialista);
 
+        menuRelatorios.setBackground(new java.awt.Color(245, 245, 245));
         menuRelatorios.setText("Relatórios");
         menuRelatorios.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
@@ -170,6 +194,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         jMenuBar1.add(menuRelatorios);
 
+        menuSobre.setBackground(new java.awt.Color(245, 245, 245));
         menuSobre.setText("Sobre");
         menuSobre.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
@@ -186,6 +211,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         jMenuBar1.add(menuSobre);
 
+        menuSair.setBackground(new java.awt.Color(245, 245, 245));
         menuSair.setText("Sair");
         menuSair.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
@@ -208,11 +234,11 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 950, Short.MAX_VALUE)
+            .addComponent(jPanelFundoTela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 679, Short.MAX_VALUE)
+            .addComponent(jPanelFundoTela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -246,7 +272,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         telaCliente.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
         telaCliente.setLocation(40, 5); //(ponto inicial apartir lateral,altura)
-
+        telaCliente.pack();
         /*
         TelaCliente telaCliente = new TelaCliente();
         telaCliente.setTitle(Cadastro.tituloCliente);
@@ -265,12 +291,15 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         TelaClientePet telaClientePet = new TelaClientePet();
         telaClientePet.setTitle(tituloCliente);
+        telaClientePet.pack();
+        telaClientePet.setLocation(50, 50); //(ponto inicial apartir lateral,altura)
         telaClientePet.setVisible(true);
         
         add(telaClientePet, JLayeredPane.DRAG_LAYER);
 
         telaClientePet.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaClientePet.setLocation(50, 50); //(ponto inicial apartir lateral,altura)
+        
+        
         //setLocationRelativeTo(null);
         
         
@@ -412,6 +441,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuVooAeronaveCadastrar;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanelFundoTela;
     private javax.swing.JMenu menuAtendimento;
     private javax.swing.JMenu menuBox_Especialista;
     private javax.swing.JMenu menuCadastroCliente_Pet;

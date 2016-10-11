@@ -37,6 +37,7 @@ public class TelaLogin extends javax.swing.JFrame {
         
         setLocationRelativeTo(null);
         lblOlhoSenha.setLocation(posX, posY);
+        pack();
         lblMostraSenha.setVisible(false);
         //setLocation(250,100); //(ponto inicial apartir lateral,altura)
 
