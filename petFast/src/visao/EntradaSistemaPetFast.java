@@ -38,7 +38,6 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelFundoTela = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAtendimento = new javax.swing.JMenu();
         subMenuNovoAtendimento = new javax.swing.JMenuItem();
@@ -60,19 +59,6 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(213, 245, 173));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jPanelFundoTela.setBackground(new java.awt.Color(100, 255, 200));
-
-        javax.swing.GroupLayout jPanelFundoTelaLayout = new javax.swing.GroupLayout(jPanelFundoTela);
-        jPanelFundoTela.setLayout(jPanelFundoTelaLayout);
-        jPanelFundoTelaLayout.setHorizontalGroup(
-            jPanelFundoTelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 950, Short.MAX_VALUE)
-        );
-        jPanelFundoTelaLayout.setVerticalGroup(
-            jPanelFundoTelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 679, Short.MAX_VALUE)
-        );
 
         jMenuBar1.setBackground(new java.awt.Color(245, 245, 245));
 
@@ -234,11 +220,11 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelFundoTela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 950, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelFundoTela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
 
         pack();
@@ -441,7 +427,6 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuVooAeronaveCadastrar;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanelFundoTela;
     private javax.swing.JMenu menuAtendimento;
     private javax.swing.JMenu menuBox_Especialista;
     private javax.swing.JMenu menuCadastroCliente_Pet;

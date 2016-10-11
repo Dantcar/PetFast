@@ -20,7 +20,7 @@ import modelo.Animal;
 import modelo.Cliente;
 
 /**
- *
+ * http://rgb.to/hex/8c1aff
  * @author Décio
  */
 public class TelaClientePet extends javax.swing.JInternalFrame {
@@ -32,14 +32,21 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     private List lAnimal;
     private JList listAnimal;
     private String urlMiniFoto, nomeAnimal;
-
+    private static int openFrameCount = 0; //teste
+    private static final int xOffset = 30, yOffset = 30; //teste
     /**
      * Creates new form TelaClientePet
      */
     public TelaClientePet() {
-
+          super("Document #" + (++openFrameCount),
+          true, //resizable
+          true, //closable
+          true, //maximizable
+          true);//iconifiable
         initComponents();
+        
         this.setLocation(50, 100); //(ponto inicial apartir lateral,altura)
+        setLocation(xOffset*openFrameCount, yOffset*openFrameCount);
         this.repaint();
         idCliente = "";
         nomeCliente = "";
@@ -91,9 +98,11 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
+        jPanel1.setBackground(new java.awt.Color(140, 26, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.setForeground(new java.awt.Color(102, 102, 102));
 
+        jPanelCliente.setBackground(new java.awt.Color(140, 26, 255));
         jPanelCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
         lblTelaPetCodigoCliente.setBackground(new java.awt.Color(102, 102, 102));
@@ -221,6 +230,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         jPanelClienteLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tctIdCliente, tctPetAnimalCliente});
 
+        jPanelPet.setBackground(new java.awt.Color(140, 26, 255));
         jPanelPet.setBorder(javax.swing.BorderFactory.createTitledBorder("Pet Animal"));
 
         lblTelaPetNomeCliente2.setBackground(new java.awt.Color(102, 102, 102));
@@ -343,6 +353,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelTitulo.setBackground(new java.awt.Color(140, 26, 255));
         jPanelTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         lblTituloPet1.setBackground(new java.awt.Color(102, 102, 102));
