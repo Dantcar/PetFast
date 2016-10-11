@@ -63,6 +63,10 @@ public class TelaLogin extends javax.swing.JFrame {
         lblMostraSenha = new javax.swing.JLabel();
         lblOlhoSenha = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(204, 255, 204));
+
+        panelUsuario.setBackground(new java.awt.Color(0, 201, 143));
+
         btnUsuarioVoltar.setBackground(new java.awt.Color(204, 204, 204));
         btnUsuarioVoltar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnUsuarioVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N

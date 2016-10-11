@@ -952,6 +952,7 @@ public class TelaAnimal extends javax.swing.JFrame {
     }
 
     private void colocarFotoLabel() {
+        lblFotoPet.setIcon(null);
         Dimension d = lblFotoPet.getSize();
         //int width = tctPetFoto.getWidth();
         //int height = tctPetFoto.getHeight();

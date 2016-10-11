@@ -631,6 +631,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
     private void cbxClienteAnimalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxClienteAnimalItemStateChanged
         // Quando houver alteração no combo box
+        lblMiniFotoPet.setIcon(null);
         int QuantidadePet = 0;
         String nomeCli ="";
         AnimalCtrl canimal = new AnimalCtrl();
