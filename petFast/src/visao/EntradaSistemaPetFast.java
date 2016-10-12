@@ -352,17 +352,17 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuRelatorioAtendimentoActionPerformed
 
     private void subMenuRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuRelatorioClienteActionPerformed
-       /*
+       
         String tituloStatus;
         tituloStatus = "Relatórios Clientes";
 
-        TelaRelatorioClientes relCliente = new TelaRelatorioClientes();
+        TelaRelatorioCliente relCliente = new TelaRelatorioCliente();
         relCliente.setTitle(tituloStatus);
         relCliente.setVisible(true);
         add(relCliente, JLayeredPane.DEFAULT_LAYER);
         relCliente.setDefaultCloseOperation(1);
         relCliente.setLocation(40, 50);
-*/
+
     }//GEN-LAST:event_subMenuRelatorioClienteActionPerformed
 
     private void subMenuRelatorioPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuRelatorioPetActionPerformed

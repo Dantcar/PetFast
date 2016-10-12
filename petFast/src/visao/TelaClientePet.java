@@ -96,26 +96,27 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         jPanelTitulo = new javax.swing.JPanel();
         lblTituloPet1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(0, 128, 0));
         setClosable(true);
 
-        jPanel1.setBackground(new java.awt.Color(140, 26, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 128, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel1.setForeground(new java.awt.Color(102, 102, 102));
 
-        jPanelCliente.setBackground(new java.awt.Color(140, 26, 255));
+        jPanelCliente.setBackground(new java.awt.Color(0, 128, 128));
         jPanelCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
         lblTelaPetCodigoCliente.setBackground(new java.awt.Color(102, 102, 102));
         lblTelaPetCodigoCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblTelaPetCodigoCliente.setForeground(new java.awt.Color(102, 102, 102));
         lblTelaPetCodigoCliente.setText("Cpf:");
 
+        tctPetAnimalCpfCliente.setBackground(new java.awt.Color(255, 239, 191));
         tctPetAnimalCpfCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tctPetAnimalCpfCliente.setForeground(new java.awt.Color(51, 51, 51));
         tctPetAnimalCpfCliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        btnPesquisarCliente.setBackground(new java.awt.Color(102, 102, 102));
+        btnPesquisarCliente.setBackground(new java.awt.Color(0, 128, 0));
         btnPesquisarCliente.setFont(new java.awt.Font("Tahoma", 3, 10)); // NOI18N
+        btnPesquisarCliente.setForeground(new java.awt.Color(0, 0, 51));
         btnPesquisarCliente.setText("Pesquisar");
         btnPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,14 +126,16 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         lblTelaPetNomeCliente.setBackground(new java.awt.Color(102, 102, 102));
         lblTelaPetNomeCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblTelaPetNomeCliente.setForeground(new java.awt.Color(102, 102, 102));
         lblTelaPetNomeCliente.setText("Cliente:");
 
+        tctPetAnimalCliente.setBackground(new java.awt.Color(255, 239, 191));
         tctPetAnimalCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tctPetAnimalCliente.setForeground(new java.awt.Color(51, 51, 51));
         tctPetAnimalCliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
+        btnInicioCli.setBackground(new java.awt.Color(0, 128, 0));
         btnInicioCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnInicioCli.setForeground(new java.awt.Color(0, 0, 51));
         btnInicioCli.setText("|<");
         btnInicioCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +143,9 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        btnPrevCli.setBackground(new java.awt.Color(0, 128, 0));
         btnPrevCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnPrevCli.setForeground(new java.awt.Color(0, 0, 51));
         btnPrevCli.setText("<");
         btnPrevCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,7 +153,9 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        btnNextCli.setBackground(new java.awt.Color(0, 128, 0));
         btnNextCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnNextCli.setForeground(new java.awt.Color(0, 0, 51));
         btnNextCli.setText(">");
         btnNextCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +163,9 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        btnLastCli.setBackground(new java.awt.Color(0, 128, 0));
         btnLastCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnLastCli.setForeground(new java.awt.Color(0, 0, 51));
         btnLastCli.setText(">|");
         btnLastCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,11 +174,11 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         });
 
         tctIdCliente.setEditable(false);
+        tctIdCliente.setBackground(new java.awt.Color(255, 239, 191));
         tctIdCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         lblTelaPetCodigoCliente1.setBackground(new java.awt.Color(102, 102, 102));
         lblTelaPetCodigoCliente1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblTelaPetCodigoCliente1.setForeground(new java.awt.Color(102, 102, 102));
         lblTelaPetCodigoCliente1.setText("Id Cliente:");
 
         javax.swing.GroupLayout jPanelClienteLayout = new javax.swing.GroupLayout(jPanelCliente);
@@ -199,14 +208,14 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                         .addComponent(lblTelaPetCodigoCliente1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tctIdCliente))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanelClienteLayout.setVerticalGroup(
             jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClienteLayout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tctPetAnimalCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,14 +239,15 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         jPanelClienteLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tctIdCliente, tctPetAnimalCliente});
 
-        jPanelPet.setBackground(new java.awt.Color(140, 26, 255));
+        jPanelPet.setBackground(new java.awt.Color(0, 128, 128));
         jPanelPet.setBorder(javax.swing.BorderFactory.createTitledBorder("Pet Animal"));
 
         lblTelaPetNomeCliente2.setBackground(new java.awt.Color(102, 102, 102));
         lblTelaPetNomeCliente2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblTelaPetNomeCliente2.setForeground(new java.awt.Color(102, 102, 102));
         lblTelaPetNomeCliente2.setText("Lista Pet");
 
+        btnAlterarPet.setBackground(new java.awt.Color(0, 128, 0));
+        btnAlterarPet.setForeground(new java.awt.Color(0, 0, 51));
         btnAlterarPet.setText("Alterar");
         btnAlterarPet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,6 +255,8 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExcluirPet.setBackground(new java.awt.Color(0, 128, 0));
+        btnExcluirPet.setForeground(new java.awt.Color(0, 0, 51));
         btnExcluirPet.setText("Excluir");
         btnExcluirPet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,6 +264,8 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        btnConsultarPet.setBackground(new java.awt.Color(0, 128, 0));
+        btnConsultarPet.setForeground(new java.awt.Color(0, 0, 51));
         btnConsultarPet.setText("Consultar");
         btnConsultarPet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,7 +273,9 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        btnVoltarMenu.setBackground(new java.awt.Color(0, 128, 0));
         btnVoltarMenu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnVoltarMenu.setForeground(new java.awt.Color(0, 0, 51));
         btnVoltarMenu.setText("Voltar");
         btnVoltarMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,6 +283,8 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        btnIncluirPet.setBackground(new java.awt.Color(0, 128, 0));
+        btnIncluirPet.setForeground(new java.awt.Color(0, 0, 51));
         btnIncluirPet.setText("Incluir");
         btnIncluirPet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,9 +292,8 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        cbxClienteAnimal.setBackground(new java.awt.Color(255, 239, 191));
         cbxClienteAnimal.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        cbxClienteAnimal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbxClienteAnimal.setSelectedIndex(-1);
         cbxClienteAnimal.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxClienteAnimalItemStateChanged(evt);
@@ -292,7 +309,6 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         lblQuantidadePetCliente.setBackground(new java.awt.Color(102, 102, 102));
         lblQuantidadePetCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblQuantidadePetCliente.setForeground(new java.awt.Color(102, 102, 102));
         lblQuantidadePetCliente.setText("Este Cliente possui :");
         lblQuantidadePetCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -316,10 +332,10 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                                 .addGap(26, 26, 26)
                                 .addComponent(btnConsultarPet))
                             .addComponent(cbxClienteAnimal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblQuantidadePetCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                            .addComponent(lblQuantidadePetCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblMiniFotoPet, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(17, 17, 17))
                     .addGroup(jPanelPetLayout.createSequentialGroup()
@@ -348,17 +364,16 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                             .addComponent(btnAlterarPet)
                             .addComponent(btnExcluirPet)
                             .addComponent(btnConsultarPet))))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVoltarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelTitulo.setBackground(new java.awt.Color(140, 26, 255));
+        jPanelTitulo.setBackground(new java.awt.Color(0, 128, 128));
         jPanelTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         lblTituloPet1.setBackground(new java.awt.Color(102, 102, 102));
         lblTituloPet1.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
-        lblTituloPet1.setForeground(new java.awt.Color(102, 102, 102));
         lblTituloPet1.setText("Pet-Animal");
 
         javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
@@ -373,7 +388,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         jPanelTituloLayout.setVerticalGroup(
             jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTituloLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTituloPet1)
                 .addGap(22, 22, 22))
         );
@@ -382,12 +397,12 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelPet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanelPet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -395,9 +410,9 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -407,15 +422,15 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
