@@ -282,7 +282,7 @@ public class Util {
             vdia = arg.substring(8,10);
             vmes = arg.substring(4,7);
             vano = arg.substring(inicio,fim);
-            System.out.println(arg+"-"+vmes);
+            //System.out.println(arg+"-"+vmes);
             if (vmes.equals("Jan")){
               vmes = "01";   
             }
@@ -339,7 +339,7 @@ public class Util {
             vdia = arg.substring(8,10);
             vmes = arg.substring(4,7);
             vano = arg.substring(inicio,fim);
-            System.out.println(arg+"-"+vmes);
+            //System.out.println(arg+"-"+vmes);
             if (vmes.equals("Jan")){
               vmes = "01";   
             }
@@ -818,6 +818,8 @@ public class Util {
        
        return true;
      }
+     
+     
 }
 
 

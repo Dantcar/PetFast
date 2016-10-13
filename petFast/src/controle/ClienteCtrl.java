@@ -116,5 +116,12 @@ public class ClienteCtrl {
        return lista;
     
     }
+    
+     public Cliente buscarClientesPorNome(String nomeCliente) {
+       ClienteDAO clienteDAO = new ClienteDAO();
+       Cliente cli = clienteDAO.buscarClientePorNome(nomeCliente);
+       return cli;
+    
+    }
         
 }

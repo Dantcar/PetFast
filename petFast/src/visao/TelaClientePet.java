@@ -210,7 +210,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                 .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tctIdCliente))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelClienteLayout.setVerticalGroup(
             jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,13 +222,13 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                         .addComponent(lblTelaPetCodigoCliente1)
                         .addComponent(tctIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblTelaPetCodigoCliente, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblTelaPetNomeCliente)
                         .addComponent(tctPetAnimalCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInicioCli)
                     .addComponent(btnPrevCli)
@@ -493,7 +493,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnVoltarMenuActionPerformed
 
     private void btnLastCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastCliActionPerformed
-        // TODO add your handling code here:
+        // Botão [>|]
         int idClienteP;
         pos = tam;
         Cliente cli = (Cliente) listaNome.get(tam);
@@ -508,7 +508,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLastCliActionPerformed
 
     private void btnInicioCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioCliActionPerformed
-        // TODO add your handling code here:
+        // Botão [|<]
         int idClienteP;
         pos = 0;
         Cliente cli = (Cliente) listaNome.get(pos);
@@ -523,7 +523,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnInicioCliActionPerformed
 
     private void btnPrevCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevCliActionPerformed
-        // TODO add your handling code here:
+        // Botão [<]
 
         if (pos > 0) {
             int idClienteP;
@@ -543,7 +543,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnPrevCliActionPerformed
 
     private void btnNextCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextCliActionPerformed
-        // TODO add your handling code here:
+        // Botão [>]
 
         if (pos < tam) {
             int idClienteP;
@@ -723,7 +723,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
     }
 
     private void desabilitarBotoesCliente() {
-        //btnInicioCli.setEnabled(false);
+        btnInicioCli.setEnabled(false);
         btnPrevCli.setEnabled(false);
         btnNextCli.setEnabled(false);
         btnLastCli.setEnabled(false);

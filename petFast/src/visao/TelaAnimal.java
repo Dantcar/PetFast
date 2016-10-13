@@ -10,7 +10,10 @@ import controle.Util;
 import controle.ValidaCampos;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -47,10 +51,12 @@ public class TelaAnimal extends javax.swing.JFrame {
 
     public TelaAnimal(String nomeCliente, int id, String operacao, String nomeAnimal) {
         initComponents();
-        String pathProjeto = System.getProperty("user.dir")+"//";
-        String iconPetfast = pathProjeto + "src//Icones//petfastIcone.png";
-        //System.out.println(iconPetfast);
-        setIconImage(Toolkit.getDefaultToolkit().getImage( iconPetfast ));
+        String pathProjeto = System.getProperty("user.dir") + "\\";
+        String iconPetfast = pathProjeto + "src\\Icones\\petfastIcone.png";
+
+        String fotoPet = System.getProperty("user.dir") + "\\ImagensPet\\templateFoto1.png";
+
+        setIconImage(Toolkit.getDefaultToolkit().getImage(iconPetfast));
         this.setLocation(250, 100); //(ponto inicial apartir lateral,altura)
         AnimalCtrl cAnimal = new AnimalCtrl();
         desabilitarBotoesAnimal();
@@ -77,7 +83,7 @@ public class TelaAnimal extends javax.swing.JFrame {
             btnPetBuscarFoto.setEnabled(true);
             int idAnimal = cAnimal.receberIdAnimalAtual(); //pega o próximo id para cadastro
             tctPetAnimalId.setText(idAnimal + 1 + "");
-
+            colocarFotoLabelUrl(fotoPet);
             /**
              * Botão Alterar
              */
@@ -91,6 +97,7 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tctPetAnimalClienteId.setText(id + "");
                 tctPetAnimalClienteId.setEditable(false);
                 tctPetAnimalNome.setText(nomeAnimal);
+                colocarFotoLabelUrl(fotoPet);
 
                 if (animal.getSexo() == "M") {
                     rbMacho.setSelected(true);
@@ -112,13 +119,25 @@ public class TelaAnimal extends javax.swing.JFrame {
 
                 tctPetCor.setText(animal.getCor());
                 tctPetEspecie.setText(animal.getEspecie());
-                tctPetFoto.setText(animal.getFoto());
+                colocarFotoLabel();
+
+                if (verificarFotoExiste(animal.getFoto())) {
+                    tctPetFoto.setText(animal.getFoto());
+                    System.out.println("retorno consulta if: " + verificarFotoExiste(animal.getFoto()));
+                    colocarFotoLabel();
+                } else {
+                    // fotoPet = System.getProperty("user.dir") + "\\ImagensPet\\templateFoto1.png";
+                    colocarFotoLabelUrl(fotoPet);
+                    System.out.println("retorno consulta else: " + verificarFotoExiste(animal.getFoto()));
+                    System.out.println(fotoPet);
+                }
+
                 tctPetFoto.setEditable(false);
                 tctPetRaca.setText(animal.getRaca());
                 tftAlturaPet.setText(animal.getAltura());
                 tftPesoPet.setText(animal.getPeso());
                 txaPetCaracteristica.setText(animal.getCaracteristica());
-                colocarFotoLabel();
+                //colocarFotoLabel();
                 btnPetAlterar.setEnabled(true);
             } else {
                 limparTelaAnimal();
@@ -183,10 +202,9 @@ public class TelaAnimal extends javax.swing.JFrame {
                 tctPetAnimalCliente.setText(nomeCliente);
                 tctPetAnimalClienteId.setText(id + "");
                 tctPetAnimalNome.setText(nomeAnimal);
-                
+
                 //System.out.println("Este é o sexo: "+ animal.getSexo());
-               
-                 if (animal.getSexo().trim().equals("M")) {
+                if (animal.getSexo().trim().equals("M")) {
                     rbMacho.setSelected(true);
                 } else {
                     rbFemea.setSelected(true);
@@ -697,8 +715,8 @@ public class TelaAnimal extends javax.swing.JFrame {
     private void btnPetVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetVoltarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        
-        
+
+
     }//GEN-LAST:event_btnPetVoltarActionPerformed
 
     private void btnPetSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetSalvarActionPerformed
@@ -723,7 +741,7 @@ public class TelaAnimal extends javax.swing.JFrame {
         if (rbMacho.isSelected()) {
             //JOptionPane.showMessageDialog(null,"O sexo Masculino foi selecionado");
             animal.setSexo("M");
-        } 
+        }
         if (rbFemea.isSelected()) {
             //JOptionPane.showMessageDialog(null,"O sexo Feminino foi selecionado");
             animal.setSexo("F");
@@ -786,35 +804,30 @@ public class TelaAnimal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPetExcluirActionPerformed
 
     private void btnPetBuscarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetBuscarFotoActionPerformed
-        // TODO add your handling code here:
+        // metodo para buscar um arquivo de foto
         jFileChooserFoto = new javax.swing.JFileChooser();
         String fotoSource = null;
-        //String fotoDestino = "C:\\Users\\Décio\\Documents\\NetBeansProjects\\PetFast\\petFast\\ImagensPet\\";
-        String fotoDestino = System.getProperty("user.dir")+"\\ImagensPet\\";
-        String fotoNome = tctPetAnimalCliente.getText() + "-"+tctPetAnimalClienteId.getText();
-        //C:\Documents and Settings\deciodecarvalho\Meus documentos\NetBeansProjects\PetFast\petFast
+        
+        String fotoDestino = System.getProperty("user.dir") + "\\ImagensPet\\";
+        String fotoNome = tctPetAnimalCliente.getText() + "-" + tctPetAnimalClienteId.getText();
+       
         int retVal;
-
-        //JFileChooser jFileChooser1 = new JFileChooser();
         jFileChooserFoto.addChoosableFileFilter(new TextFilter());
 
         retVal = jFileChooserFoto.showOpenDialog(this);
 
         if (retVal == JFileChooser.APPROVE_OPTION) {
-            //System.out.println(jFileChooserFoto.getSelectedFile().getAbsolutePath());
+            
             fotoSource = jFileChooserFoto.getSelectedFile().getAbsolutePath();
-            //tctPetFoto.setText(fotoSource); //esta funcionando
-            //System.out.println(jFileChooserFoto.getSelectedFile().getName());
+            
             fotoNome = fotoNome + jFileChooserFoto.getSelectedFile().getName();
-            //copiarFotoToPetfast( fotoSource, fotoDestino, fotNome);
+           
         }
-        
+
         //System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
         //System.out.println(fotoDestino+fotoNome);
-        
-        
         jFileChooserFoto.setVisible(false);
-        copiarFotoToPetfast( fotoSource, fotoDestino, fotoNome);
+        copiarFotoToPetfast(fotoSource, fotoDestino, fotoNome);
         tctPetFoto.setText(fotoDestino + fotoNome);
         colocarFotoLabel();
 
@@ -871,7 +884,6 @@ public class TelaAnimal extends javax.swing.JFrame {
         btnPetBuscarFoto.setEnabled(false);
     }
 
-    
     private void limparTelaAnimal() {
         rbFemea.setSelected(false);
         rbMacho.setSelected(false);
@@ -923,8 +935,6 @@ public class TelaAnimal extends javax.swing.JFrame {
         boolean validaNome = ValidaCampos.validaVazio(tctPetAnimalNome.getText());
         boolean validaDatajsp = ValidaCampos.validaDataNascimento(dataIntNascimentoPet);
         boolean validaSexo = buttonGroupSexo.isSelected(null); //ValidaCampos.validaVazioComboBox(animal.getSexo());
-        //System.out.println("validaSexo = " + validaSexo);
-        //System.out.println("validaDatajsp = " + validaNome);
 
         //testes da validacao
         if (validaNome) {
@@ -960,8 +970,24 @@ public class TelaAnimal extends javax.swing.JFrame {
         String urlFoto = tctPetFoto.getText();
         ImageIcon foto;
         foto = new ImageIcon(urlFoto);
-        
-        foto.setImage(foto.getImage().getScaledInstance((d.width-20), (d.height-20), 100));
+
+        foto.setImage(foto.getImage().getScaledInstance((d.width - 20), (d.height - 20), 100));
+        //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
+        lblFotoPet.setIcon(foto);
+        //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
+    }
+
+    private void colocarFotoLabelUrl(String urlFoto) {
+        lblFotoPet.setIcon(null);
+        Dimension d = lblFotoPet.getSize();
+        //int width = tctPetFoto.getWidth();
+        //int height = tctPetFoto.getHeight();
+        //System.out.println("width: "+d.width + " height: "+d.height);
+        //String urlFoto = tctPetFoto.getText();
+        ImageIcon foto;
+        foto = new ImageIcon(urlFoto);
+
+        foto.setImage(foto.getImage().getScaledInstance((d.width - 20), (d.height - 20), 100));
         //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
         lblFotoPet.setIcon(foto);
         //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
@@ -969,39 +995,118 @@ public class TelaAnimal extends javax.swing.JFrame {
 
     private void copiarFotoToPetfast(String fonte, String destino, String nomeArquivo) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-   //long start = new Date().getTime();
-		
-		FileInputStream fis = null;
-                FileOutputStream fos = null;
+        //long start = new Date().getTime();
+
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            fis = new FileInputStream(fonte);
+            fos = new FileOutputStream(destino + nomeArquivo);
+            int i;
+            while ((i = fis.read()) != -1) {
+                fos.write(i);
+            }
+            // System.out.println("Arquivo copiado!"); 
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
             try {
-                fis = new FileInputStream(fonte);
-		fos = new FileOutputStream(destino + nomeArquivo);
-			int i;
-			while((i=fis.read())!=-1){
-			fos.write(i);
-                        } 
-                       // System.out.println("Arquivo copiado!"); 
-            } catch (FileNotFoundException ex) {
-            Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
-            }catch (IOException ex) {
-            Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-                    try {
-                        fis.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    try {
-                        fos.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-		
-            }	//long stop = new Date().getTime();
-		//System.out.println("Tempo de copia:" + (stop - start) + "ms");
-    
-    }
-    
-    
+                fis.close();
+            } catch (IOException ex) {
+                Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                fos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }	//long stop = new Date().getTime();
+        //System.out.println("Tempo de copia:" + (stop - start) + "ms");
+
+    }//fimal método copiarFotoToPetfast
+
+    private boolean verificarFotoExiste(String url) {
+        int i = url.lastIndexOf('.');
+        boolean resp = false;
+        Image image = null;
+        File f = new File(url);
+        BufferedImage img = null;
+
+        if (f.exists()) {
+
+            try {
+                image = ImageIO.read(f);
+                resp = true;
+            } catch (IOException ex) {
+                System.out.println("" + ex);
+                resp = false;
+                Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (i > 0 && i < url.length() - 1) {
+                if (url.substring(i + 1).toLowerCase().equals("jpg")) {
+                    return true;
+                }
+            }
+
+            //filtra para abrir somente arquivos jpeg
+            if (i > 0 && i < url.length() - 1) {
+                if (url.substring(i + 1).toLowerCase().equals("jpeg")) {
+                    return true;
+                }
+            }
+
+            //filtra para abrir somente arquivos jpg
+            if (i > 0 && i < url.length() - 1) {
+                if (url.substring(i + 1).toLowerCase().equals("png")) {
+                    return true;
+                }
+            }
+
+        } else {
+            resp = false;
+        }
+
+        return resp;
+
+        /**
+         *
+         * File f = new File(petfast/imagensPet""); if(f.exists()){
+         * System.out.println("Arquivo encontrado!");
+         * System.out.println("Arquivo:"+ f.getPAth());
+         * System.out.println("Arquivo:"+ f.getAbsolutePAth());
+         * System.out.println("Arquivo:"+ f.getName());
+         * System.out.println("Arquivo:"+ f.canExecute());
+         * System.out.println("Arquivo:"+ f.canRead());
+         * System.out.println("Arquivo:"+ f.canWrite()); }else{
+         * System.out.println("Arquivo nao encontrado!");
+         *
+         * }
+         */
+
+        /*
+         try {
+         // Lendo um arquivo
+         File sourceimage = new File("source.gif");
+         image = ImageIO.read(sourceimage);
+         */
+        /*
+         try {
+         img = ImageIO.read(TelaAnimal.class.getResourceAsStream(url));
+         } catch (FileNotFoundException e) {
+         resp=false;//Mostre o erro e faça alguma coisa!
+         } catch (Exception e) {
+         resp=false;//Mostre o erro e faça alguma coisa!
+         }
+         if (img != null) {
+         //Continue
+         } else {
+         resp = true;
+         }
+         */
+    }//final método verificarfotoExiste
 
 }

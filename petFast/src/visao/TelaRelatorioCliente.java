@@ -13,6 +13,8 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import static controle.Util.reduzString;
+import java.awt.Dimension;
+import java.awt.Label;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -20,30 +22,36 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
+
 /**
  *
  * @author Décio
  */
 public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
-    
+
     public static String rgCliente, nomeCliente;
-   
-     /**
+
+    /**
      * Creates new form TelaRelatorioCliente
      */
     public TelaRelatorioCliente() {
         initComponents();
         populaJComboBoxClientesNome();
         btnListarCliente.setEnabled(false);
-
+        tctCpfCliente.setEditable(false);
+        tctIdCliente.setEditable(false);
         //Limpar ComboBox
+        cbxNomeCliente.removeAllItems();
         cbxNomeCliente.setSelectedIndex(-1);
+        String url = System.getProperty("user.dir") + "\\src\\Icones\\clientePet.jpg";
+        colocarFotoLabelUrl(url);
         
     }
 
-    
     private void populaJComboBoxClientesNome() {
         ClienteCtrl cCliente = new ClienteCtrl();
         cbxNomeCliente.removeAllItems(); //remove os itens atuais do comboBox.
@@ -53,6 +61,7 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
             cbxNomeCliente.addItem(String.valueOf(i.next()));
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,16 +78,23 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
         btnLimparPassagem = new javax.swing.JButton();
         btnSairPassagem = new javax.swing.JButton();
         btnImprimirRelatorioCliente = new javax.swing.JButton();
-        lblRelatorioClientesFundo = new javax.swing.JLabel();
         PanelTabRelClientesImpresso = new javax.swing.JTabbedPane();
         PainelRelOpcoesCliente = new javax.swing.JPanel();
         lblNomeCliente = new javax.swing.JLabel();
         cbxNomeCliente = new javax.swing.JComboBox();
         btnListarCliente = new javax.swing.JButton();
         btnListarClientesTodos = new javax.swing.JButton();
+        lblTelaPetNomeCliente = new javax.swing.JLabel();
+        tctNomeCliente = new javax.swing.JTextField();
+        btnPesquisarCliente = new javax.swing.JButton();
+        lblTelaPetCodigoCliente = new javax.swing.JLabel();
+        tctCpfCliente = new javax.swing.JTextField();
+        lblTelaPetCodigoCliente1 = new javax.swing.JLabel();
+        tctIdCliente = new javax.swing.JTextField();
         PainelRelImpresso = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtRelCliente = new javax.swing.JTextArea();
+        lblRelatorioClientesFundo = new javax.swing.JLabel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -184,13 +200,9 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
 
         getContentPane().add(PanelRelClientesBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, 670, -1));
 
-        lblRelatorioClientesFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/relClientes.jpg"))); // NOI18N
-        getContentPane().add(lblRelatorioClientesFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 360));
-
         PainelRelOpcoesCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         lblNomeCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblNomeCliente.setForeground(new java.awt.Color(102, 102, 102));
         lblNomeCliente.setText("Nome Cliente: ");
 
         cbxNomeCliente.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
@@ -207,7 +219,7 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
 
         btnListarCliente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarCliente.setMnemonic('E');
-        btnListarCliente.setText("Mostrar Cliente");
+        btnListarCliente.setText("<= Mostrar Cliente");
         btnListarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarClienteActionPerformed(evt);
@@ -222,6 +234,42 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        lblTelaPetNomeCliente.setBackground(new java.awt.Color(102, 102, 102));
+        lblTelaPetNomeCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblTelaPetNomeCliente.setText("Cliente:");
+
+        tctNomeCliente.setBackground(new java.awt.Color(255, 239, 191));
+        tctNomeCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tctNomeCliente.setForeground(new java.awt.Color(51, 51, 51));
+        tctNomeCliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        btnPesquisarCliente.setBackground(new java.awt.Color(0, 128, 0));
+        btnPesquisarCliente.setFont(new java.awt.Font("Tahoma", 3, 10)); // NOI18N
+        btnPesquisarCliente.setForeground(new java.awt.Color(0, 0, 51));
+        btnPesquisarCliente.setText("Pesquisar");
+        btnPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarClienteActionPerformed(evt);
+            }
+        });
+
+        lblTelaPetCodigoCliente.setBackground(new java.awt.Color(102, 102, 102));
+        lblTelaPetCodigoCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblTelaPetCodigoCliente.setText("Cpf:");
+
+        tctCpfCliente.setBackground(new java.awt.Color(255, 239, 191));
+        tctCpfCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tctCpfCliente.setForeground(new java.awt.Color(51, 51, 51));
+        tctCpfCliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        lblTelaPetCodigoCliente1.setBackground(new java.awt.Color(102, 102, 102));
+        lblTelaPetCodigoCliente1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblTelaPetCodigoCliente1.setText("Id Cliente:");
+
+        tctIdCliente.setEditable(false);
+        tctIdCliente.setBackground(new java.awt.Color(255, 239, 191));
+        tctIdCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout PainelRelOpcoesClienteLayout = new javax.swing.GroupLayout(PainelRelOpcoesCliente);
         PainelRelOpcoesCliente.setLayout(PainelRelOpcoesClienteLayout);
         PainelRelOpcoesClienteLayout.setHorizontalGroup(
@@ -230,25 +278,53 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
-                        .addComponent(lblNomeCliente)
+                        .addComponent(lblTelaPetNomeCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tctNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnListarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnListarClientesTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                        .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                        .addGap(111, 111, 111))
+                    .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
+                        .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
+                                .addComponent(lblTelaPetCodigoCliente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tctCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(lblTelaPetCodigoCliente1)
+                                .addGap(18, 18, 18)
+                                .addComponent(tctIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnListarClientesTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
+                                .addComponent(lblNomeCliente)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnListarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         PainelRelOpcoesClienteLayout.setVerticalGroup(
             PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(23, 23, 23)
+                .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTelaPetCodigoCliente)
+                    .addComponent(tctCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTelaPetCodigoCliente1)
+                    .addComponent(tctIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTelaPetNomeCliente)
+                    .addComponent(tctNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNomeCliente)
                     .addComponent(btnListarCliente))
-                .addGap(76, 76, 76)
+                .addGap(51, 51, 51)
                 .addComponent(btnListarClientesTodos)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         PanelTabRelClientesImpresso.addTab("Relatórios Clientes", PainelRelOpcoesCliente);
@@ -280,6 +356,10 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
 
         getContentPane().add(PanelTabRelClientesImpresso, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 680, 340));
 
+        lblRelatorioClientesFundo.setText(" ");
+        lblRelatorioClientesFundo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        getContentPane().add(lblRelatorioClientesFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 270, 420));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -296,7 +376,7 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
 
     private void btnImprimirRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioClienteActionPerformed
         //criamos um documento vazio
-        String msg ="";
+        String msg = "";
         String tituloMsg = "Relatório PDF";
         String passagemTexto = txtRelCliente.getText();
         Document documento = new Document();
@@ -325,35 +405,48 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
             msg = reduzString(msg);
             Logger.getLogger(FrameListaCliente.class.getName()).log(Level.SEVERE, null, ex);
 
-        }finally{
+        } finally {
             documento.close();
 
-            if (!"".equals(msg)){
+            if (!"".equals(msg)) {
                 JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
-                msg="";
-            }else
-            {
+                msg = "";
+            } else {
                 msg = "Relatório criado em PDF com sucesso";
                 JOptionPane.showMessageDialog(this, msg, tituloMsg, JOptionPane.WARNING_MESSAGE);
-                msg="";
+                msg = "";
             }
         }
     }//GEN-LAST:event_btnImprimirRelatorioClienteActionPerformed
 
     private void cbxNomeClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxNomeClienteItemStateChanged
 
+        if (cbxNomeCliente.isValid()) {
+            ClienteCtrl cCliente = new ClienteCtrl();
+            String nomeCliente = cbxNomeCliente.getSelectedItem().toString();
+            System.out.println(nomeCliente);
+            Cliente cliNome = cCliente.buscarClientesPorNome(nomeCliente);
+
+            tctCpfCliente.setText(cliNome.getCpf());
+            System.out.println(cliNome.getNome());
+            System.out.println(cliNome.getCpf());
+            System.out.println(cliNome.getIdCliente());
+            tctNomeCliente.setText(cliNome.getNome());
+            tctIdCliente.setText(cliNome.getIdCliente());
+        }
+
     }//GEN-LAST:event_cbxNomeClienteItemStateChanged
 
     private void cbxNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNomeClienteActionPerformed
-        if((cbxNomeCliente.getSelectedIndex())!=-1){
+        if ((cbxNomeCliente.getSelectedIndex()) != -1) {
             btnListarCliente.setEnabled(true);
-        }else{
+        } else {
             btnListarCliente.setEnabled(false);
         }
     }//GEN-LAST:event_cbxNomeClienteActionPerformed
 
     private void btnListarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClienteActionPerformed
-        String title="Relatórios Clientes";
+        String title = "Relatórios Clientes";
         nomeCliente = cbxNomeCliente.getSelectedItem().toString();
         ClienteCtrl cCliente = new ClienteCtrl();
         List cliente = cCliente.listaClientesNome(nomeCliente);
@@ -363,7 +456,7 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnListarClienteActionPerformed
 
     private void btnListarClientesTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClientesTodosActionPerformed
-        String title="Relatórios Clientes";
+        String title = "Relatórios Clientes";
         ClienteCtrl cCliente = new ClienteCtrl();
         PanelTabRelClientesImpresso.setSelectedIndex(1);
         List clientes = cCliente.listarClientes();
@@ -371,7 +464,60 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnListarClientesTodosActionPerformed
 
+    private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
+        // Pesquisar Cliente e buscar lista animais por cliente
+        int idClienteP, tam;
+        DefaultListModel model = new DefaultListModel();
 
+        ClienteCtrl ccliente = new ClienteCtrl();
+        ArrayList listaNome = null;
+        listaNome = (ArrayList) ccliente.listaClientesPorNome(tctNomeCliente.getText());
+        //Jlist listaAnimais = canimal.receberListaAnimaisCliente(WIDTH);
+        if (!listaNome.isEmpty()) {
+
+            tam = listaNome.size() - 1;
+            Cliente cli = (Cliente) listaNome.get(0);
+            tctCpfCliente.setText(cli.getCpf());
+            tctNomeCliente.setText(cli.getNome());
+            tctIdCliente.setText(cli.getIdCliente());
+
+            populaJComboBoxClientesNomePesquisado(listaNome);
+
+            // colocarMiniFotoLabel();
+        } else {
+            JOptionPane.showMessageDialog(null, "Cliente não localizado!");
+            tctCpfCliente.setText("");
+            tctNomeCliente.setText("");
+            tctIdCliente.setText("");
+            cbxNomeCliente.setSelectedItem(null);
+            cbxNomeCliente.setSelectedIndex(-1);
+            cbxNomeCliente.removeAllItems();
+            cbxNomeCliente.removeAll();
+
+        }
+
+        /*
+         */
+    }//GEN-LAST:event_btnPesquisarClienteActionPerformed
+
+    private void populaJComboBoxClientesNomePesquisado(ArrayList cliente) {
+
+        cbxNomeCliente.removeAllItems(); //remove os itens atuais do comboBox.
+        Cliente cli = new Cliente();
+        String str = null;
+        for (int i = 0; i < cliente.size(); i++) {
+            cli = (Cliente) cliente.get(i);
+            cbxNomeCliente.addItem(cli.getNome());
+        }
+        /*
+         Iterator i = cliente.iterator();
+        
+         while (i.hasNext()) {
+           
+         cbxNomeCliente.addItem(cliente.get(i));
+         }
+         */
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelRelImpresso;
     private javax.swing.JPanel PainelRelOpcoesCliente;
@@ -382,42 +528,57 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimparPassagem;
     private javax.swing.JButton btnListarCliente;
     private javax.swing.JButton btnListarClientesTodos;
+    private javax.swing.JButton btnPesquisarCliente;
     private javax.swing.JButton btnSairPassagem;
     private javax.swing.JComboBox cbxNomeCliente;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNomeCliente;
     private javax.swing.JLabel lblRelatorioClientesFundo;
+    private javax.swing.JLabel lblTelaPetCodigoCliente;
+    private javax.swing.JLabel lblTelaPetCodigoCliente1;
+    private javax.swing.JLabel lblTelaPetNomeCliente;
     private javax.swing.JLabel lblTelaRelatorioCliente;
     private javax.swing.JLabel lblTituloRelatorioCliente;
+    private static javax.swing.JTextField tctCpfCliente;
+    private javax.swing.JTextField tctIdCliente;
+    private static javax.swing.JTextField tctNomeCliente;
     private javax.swing.JTextArea txtRelCliente;
     // End of variables declaration//GEN-END:variables
 
-private void carregarListaCliente2(List<Cliente> ListaClientes){
-      String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
-      String resultado = "";
-      
-      for (Cliente c : ListaClientes){
-          
-          resultado += ""
-          +"\n\tCódigo Cliente: "+c.getIdCliente()+"\n"
-          +"\n\tNome: "+c.getNome()
-          +"\n\tEndereço: "+c.getEndereco().trim()+","+ c.getNumero()
-          +"\n\tBairro: "+c.getBairro().trim() + " - Cep: "+ c.getCep()
-          +"\n\tCidade: "+c.getCidade().trim() + " - UF: "+ c.getUf()
-          +"\n\tEmail: "+c.getEmail().trim()
-          +"\n\tTelefone: "+c.getTelefone()
-          +"\n\tRG: "+c.getRg() + " - CPF: "+c.getCpf();
-          
-          resultado += newline;
+    private void carregarListaCliente2(List<Cliente> ListaClientes) {
+        String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
+        String resultado = "";
 
-      }
-      resultado="\n\n\t\t\t CADASTRO CLIENTES\n"+resultado;
-      txtRelCliente.setText(resultado);
-      txtRelCliente.setEditable(false);
-      
-        
+        for (Cliente c : ListaClientes) {
+
+            resultado += ""
+                    + "\n\tCódigo Cliente: " + c.getIdCliente() + "\n"
+                    + "\n\tNome: " + c.getNome()
+                    + "\n\tEndereço: " + c.getEndereco().trim() + "," + c.getNumero()
+                    + "\n\tBairro: " + c.getBairro().trim() + " - Cep: " + c.getCep()
+                    + "\n\tCidade: " + c.getCidade().trim() + " - UF: " + c.getUf()
+                    + "\n\tEmail: " + c.getEmail().trim()
+                    + "\n\tTelefone: " + c.getTelefone()
+                    + "\n\tRG: " + c.getRg() + " - CPF: " + c.getCpf();
+
+            resultado += newline;
+
+        }
+        resultado = "\n\n\t\t\t CADASTRO CLIENTES\n" + resultado;
+        txtRelCliente.setText(resultado);
+        txtRelCliente.setEditable(false);
+
     }
+    
+    private void colocarFotoLabelUrl(String urlFoto) {
+        lblRelatorioClientesFundo.setIcon(null);
+        Dimension d = lblRelatorioClientesFundo.getSize();
+        
+        ImageIcon foto;
+        foto = new ImageIcon(urlFoto);
 
-
+        foto.setImage(foto.getImage().getScaledInstance((d.width - 20), (d.height - 20), 100));
+        lblRelatorioClientesFundo.setIcon(foto);
+    }
 
 }//Final da Classe TelaRelatorioCliente

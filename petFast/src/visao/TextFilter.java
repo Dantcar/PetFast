@@ -44,7 +44,7 @@ class TextFilter extends FileFilter {
     
     //filtra para abrir somente arquivos jpg
     if (i > 0 && i < s.length() - 1)
-      if (s.substring(i + 1).toLowerCase().equals("jpg"))
+      if (s.substring(i + 1).toLowerCase().equals("png"))
         return true;
 
     return false;
