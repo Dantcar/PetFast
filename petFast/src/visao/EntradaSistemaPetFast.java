@@ -366,17 +366,15 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuRelatorioClienteActionPerformed
 
     private void subMenuRelatorioPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuRelatorioPetActionPerformed
-/*
-        String tituloStatus;
-        tituloStatus = "Relatórios Voos";
+ String tituloStatus;
+        tituloStatus = "Relatórios Pets";
 
-        TelaRelatorioVoo relVoo = new TelaRelatorioVoo();
-        relVoo.setTitle(tituloStatus);
-        relVoo.setVisible(true);
-        add(relVoo, JLayeredPane.DEFAULT_LAYER);
-        relVoo.setDefaultCloseOperation(1);
-        relVoo.setLocation(40, 50);
-*/
+        TelaRelatorioPet relPet = new TelaRelatorioPet();
+        relPet.setTitle(tituloStatus);
+        relPet.setVisible(true);
+        add(relPet, JLayeredPane.DEFAULT_LAYER);
+        relPet.setDefaultCloseOperation(1);
+        relPet.setLocation(40, 50);
     }//GEN-LAST:event_subMenuRelatorioPetActionPerformed
 
     private void subMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuSobreActionPerformed

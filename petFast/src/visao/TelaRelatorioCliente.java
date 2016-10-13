@@ -75,8 +75,8 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
         lblTituloRelatorioCliente = new javax.swing.JLabel();
         lblTelaRelatorioCliente = new javax.swing.JLabel();
         PanelRelClientesBotoes = new javax.swing.JPanel();
-        btnLimparPassagem = new javax.swing.JButton();
-        btnSairPassagem = new javax.swing.JButton();
+        btnLimparTelaRelClientes = new javax.swing.JButton();
+        btnSairTelaRelatorioCliente = new javax.swing.JButton();
         btnImprimirRelatorioCliente = new javax.swing.JButton();
         PanelTabRelClientesImpresso = new javax.swing.JTabbedPane();
         PainelRelOpcoesCliente = new javax.swing.JPanel();
@@ -132,29 +132,29 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
 
         PanelRelClientesBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btnLimparPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnLimparPassagem.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnLimparPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/oopsRed.png"))); // NOI18N
-        btnLimparPassagem.setText("Limpar");
-        btnLimparPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnLimparPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnLimparPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnLimparPassagem.addActionListener(new java.awt.event.ActionListener() {
+        btnLimparTelaRelClientes.setBackground(new java.awt.Color(204, 204, 204));
+        btnLimparTelaRelClientes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnLimparTelaRelClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/oopsRed.png"))); // NOI18N
+        btnLimparTelaRelClientes.setText("Limpar");
+        btnLimparTelaRelClientes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnLimparTelaRelClientes.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnLimparTelaRelClientes.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnLimparTelaRelClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparPassagemActionPerformed(evt);
+                btnLimparTelaRelClientesActionPerformed(evt);
             }
         });
 
-        btnSairPassagem.setBackground(new java.awt.Color(204, 204, 204));
-        btnSairPassagem.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnSairPassagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
-        btnSairPassagem.setText("Voltar");
-        btnSairPassagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnSairPassagem.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnSairPassagem.setPreferredSize(new java.awt.Dimension(100, 50));
-        btnSairPassagem.addActionListener(new java.awt.event.ActionListener() {
+        btnSairTelaRelatorioCliente.setBackground(new java.awt.Color(204, 204, 204));
+        btnSairTelaRelatorioCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnSairTelaRelatorioCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/saidaDireitaRed.png"))); // NOI18N
+        btnSairTelaRelatorioCliente.setText("Voltar");
+        btnSairTelaRelatorioCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSairTelaRelatorioCliente.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnSairTelaRelatorioCliente.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnSairTelaRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairPassagemActionPerformed(evt);
+                btnSairTelaRelatorioClienteActionPerformed(evt);
             }
         });
 
@@ -180,11 +180,11 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
             PanelRelClientesBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRelClientesBotoesLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLimparTelaRelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addComponent(btnImprimirRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
-                .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSairTelaRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         PanelRelClientesBotoesLayout.setVerticalGroup(
@@ -192,9 +192,9 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
             .addGroup(PanelRelClientesBotoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelRelClientesBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSairPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSairTelaRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnImprimirRelatorioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimparPassagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLimparTelaRelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -363,16 +363,16 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLimparPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparPassagemActionPerformed
+    private void btnLimparTelaRelClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparTelaRelClientesActionPerformed
         //Limpar ComboBox
         cbxNomeCliente.setSelectedIndex(-1);
         txtRelCliente.setText("");
 
-    }//GEN-LAST:event_btnLimparPassagemActionPerformed
+    }//GEN-LAST:event_btnLimparTelaRelClientesActionPerformed
 
-    private void btnSairPassagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairPassagemActionPerformed
+    private void btnSairTelaRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairTelaRelatorioClienteActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnSairPassagemActionPerformed
+    }//GEN-LAST:event_btnSairTelaRelatorioClienteActionPerformed
 
     private void btnImprimirRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRelatorioClienteActionPerformed
         //criamos um documento vazio
@@ -525,11 +525,11 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel PanelRelClientesBotoes;
     private javax.swing.JTabbedPane PanelTabRelClientesImpresso;
     private javax.swing.JButton btnImprimirRelatorioCliente;
-    private javax.swing.JButton btnLimparPassagem;
+    private javax.swing.JButton btnLimparTelaRelClientes;
     private javax.swing.JButton btnListarCliente;
     private javax.swing.JButton btnListarClientesTodos;
     private javax.swing.JButton btnPesquisarCliente;
-    private javax.swing.JButton btnSairPassagem;
+    private javax.swing.JButton btnSairTelaRelatorioCliente;
     private javax.swing.JComboBox cbxNomeCliente;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNomeCliente;

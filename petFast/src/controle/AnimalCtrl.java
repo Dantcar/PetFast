@@ -141,4 +141,11 @@ public class AnimalCtrl {
     int resposta = animalDAO.contarAnimaisCliente(cliente);
     return resposta;
     }
+
+    public List listaAnimaisNome(String nomeAnimal) {
+       AnimalDAO animalDAO = new AnimalDAO();
+       List<Animal> lista = animalDAO.listarAnimaisNome(nomeAnimal);
+       return lista;
+        
+    }
 }//Final classe AnimalCtrl

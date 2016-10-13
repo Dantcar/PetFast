@@ -712,6 +712,63 @@ public class AnimalDAO {
         return resultado;
     }//final método listarAnimaisCliente
 
+    public List<Animal> listarAnimaisNome(String nomeAnimal) {
+       List<Animal> listaAnimal = new ArrayList<Animal>();
+       String msg = "";
+        //modelo sql da consulta: SELECT * FROM cliente WHERE upper(nome) LIKE upper('%mario%')
+        String sql = "SELECT * FROM animal WHERE upper(nome) LIKE upper('" + "%" + nomeAnimal + "%" + "')";
+        System.out.println(sql);
+        conexao = DBPetFast.getConnection();
+        ResultSet rs;
+        rs = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            while (rs.next()) {
+                //Cliente cl = new Cliente();
+                Animal an = new Animal();
+                
+                an.setIdAnimal(rs.getString("idanimal"));
+                an.setIdCliente(rs.getString("idcliente"));
+                an.setNome(rs.getString("nome"));
+                an.setEspecie(rs.getString("especie"));
+                an.setNascimento(rs.getString("nascimento"));
+                an.setRaca(rs.getString("raca"));
+                an.setPeso(rs.getString("peso"));
+                an.setAltura(rs.getString("altura"));
+                an.setCaracteristica(rs.getString("caracteristica"));
+                an.setSexo(rs.getString("sexo"));
+                an.setFoto(rs.getString("foto"));
+                listaAnimal.add(an);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        return listaAnimal;
+        
+    }
+
  
 
 }//final Classe AnimalDAO
