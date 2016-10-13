@@ -573,11 +573,12 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
     private void colocarFotoLabelUrl(String urlFoto) {
         lblRelatorioClientesFundo.setIcon(null);
         Dimension d = lblRelatorioClientesFundo.getSize();
-        
+        int width = lblRelatorioClientesFundo.getWidth()-20;
+        int height = lblRelatorioClientesFundo.getHeight()-20;
         ImageIcon foto;
         foto = new ImageIcon(urlFoto);
-
-        foto.setImage(foto.getImage().getScaledInstance((d.width - 20), (d.height - 20), 100));
+        foto.setImage(foto.getImage().getScaledInstance(250, 400, 100));
+        //foto.setImage(foto.getImage().getScaledInstance((d.width - 20), (d.height - 20), 100));
         lblRelatorioClientesFundo.setIcon(foto);
     }
 
