@@ -112,7 +112,7 @@ public class ClienteCtrl {
      */
     public List<Cliente> listaClientesPorNome(String nomeCliente) {
        ClienteDAO clienteDAO = new ClienteDAO();
-       List<Cliente> lista = clienteDAO.listarClientePorNome(nomeCliente);
+       List<Cliente> lista = clienteDAO.listarClienteNome(nomeCliente);
        return lista;
     
     }

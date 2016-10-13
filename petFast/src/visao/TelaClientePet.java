@@ -442,10 +442,8 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         DefaultListModel model = new DefaultListModel();
 
         ClienteCtrl ccliente = new ClienteCtrl();
-        AnimalCtrl canimal = new AnimalCtrl();
-        Animal animal = new Animal();
         listaNome = (ArrayList) ccliente.listaClientesPorNome(tctPetAnimalCliente.getText());
-        //Jlist listaAnimais = canimal.receberListaAnimaisCliente(WIDTH);
+              
         if (!listaNome.isEmpty()) {
             btnIncluirPet.setEnabled(true);
             pos = 0;
@@ -770,5 +768,22 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
         lblMiniFotoPet.setIcon(foto);
         //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
     }
+    private void colocarMiniFotoLabelVaga() {
+       
+        urlMiniFoto = "";
+        Dimension d = lblMiniFotoPet.getSize();
+        int width = lblMiniFotoPet.getWidth();
+        int height = lblMiniFotoPet.getHeight();
+        //System.out.println("width: "+d.width + " height: "+d.height);
+        String urlFoto = urlMiniFoto; //pegar do combobox
+        ImageIcon foto;
+        foto = new ImageIcon(urlFoto);
+
+        foto.setImage(foto.getImage().getScaledInstance(d.width, d.height, 100));
+        //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
+        lblMiniFotoPet.setIcon(foto);
+        //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
+    }
+
 
 }

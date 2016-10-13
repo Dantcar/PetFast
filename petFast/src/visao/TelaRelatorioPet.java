@@ -5,14 +5,13 @@
  */
 package visao;
 
-import controle.ClienteCtrl;
-//import static Control.Util.reduzString;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import controle.AnimalCtrl;
+import controle.ClienteCtrl;
 import static controle.Util.reduzString;
 import java.awt.Dimension;
 import java.io.FileNotFoundException;
@@ -28,6 +27,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import modelo.Animal;
 import modelo.Cliente;
+
 /**
  *
  * @author Décio
@@ -67,7 +67,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
          tctPetAnimalCpfCliente.setEditable(false);
          tctIdCliente.setEditable(false);
          */
-        populaJComboBoxClientesNome();
+        //populaJComboBoxClientesNome();
         btnListarPet.setEnabled(false);
         tctCpfCliente.setEditable(false);
         tctIdCliente.setEditable(false);
@@ -80,19 +80,10 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         tctCpfCliente.setEditable(false);
         tctIdCliente.setText("");
         tctIdCliente.setEditable(false);
+        desabilitarBotoesCliente();
         desabilitarBotoesRelPet();
         txtRelPet.setText("");
 
-    }
-
-    private void populaJComboBoxClientesNome() {
-        ClienteCtrl cCliente = new ClienteCtrl();
-        cbxNomePet.removeAllItems(); //remove os itens atuais do comboBox.
-        ArrayList lista = cCliente.populaComboClienteNome(); //retorna os nomes dos clientes do banco.
-        Iterator i = lista.iterator();
-        while (i.hasNext()) {
-            cbxNomePet.addItem(String.valueOf(i.next()));
-        }
     }
 
     /**
@@ -132,6 +123,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         PainelRelImpresso = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtRelPet = new javax.swing.JTextArea();
+        lblFotoPetRel = new javax.swing.JLabel();
         lblRelatorioPetImagem = new javax.swing.JLabel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -466,13 +458,17 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         PainelRelImpressoLayout.setHorizontalGroup(
             PainelRelImpressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelImpressoLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFotoPetRel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         PainelRelImpressoLayout.setVerticalGroup(
             PainelRelImpressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelImpressoLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PainelRelImpressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFotoPetRel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 20, Short.MAX_VALUE))
         );
 
@@ -497,9 +493,10 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         tctCpfCliente.setEditable(false);
         tctIdCliente.setText("");
         tctIdCliente.setEditable(false);
+        desabilitarBotoesCliente();
         desabilitarBotoesRelPet();
         txtRelPet.setText("");
-
+        colocarMiniFotoLabelVaga();
 
     }//GEN-LAST:event_btnLimparTelaPetRelActionPerformed
 
@@ -554,20 +551,20 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
 
     private void cbxNomePetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxNomePetItemStateChanged
 
-        if (cbxNomePet.isValid()) {
-            ClienteCtrl cCliente = new ClienteCtrl();
-            String nomeCliente = cbxNomePet.getSelectedItem().toString();
-            System.out.println(nomeCliente);
-            Cliente cliNome = cCliente.buscarClientesPorNome(nomeCliente);
+        /*  if (cbxNomePet.isValid()) {
+         ClienteCtrl cCliente = new ClienteCtrl();
+         String nomeCliente = cbxNomePet.getSelectedItem().toString();
+         System.out.println(nomeCliente);
+         Cliente cliNome = cCliente.buscarClientesPorNome(nomeCliente);
 
-            tctCpfCliente.setText(cliNome.getCpf());
-            System.out.println(cliNome.getNome());
-            System.out.println(cliNome.getCpf());
-            System.out.println(cliNome.getIdCliente());
-            tctNomeCliente.setText(cliNome.getNome());
-            tctIdCliente.setText(cliNome.getIdCliente());
-        }
-
+         tctCpfCliente.setText(cliNome.getCpf());
+         System.out.println(cliNome.getNome());
+         System.out.println(cliNome.getCpf());
+         System.out.println(cliNome.getIdCliente());
+         tctNomeCliente.setText(cliNome.getNome());
+         tctIdCliente.setText(cliNome.getIdCliente());
+         }
+         */
     }//GEN-LAST:event_cbxNomePetItemStateChanged
 
     private void cbxNomePetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNomePetActionPerformed
@@ -588,42 +585,40 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         PanelTabRelPetImpresso.setSelectedIndex(1);
         //this.carregarListaCliente2(animal);
         this.carregarListaAnimal2(animal);
+        
     }//GEN-LAST:event_btnListarPetActionPerformed
 
     private void btnListarTodosPetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarTodosPetsActionPerformed
-      /*
-        String title = "Relatórios Clientes";
-        ClienteCtrl cCliente = new ClienteCtrl();
-        PanelTabRelPetImpresso.setSelectedIndex(1);
-        List clientes = cCliente.listarClientes();
-        this.carregarListaCliente2(clientes);
-        */
+        /*
+         String title = "Relatórios Clientes";
+         ClienteCtrl cCliente = new ClienteCtrl();
+         PanelTabRelPetImpresso.setSelectedIndex(1);
+         List clientes = cCliente.listarClientes();
+         this.carregarListaCliente2(clientes);
+         */
     }//GEN-LAST:event_btnListarTodosPetsActionPerformed
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         // Pesquisar Cliente e buscar lista animais por cliente
-        int idClienteP, tam;
-        DefaultListModel model = new DefaultListModel();
-
+        int idClienteP;
+       
         ClienteCtrl ccliente = new ClienteCtrl();
-        //ArrayList listaNome = null;
         listaNome = (ArrayList) ccliente.listaClientesPorNome(tctNomeCliente.getText());
-        //Jlist listaAnimais = canimal.receberListaAnimaisCliente(WIDTH);
-        AnimalCtrl canimal = new AnimalCtrl();
-        Animal animal = new Animal();
 
         if (!listaNome.isEmpty()) {
             habilitarBotoesRelPet();
             pos = 0;
             tam = listaNome.size() - 1;
             Cliente cli = (Cliente) listaNome.get(0);
+
+            //preenche os dados do cliente no form
             tctCpfCliente.setText(cli.getCpf());
             tctNomeCliente.setText(cli.getNome());
             tctIdCliente.setText(cli.getIdCliente());
             idClienteP = Integer.parseInt(cli.getIdCliente());
             habilitarBotoesCliente();
-            // populaJComboBoxClientesNomePesquisado(listaNome);
             populaJComboBoxAnimalCliente(idClienteP);
+
             // colocarMiniFotoLabel();
         } else {
             JOptionPane.showMessageDialog(null, "Cliente não localizado!");
@@ -643,6 +638,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
 
     private void btnInicioCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioCliActionPerformed
         // Botão [|<]
+        System.out.println("Botão [|<]");
         int idClienteP;
         pos = 0;
         Cliente cli = (Cliente) listaNome.get(pos);
@@ -657,7 +653,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
 
     private void btnPrevCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevCliActionPerformed
         // Botão [<]
-
+        System.out.println("Botão [<]");
         if (pos > 0) {
             int idClienteP;
             pos--;
@@ -676,7 +672,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
 
     private void btnNextCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextCliActionPerformed
         // Botão [>]
-
+        System.out.println("Botão [>]");
         if (pos < tam) {
             int idClienteP;
             pos++;
@@ -695,6 +691,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
 
     private void btnLastCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastCliActionPerformed
         // Botão [>|]
+        System.out.println("Botão [>|]");
         int idClienteP;
         pos = tam;
         Cliente cli = (Cliente) listaNome.get(tam);
@@ -708,7 +705,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnLastCliActionPerformed
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelRelImpresso;
     private javax.swing.JPanel PainelRelOpcoesCliente;
@@ -728,6 +725,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cbxNomePet;
     private javax.swing.JPanel jPanelBotoesMovimentoCliente;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblFotoPetRel;
     private javax.swing.JLabel lblNomePet;
     private javax.swing.JLabel lblRelatorioPetImagem;
     private javax.swing.JLabel lblTelaPetCodigoCliente;
@@ -741,7 +739,6 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txtRelPet;
     // End of variables declaration//GEN-END:variables
 
-    
     private void colocarFotoLabelUrl(String urlFoto) {
         lblRelatorioPetImagem.setIcon(null);
         Dimension d = lblRelatorioPetImagem.getSize();
@@ -782,8 +779,8 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
 
         AnimalCtrl cAnimal = new AnimalCtrl();
         cbxNomePet.removeAllItems(); //remove os itens atuais do comboBox.
-        ArrayList lista = cAnimal.populaComboAnimaisCliente(id); //retorna os animais do cliente.
-        Iterator i = lista.iterator();
+        listaAnimal = cAnimal.populaComboAnimaisCliente(id); //retorna os animais do cliente.
+        Iterator i = listaAnimal.iterator();
         while (i.hasNext()) {
             cbxNomePet.addItem(String.valueOf(i.next()));
 
@@ -794,18 +791,26 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
     private void carregarListaAnimal2(List<Animal> ListaAnimais) {
         String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
         String resultado = "";
-
+        String sexoAnimal = "";
         //for (Cliente c : ListaClientes) {
         for (Animal a : ListaAnimais) {
+
             resultado += ""
                     + "\n\tCódigo Pet: " + a.getIdAnimal() + "\n"
                     + "\n\tNome: " + a.getNome()
-                    + "\n\tEspécie: " + a.getEspecie().trim()
-                    + "\n\tSexo: " + a.getSexo()
-                    + "\n\tRaça: " + a.getRaca().trim() 
-                    + "\n\tAltura: " + a.getAltura().trim() + " em cm  -  \tPeso: " + a.getPeso() +" em kg."
-                    + "\n\tNascimento: " + a.getNascimento().trim()
-                    ;
+                    + "\n\tEspécie: " + a.getEspecie().trim();
+
+            if (a.getSexo().equals("F")) {
+                sexoAnimal = "\n\tSexo: Feminino";
+            } else {
+                sexoAnimal = "\n\tSexo: Masculino";
+            }
+            resultado += sexoAnimal;
+
+            resultado += " "
+                    + "\n\tRaça: " + a.getRaca().trim()
+                    + "\n\tAltura: " + a.getAltura().trim() + " cm \t-  Peso: " + a.getPeso() + " kg"
+                    + "\n\tNascimento: " + a.getNascimento().trim();
 
             resultado += newline;
 
@@ -813,6 +818,45 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         resultado = "\n\n\t\t\t CADASTRO ANIMAIS / PETS\n" + resultado;
         txtRelPet.setText(resultado);
         txtRelPet.setEditable(false);
+        //lblFotoPetRel.setVisible(true);
+        colocarMiniFotoRelLabel();
+        
+    }
+     private void colocarMiniFotoRelLabel() {
+        Animal animal = new Animal();
+        AnimalCtrl canimal = new AnimalCtrl();
+        nomeAnimal = cbxNomePet.getSelectedItem() + "";
+        animal = canimal.receberAnimalNome(nomeAnimal);
+        urlMiniFoto = animal.getFoto();
+        Dimension d = lblFotoPetRel.getSize();
+        int width = lblFotoPetRel.getWidth();
+        int height = lblFotoPetRel.getHeight();
+        //System.out.println("width: "+d.width + " height: "+d.height);
+        String urlFoto = urlMiniFoto; //pegar do combobox
+        ImageIcon foto;
+        foto = new ImageIcon(urlFoto);
+
+        foto.setImage(foto.getImage().getScaledInstance(d.width, d.height, 100));
+        //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
+        lblFotoPetRel.setIcon(foto);
+        //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
+    }
+
+    private void colocarMiniFotoLabelVaga() {
+       
+        urlMiniFoto = "";
+        Dimension d = lblFotoPetRel.getSize();
+        int width = lblFotoPetRel.getWidth();
+        int height = lblFotoPetRel.getHeight();
+        //System.out.println("width: "+d.width + " height: "+d.height);
+        String urlFoto = urlMiniFoto; //pegar do combobox
+        ImageIcon foto;
+        foto = new ImageIcon(urlFoto);
+
+        foto.setImage(foto.getImage().getScaledInstance(d.width, d.height, 100));
+        //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
+        lblFotoPetRel.setIcon(foto);
+        //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
     }
 
 }//Final da Classe TelaRelatorioPet
