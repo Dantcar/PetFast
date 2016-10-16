@@ -13,6 +13,7 @@ import static controle.ValidaCampos.validaLogin;
 import static controle.ValidaCampos.validaSenhaForte;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -67,6 +68,11 @@ public class TelaLogin extends javax.swing.JFrame {
         setBackground(new java.awt.Color(204, 255, 204));
 
         panelUsuario.setBackground(new java.awt.Color(0, 201, 143));
+        panelUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                panelUsuarioKeyPressed(evt);
+            }
+        });
 
         btnUsuarioVoltar.setBackground(new java.awt.Color(204, 204, 204));
         btnUsuarioVoltar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -88,6 +94,16 @@ public class TelaLogin extends javax.swing.JFrame {
         btnNovoUsuarioBd.setInheritsPopupMenu(true);
         btnNovoUsuarioBd.setMargin(new java.awt.Insets(2, 0, 2, 0));
         btnNovoUsuarioBd.setPreferredSize(new java.awt.Dimension(100, 50));
+        btnNovoUsuarioBd.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                btnNovoUsuarioBdStateChanged(evt);
+            }
+        });
+        btnNovoUsuarioBd.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnNovoUsuarioBdFocusGained(evt);
+            }
+        });
         btnNovoUsuarioBd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoUsuarioBdActionPerformed(evt);
@@ -106,6 +122,11 @@ public class TelaLogin extends javax.swing.JFrame {
                 tctLoginMouseReleased(evt);
             }
         });
+        tctLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tctLoginKeyPressed(evt);
+            }
+        });
 
         lblUsuarioSenha.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblUsuarioSenha.setForeground(new java.awt.Color(102, 102, 102));
@@ -115,6 +136,11 @@ public class TelaLogin extends javax.swing.JFrame {
         lblLogoPet.setText(" ");
 
         tctSenha.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tctSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tctSenhaKeyPressed(evt);
+            }
+        });
 
         lblMostraSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -286,6 +312,38 @@ public class TelaLogin extends javax.swing.JFrame {
         pack();
     }//GEN-LAST:event_lblOlhoSenhaMouseReleased
 
+    private void btnNovoUsuarioBdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNovoUsuarioBdFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNovoUsuarioBdFocusGained
+
+    private void btnNovoUsuarioBdStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btnNovoUsuarioBdStateChanged
+        //Colocar focus no botao login
+        btnNovoUsuarioBd.grabFocus();
+    }//GEN-LAST:event_btnNovoUsuarioBdStateChanged
+
+    private void tctSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tctSenhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){  
+            //O botão desejado foi pressionado então só preciso  
+            //inserir o código aqui, no caso, execute o código do botão que realiza o login  
+       btnNovoUsuarioBd.doClick();
+        
+        } 
+        
+    }//GEN-LAST:event_tctSenhaKeyPressed
+
+    private void panelUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelUsuarioKeyPressed
+              
+       
+    }//GEN-LAST:event_panelUsuarioKeyPressed
+
+    private void tctLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tctLoginKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){  
+            //O botão desejado foi pressionado então só preciso  
+            //inserir o código aqui, no caso, execute o código do botão que realiza o login  
+       btnNovoUsuarioBd.doClick();
+        }
+    }//GEN-LAST:event_tctLoginKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -321,6 +379,7 @@ public class TelaLogin extends javax.swing.JFrame {
             @Override
             public void run() {
                 new TelaLogin().setVisible(true);
+                
             }
         });
     }

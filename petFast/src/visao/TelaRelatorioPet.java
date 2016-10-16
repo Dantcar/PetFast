@@ -126,6 +126,11 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         lblFotoPetRel = new javax.swing.JLabel();
         lblRelatorioPetImagem = new javax.swing.JLabel();
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PainelRelTituloCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -704,6 +709,10 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         //btnIncluirPet.setEnabled(true);
 
     }//GEN-LAST:event_btnLastCliActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+       toFront();
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
