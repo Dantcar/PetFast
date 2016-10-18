@@ -5,16 +5,16 @@
  */
 package visao;
 
-import controle.ClienteCtrl;
-//import static Control.Util.reduzString;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import controle.ClienteCtrl;
 import static controle.Util.reduzString;
 import java.awt.Dimension;
-import java.awt.Label;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -27,12 +27,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 
+
+
 /**
  *
  * @author Décio
  */
 public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
 
+    private static int openFrameCount = 0; //teste
+private static final int xOffset = 30, yOffset = 30; //teste
+    
+    
     public static String rgCliente, nomeCliente;
 
     /**
@@ -40,6 +46,17 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
      */
     public TelaRelatorioCliente() {
         initComponents();
+         // Center in the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+        //setLocation(new Point((screenSize.width - frameSize.width) / 2,
+        //                     (screenSize.height - frameSize.width) / 2));
+        
+        //this.setLocation(50, 100); //(ponto inicial apartir lateral,altura)
+        setLocation(xOffset*openFrameCount, yOffset*openFrameCount);
+        setLocation(new Point((screenSize.width - frameSize.width) / 2,
+                              (screenSize.height - frameSize.width) / 2));
+        this.repaint();
         populaJComboBoxClientesNome();
         btnListarCliente.setEnabled(false);
         tctCpfCliente.setEditable(false);
@@ -49,7 +66,7 @@ public class TelaRelatorioCliente extends javax.swing.JInternalFrame {
         cbxNomeCliente.setSelectedIndex(-1);
         String url = System.getProperty("user.dir") + "\\src\\Icones\\clientePet.jpg";
         colocarFotoLabelUrl(url);
-        
+         this.repaint();
     }
 
     private void populaJComboBoxClientesNome() {

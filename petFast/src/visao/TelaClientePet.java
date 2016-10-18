@@ -8,6 +8,8 @@ package visao;
 import controle.AnimalCtrl;
 import controle.ClienteCtrl;
 import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,8 +47,16 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
           true);//iconifiable
         initComponents();
         
-        this.setLocation(50, 100); //(ponto inicial apartir lateral,altura)
+        // Center in the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+        //setLocation(new Point((screenSize.width - frameSize.width) / 2,
+        //                     (screenSize.height - frameSize.width) / 2));
+        
+        //this.setLocation(50, 100); //(ponto inicial apartir lateral,altura)
         setLocation(xOffset*openFrameCount, yOffset*openFrameCount);
+        setLocation(new Point((screenSize.width - frameSize.width) / 2,
+                              (screenSize.height - frameSize.width) / 2));
         this.repaint();
         idCliente = "";
         nomeCliente = "";

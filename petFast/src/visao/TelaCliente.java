@@ -16,6 +16,9 @@ import controle.Util;
 import static controle.Util.reduzString;
 import controle.ValidaCampos;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,7 +49,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private static SimpleDateFormat sdfNascimentoCliente;
     private int dataIntNascimentoCliente;
     private static String oldCPF;
-
+    //
+    private static int openFrameCount = 0; //teste
+    private static final int xOffset = 30, yOffset = 30; //teste
     /**
      * Instanciando objeto Cliente
      */
@@ -54,8 +59,22 @@ public class TelaCliente extends javax.swing.JInternalFrame {
      * Creates new form TelaCliente
      */
     public TelaCliente() {
-
+ super("Document #" + (++openFrameCount),
+          true, //resizable
+          true, //closable
+          true, //maximizable
+          true);//iconifiable
         initComponents();
+        // Center in the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+        //setLocation(new Point((screenSize.width - frameSize.width) / 2,
+        //                     (screenSize.height - frameSize.width) / 2));
+        
+        //this.setLocation(50, 100); //(ponto inicial apartir lateral,altura)
+        setLocation(xOffset*openFrameCount, yOffset*openFrameCount);
+        setLocation(new Point((screenSize.width - frameSize.width) / 2,
+                              (screenSize.height - frameSize.width) / 2));
         tftCep.setText(null);
 
         //btnSalvarCliente.setEnabled(false);

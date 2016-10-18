@@ -11,6 +11,7 @@ package visao;
 import static controle.UsuarioCtrl.logarUsuario;
 import static controle.ValidaCampos.validaLogin;
 import static controle.ValidaCampos.validaSenhaForte;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -36,7 +37,13 @@ public class TelaLogin extends javax.swing.JFrame {
         String iconPetfast = pathProjeto + "src//Icones//petfastIcone.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage( iconPetfast ));
         
-        setLocationRelativeTo(null);
+
+        // Center in the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+        setLocation(new Point((screenSize.width - frameSize.width) / 2,
+                              (screenSize.height - frameSize.width) / 2));
+        //setLocationRelativeTo(null);
         lblOlhoSenha.setLocation(posX, posY);
         pack();
         lblMostraSenha.setVisible(false);
