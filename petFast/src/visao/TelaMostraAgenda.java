@@ -52,7 +52,8 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
     JLabel iconHolder = new JLabel(icon);
 
     //Elementos GUI
-    JLabel lblDataAgendamento = new JLabel("data ");
+    JLabel lblDataAgendamento = new JLabel("Dia: ");
+    JLabel lblHoraAgendamento = new JLabel("Horario: ");
     JLabel lblTipoDocumento = new JLabel("Passagem ");
     JLabel lblServicoPrecoTotal = new JLabel("Preco Total: ");
     JLabel lblQuantidadeServicos = new JLabel("Total dos Serviços: ");
@@ -144,7 +145,13 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
 
    // public String listaDatas[] = {"----", "1004", "1005", "1006", "1007", "1008"};
     public String listaDatas[] = {"-----------", "2016-out-19", "2016-out-20", "2016-out-21", "2016-out-22", "2016-out-23"}; //pegar da agenda as datas incluidas
+    public String listaHoras[] = {"-----", "09:00", 
+        "09:30", "10:00", "10:30", "11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30",
+        "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"       
+        }; //pegar da agenda as datas incluidas
+    
     public JComboBox cbxDataReservaCombo = new JComboBox(listaDatas);
+    public JComboBox cbxHoraReservaCombo = new JComboBox(listaHoras);
 
     /**
      * 
@@ -153,10 +160,11 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
     public TelaMostraAgenda(){
         this.local = "";
         //public String listaDatasArray[] = {"","VOO1004-05082016","VOO1005-06082016","VOO1006-07082016","VOO1006-07082016"}; //buscar voo
-
         //String listaDatas[] = {"----", "1004", "1005", "1006", "1007", "1008"};
         //listaDatas[1] = "{'','VOO1004-05082016','VOO1005-06082016','VOO1006-07082016','VOO1007-07082016'}"; //buscar voo
+        
         cbxDataReservaCombo = new JComboBox(listaDatas);
+        cbxHoraReservaCombo = new JComboBox(listaHoras);
     }
 
     /**
@@ -222,8 +230,13 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
        
         p1.add(resetButton); //painel 1 EAST
        
+        //incluindo comboBox DATA
         p2.add(lblDataAgendamento); //painel 2 WEST
         p2.add(cbxDataReservaCombo); //painel 2 WEST
+        //incluindo comboBox Hora
+        p2.add(lblHoraAgendamento); //painel 2 WEST
+        p2.add(cbxHoraReservaCombo); //painel 2 WEST
+        //incluindo comboBoxQuantidade de agendamentos serviços
         p2.add(lblClientePet); //painel 2 WEST
         p2.add(cbxClientePetQuantidade);  //painel 2 WEST
         
@@ -232,7 +245,8 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
         cbxClientePetQuantidade.setMaximumRowCount(3);
         
         cbxDataReservaCombo.setMaximumRowCount(3);
-
+        cbxHoraReservaCombo.setMaximumRowCount(3);
+        
         cbxAssentoCombo1.setMaximumRowCount(3);
         cbxAssentoCombo2.setMaximumRowCount(3);
         cbxAssentoCombo3.setMaximumRowCount(3);
@@ -247,7 +261,7 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
         //p1.addActionListener(this);
         //p2.addActionListener(this);
         //p3.addActionListener(this);
-        cbxDataReservaCombo.addActionListener(this);
+        cbxHoraReservaCombo.addActionListener(this);
         cbxClientePetQuantidade.addActionListener(this);
         //cbxCriancaQuantidade.addActionListener(this);
         //cbxIdosoQuantidade.addActionListener(this);
@@ -282,44 +296,55 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
          */
         
         String msg = "";
-        // ActionListener for Combobox that displays Film Viewing Times
-        if (action.getSource() == cbxDataReservaCombo)
+        // ActionListener Combobox reserva hora
+        if (action.getSource() == cbxHoraReservaCombo || action.getSource() == cbxDataReservaCombo )
         {
-            // Create New Instance of the Database class
-            VooPreencheAssento db = new VooPreencheAssento();
+            if ((cbxDataReservaCombo.getSelectedItem().toString() != "-----------")){// &&
+                
+                if((cbxHoraReservaCombo.getSelectedItem().toString() != "-----") )  {
+                            
+                        // Create New Instance of the Database class
+                VooPreencheAssento db = new VooPreencheAssento();
 
-            // Get Name of database
-            String vooSelecionado = cbxDataReservaCombo.getSelectedItem().toString();
-            System.out.println("Ponto verificado 1 - "+vooSelecionado);
+                // Get Nome da Base a ser utilizada
+                String vooSelecionado = cbxDataReservaCombo.getSelectedItem().toString()+"-"+
+                cbxHoraReservaCombo.getSelectedItem().toString();
+            
+                System.out.println("Ponto verificado 1 - "+vooSelecionado);
 
-            // Make Name of Database global
-            voo = vooSelecionado+".txt";
+                // Make Name of Database global
+                voo = vooSelecionado+".txt";
 
-            // Call DataBase Generator (will generate fresh database for that time if one does not  ist)
-            //db.FullDataBaseGeneration(vooSelecionado);
-            //db.GeraNovaBaseAssentos(vooSelecionado, 40, 30, 20);
-            VooPreencheAssento.GeraNovaBaseAssentos(vooSelecionado+".txt", e, b, f);
+                // Call DataBase Generator (will generate fresh database for that time if one does not  ist)
+                //db.FullDataBaseGeneration(vooSelecionado);
+                //db.GeraNovaBaseAssentos(vooSelecionado, 40, 30, 20);
+                VooPreencheAssento.GeraNovaBaseAssentos(vooSelecionado+".txt", e, b, f);
 
-            //Fetch array of available seats and pass it to the global ArrayList 'seatArrayList'
-            //ArrayList<Integer> vooArray  = db.AvailableAssentosArrayReturn(vooSelecionado);
-            ArrayList<String> vooArray  = VooPreencheAssento.RetornaAssentosDisponiveisVoo(vooSelecionado);
-            seatArrayList = vooArray;
+                //Fetch array of available seats and pass it to the global ArrayList 'seatArrayList'
+                //ArrayList<Integer> vooArray  = db.AvailableAssentosArrayReturn(vooSelecionado);
+                ArrayList<String> vooArray  = VooPreencheAssento.RetornaAssentosDisponiveisVoo(vooSelecionado);
+                seatArrayList = vooArray;
 
-            //Reset any user selection of tickets when a new database is selected
-            cbxClientePetQuantidade.setSelectedIndex(0);
-            //cbxCriancaQuantidade.setSelectedIndex(0);
-            //cbxIdosoQuantidade.setSelectedIndex(0);
+                //Reset any user selection of tickets when a new database is selected
+                cbxClientePetQuantidade.setSelectedIndex(0);
+                //cbxCriancaQuantidade.setSelectedIndex(0);
+                //cbxIdosoQuantidade.setSelectedIndex(0);
 
-            //Repaint the Frame
-            repaint();
-
+                //Repaint the Frame
+                repaint();
+                        
+                }
+                
+            }
+           
+             repaint();
         }
 
         // ActionListener for all ticket type comboboxes collectively
         if (action.getSource() == cbxClientePetQuantidade)
             //|| action.getSource()
        // == cbxCriancaQuantidade|| action.getSource() == cbxIdosoQuantidade)
-
+           
         {
             // Remove all existing items from each cb
             cbxAssentoCombo1.removeAllItems();
@@ -370,7 +395,9 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
             //Integer oapCounter = Integer.parseInt((cbxIdosoQuantidade.getSelectedItem().toString()));
             Integer countTotal = adultCounter;//+ childCounter + oapCounter);
             tftServicoQuantidade.setText(countTotal.toString());
-
+            
+            repaint();
+            
             // Only 5 tickets can be ordered at one time. Returns error message if more are selected
             if (countTotal >5)
             {   cbxClientePetQuantidade.setSelectedIndex(0);
