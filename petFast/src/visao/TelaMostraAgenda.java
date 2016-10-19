@@ -866,14 +866,14 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
         g.setColor(Color.black);        // Set Default Draw Color to black
 
         //PRIMEIRA LINHA DE TITULOS
-        g.drawString("CLASSE", (classeEconomicaPosX), (classeEconomicaPosY - 30));              //TITULO 1
-        g.drawString("CLASSE", (classeEmpresarialPosX), (classeEmpresarialPosY - 30));          //TITULO 2
-        g.drawString("PRIMEIRA", (classePrimeiraPosX), (classePrimeiraPosY - 30));              //TITULO 3
+        g.drawString("Agenda Diária de Serviços", (classeEconomicaPosX), (classeEconomicaPosY - 30));              //TITULO 1
+        //g.drawString("CLASSE", (classeEmpresarialPosX), (classeEmpresarialPosY - 30));          //TITULO 2
+        //g.drawString("PRIMEIRA", (classePrimeiraPosX), (classePrimeiraPosY - 30));              //TITULO 3
 
         //SEGUNDA LINHA DE TITULOS
-        g.drawString("ECONOMICA", (classeEconomicaPosX), (classeEconomicaPosY - 10));           //SUB-TITULO 1
-        g.drawString("EMPRESARIAL", (classeEmpresarialPosX), (classeEmpresarialPosY - 10));     //SUB-TITULO 2
-        g.drawString("CLASSE", (classePrimeiraPosX), (classePrimeiraPosY - 10));                //SUB-TITULO 3
+        g.drawString("Profissional / Box ", (classeEconomicaPosX), (classeEconomicaPosY - 10));           //SUB-TITULO 1
+        //g.drawString("EMPRESARIAL", (classeEmpresarialPosX), (classeEmpresarialPosY - 10));     //SUB-TITULO 2
+        //g.drawString("CLASSE", (classePrimeiraPosX), (classePrimeiraPosY - 10));                //SUB-TITULO 3
 
         //Color custom_grey = new Color(175,175,175);
         Color custom_grey = new Color(0,0,0); //alterado para black
