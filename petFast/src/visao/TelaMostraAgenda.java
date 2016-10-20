@@ -4,6 +4,7 @@ package visao;
 //import java.awt.event.AdjustmentEvent;
 //import java.awt.event.AdjustmentListener;
 import controle.AgendaPreencheDatas;
+import controle.Util;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -17,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -29,7 +31,8 @@ import javax.swing.JTextField;
 public class TelaMostraAgenda extends JFrame implements ActionListener {
 
     AgendaPreencheDatas util = new AgendaPreencheDatas();
-
+    Util cUtil = new Util();
+    
     //String
     private String local;
     private String filename = "agendaHoje";
@@ -37,8 +40,8 @@ public class TelaMostraAgenda extends JFrame implements ActionListener {
     private String name = "";
     //C:\Documents and Settings\deciodecarvalho\Meus documentos\Google Drive\projetosJava\PetFast\petFast\Icones
     //C:\Documents and Settings\deciodecarvalho\Meus documentos\Google Drive\projetosJava\PetFast\petFastIcones\clientePet.jpg
-    private String url = System.getProperty("user.dir") + "\\Icones\\clientePet.jpeg";
-    
+    private String url = System.getProperty("user.dir") + "\\Icones\\pensandoRed.png";
+    private java.net.URL imgURL = getClass().getResource(url);
     
      //lista do combox de Datas
     public String listaDatas[] = {"-----------", "2016-out-19", "2016-out-20", "2016-out-21", "2016-out-22", "2016-out-23"}; //pegar da agenda as datas incluidas
@@ -52,8 +55,9 @@ public class TelaMostraAgenda extends JFrame implements ActionListener {
     // Creates an icon, attached to a label to act as a banner  for the program
     // Get resource is required for finding the image within the JAR achive once packed
 
-    //final public ImageIcon icon = (new ImageIcon(getClass().getResource(url)));
     
+    
+    //final public ImageIcon icon = createImageIcon(url);
     // Array para a quantidade agendamentos defini como um único
     Integer[] listaQuantidadeClientePets = {0, 1};
 
@@ -66,9 +70,12 @@ public class TelaMostraAgenda extends JFrame implements ActionListener {
     // Comboboxes to hold the state of the desired quantity of each ticket type
     
     JComboBox cbxClientePetQuantidade = new JComboBox(listaQuantidadeClientePets);
-
+    
+    ImageIcon icon = cUtil.createImageIcon(url,
+                                 "Cliente Petfast");
+    
     //JLabel
-    //JLabel iconHolder = new JLabel(icon);
+    JLabel iconHolder = new JLabel(icon);
     JLabel lblDataAgendamento = new JLabel("Dia: ");
     JLabel lblHoraAgendamento = new JLabel("Horario: ");
     JLabel lblTipoDocumento = new JLabel("Passagem ");
@@ -140,6 +147,8 @@ public class TelaMostraAgenda extends JFrame implements ActionListener {
      * Metodo construtor TelaMostraAssentos
      */
     public TelaMostraAgenda() {
+           
+        
         System.out.println(url);
         this.local = "";
 
