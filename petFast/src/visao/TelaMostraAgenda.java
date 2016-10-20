@@ -4,8 +4,7 @@ package visao;
 // TelaMostraAgenda Class File
 //import java.awt.event.AdjustmentEvent;
 //import java.awt.event.AdjustmentListener;
-//import AssentosAerofast.VooPreencheAssentosUtil.*;
-import controle.VooPreencheAssento;
+import controle.AgendaPreencheDatas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -33,18 +32,15 @@ import javax.swing.JTextField;
 public class TelaMostraAgenda extends JFrame implements ActionListener
 {
 
+    AgendaPreencheDatas util = new AgendaPreencheDatas();
     
-    VooPreencheAssento util = new VooPreencheAssento();
-
-    private String local; 
-    //private String filename ="vooHoje";
+    //Uso no formato da tela
+    private String local;
     private String filename ="agendaHoje";
     private String tipoFile = "txt";
     private String name = "";
     
-    //name = local + filename;
-    //String vtexto ="teste";
-
+    
     String msg ="";
     // Creates an icon, attached to a label to act as a banner  for the program
     // Get resource is required for finding the image within the JAR achive once packed
@@ -66,47 +62,30 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
 
     // GUI Buttons
     JButton btnReservaServico = new JButton("Reserva");
+    JButton btnAgendaServico = new JButton("Agendar Serviço na Data");
     JButton resetButton = new JButton("Delete DB");
 
-    //Labels For Each Ticket (Do not appear until called by selecting a Ticket Type quantity)
-    JLabel lblAssento01 = new JLabel ("Agendamento 1");
-    JLabel lblAssento02 = new JLabel ("Agendamento 2");
-    JLabel lblAssento03 = new JLabel ("Agendamento 3");
-    JLabel lblAssento04 = new JLabel ("Agendamento 4");
-    JLabel lblAssento05 = new JLabel ("Agendamento 5");
+    //Labels dos boxes/profissionais disponíveis no dia/hora da agenda
+    JLabel lblAssento01 = new JLabel ("Escolher o profissional / Box ");
+    
 
-    // Labels and ComboBoxes for for various Quantity of Tickets (Like their label, also do not appear untill called)
-    JComboBox cbxAssentoCombo1 = new JComboBox();
-    JComboBox cbxAssentoCombo2=  new JComboBox();
-    JComboBox cbxAssentoCombo3=  new JComboBox();
-    JComboBox cbxAssentoCombo4=  new JComboBox();
-    JComboBox cbxAssentoCombo5=  new JComboBox();
-
-    // Arrays for Quantity of each ticket type
-    Integer[] listaQuantidadeClientePets = {0,1,2,3,4,5};
+    // combo box dos boxes/profissionais disponíveis no dia/hora da agenda
+    JComboBox cbxBoxProfissional = new JComboBox();
+    
+    // Array para a quantidade agendamentos defini como um único
+    Integer[] listaQuantidadeClientePets = {0,1};
     
 
     // Comboboxes to hold the state of the desired quantity of each ticket type
     JComboBox cbxClientePetQuantidade = new JComboBox(listaQuantidadeClientePets);
     
 
-    //fundacao321@
-
-    //Original ArrayList for a Combobox that shows Film Times
-    //String[] timeList = {"-", "1.00 PM", "3.00 PM", "5.00 PM", "7.00 PM", "9.00 PM"}; //buscar voo
-
-    //buscar listas de voos no arquivo tipo txt com a relacao de voos da aeronave escolhida.
-    //formato do arquivo {"vooNNNN-DDMMYYYY",vooNNNN-DDMMYYYY"}    
-
-    //preenchimento do combo box dos arquivos txt de voos
-    //public String listaDatas = util.RetornaStringArquivoVoo("agendaHoje.txt");
-
-    // JComboBox cbxDataReservaCombo = new JComboBox(listaDatas);
+    //fundacao321@ wifi seade
 
     // ArrayList that holds the vaules of seats that are available
     ArrayList<String> seatArrayList = new ArrayList<>();
 
-    String voo = new String();
+    String agenda= new String();
 
     //Creation of JPanels to be added to the frame
     JPanel bannerPanel = new JPanel();
@@ -142,9 +121,13 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
     public int ex;
     public int bx;
     public int fx;
+    
+    private int controleData = 0; //verificador se existe data completa data + hora
 
-   // public String listaDatas[] = {"----", "1004", "1005", "1006", "1007", "1008"};
+    //lista do combox de Datas
     public String listaDatas[] = {"-----------", "2016-out-19", "2016-out-20", "2016-out-21", "2016-out-22", "2016-out-23"}; //pegar da agenda as datas incluidas
+    
+    //lista do combox de Horas
     public String listaHoras[] = {"-----", "09:00", 
         "09:30", "10:00", "10:30", "11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30",
         "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"       
@@ -158,17 +141,15 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
      * Metodo construtor TelaMostraAssentos
      */
     public TelaMostraAgenda(){
-        this.local = "";
-        //public String listaDatasArray[] = {"","VOO1004-05082016","VOO1005-06082016","VOO1006-07082016","VOO1006-07082016"}; //buscar voo
-        //String listaDatas[] = {"----", "1004", "1005", "1006", "1007", "1008"};
-        //listaDatas[1] = "{'','VOO1004-05082016','VOO1005-06082016','VOO1006-07082016','VOO1007-07082016'}"; //buscar voo
         
+        this.local = "";
+                
         cbxDataReservaCombo = new JComboBox(listaDatas);
         cbxHoraReservaCombo = new JComboBox(listaHoras);
     }
 
     /**
-     * Metodo para criar tela com os assentos e classes desejadas.
+     * Metodo para criar tela com a data e horário desejado.
      * @param tipoLayout
      * @param ve
      * @param vb
@@ -214,7 +195,6 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
         setDefaultCloseOperation(EXIT_ON_CLOSE);        // Set frame to exit when 'CLOSE' window button is clicked
 
         // Add Panels to the Frame and state Layout Manager constructor arguments
-
         add(bannerPanel, BorderLayout.NORTH );
         add(p1, BorderLayout.EAST);
         add(p2, BorderLayout.WEST);
@@ -239,7 +219,8 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
         //incluindo comboBoxQuantidade de agendamentos serviços
         p2.add(lblClientePet); //painel 2 WEST
         p2.add(cbxClientePetQuantidade);  //painel 2 WEST
-        
+        //incluindo botao para agendar evento
+        p2.add(btnAgendaServico); // painel 2 WEST
 
         // Set number of visible entries when a combobox is selected
         cbxClientePetQuantidade.setMaximumRowCount(3);
@@ -247,32 +228,18 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
         cbxDataReservaCombo.setMaximumRowCount(3);
         cbxHoraReservaCombo.setMaximumRowCount(3);
         
-        cbxAssentoCombo1.setMaximumRowCount(3);
-        cbxAssentoCombo2.setMaximumRowCount(3);
-        cbxAssentoCombo3.setMaximumRowCount(3);
-        cbxAssentoCombo4.setMaximumRowCount(3);
-        cbxAssentoCombo5.setMaximumRowCount(3);
+        cbxBoxProfissional.setMaximumRowCount(3);
 
         // Makes textfields non-editable, so that they can be used to display content
         tftServicoQuantidade.setEditable(false);
         tftTipoCusto.setEditable(false);
 
         // Addition of Action Listeners to Objects
-        //p1.addActionListener(this);
-        //p2.addActionListener(this);
-        //p3.addActionListener(this);
         cbxHoraReservaCombo.addActionListener(this);
         cbxClientePetQuantidade.addActionListener(this);
-        //cbxCriancaQuantidade.addActionListener(this);
-        //cbxIdosoQuantidade.addActionListener(this);
-        
         btnReservaServico.addActionListener(this);
         resetButton.addActionListener(this);
-        cbxAssentoCombo1.addActionListener(this);
-        cbxAssentoCombo2.addActionListener(this);
-        cbxAssentoCombo3.addActionListener(this);
-        cbxAssentoCombo4.addActionListener(this);
-        cbxAssentoCombo5.addActionListener(this);
+        cbxBoxProfissional.addActionListener(this);
 
         setVisible(true);   // Set frame to be Visible, thus updating frame with all the selected elements
         repaint();
@@ -297,41 +264,50 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
         
         String msg = "";
         // ActionListener Combobox reserva hora
-        if (action.getSource() == cbxHoraReservaCombo || action.getSource() == cbxDataReservaCombo )
+        
+        if (action.getSource() == cbxHoraReservaCombo)
+            if(cbxHoraReservaCombo.isValid())
+                controleData = controleData + 1;
+        
+        if (action.getSource() == cbxDataReservaCombo )
+            if(cbxDataReservaCombo.isValid())
+                controleData = controleData + 2;
+        
+        System.out.println("Valor de controleData: "+controleData);
+        
+          if (action.getSource() == cbxHoraReservaCombo)
         {
-            if ((cbxDataReservaCombo.getSelectedItem().toString() != "-----------")){// &&
+            if ((cbxDataReservaCombo.getSelectedItem().toString() != "-----------")){
                 
                 if((cbxHoraReservaCombo.getSelectedItem().toString() != "-----") )  {
                             
                         // Create New Instance of the Database class
-                VooPreencheAssento db = new VooPreencheAssento();
+                AgendaPreencheDatas db = new AgendaPreencheDatas();
 
                 // Get Nome da Base a ser utilizada
-                String vooSelecionado = cbxDataReservaCombo.getSelectedItem().toString()+"-"+
+                String dataHoraSelecionada = cbxDataReservaCombo.getSelectedItem().toString()+"-"+
                 cbxHoraReservaCombo.getSelectedItem().toString();
             
-                System.out.println("Ponto verificado 1 - "+vooSelecionado);
+                System.out.println("Ponto verificado 1 - "+dataHoraSelecionada);
 
                 // Make Name of Database global
-                voo = vooSelecionado+".txt";
+               agenda = dataHoraSelecionada + ".txt";
 
                 // Call DataBase Generator (will generate fresh database for that time if one does not  ist)
-                //db.FullDataBaseGeneration(vooSelecionado);
-                //db.GeraNovaBaseAssentos(vooSelecionado, 40, 30, 20);
-                VooPreencheAssento.GeraNovaBaseAssentos(vooSelecionado+".txt", e, b, f);
+                //db.FullDataBaseGeneration(dataHoraSelecionada);
+                //db.GeraNovaBaseAssentos(dataHoraSelecionada, 40, 30, 20);
+                AgendaPreencheDatas.GeraNovaBaseAssentos(agenda, e, b, f);
 
                 //Fetch array of available seats and pass it to the global ArrayList 'seatArrayList'
-                //ArrayList<Integer> vooArray  = db.AvailableAssentosArrayReturn(vooSelecionado);
-                ArrayList<String> vooArray  = VooPreencheAssento.RetornaAssentosDisponiveisVoo(vooSelecionado);
-                seatArrayList = vooArray;
+                //ArrayList<Integer> agendaArray  = db.AvailableAssentosArrayReturn(dataHoraSelecionada);
+                ArrayList<String> agendaArray  = AgendaPreencheDatas.RetornaBoxDisponiveisAgenda(dataHoraSelecionada);
+                seatArrayList = agendaArray;
 
                 //Reset any user selection of tickets when a new database is selected
                 cbxClientePetQuantidade.setSelectedIndex(0);
-                //cbxCriancaQuantidade.setSelectedIndex(0);
-                //cbxIdosoQuantidade.setSelectedIndex(0);
-
+                
                 //Repaint the Frame
-                repaint();
+                
                         
                 }
                 
@@ -347,11 +323,7 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
            
         {
             // Remove all existing items from each cb
-            cbxAssentoCombo1.removeAllItems();
-            cbxAssentoCombo2.removeAllItems();
-            cbxAssentoCombo3.removeAllItems();
-            cbxAssentoCombo4.removeAllItems();
-            cbxAssentoCombo5.removeAllItems();
+            cbxBoxProfissional.removeAllItems();
 
             // If the arraylist no longer contains a zero (default answer)
             // Add a zero at the beginning of the array
@@ -362,41 +334,37 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
                 seatArrayList.add(0, "000");
             }
 
-            /*
-            if (seatArrayList.contains(000) != true)
-            {
-            seatArrayList.add(0, "000");
-            }
-             */
+            
             // Add contents of the ArrayList to each combobox that display available seats
-            seatArrayList.stream().map((seatArrayList1) -> {
-                cbxAssentoCombo1.addItem(seatArrayList1);
-                return seatArrayList1;
-            }).map((seatArrayList1) -> {
-                cbxAssentoCombo2.addItem(seatArrayList1);
-                return seatArrayList1;
-            }).map((seatArrayList1) -> {
-                cbxAssentoCombo3.addItem(seatArrayList1);
-                return seatArrayList1;
-            }).map((seatArrayList1) -> {
-                cbxAssentoCombo4.addItem(seatArrayList1);
-                return seatArrayList1;
-            }).forEach((seatArrayList1) -> {
-                cbxAssentoCombo5.addItem(seatArrayList1);
+            //estudar sobre stream e map ->
+          seatArrayList.stream().map((seatArrayList1)->{
+          cbxBoxProfissional.addItem(seatArrayList1);
+          return seatArrayList1;
+        }).forEach((seatArrayList1) -> {
+                //cbxBoxProfissional.addItem(seatArrayList1);
             });
+            
+            
+            
+            
 
             // Get new total price as a String and affix to a Label for display on Frame
             String totalString = getTotal();
             tftTipoCusto.setText("R$ " + totalString);
 
-            // Calculate total quantity of Tickets and affix to a label for display on Frame
+            
+            //Calculo total quantidade de agendamentos e e preenche a lbl na frame
             Integer adultCounter = Integer.parseInt((cbxClientePetQuantidade.getSelectedItem().toString()));
-            //Integer childCounter = Integer.parseInt((cbxCriancaQuantidade.getSelectedItem().toString()));
-            //Integer oapCounter = Integer.parseInt((cbxIdosoQuantidade.getSelectedItem().toString()));
+           
+            
             Integer countTotal = adultCounter;//+ childCounter + oapCounter);
             tftServicoQuantidade.setText(countTotal.toString());
             
             repaint();
+            
+             p3.add(lblAssento01);
+             p3.add(cbxBoxProfissional);
+            
             
             // Only 5 tickets can be ordered at one time. Returns error message if more are selected
             if (countTotal >5)
@@ -409,69 +377,13 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
             // E.G. if no tickets are selected then no labels/cbs show
             // if 3 tickets are chosen, then the labels/cbs for Ticket 1,2 and 3 are shown
             // if 1 ticket is then chosen, cb/label for Ticket 2 and 3 dissapear by 1 stays
-            if (countTotal ==1 || countTotal ==2 || countTotal ==3 || countTotal ==4|| countTotal ==5 )
-            {
-                p3.remove(lblAssento02);
-                p3.remove(cbxAssentoCombo2);
-                p3.remove(lblAssento03);
-                p3.remove(cbxAssentoCombo3);
-                p3.remove(lblAssento04);
-                p3.remove(cbxAssentoCombo4);
-                p3.remove(lblAssento05);
-                p3.remove(cbxAssentoCombo5);
-                p3.add(lblAssento01);
-                p3.add(cbxAssentoCombo1);
-            }
+           
 
-            if (countTotal ==2 || countTotal ==3 || countTotal ==4|| countTotal ==5 )
-            {
-                p3.remove(lblAssento03);
-                p3.remove(cbxAssentoCombo3);
-                p3.remove(lblAssento04);
-                p3.remove(cbxAssentoCombo4);
-                p3.remove(lblAssento05);
-                p3.remove(cbxAssentoCombo5);
-                p3.add(lblAssento02);
-                p3.add(cbxAssentoCombo2);
-            }
-
-            if (countTotal ==3 || countTotal ==4|| countTotal ==5 )
-            {
-                p3.remove(lblAssento04);
-                p3.remove(cbxAssentoCombo4);
-                p3.remove(lblAssento05);
-                p3.remove(cbxAssentoCombo5);
-                p3.add(lblAssento03);
-                p3.add(cbxAssentoCombo3);
-            }
-
-            if (countTotal ==4|| countTotal ==5 )
-            {
-                p3.remove(lblAssento05);
-                p3.remove(cbxAssentoCombo5);
-                p3.add(lblAssento04);
-                p3.add(cbxAssentoCombo4);
-            }
-
-            if (countTotal ==5 )
-            {
-                p3.add(lblAssento05);
-                p3.add(cbxAssentoCombo5);
-
-            }
 
             if (countTotal ==0 )
             {
                 p3.remove(lblAssento01);
-                p3.remove(cbxAssentoCombo1);
-                p3.remove(lblAssento02);
-                p3.remove(cbxAssentoCombo2);
-                p3.remove(lblAssento03);
-                p3.remove(cbxAssentoCombo3);
-                p3.remove(lblAssento04);
-                p3.remove(cbxAssentoCombo4);
-                p3.remove(lblAssento05);
-                p3.remove(cbxAssentoCombo5);
+                p3.remove(cbxBoxProfissional);
                 p3.remove(btnReservaServico);
             }
 
@@ -509,80 +421,32 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
             }
 
             // Get the Values of Each Ticket Quantity ComboBox (e.g. 102, 301, etc)..
-            String seat1Store = cbxAssentoCombo1.getSelectedItem().toString();
-            String seat2Store = cbxAssentoCombo2.getSelectedItem().toString();
-            String seat3Store = cbxAssentoCombo3.getSelectedItem().toString();
-            String seat4Store = cbxAssentoCombo4.getSelectedItem().toString();
-            String seat5Store = cbxAssentoCombo5.getSelectedItem().toString();
+            String seat1Store = cbxBoxProfissional.getSelectedItem().toString();
 
             //Create an array to hold theese values
             Integer[] proceedArray = new Integer[5];
             proceedArray[0] = Integer.parseInt(seat1Store.substring(1));
-            proceedArray[1] = Integer.parseInt(seat2Store.substring(1));
-            proceedArray[2] = Integer.parseInt(seat3Store.substring(1));
-            proceedArray[3] = Integer.parseInt(seat4Store.substring(1));
-            proceedArray[4] = Integer.parseInt(seat5Store.substring(1));
 
             // Repeat code to get value for number of Tickets
             Integer adultCounter = Integer.parseInt((cbxClientePetQuantidade.getSelectedItem().toString()));
             Integer countTotal = adultCounter;
 
-            // for the number of tickets selected
-            // if that ticket number equals zero (the default value)
-            // then state that not all tickets have been assined seats //128
-            for (int z=0; z<countTotal; z++)
-            {
-                if (proceedArray[z] ==0)
-                {
-                    notSelectedAllAssentos();
-                    return;
-                }
-            }
-
+            
             // Create a boolean that when true carries out the database portion of this ActionEvent
-            boolean proceed = false;
+            boolean proceed = true;
 
-            // Iterates through each object of the array and compares then with each other
-            for(int i = 0; i<proceedArray.length;i++)
-            {
-                for(int p=0; p<proceedArray.length; p++)
-                {
-                    if(i != p)
-                    {
-                        // if the two compared objects have the same seat number...
-                        if(proceedArray[i].equals(proceedArray[p]))
-                        {
-                            //...and is not a zero (this is a default value, not a seat number)
-                            // then call an error stating duplicate seats have been allocated
-
-                            if (proceedArray[i] != 0 || proceedArray[p] != 0)
-                            {
-                                duplicateAssentos();
-                                return;
-                            }
-                        }
-                    }
-                }
-
-                // if no duplications are found, the rest of the event can proceed
-                proceed = true;
-            }
-
+            
             if (proceed == true)
             {
 
                 // Remove the send values from the array
                 seatArrayList.remove(seat1Store);
-                seatArrayList.remove(seat2Store);
-                seatArrayList.remove(seat3Store);
-                seatArrayList.remove(seat4Store);
-                seatArrayList.remove(seat5Store);
 
                 try{ // Start try/catch
                     // State dependables for reading the database
-                    voo = local+voo;
-                    System.out.println(voo);
-                    FileInputStream fs = new FileInputStream(voo);
+                   agenda= local+agenda;
+                    System.out.println(agenda);
+                    FileInputStream fs = new FileInputStream(agenda);
                     DataInputStream in = new DataInputStream(fs);
                     BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
@@ -591,7 +455,7 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
                     while ((stringLine = br.readLine()) != null)
                     {
                         try ( // Create dependencies for writing to same file
-                                BufferedWriter fw = new BufferedWriter(new FileWriter(voo))) {
+                                BufferedWriter fw = new BufferedWriter(new FileWriter(agenda))) {
                             int x=0;
                             // Iterate through the new edited array (orginal array minus selected seat)
                             while(x<seatArrayList.size())
@@ -653,28 +517,30 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
                     TelaMostraAgenda.this.dispose();
 
                     //Delete Current database
-                    File fileToDelete = new File(voo);
+                    File fileToDelete = new File(agenda);
                     fileToDelete.delete();
 
                     // Delete all the databases (stated by name)
                     //int size = toppings.length;
-                    for (String listaVoo : listaDatas) {
-                        File file = new File(listaVoo + ".txt");
+                    for (String listaAgenda : listaDatas) {
+                        File file = new File(listaAgenda + ".txt");
                         file.delete();
-                        System.out.println("Arquivo :" + listaVoo + ".txt" + " deletado!");
+                        //file.getName().toString()
+                        System.out.println("Arquivo :" + listaAgenda + ".txt" + " deletado!");
                     }
 
                     // Create new instance of the program (hence restart it)
                     TelaMostraAgenda telaMostraAssentos = new TelaMostraAgenda(coluna, e, b, f, e_param, b_param, f_param);
-                }
-            }
-        }
+                }//fim if
+            }//fim if
+        }//fim action resetButton
 
     }
 
     //END OF ACTIONEVENTS
 
-    /**
+   
+     /**
      * Metodo retorna o valor total da compra.
      * 
      * 
@@ -740,7 +606,7 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
 
     public void notEnoughAssentos()
     {
-        JOptionPane.showMessageDialog(getContentPane(), "Não existe nenhum voo selecionado para compra das passagens selecionadas!", "Erro Quantidade de passagens", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(getContentPane(), "Não existe nenhumaagendaselecionado para compra das passagens selecionadas!", "Erro Quantidade de passagens", JOptionPane.ERROR_MESSAGE);
     }
 
     public void duplicateAssentos()
@@ -780,7 +646,7 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
          *  D E S E N H O    D O   L A Y O U T    D O S    A S S E N T O S
          * 
          */
-        int width = 40;                         // DEFINICAO DA LARGURA DE CADA RETANGULO
+        int width = 90;                         // DEFINICAO DA LARGURA DE CADA RETANGULO
         int height = 25;                        // DEFINICAO DA ALTURA DE CADA RETANGULO
 
         int classeEconomicaAssentosRow = 0;     // VARIAVEL LINHAS DA CLASSE ECONOMICA
@@ -813,13 +679,13 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
              *  C O L U N A  =  T R U E
              */
 
-            classeEconomicaAssentosRow = VooPreencheAssento.calcRow(e,ecol);       // NUMERO DE LINHAS DA CLASSE ECONOMICA
+            classeEconomicaAssentosRow = AgendaPreencheDatas.calcRow(e,ecol);       // NUMERO DE LINHAS DA CLASSE ECONOMICA
             classeEconomicaAssentosCol = ecol;                                          // NUMERO DE COLUNAS DA CLASSE ECONOMICA
 
-            classeEmpresarialAssentosRow = VooPreencheAssento.calcRow(b, bcol);    // NUMERO DE LINHAS DA CLASSE EMPRESARIAL
+            classeEmpresarialAssentosRow = AgendaPreencheDatas.calcRow(b, bcol);    // NUMERO DE LINHAS DA CLASSE EMPRESARIAL
             classeEmpresarialAssentosCol = bcol;                                        // NUMERO DE COLUNAS DA CLASSE EMPRESARIAL
 
-            classePrimeiraAssentosRow = VooPreencheAssento.calcRow(f, fcol);       // NUMERO DE LINHAS DA CLASSE PRIMEIRA
+            classePrimeiraAssentosRow = AgendaPreencheDatas.calcRow(f, fcol);       // NUMERO DE LINHAS DA CLASSE PRIMEIRA
             classePrimeiraAssentosCol = fcol;                                           // NUMERO DE COLUNAS DA CLASSE PRIMEIRA
 
         }else{
@@ -828,13 +694,13 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
              */
 
             classeEconomicaAssentosRow = erow;                                          // NUMERO DE LINHAS DA CLASSE ECONOMICA
-            classeEconomicaAssentosCol = VooPreencheAssento.calcCol(e,erow);       // NUMERO DE COLUNAS DA CLASSE ECONOMICA
+            classeEconomicaAssentosCol = AgendaPreencheDatas.calcCol(e,erow);       // NUMERO DE COLUNAS DA CLASSE ECONOMICA
 
             classeEmpresarialAssentosRow = brow;                                        // NUMERO DE LINHAS DA CLASSE EMPRESARIAL
-            classeEmpresarialAssentosCol = VooPreencheAssento.calcCol(b, brow);    // NUMERO DE COLUNAS DA CLASSE EMPRESARIAL
+            classeEmpresarialAssentosCol = AgendaPreencheDatas.calcCol(b, brow);    // NUMERO DE COLUNAS DA CLASSE EMPRESARIAL
 
             classePrimeiraAssentosRow = frow;                                           // NUMERO DE LINHAS DA CLASSE PRIMEIRA
-            classePrimeiraAssentosCol = VooPreencheAssento.calcCol(f, frow);       // NUMERO DE COLUNAS DA CLASSE PRIMEIRA
+            classePrimeiraAssentosCol = AgendaPreencheDatas.calcCol(f, frow);       // NUMERO DE COLUNAS DA CLASSE PRIMEIRA
 
         }
 
@@ -867,13 +733,10 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
 
         //PRIMEIRA LINHA DE TITULOS
         g.drawString("Agenda Diária de Serviços", (classeEconomicaPosX), (classeEconomicaPosY - 30));              //TITULO 1
-        //g.drawString("CLASSE", (classeEmpresarialPosX), (classeEmpresarialPosY - 30));          //TITULO 2
-        //g.drawString("PRIMEIRA", (classePrimeiraPosX), (classePrimeiraPosY - 30));              //TITULO 3
+         //TITULO 3
 
         //SEGUNDA LINHA DE TITULOS
         g.drawString("Profissional / Box ", (classeEconomicaPosX), (classeEconomicaPosY - 10));           //SUB-TITULO 1
-        //g.drawString("EMPRESARIAL", (classeEmpresarialPosX), (classeEmpresarialPosY - 10));     //SUB-TITULO 2
-        //g.drawString("CLASSE", (classePrimeiraPosX), (classePrimeiraPosY - 10));                //SUB-TITULO 3
 
         //Color custom_grey = new Color(175,175,175);
         Color custom_grey = new Color(0,0,0); //alterado para black
@@ -1062,6 +925,6 @@ public class TelaMostraAgenda extends JFrame implements ActionListener
 
     public static void main (String[] args)     // Main Method Declaration
     {
-        TelaMostraAgenda telaMostraAssentos = new TelaMostraAgenda(true, 38, 22, 17, 3,3, 4); // Cria uma nova instancia de TelaMostraAgenda.
+        TelaMostraAgenda telaMostraAgenda = new TelaMostraAgenda(true, 20, 0, 0, 1, 0, 0); // Cria uma nova instancia de TelaMostraAgenda.
     }
 }

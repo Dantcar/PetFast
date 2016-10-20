@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 
-public class VooPreencheAssento {
+public class AgendaPreencheDatas {
 
     public static String local;
 
@@ -287,7 +287,7 @@ public class VooPreencheAssento {
      */
     public static void GeraNovaBaseAssentos(String filename, Integer E, Integer B, Integer P) {
         // Nome da base de dados (calculada pelo metodo 'retornaNomeArquivo')
-        local = ""; //diretorio ondes serao gravados/lidos os arquivos gerados pelo gerenciador de assentos.
+        local = ""; //diretorio ondes serao gravados/lidos os arquivos gerados pelo gerenciador de agenda.
         String name = filename;
         name = local + filename;
         String msg = "";
@@ -295,15 +295,15 @@ public class VooPreencheAssento {
         ArrayList<String> input = criaNumeroAssento(E, B, P); //criaNumeroAssento(Integer nE, Integer nB, Integer nP)
 
         // Nome da base de dados
-        //String vooSelecionado = retornaNomeArquivo(name);
-        String vooSelecionado = name;
+        //String agendaSelecionada = retornaNomeArquivo(name);
+        String agendaSelecionada = name;
 
-        File arquivoVooSelecionado = new File(vooSelecionado);
+        File arquivoVooSelecionado = new File(agendaSelecionada);
 
         try {
             // if the file exists, do not create a new file (leave existing file alone)
             if (arquivoVooSelecionado.exists() == true) {
-                //   msg = "Arquivo: "+vooSelecionado+" ja existe" +"\n";
+                //   msg = "Arquivo: "+agendaSelecionada+" ja existe" +"\n";
                 return;
             }
 
@@ -330,7 +330,7 @@ public class VooPreencheAssento {
             // Inicio de dependencias para gravacao do arquivo.
             String stringLine;
             // Write a ; to the file (this is needed to add some content to replace)
-            try (BufferedWriter fw1 = new BufferedWriter(new FileWriter(vooSelecionado))) {
+            try (BufferedWriter fw1 = new BufferedWriter(new FileWriter(agendaSelecionada))) {
                 // Write a ; to the file (this is needed to add some content to replace)
                 fw1.write(";");
                 // Close this write dependancy
@@ -339,7 +339,7 @@ public class VooPreencheAssento {
             // While there are Lines left to be read
             while ((stringLine = br.readLine()) != null) {
                 try ( // Create dependencies for writing to same file
-                        BufferedWriter fw = new BufferedWriter(new FileWriter(vooSelecionado))) {
+                        BufferedWriter fw = new BufferedWriter(new FileWriter(agendaSelecionada))) {
                     int x = 0;
                     // Iterate through the new edited array (orginal array minus selected seat)
                     while (x < input.size()) {
@@ -351,7 +351,7 @@ public class VooPreencheAssento {
                     //Close the file writing dependency
                 }
             }
-            msg = "Arquivo: " + vooSelecionado + " criado com sucesso!" + "\n";
+            msg = "Arquivo: " + agendaSelecionada + " criado com sucesso!" + "\n";
 
         } catch (Exception ex) {
             msg = msg + "Erro 5 Metodo - GeraNovaBaseAssentos()\n";
@@ -374,17 +374,17 @@ public class VooPreencheAssento {
      * @return
      */
     // Method for returning an array of the available seats, for passing into the Main class
-    public static ArrayList<String> RetornaAssentosDisponiveisVoo(String filename) {
+    public static ArrayList<String> RetornaBoxDisponiveisAgenda(String filename) {
         ArrayList<String> temp = new ArrayList<>();
         String msg = "";
         local = ""; //diretorio ondes serao gravados/lidos os arquivos gerados pelo gerenciador de assentos.
         String name = filename;
         name = local + filename;
-        String vooSelecionado = retornaNomeArquivo(name);
-        File arquivoVooSelecionado = new File(vooSelecionado);
+        String agendaSelecionada = retornaNomeArquivo(name);
+        File arquivoVooSelecionado = new File(agendaSelecionada);
 
         if (arquivoVooSelecionado.exists()) {
-           // msg = "Encontrei Arquivo " + vooSelecionado + "\n";
+           // msg = "Encontrei Arquivo " + agendaSelecionada + "\n";
 
             try {
                 FileInputStream fs = new FileInputStream(arquivoVooSelecionado.toString());
@@ -496,7 +496,7 @@ public class VooPreencheAssento {
         local = ""; //diretorio ondes serao gravados/lidos os arquivos gerados pelo gerenciador de assentos.
         String name = filename;
         name = local + filename;
-        //String vooSelecionado = retornaNomeArquivo(name);
+        //String agendaSelecionada = retornaNomeArquivo(name);
         File arquivoVooSelecionado = new File(name);
 
         if (arquivoVooSelecionado.exists()) //  msg = "Encontrei Arquivo "+ name + "\n";

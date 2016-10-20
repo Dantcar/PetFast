@@ -4,8 +4,8 @@ package visao;
 // TelaMostraAgenda Class File
 //import java.awt.event.AdjustmentEvent;
 //import java.awt.event.AdjustmentListener;
-//import AssentosAerofast.VooPreencheAssentosUtil.*;
-import controle.VooPreencheAssento;
+
+import controle.AgendaPreencheDatas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -34,7 +34,7 @@ public class TelaMostraAgendaOld extends JFrame implements ActionListener
 {
 
     
-    VooPreencheAssento util = new VooPreencheAssento();
+    AgendaPreencheDatas util = new AgendaPreencheDatas();
 
     private String local; 
     //private String filename ="vooHoje";
@@ -92,21 +92,10 @@ public class TelaMostraAgendaOld extends JFrame implements ActionListener
 
     //fundacao321@
 
-    //Original ArrayList for a Combobox that shows Film Times
-    //String[] timeList = {"-", "1.00 PM", "3.00 PM", "5.00 PM", "7.00 PM", "9.00 PM"}; //buscar voo
 
-    //buscar listas de voos no arquivo tipo txt com a relacao de voos da aeronave escolhida.
-    //formato do arquivo {"vooNNNN-DDMMYYYY",vooNNNN-DDMMYYYY"}    
-
-    //preenchimento do combo box dos arquivos txt de voos
-    //public String listaDatas = util.RetornaStringArquivoVoo("agendaHoje.txt");
-
-    // JComboBox cbxDataReservaCombo = new JComboBox(listaDatas);
-
-    // ArrayList that holds the vaules of seats that are available
     ArrayList<String> seatArrayList = new ArrayList<>();
 
-    String voo = new String();
+    String agenda = new String();
 
     //Creation of JPanels to be added to the frame
     JPanel bannerPanel = new JPanel();
@@ -159,9 +148,7 @@ public class TelaMostraAgendaOld extends JFrame implements ActionListener
      */
     public TelaMostraAgendaOld(){
         this.local = "";
-        //public String listaDatasArray[] = {"","VOO1004-05082016","VOO1005-06082016","VOO1006-07082016","VOO1006-07082016"}; //buscar voo
-        //String listaDatas[] = {"----", "1004", "1005", "1006", "1007", "1008"};
-        //listaDatas[1] = "{'','VOO1004-05082016','VOO1005-06082016','VOO1006-07082016','VOO1007-07082016'}"; //buscar voo
+        
         
         cbxDataReservaCombo = new JComboBox(listaDatas);
         cbxHoraReservaCombo = new JComboBox(listaHoras);
@@ -304,25 +291,25 @@ public class TelaMostraAgendaOld extends JFrame implements ActionListener
                 if((cbxHoraReservaCombo.getSelectedItem().toString() != "-----") )  {
                             
                         // Create New Instance of the Database class
-                VooPreencheAssento db = new VooPreencheAssento();
+                AgendaPreencheDatas db = new AgendaPreencheDatas();
 
                 // Get Nome da Base a ser utilizada
-                String vooSelecionado = cbxDataReservaCombo.getSelectedItem().toString()+"-"+
+                String agendaSelecionada = cbxDataReservaCombo.getSelectedItem().toString()+"-"+
                 cbxHoraReservaCombo.getSelectedItem().toString();
             
-                System.out.println("Ponto verificado 1 - "+vooSelecionado);
+                System.out.println("Ponto verificado 1 - "+agendaSelecionada);
 
                 // Make Name of Database global
-                voo = vooSelecionado+".txt";
+                agenda = agendaSelecionada+".txt";
 
                 // Call DataBase Generator (will generate fresh database for that time if one does not  ist)
                 //db.FullDataBaseGeneration(vooSelecionado);
                 //db.GeraNovaBaseAssentos(vooSelecionado, 40, 30, 20);
-                VooPreencheAssento.GeraNovaBaseAssentos(vooSelecionado+".txt", e, b, f);
+                AgendaPreencheDatas.GeraNovaBaseAssentos(agendaSelecionada+".txt", e, b, f);
 
                 //Fetch array of available seats and pass it to the global ArrayList 'seatArrayList'
                 //ArrayList<Integer> vooArray  = db.AvailableAssentosArrayReturn(vooSelecionado);
-                ArrayList<String> vooArray  = VooPreencheAssento.RetornaAssentosDisponiveisVoo(vooSelecionado);
+                ArrayList<String> vooArray  = AgendaPreencheDatas.RetornaBoxDisponiveisAgenda(agendaSelecionada);
                 seatArrayList = vooArray;
 
                 //Reset any user selection of tickets when a new database is selected
@@ -580,9 +567,9 @@ public class TelaMostraAgendaOld extends JFrame implements ActionListener
 
                 try{ // Start try/catch
                     // State dependables for reading the database
-                    voo = local+voo;
-                    System.out.println(voo);
-                    FileInputStream fs = new FileInputStream(voo);
+                    agenda = local+agenda;
+                    System.out.println(agenda);
+                    FileInputStream fs = new FileInputStream(agenda);
                     DataInputStream in = new DataInputStream(fs);
                     BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
@@ -591,7 +578,7 @@ public class TelaMostraAgendaOld extends JFrame implements ActionListener
                     while ((stringLine = br.readLine()) != null)
                     {
                         try ( // Create dependencies for writing to same file
-                                BufferedWriter fw = new BufferedWriter(new FileWriter(voo))) {
+                                BufferedWriter fw = new BufferedWriter(new FileWriter(agenda))) {
                             int x=0;
                             // Iterate through the new edited array (orginal array minus selected seat)
                             while(x<seatArrayList.size())
@@ -653,19 +640,19 @@ public class TelaMostraAgendaOld extends JFrame implements ActionListener
                     TelaMostraAgendaOld.this.dispose();
 
                     //Delete Current database
-                    File fileToDelete = new File(voo);
+                    File fileToDelete = new File(agenda);
                     fileToDelete.delete();
 
                     // Delete all the databases (stated by name)
                     //int size = toppings.length;
-                    for (String listaVoo : listaDatas) {
-                        File file = new File(listaVoo + ".txt");
+                    for (String listaAgenda : listaDatas) {
+                        File file = new File(listaAgenda + ".txt");
                         file.delete();
-                        System.out.println("Arquivo :" + listaVoo + ".txt" + " deletado!");
+                        System.out.println("Arquivo :" + listaAgenda + ".txt" + " deletado!");
                     }
 
                     // Create new instance of the program (hence restart it)
-                    TelaMostraAgendaOld telaMostraAssentos = new TelaMostraAgendaOld(coluna, e, b, f, e_param, b_param, f_param);
+                    TelaMostraAgendaOld telaMostraAgenda = new TelaMostraAgendaOld(coluna, e, b, f, e_param, b_param, f_param);
                 }
             }
         }
@@ -813,13 +800,13 @@ public class TelaMostraAgendaOld extends JFrame implements ActionListener
              *  C O L U N A  =  T R U E
              */
 
-            classeEconomicaAssentosRow = VooPreencheAssento.calcRow(e,ecol);       // NUMERO DE LINHAS DA CLASSE ECONOMICA
+            classeEconomicaAssentosRow = AgendaPreencheDatas.calcRow(e,ecol);       // NUMERO DE LINHAS DA CLASSE ECONOMICA
             classeEconomicaAssentosCol = ecol;                                          // NUMERO DE COLUNAS DA CLASSE ECONOMICA
 
-            classeEmpresarialAssentosRow = VooPreencheAssento.calcRow(b, bcol);    // NUMERO DE LINHAS DA CLASSE EMPRESARIAL
+            classeEmpresarialAssentosRow = AgendaPreencheDatas.calcRow(b, bcol);    // NUMERO DE LINHAS DA CLASSE EMPRESARIAL
             classeEmpresarialAssentosCol = bcol;                                        // NUMERO DE COLUNAS DA CLASSE EMPRESARIAL
 
-            classePrimeiraAssentosRow = VooPreencheAssento.calcRow(f, fcol);       // NUMERO DE LINHAS DA CLASSE PRIMEIRA
+            classePrimeiraAssentosRow = AgendaPreencheDatas.calcRow(f, fcol);       // NUMERO DE LINHAS DA CLASSE PRIMEIRA
             classePrimeiraAssentosCol = fcol;                                           // NUMERO DE COLUNAS DA CLASSE PRIMEIRA
 
         }else{
@@ -828,13 +815,13 @@ public class TelaMostraAgendaOld extends JFrame implements ActionListener
              */
 
             classeEconomicaAssentosRow = erow;                                          // NUMERO DE LINHAS DA CLASSE ECONOMICA
-            classeEconomicaAssentosCol = VooPreencheAssento.calcCol(e,erow);       // NUMERO DE COLUNAS DA CLASSE ECONOMICA
+            classeEconomicaAssentosCol = AgendaPreencheDatas.calcCol(e,erow);       // NUMERO DE COLUNAS DA CLASSE ECONOMICA
 
             classeEmpresarialAssentosRow = brow;                                        // NUMERO DE LINHAS DA CLASSE EMPRESARIAL
-            classeEmpresarialAssentosCol = VooPreencheAssento.calcCol(b, brow);    // NUMERO DE COLUNAS DA CLASSE EMPRESARIAL
+            classeEmpresarialAssentosCol = AgendaPreencheDatas.calcCol(b, brow);    // NUMERO DE COLUNAS DA CLASSE EMPRESARIAL
 
             classePrimeiraAssentosRow = frow;                                           // NUMERO DE LINHAS DA CLASSE PRIMEIRA
-            classePrimeiraAssentosCol = VooPreencheAssento.calcCol(f, frow);       // NUMERO DE COLUNAS DA CLASSE PRIMEIRA
+            classePrimeiraAssentosCol = AgendaPreencheDatas.calcCol(f, frow);       // NUMERO DE COLUNAS DA CLASSE PRIMEIRA
 
         }
 
