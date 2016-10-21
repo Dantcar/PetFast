@@ -1,8 +1,8 @@
 -- select * from DAC.AERONAVE;
 --DROP TABLE CLIENTE
 --dia 15-09-2016
-USE Petfast.DAC
-GO
+--USE Petfast.DAC
+--GO
 CREATE TABLE CLIENTE (
 idCliente int not null,
 nome VARCHAR(60)not null,
