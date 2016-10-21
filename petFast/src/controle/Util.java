@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.EndCep;
 
@@ -36,6 +37,18 @@ public class Util {
     public static boolean temCep;
     private static ViaCEP vCEP;
 
+    
+    public ImageIcon createImageIcon(String path,
+                                           String description) {
+    java.net.URL imgURL = getClass().getResource(path);
+    if (imgURL != null) {
+        return new ImageIcon(imgURL, description);
+    } else {
+        System.err.println("Não foi possível encontrar: " + path);
+        return null;
+    }
+}
+    
     public static String retiraHora(String arg) {
        //int data;
        //int inicio, fim;
