@@ -10,6 +10,7 @@
 
 package controle;
 
+import java.util.List;
 import modelo.Profissional;
 import modelo.ProfissionalDAO;
 
@@ -74,5 +75,48 @@ public class ProfissionalCtrl {
        return animal; 
     }
     
+     /**
+     * 5
+     * Método controle enviar animal para cadastro
+     * @param profissional
+     */
+    public void cInserirProfissional(Profissional profissional){
+        ProfissionalDAO profDAO = new ProfissionalDAO();
+        profDAO.inserirProfissional(profissional);
+    }//Final método cInserirProfissional
+    
+     /**
+     * 6
+     * Método controle para enviar alteração de animal cadastrado
+     * @param profissional, id
+     */
+    public void cAlterarProfissional(Profissional profissional, String id){
+        ProfissionalDAO profDAO = new ProfissionalDAO();
+        profDAO.alterarProfissional(profissional, id);
+    }//Final método cAlterarProfissional
+    
+     /**
+     * 8
+     * Método controle para enviar remoção de animal cadastrado
+     * @param animal 
+     */
+    public void cDelerarProfissional(String nomeProfissional, int id){
+        ProfissionalDAO profDAO = new ProfissionalDAO();
+        profDAO.deletarProfissional(nomeProfissional, id);
+    }//Final método cDeletarAnimal
+    
 
+     /**
+     * Método retorna uma lista com os animais que contem no nome a string 
+     * passada no parametro
+     * @param nomeAnimal
+     * @return 
+     */
+    public List listaProfissionaisNome(String nomeProfissional) {
+       ProfissionalDAO profDAO = new ProfissionalDAO();
+       List<Profissional> lista = profDAO.listarProfissionaisNome(nomeProfissional);
+       return lista;
+        
+    }
+    
 }

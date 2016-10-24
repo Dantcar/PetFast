@@ -49,7 +49,8 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         subMenuPet = new javax.swing.JMenuItem();
         menuBox_Especialista = new javax.swing.JMenu();
         subMenuBox = new javax.swing.JMenuItem();
-        MenuVooAeronaveCadastrar = new javax.swing.JMenuItem();
+        MenuProfissional = new javax.swing.JMenu();
+        SubMenuGestaoProfissional = new javax.swing.JMenuItem();
         menuRelatorios = new javax.swing.JMenu();
         subMenuRelatorioAtendimento = new javax.swing.JMenuItem();
         subMenuRelatorioCliente = new javax.swing.JMenuItem();
@@ -149,16 +150,22 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         });
         menuBox_Especialista.add(subMenuBox);
 
-        MenuVooAeronaveCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        MenuVooAeronaveCadastrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        MenuVooAeronaveCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendente.png"))); // NOI18N
-        MenuVooAeronaveCadastrar.setText("Especialista");
-        MenuVooAeronaveCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        MenuProfissional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendente.png"))); // NOI18N
+        MenuProfissional.setText("Profissional");
+        MenuProfissional.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        SubMenuGestaoProfissional.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        SubMenuGestaoProfissional.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        SubMenuGestaoProfissional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeClientes1.png"))); // NOI18N
+        SubMenuGestaoProfissional.setText("Gestão Profissional");
+        SubMenuGestaoProfissional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuVooAeronaveCadastrarActionPerformed(evt);
+                SubMenuGestaoProfissionalActionPerformed(evt);
             }
         });
-        menuBox_Especialista.add(MenuVooAeronaveCadastrar);
+        MenuProfissional.add(SubMenuGestaoProfissional);
+
+        menuBox_Especialista.add(MenuProfissional);
 
         jMenuBar1.add(menuBox_Especialista);
 
@@ -328,21 +335,6 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_subMenuBoxActionPerformed
 
-    private void MenuVooAeronaveCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuVooAeronaveCadastrarActionPerformed
-        //Cadastro.montaTelaAeronave();
-        /*
-        String tituloAeronave;
-        tituloAeronave = "Gestão Aeronave";
-
-        TelaAeronave telaAeronave = new TelaAeronave();
-        telaAeronave.setTitle(tituloAeronave);
-        telaAeronave.setVisible(true);
-        add(telaAeronave, JLayeredPane.DEFAULT_LAYER);
-        telaAeronave.setDefaultCloseOperation(1);
-        telaAeronave.setLocation(40, 5);
-        */
-    }//GEN-LAST:event_MenuVooAeronaveCadastrarActionPerformed
-
     private void subMenuRelatorioAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuRelatorioAtendimentoActionPerformed
       /*
         String tituloStatus;
@@ -410,6 +402,38 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         
     }//GEN-LAST:event_subMenuAgendarActionPerformed
 
+    private void SubMenuGestaoProfissionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuGestaoProfissionalActionPerformed
+        // TODO add your handling code here:
+        String tituloStatus;
+        tituloStatus = "Gestão Profissional";
+
+        TelaProfissional telaProf = new TelaProfissional();
+        telaProf.setTitle(tituloStatus);
+        telaProf.pack();
+        
+        
+        telaProf.setLocation(50, 50);
+        telaProf.setVisible(true);
+        add(telaProf, JLayeredPane.DEFAULT_LAYER);
+        telaProf.setDefaultCloseOperation(1);
+         
+        /*
+        String tituloCliente;
+        tituloCliente = "Gestão Pet / Cliente";
+
+        TelaClientePet telaClientePet = new TelaClientePet();
+        telaClientePet.setTitle(tituloCliente);
+        telaClientePet.pack();
+        telaClientePet.setLocation(50, 50); //(ponto inicial apartir lateral,altura)
+        telaClientePet.setVisible(true);
+        
+        add(telaClientePet, JLayeredPane.DRAG_LAYER);
+
+        telaClientePet.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+        */
+        
+    }//GEN-LAST:event_SubMenuGestaoProfissionalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -447,7 +471,8 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem MenuVooAeronaveCadastrar;
+    private javax.swing.JMenu MenuProfissional;
+    private javax.swing.JMenuItem SubMenuGestaoProfissional;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuAdministrarAtendimento;

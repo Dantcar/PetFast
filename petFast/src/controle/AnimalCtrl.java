@@ -82,6 +82,7 @@ public class AnimalCtrl {
     }
     
     /**
+     * 6
      * Método controle enviar animal para cadastro
      * @param animal 
      */
@@ -91,6 +92,7 @@ public class AnimalCtrl {
     }//Final método cInserirAnimal
     
     /**
+     * 7
      * Método controle para enviar alteração de animal cadastrado
      * @param animal 
      */
@@ -100,6 +102,7 @@ public class AnimalCtrl {
     }//Final método cAlterarAnimal
     
     /**
+     * 8
      * Método controle para enviar remoção de animal cadastrado
      * @param animal 
      */
@@ -108,6 +111,9 @@ public class AnimalCtrl {
         animalDAO.deletarAnimal(nomeAnimal, id);        
     }//Final método cDeletarAnimal
     
+    /**
+     * 9
+     */
     public void chamarTelaAnimal(){
         System.out.println("Estou no método: chamarTelaAnimal");
         
@@ -116,7 +122,7 @@ public class AnimalCtrl {
     }//Final método chamarTelaAnimal
     
      /**
-     * 3
+     * 10
      * Método controle receber lista de animais pertencentes a um cliente 
      * informando o id do cliente.
      * @param idCliente
@@ -127,7 +133,13 @@ public class AnimalCtrl {
         ArrayList<Animal> lista = animalDAO.ArraylistAnimaisCliente(idCliente);
         return lista;
     }
-
+    
+    /**
+     * 11
+     * Método populaComboAnimaisCliente
+     * @param id
+     * @return 
+     */
     public ArrayList populaComboAnimaisCliente(int id) {
        ArrayList lista;
         AnimalDAO animalDAO = new AnimalDAO();
@@ -136,12 +148,23 @@ public class AnimalCtrl {
    
     }
     
+    /**
+     * Método controle para contar a quantidade de animais do cliente
+     * @param cliente
+     * @return 
+     */
     public int ReceberContarAnimaisCliente(int cliente) {
     AnimalDAO animalDAO = new AnimalDAO();
     int resposta = animalDAO.contarAnimaisCliente(cliente);
     return resposta;
     }
 
+    /**
+     * Método retorna uma lista com os animais que contem no nome a string 
+     * passada no parametro
+     * @param nomeAnimal
+     * @return 
+     */
     public List listaAnimaisNome(String nomeAnimal) {
        AnimalDAO animalDAO = new AnimalDAO();
        List<Animal> lista = animalDAO.listarAnimaisNome(nomeAnimal);
