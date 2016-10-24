@@ -38,9 +38,12 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAtendimento = new javax.swing.JMenu();
-        subMenuNovoAtendimento = new javax.swing.JMenuItem();
+        menuAdministrarAtendimento = new javax.swing.JMenu();
+        subMenuAgendar = new javax.swing.JMenuItem();
+        subMenuConsultarAgenda = new javax.swing.JMenuItem();
         menuCadastroCliente_Pet = new javax.swing.JMenu();
         subMenuCliente = new javax.swing.JMenuItem();
         subMenuPet = new javax.swing.JMenuItem();
@@ -56,6 +59,8 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         menuSair = new javax.swing.JMenu();
         subMenuSair = new javax.swing.JMenuItem();
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(213, 245, 173));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -66,17 +71,33 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         menuAtendimento.setText("Atendimento");
         menuAtendimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
-        subMenuNovoAtendimento.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        subMenuNovoAtendimento.setBackground(new java.awt.Color(245, 245, 245));
-        subMenuNovoAtendimento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        subMenuNovoAtendimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendimento.jpg"))); // NOI18N
-        subMenuNovoAtendimento.setText("Administrar Atendimento");
-        subMenuNovoAtendimento.addActionListener(new java.awt.event.ActionListener() {
+        menuAdministrarAtendimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/alterar.png"))); // NOI18N
+        menuAdministrarAtendimento.setText("Administrar Atendimento");
+        menuAdministrarAtendimento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        subMenuAgendar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuAgendar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        subMenuAgendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendimento1.png"))); // NOI18N
+        subMenuAgendar.setText("Agendar");
+        subMenuAgendar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subMenuNovoAtendimentoActionPerformed(evt);
+                subMenuAgendarActionPerformed(evt);
             }
         });
-        menuAtendimento.add(subMenuNovoAtendimento);
+        menuAdministrarAtendimento.add(subMenuAgendar);
+
+        subMenuConsultarAgenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuConsultarAgenda.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        subMenuConsultarAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendimento.jpg"))); // NOI18N
+        subMenuConsultarAgenda.setText("Consultar Agenda");
+        subMenuConsultarAgenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subMenuConsultarAgendaActionPerformed(evt);
+            }
+        });
+        menuAdministrarAtendimento.add(subMenuConsultarAgenda);
+
+        menuAtendimento.add(menuAdministrarAtendimento);
 
         jMenuBar1.add(menuAtendimento);
 
@@ -230,21 +251,6 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void subMenuNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuNovoAtendimentoActionPerformed
-        //Cadastro.montaTelaNovaPassagem();
-/*
-        String tituloPassagem;
-        tituloPassagem = "Gestão Passagem";
-
-        TelaNovaPassagem telaPassagem = new TelaNovaPassagem();
-        telaPassagem.setTitle(tituloPassagem);
-        telaPassagem.setVisible(true);
-        add(telaPassagem, JLayeredPane.DEFAULT_LAYER);
-        telaPassagem.setDefaultCloseOperation(1);
-        telaPassagem.setLocation(40, 5);
-*/
-    }//GEN-LAST:event_subMenuNovoAtendimentoActionPerformed
-
     private void subMenuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuClienteActionPerformed
         // Cadastro.montaTelaCliente();
         
@@ -366,7 +372,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuRelatorioClienteActionPerformed
 
     private void subMenuRelatorioPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuRelatorioPetActionPerformed
- String tituloStatus;
+        String tituloStatus;
         tituloStatus = "Relatórios Pets";
 
         TelaRelatorioPet relPet = new TelaRelatorioPet();
@@ -385,6 +391,24 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     private void subMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_subMenuSairActionPerformed
+
+    private void subMenuConsultarAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuConsultarAgendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_subMenuConsultarAgendaActionPerformed
+
+    private void subMenuAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuAgendarActionPerformed
+        // TODO add your handling code here:
+        String tituloStatus;
+        tituloStatus = "Agendar Serviço Pet";
+
+        TelaMostraAgenda agendaPet = new TelaMostraAgenda(true, 20, 0, 0, 1, 0, 0); // Cria uma nova instancia de TelaMostraAgenda.
+        agendaPet.setTitle(tituloStatus);
+        agendaPet.setVisible(true);
+        
+        
+        
+        
+    }//GEN-LAST:event_subMenuAgendarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,15 +449,18 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuVooAeronaveCadastrar;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu menuAdministrarAtendimento;
     private javax.swing.JMenu menuAtendimento;
     private javax.swing.JMenu menuBox_Especialista;
     private javax.swing.JMenu menuCadastroCliente_Pet;
     private javax.swing.JMenu menuRelatorios;
     private javax.swing.JMenu menuSair;
     private javax.swing.JMenu menuSobre;
+    private javax.swing.JMenuItem subMenuAgendar;
     private javax.swing.JMenuItem subMenuBox;
     private javax.swing.JMenuItem subMenuCliente;
-    private javax.swing.JMenuItem subMenuNovoAtendimento;
+    private javax.swing.JMenuItem subMenuConsultarAgenda;
     private javax.swing.JMenuItem subMenuPet;
     private javax.swing.JMenuItem subMenuRelatorioAtendimento;
     private javax.swing.JMenuItem subMenuRelatorioCliente;

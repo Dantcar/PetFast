@@ -197,11 +197,11 @@ public class TelaMostraAgenda extends JFrame implements ActionListener {
         setLocationRelativeTo(null);     // Centers the Frame (NOTE: Multi-monitor setups may not center correctly depending on collective resolution
 
         setTitle("Reserva de Serviços Petfast versao 0.1"); // Set Title of Main Window
-        setSize(800, 640);                               // Set frame resolution to [x,y] pixels
+        setSize(800, 800);                               // Set frame resolution to [x,y] pixels
         //setResizable(false);                           // Keeps Frame a constant resolution (Stops Resizing of Frame by user)
         setResizable(true);
         setLocation(100, 100);                          //
-        setDefaultCloseOperation(EXIT_ON_CLOSE);        // Set frame to exit when 'CLOSE' window button is clicked
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);        // Set frame to exit when 'CLOSE' window button is clicked
 
         // Add Panels to the Frame and state Layout Manager constructor arguments
         add(bannerPanel, BorderLayout.NORTH);
