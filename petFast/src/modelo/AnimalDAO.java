@@ -263,7 +263,7 @@ public class AnimalDAO {
         boolean resposta = true;
         String msg, sql;
         msg = "";
-        sql = "SELECT * FROM cliente WHERE idanimal = " + idanimal;
+        sql = "SELECT * FROM animal WHERE idanimal = " + idanimal;
         conexao = DBPetFast.getConnection();
         ResultSet rs;
         rs = null;
@@ -421,7 +421,7 @@ public class AnimalDAO {
         
         try {
             stmt.executeUpdate(sql);
-              msg = msg+"Dados do cliente inseridos com sucesso \n";
+              msg = msg+"Dados do animal inseridos com sucesso \n";
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -516,7 +516,7 @@ public class AnimalDAO {
             if(n == 0){
            try {
                stmt.executeUpdate(sql);
-               msg = msg+"Dados do cliente excluidos com sucesso \n";
+               msg = msg+"Dados do animal excluidos com sucesso \n";
                 } catch (SQLException ex) {
                 msg = reduzString(msg+ex);
                  msg = reduzString(msg);
@@ -524,7 +524,7 @@ public class AnimalDAO {
                Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
            }else{
-              msg = msg+"Dados do cliente inalterados \n";  
+              msg = msg+"Dados do animal inalterados \n";  
             }
             
          if ("".equals(msg)) {
@@ -767,7 +767,7 @@ public class AnimalDAO {
         }
         return listaAnimal;
         
-    }
+    }// final método listarAnimaisNome()
 
  
 
