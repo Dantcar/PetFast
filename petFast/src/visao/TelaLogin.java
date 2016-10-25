@@ -74,7 +74,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         setBackground(new java.awt.Color(204, 255, 204));
 
-        panelUsuario.setBackground(new java.awt.Color(0, 201, 143));
+        panelUsuario.setBackground(new java.awt.Color(255, 234, 167));
         panelUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 panelUsuarioKeyPressed(evt);

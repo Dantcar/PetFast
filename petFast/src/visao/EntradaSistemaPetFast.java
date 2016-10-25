@@ -5,7 +5,9 @@
  */
 package visao;
 
+import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JDesktopPane;
 import javax.swing.JLayeredPane;
 
 /**
@@ -14,11 +16,22 @@ import javax.swing.JLayeredPane;
  */
 public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
+   private static final int DT_WIDTH = 700;
+   private static final int DT_HEIGHT = 500;
+   private static final Dimension DESKTOP_SIZE = new Dimension(DT_WIDTH, DT_HEIGHT);
+   private JDesktopPane desktop = new JDesktopPane();
+   //private static final int IF_WIDTH = 150;
+   //private static final int IF_HEIGHT = 100;
+   //private static final Dimension INT_FRAME_SIZE = new Dimension(IF_WIDTH, IF_HEIGHT);
     /**
      * Creates new form EntradaSistemaPetFast
      */
     public EntradaSistemaPetFast() {
         initComponents();
+        
+        //JDesktopPane desktop = new JDesktopPane();
+        desktop.setPreferredSize(DESKTOP_SIZE);
+        
         this.pack();
         String pathProjeto = System.getProperty("user.dir")+"//";
         String iconPetfast = pathProjeto + "src//Icones//petfastIcone.png";
@@ -66,17 +79,19 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         setBackground(new java.awt.Color(213, 245, 173));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jMenuBar1.setBackground(new java.awt.Color(245, 245, 245));
+        jMenuBar1.setBackground(new java.awt.Color(156, 116, 64));
 
-        menuAtendimento.setBackground(new java.awt.Color(245, 245, 245));
+        menuAtendimento.setBackground(new java.awt.Color(156, 116, 64));
         menuAtendimento.setText("Atendimento");
         menuAtendimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
+        menuAdministrarAtendimento.setBackground(new java.awt.Color(228, 196, 154));
         menuAdministrarAtendimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/alterar.png"))); // NOI18N
         menuAdministrarAtendimento.setText("Administrar Atendimento");
         menuAdministrarAtendimento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         subMenuAgendar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuAgendar.setBackground(new java.awt.Color(228, 196, 154));
         subMenuAgendar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         subMenuAgendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendimento1.png"))); // NOI18N
         subMenuAgendar.setText("Agendar");
@@ -88,6 +103,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         menuAdministrarAtendimento.add(subMenuAgendar);
 
         subMenuConsultarAgenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuConsultarAgenda.setBackground(new java.awt.Color(228, 196, 154));
         subMenuConsultarAgenda.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         subMenuConsultarAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendimento.jpg"))); // NOI18N
         subMenuConsultarAgenda.setText("Consultar Agenda");
@@ -102,7 +118,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         jMenuBar1.add(menuAtendimento);
 
-        menuCadastroCliente_Pet.setBackground(new java.awt.Color(245, 245, 245));
+        menuCadastroCliente_Pet.setBackground(new java.awt.Color(156, 116, 64));
         menuCadastroCliente_Pet.setText(" Cliente/Pet ");
         menuCadastroCliente_Pet.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         menuCadastroCliente_Pet.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +128,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         });
 
         subMenuCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuCliente.setBackground(new java.awt.Color(228, 196, 154));
         subMenuCliente.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
         subMenuCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeClientes.png"))); // NOI18N
         subMenuCliente.setText("Cliente ");
@@ -123,6 +140,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         menuCadastroCliente_Pet.add(subMenuCliente);
 
         subMenuPet.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuPet.setBackground(new java.awt.Color(228, 196, 154));
         subMenuPet.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
         subMenuPet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconePetAnimal9.jpg"))); // NOI18N
         subMenuPet.setText("Pet - Animal");
@@ -135,11 +153,12 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         jMenuBar1.add(menuCadastroCliente_Pet);
 
-        menuBox_Especialista.setBackground(new java.awt.Color(245, 245, 245));
+        menuBox_Especialista.setBackground(new java.awt.Color(156, 116, 64));
         menuBox_Especialista.setText("Box / Especialista");
         menuBox_Especialista.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         subMenuBox.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuBox.setBackground(new java.awt.Color(228, 196, 154));
         subMenuBox.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         subMenuBox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendimento1.png"))); // NOI18N
         subMenuBox.setText("Box");
@@ -150,6 +169,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         });
         menuBox_Especialista.add(subMenuBox);
 
+        MenuProfissional.setBackground(new java.awt.Color(228, 196, 154));
         MenuProfissional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendente.png"))); // NOI18N
         MenuProfissional.setText("Profissional");
         MenuProfissional.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -169,14 +189,16 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         jMenuBar1.add(menuBox_Especialista);
 
-        menuRelatorios.setBackground(new java.awt.Color(245, 245, 245));
+        menuRelatorios.setBackground(new java.awt.Color(156, 116, 64));
         menuRelatorios.setText("Relatórios");
         menuRelatorios.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         subMenuRelatorioAtendimento.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuRelatorioAtendimento.setBackground(new java.awt.Color(228, 196, 154));
         subMenuRelatorioAtendimento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         subMenuRelatorioAtendimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeCaixa.png"))); // NOI18N
         subMenuRelatorioAtendimento.setText("Atendimento");
+        subMenuRelatorioAtendimento.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         subMenuRelatorioAtendimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subMenuRelatorioAtendimentoActionPerformed(evt);
@@ -185,9 +207,11 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         menuRelatorios.add(subMenuRelatorioAtendimento);
 
         subMenuRelatorioCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuRelatorioCliente.setBackground(new java.awt.Color(228, 196, 154));
         subMenuRelatorioCliente.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         subMenuRelatorioCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeClientes1.png"))); // NOI18N
         subMenuRelatorioCliente.setText("Cliente");
+        subMenuRelatorioCliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         subMenuRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subMenuRelatorioClienteActionPerformed(evt);
@@ -196,9 +220,11 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         menuRelatorios.add(subMenuRelatorioCliente);
 
         subMenuRelatorioPet.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        subMenuRelatorioPet.setBackground(new java.awt.Color(228, 196, 154));
         subMenuRelatorioPet.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         subMenuRelatorioPet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconePetAnimal2.jpg"))); // NOI18N
         subMenuRelatorioPet.setText("Pet");
+        subMenuRelatorioPet.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         subMenuRelatorioPet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subMenuRelatorioPetActionPerformed(evt);
@@ -208,11 +234,12 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         jMenuBar1.add(menuRelatorios);
 
-        menuSobre.setBackground(new java.awt.Color(245, 245, 245));
+        menuSobre.setBackground(new java.awt.Color(156, 116, 64));
         menuSobre.setText("Sobre");
         menuSobre.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         subMenuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
+        subMenuSobre.setBackground(new java.awt.Color(228, 196, 154));
         subMenuSobre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         subMenuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAbout.jpg"))); // NOI18N
         subMenuSobre.setText("Sobre");
@@ -225,11 +252,12 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
         jMenuBar1.add(menuSobre);
 
-        menuSair.setBackground(new java.awt.Color(245, 245, 245));
+        menuSair.setBackground(new java.awt.Color(156, 116, 64));
         menuSair.setText("Sair");
         menuSair.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         subMenuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        subMenuSair.setBackground(new java.awt.Color(228, 196, 154));
         subMenuSair.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         subMenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeSair.png"))); // NOI18N
         subMenuSair.setText("Sair");
@@ -268,10 +296,11 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         telaCliente.setTitle(tituloCliente);
         telaCliente.setVisible(true);
         add(telaCliente, JLayeredPane.DRAG_LAYER);
-
+        //desktop.add(telaCliente, JLayeredPane.DRAG_LAYER);
         telaCliente.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
         telaCliente.setLocation(40, 5); //(ponto inicial apartir lateral,altura)
         telaCliente.pack();
+        
         /*
         TelaCliente telaCliente = new TelaCliente();
         telaCliente.setTitle(Cadastro.tituloCliente);

@@ -65,6 +65,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
           true, //maximizable
           true);//iconifiable
         initComponents();
+        repaint();
         // Center in the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frameSize = getSize();
@@ -672,7 +673,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here
-        this.moveToFront();
+        moveToFront();
     }//GEN-LAST:event_formMouseClicked
 
     private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClienteActionPerformed
