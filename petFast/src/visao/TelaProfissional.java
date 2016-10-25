@@ -504,7 +504,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         int id;
         id = parseInt(tctIdProfissional.getText());
         //TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional(nome, id, "i", nomeProfissional);
-        TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional();
+        TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional("",0,"");
         telaCadProf.setTitle(tituloProfissional);
         telaCadProf.setVisible(true);
 

@@ -31,7 +31,7 @@ public class ProfissionalCtrl {
     * @param nomeProfissional
     * @return 
     */
-   public Profissional receberAnimalNome(String nomeProfissional){
+   public Profissional receberProfissionalNome(String nomeProfissional){
         //AnimalDAO animalDAO = new AnimalDAO();
         ProfissionalDAO profDAO = new ProfissionalDAO();
         
