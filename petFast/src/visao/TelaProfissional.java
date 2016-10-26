@@ -25,33 +25,33 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
     private static ArrayList listaNome;
     private static int pos = 0, tam = 0;
     private String idProfissional, nomeProfissional;
-    
+
     private static int openFrameCount = 0; //teste
     private static final int xOffset = 30, yOffset = 30; //teste
-    
+
     /**
      * Creates new form TelaProfissional
      */
     public TelaProfissional() {
-        
-         super("Document #" + (++openFrameCount),
-          true, //resizable
-          true, //closable
-          true, //maximizable
-          true);//iconifiable
-        
+
+        super("Document #" + (++openFrameCount),
+                true, //resizable
+                true, //closable
+                true, //maximizable
+                true);//iconifiable
+
         initComponents();
-        
-         // Center in the screen
+
+        // Center in the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frameSize = getSize();
         //setLocation(new Point((screenSize.width - frameSize.width) / 2,
         //                     (screenSize.height - frameSize.width) / 2));
-        
+
         //this.setLocation(50, 100); //(ponto inicial apartir lateral,altura)
-        setLocation(xOffset*openFrameCount, yOffset*openFrameCount);
+        setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         setLocation(new Point((screenSize.width - frameSize.width) / 2,
-                              (screenSize.height - frameSize.width) / 2));
+                (screenSize.height - frameSize.width) / 2));
         this.repaint();
         idProfissional = "";
         nomeProfissional = "";
@@ -59,9 +59,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         tctIdProfissional.setEditable(false);
         //desabilitarBotoesProf();
         //desabilitarBotoesProf2();
-        
-        
-        
+
     }
 
     /**
@@ -413,29 +411,35 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             idProfissionalP = Integer.parseInt(prof.getIdProfissional());
             habilitarBotoesProf();
 
-            //buscar listas de animais deste
-            //arrayListAnimal = canimal.receberArrayListAnimaisCliente(idClienteP);
-            // jScrollPaneAnimais.add(listAnimal);
-            //jListPet.add();
-            //lAnimal = canimal.receberListaAnimaisCliente(idClienteP);
-            //listAnimal = new JList(model);
-            
-
-            // colocarMiniFotoLabel();
-
         } else {
-            JOptionPane.showMessageDialog(null, "Profissional não localizado!");
-            tctProfissionalCpf.setText("");
-            //tctNomeProfissional.setText("");
-            tctIdProfissional.setText("");
-           
-            desabilitarBotoesProf();
-            desabilitarBotoesProf2();
-            btnIncluirProf.setEnabled(true);
+
+            int respostaDialogo = 0;
+
+            JOptionPane.showConfirmDialog(null, "Profissional " + tctNomeProfissional.getText() + " não localizado!" + "\n"
+                    + "deseja incluí-lo? ");
+            if (respostaDialogo == JOptionPane.YES_OPTION) {
+                // verifica se o usuário clicou no botão YES
+                tctProfissionalCpf.setText("");
+                //tctNomeProfissional.setText("");
+                tctIdProfissional.setText("");
+
+                desabilitarBotoesProf();
+                desabilitarBotoesProf2();
+                btnIncluirProf.setEnabled(true);
+
+                btnIncluirProf.grabFocus();
+
+            } else {
+                tctNomeProfissional.setText("");
+                tctProfissionalCpf.setText("");
+                //tctNomeProfissional.setText("");
+                tctIdProfissional.setText("");
+            }
+
         }
 
         /*
-        */
+         */
     }//GEN-LAST:event_btnPesquisarProfissionalActionPerformed
 
     private void btnInicioProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioProfActionPerformed
@@ -462,7 +466,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             tctNomeProfissional.setText(prof.getNome());
             tctIdProfissional.setText(prof.getIdProfissional());
             idProfissionalP = Integer.parseInt(prof.getIdProfissional());
-            
+
             // colocarMiniFotoLabel();
             btnIncluirProf.setEnabled(false);
 
@@ -481,7 +485,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             tctNomeProfissional.setText(prof.getNome());
             tctIdProfissional.setText(prof.getIdProfissional());
             idProfissionalP = Integer.parseInt(prof.getIdProfissional());
-           
+
             //colocarMiniFotoLabel();
             btnIncluirProf.setEnabled(false);
 
@@ -491,14 +495,14 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
 
     private void btnLastProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastProfActionPerformed
         // Botão [>|]
-         int idProfissionalP;
+        int idProfissionalP;
         pos = tam;
         Profissional prof = (Profissional) listaNome.get(tam);
         tctProfissionalCpf.setText(prof.getCpf());
         tctNomeProfissional.setText(prof.getNome());
         tctIdProfissional.setText(prof.getIdProfissional());
         idProfissionalP = Integer.parseInt(prof.getIdProfissional());
-        
+
         //colocarMiniFotoLabel();
         btnIncluirProf.setEnabled(false);
     }//GEN-LAST:event_btnLastProfActionPerformed
@@ -509,10 +513,10 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         String tituloProfissional;
         tituloProfissional = "Gestão Pet Inclusão de Novo Profissional";
         String nome = tctNomeProfissional.getText();
-        
-        int id= cProfissional.receberIdProfissionalAtual();
+
+        int id = cProfissional.receberIdProfissionalAtual();
         //id = parseInt(tctIdProfissional.getText());
-        TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional(nome,id,"i");
+        TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional(nome, id, "i");
         telaCadProf.setTitle(tituloProfissional);
         telaCadProf.setVisible(true);
 
@@ -526,20 +530,20 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         // Botão alterar
         //this.dispose();
 
-       // ProfissionalCtrl cProfissional = new ProfissionalCtrl();
+        // ProfissionalCtrl cProfissional = new ProfissionalCtrl();
         String tituloProfissional;
         tituloProfissional = "Gestão Profissional Pet Alteração";
         String nome = tctNomeProfissional.getText();
         int id;
         id = parseInt(tctIdProfissional.getText());
-        TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional(nome,id,"a");
+        TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional(nome, id, "a");
         telaCadProf.setTitle(tituloProfissional);
         telaCadProf.setVisible(true);
 
         //add(telaAnimal, JLayeredPane.DRAG_LAYER);
         telaCadProf.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
         telaCadProf.setLocation(50, 50);
-        
+
 
     }//GEN-LAST:event_btnAlterarProfActionPerformed
 
@@ -547,22 +551,21 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         // TBotão Excluir Animal
         //this.dispose();
 
-/*
+        /*
          String tituloPet;
-        tituloPet = "Gestão Pet - Exclusão";
-        String nome = tctPetAnimalCliente.getText();
-        String nomeAnimal = cbxClienteAnimal.getSelectedItem() + "";
-        int id;
-        id = parseInt(tctIdCliente.getText());
-        TelaAnimal telaAnimal = new TelaAnimal(nome, id, "e", nomeAnimal);
-        telaAnimal.setTitle(tituloPet);
-        telaAnimal.setVisible(true);
+         tituloPet = "Gestão Pet - Exclusão";
+         String nome = tctPetAnimalCliente.getText();
+         String nomeAnimal = cbxClienteAnimal.getSelectedItem() + "";
+         int id;
+         id = parseInt(tctIdCliente.getText());
+         TelaAnimal telaAnimal = new TelaAnimal(nome, id, "e", nomeAnimal);
+         telaAnimal.setTitle(tituloPet);
+         telaAnimal.setVisible(true);
 
-        //add(telaAnimal, JLayeredPane.DRAG_LAYER);
-        telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaAnimal.setLocation(50, 50);       
-*/
-
+         //add(telaAnimal, JLayeredPane.DRAG_LAYER);
+         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+         telaAnimal.setLocation(50, 50);       
+         */
 
     }//GEN-LAST:event_btnExcluirProfActionPerformed
 
@@ -570,23 +573,21 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         //Botão Consultar Animal
         //this.dispose();
 
-        
         /*
          String tituloPet;
-        tituloPet = "Gestão Pet- Consultar ";
-        String nome = tctPetAnimalCliente.getText();
-        String nomeAnimal = cbxClienteAnimal.getSelectedItem() + "";
-        int id;
-        id = parseInt(tctIdCliente.getText());
-        TelaAnimal telaAnimal = new TelaAnimal(nome, id, "c", nomeAnimal);
-        telaAnimal.setTitle(tituloPet);
-        telaAnimal.setVisible(true);
+         tituloPet = "Gestão Pet- Consultar ";
+         String nome = tctPetAnimalCliente.getText();
+         String nomeAnimal = cbxClienteAnimal.getSelectedItem() + "";
+         int id;
+         id = parseInt(tctIdCliente.getText());
+         TelaAnimal telaAnimal = new TelaAnimal(nome, id, "c", nomeAnimal);
+         telaAnimal.setTitle(tituloPet);
+         telaAnimal.setVisible(true);
 
-        //add(telaAnimal, JLayeredPane.DRAG_LAYER);
-        telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaAnimal.setLocation(50, 50);
-        */
-       
+         //add(telaAnimal, JLayeredPane.DRAG_LAYER);
+         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+         telaAnimal.setLocation(50, 50);
+         */
 
     }//GEN-LAST:event_btnConsultarProfActionPerformed
 
