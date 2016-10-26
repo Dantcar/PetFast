@@ -87,6 +87,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         btnPrevProf = new javax.swing.JButton();
         btnNextProf = new javax.swing.JButton();
         btnLastProf = new javax.swing.JButton();
+        lblTelaProfissionalId = new javax.swing.JLabel();
         PainelProfLista = new javax.swing.JPanel();
         btnIncluirProf = new javax.swing.JButton();
         btnAlterarProf = new javax.swing.JButton();
@@ -139,7 +140,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         tctIdProfissional.setBackground(new java.awt.Color(255, 239, 191));
         tctIdProfissional.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        btnPesquisarProfissional.setBackground(new java.awt.Color(0, 128, 0));
+        btnPesquisarProfissional.setBackground(new java.awt.Color(156, 116, 64));
         btnPesquisarProfissional.setFont(new java.awt.Font("Tahoma", 3, 10)); // NOI18N
         btnPesquisarProfissional.setForeground(new java.awt.Color(0, 0, 51));
         btnPesquisarProfissional.setText("Pesquisar");
@@ -158,7 +159,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         lblTelaProfNome.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblTelaProfNome.setText("Nome:");
 
-        btnInicioProf.setBackground(new java.awt.Color(0, 128, 0));
+        btnInicioProf.setBackground(new java.awt.Color(156, 116, 64));
         btnInicioProf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnInicioProf.setForeground(new java.awt.Color(0, 0, 51));
         btnInicioProf.setText("|<");
@@ -168,7 +169,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             }
         });
 
-        btnPrevProf.setBackground(new java.awt.Color(0, 128, 0));
+        btnPrevProf.setBackground(new java.awt.Color(156, 116, 64));
         btnPrevProf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnPrevProf.setForeground(new java.awt.Color(0, 0, 51));
         btnPrevProf.setText("<");
@@ -178,7 +179,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             }
         });
 
-        btnNextProf.setBackground(new java.awt.Color(0, 128, 0));
+        btnNextProf.setBackground(new java.awt.Color(156, 116, 64));
         btnNextProf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnNextProf.setForeground(new java.awt.Color(0, 0, 51));
         btnNextProf.setText(">");
@@ -188,7 +189,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             }
         });
 
-        btnLastProf.setBackground(new java.awt.Color(0, 128, 0));
+        btnLastProf.setBackground(new java.awt.Color(156, 116, 64));
         btnLastProf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLastProf.setForeground(new java.awt.Color(0, 0, 51));
         btnLastProf.setText(">|");
@@ -198,11 +199,18 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             }
         });
 
+        lblTelaProfissionalId.setBackground(new java.awt.Color(102, 102, 102));
+        lblTelaProfissionalId.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblTelaProfissionalId.setText("Id:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTelaProfissionalId)
+                .addGap(108, 108, 108))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -231,7 +239,10 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(lblTelaProfissionalId)
+                .addContainerGap(106, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(19, 19, 19)
@@ -258,7 +269,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         PainelProfLista.setBackground(new java.awt.Color(228, 196, 154));
         PainelProfLista.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(100, 100, 100), 2, true), "Botões", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(100, 100, 100))); // NOI18N
 
-        btnIncluirProf.setBackground(new java.awt.Color(0, 128, 0));
+        btnIncluirProf.setBackground(new java.awt.Color(156, 116, 64));
         btnIncluirProf.setForeground(new java.awt.Color(0, 0, 51));
         btnIncluirProf.setText("Incluir");
         btnIncluirProf.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +278,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             }
         });
 
-        btnAlterarProf.setBackground(new java.awt.Color(0, 128, 0));
+        btnAlterarProf.setBackground(new java.awt.Color(156, 116, 64));
         btnAlterarProf.setForeground(new java.awt.Color(0, 0, 51));
         btnAlterarProf.setText("Alterar");
         btnAlterarProf.addActionListener(new java.awt.event.ActionListener() {
@@ -276,7 +287,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             }
         });
 
-        btnExcluirProf.setBackground(new java.awt.Color(0, 128, 0));
+        btnExcluirProf.setBackground(new java.awt.Color(156, 116, 64));
         btnExcluirProf.setForeground(new java.awt.Color(0, 0, 51));
         btnExcluirProf.setText("Excluir");
         btnExcluirProf.addActionListener(new java.awt.event.ActionListener() {
@@ -285,7 +296,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             }
         });
 
-        btnConsultarProf.setBackground(new java.awt.Color(0, 128, 0));
+        btnConsultarProf.setBackground(new java.awt.Color(156, 116, 64));
         btnConsultarProf.setForeground(new java.awt.Color(0, 0, 51));
         btnConsultarProf.setText("Consultar");
         btnConsultarProf.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +305,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             }
         });
 
-        btnVoltarMenu.setBackground(new java.awt.Color(0, 128, 0));
+        btnVoltarMenu.setBackground(new java.awt.Color(156, 116, 64));
         btnVoltarMenu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnVoltarMenu.setForeground(new java.awt.Color(0, 0, 51));
         btnVoltarMenu.setText("Voltar");
@@ -389,12 +400,11 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         DefaultListModel model = new DefaultListModel();
 
         ProfissionalCtrl cProfissional = new ProfissionalCtrl();
-        listaNome = (ArrayList) cProfissional.listaProfissionaisNome(tctNomeProfissional.getText());
+        listaNome = (ArrayList) cProfissional.listaProfissionalNome(tctNomeProfissional.getText());
 
         if (!listaNome.isEmpty()) {
-            btnIncluirProf.setEnabled(true);
             pos = 0;
-            btnIncluirProf.setEnabled(true);
+            btnIncluirProf.setEnabled(false);
             tam = listaNome.size() - 1;
             Profissional prof = (Profissional) listaNome.get(0);
             tctProfissionalCpf.setText(prof.getCpf());
@@ -416,12 +426,12 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Profissional não localizado!");
             tctProfissionalCpf.setText("");
-            tctNomeProfissional.setText("");
+            //tctNomeProfissional.setText("");
             tctIdProfissional.setText("");
            
             desabilitarBotoesProf();
             desabilitarBotoesProf2();
-            btnIncluirProf.setEnabled(false);
+            btnIncluirProf.setEnabled(true);
         }
 
         /*
@@ -438,7 +448,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         tctIdProfissional.setText(prof.getIdProfissional());
         idProfissionalP = Integer.parseInt(prof.getIdProfissional());
         //colocarMiniFotoLabel();
-        btnIncluirProf.setEnabled(true);
+        btnIncluirProf.setEnabled(false);
     }//GEN-LAST:event_btnInicioProfActionPerformed
 
     private void btnPrevProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevProfActionPerformed
@@ -454,7 +464,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             idProfissionalP = Integer.parseInt(prof.getIdProfissional());
             
             // colocarMiniFotoLabel();
-            btnIncluirProf.setEnabled(true);
+            btnIncluirProf.setEnabled(false);
 
         }
 
@@ -473,7 +483,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             idProfissionalP = Integer.parseInt(prof.getIdProfissional());
            
             //colocarMiniFotoLabel();
-            btnIncluirProf.setEnabled(true);
+            btnIncluirProf.setEnabled(false);
 
         }
 
@@ -490,21 +500,19 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         idProfissionalP = Integer.parseInt(prof.getIdProfissional());
         
         //colocarMiniFotoLabel();
-        btnIncluirProf.setEnabled(true);
+        btnIncluirProf.setEnabled(false);
     }//GEN-LAST:event_btnLastProfActionPerformed
 
     private void btnIncluirProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirProfActionPerformed
-        // TODO add your handling code here:
-
-        //this.dispose();
+        // Incluir novo profissional na base petfast
+        ProfissionalCtrl cProfissional = new ProfissionalCtrl();
         String tituloProfissional;
         tituloProfissional = "Gestão Pet Inclusão de Novo Profissional";
         String nome = tctNomeProfissional.getText();
-        //String nomeAnimal = cbxClienteAnimal.getSelectedItem() + "";
-        int id;
-        id = parseInt(tctIdProfissional.getText());
-        //TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional(nome, id, "i", nomeProfissional);
-        TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional("",0,"");
+        
+        int id= cProfissional.receberIdProfissionalAtual();
+        //id = parseInt(tctIdProfissional.getText());
+        TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional(nome,id,"i");
         telaCadProf.setTitle(tituloProfissional);
         telaCadProf.setVisible(true);
 
@@ -517,22 +525,22 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
     private void btnAlterarProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarProfActionPerformed
         // Botão alterar
         //this.dispose();
-/*
-        String tituloPet;
-        tituloPet = "Gestão Pet - Alteração";
-        String nome = tctPetAnimalCliente.getText();
-        String nomeAnimal = cbxClienteAnimal.getSelectedItem() + "";
+
+       // ProfissionalCtrl cProfissional = new ProfissionalCtrl();
+        String tituloProfissional;
+        tituloProfissional = "Gestão Profissional Pet Alteração";
+        String nome = tctNomeProfissional.getText();
         int id;
-        id = parseInt(tctIdCliente.getText());
-        TelaAnimal telaAnimal = new TelaAnimal(nome, id, "a", nomeAnimal);
-        telaAnimal.setTitle(tituloPet);
-        telaAnimal.setVisible(true);
+        id = parseInt(tctIdProfissional.getText());
+        TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional(nome,id,"a");
+        telaCadProf.setTitle(tituloProfissional);
+        telaCadProf.setVisible(true);
 
         //add(telaAnimal, JLayeredPane.DRAG_LAYER);
-        telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-        telaAnimal.setLocation(50, 50);
+        telaCadProf.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+        telaCadProf.setLocation(50, 50);
         
- */
+
     }//GEN-LAST:event_btnAlterarProfActionPerformed
 
     private void btnExcluirProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirProfActionPerformed
@@ -605,6 +613,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblTelaProfCpf;
     private javax.swing.JLabel lblTelaProfNome;
+    private javax.swing.JLabel lblTelaProfissionalId;
     private javax.swing.JLabel lblTituloProfissional;
     private javax.swing.JTextField tctIdProfissional;
     private static javax.swing.JTextField tctNomeProfissional;
@@ -612,14 +621,24 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void desabilitarBotoesProf() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //btnIncluirPet.setEnabled(false);
+        btnIncluirProf.setEnabled(false);
+        btnAlterarProf.setEnabled(false);
+        btnExcluirProf.setEnabled(false);
+        btnConsultarProf.setEnabled(false);
     }
 
     private void desabilitarBotoesProf2() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        btnInicioProf.setEnabled(false);
+        btnPrevProf.setEnabled(false);
+        btnNextProf.setEnabled(false);
+        btnLastProf.setEnabled(false);
     }
 
     private void habilitarBotoesProf() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        btnInicioProf.setEnabled(true);
+        btnPrevProf.setEnabled(true);
+        btnNextProf.setEnabled(true);
+        btnLastProf.setEnabled(true);
     }
 }

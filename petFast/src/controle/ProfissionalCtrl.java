@@ -112,7 +112,7 @@ public class ProfissionalCtrl {
      * @param nomeAnimal
      * @return 
      */
-    public List listaProfissionaisNome(String nomeProfissional) {
+    public List listaProfissionalNome(String nomeProfissional) {
        ProfissionalDAO profDAO = new ProfissionalDAO();
        List<Profissional> lista = profDAO.listarProfissionaisNome(nomeProfissional);
        return lista;

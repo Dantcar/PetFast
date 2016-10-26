@@ -53,7 +53,7 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
         initComponents();
         String pathProjeto = System.getProperty("user.dir") + "\\";
         String iconfast = pathProjeto + "src\\Icones\\petfastIcone.png";
-        String foto = System.getProperty("user.dir") + "\\Imagens\\templateFoto1.png";
+        String foto = System.getProperty("user.dir") + "\\ImagensPet\\templateFoto1.png";
     
         setIconImage(Toolkit.getDefaultToolkit().getImage(iconfast));
         this.setLocation(250, 100); //(ponto inicial apartir lateral,altura)
@@ -80,10 +80,9 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
          * Botão Incluir
          */  
        if (operacao == "i") {
-            tctNomeProfissional.setText(nomeProfissional);
-           
+            tctNomeProfissional.setText(nomeProfissional);            
             tctProfissionalId.setEditable(false);
-            //habilitar botoes incluir
+                       //habilitar botoes incluir
             btnSalvar.setEnabled(true);
             btnBuscarFoto.setEnabled(true);
             int idProfissional = cProfissional.receberIdProfissionalAtual(); //pega o próximo id para cadastro
@@ -100,13 +99,13 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
                 btnBuscarFoto.setEnabled(true);
                 tctProfissionalId.setText(id + "");
                 tctProfissionalId.setEditable(false);
-                tctNomeProfissional.setText(nomeProfissional);
-                colocarFotoLabelUrl(foto);
-
-                
-
                 tctProfissionalId.setText(profissional.getIdProfissional());
-
+                tctNomeProfissional.setText(nomeProfissional);
+                tftCelular.setText(profissional.getCelular());
+                tftCPF.setText(profissional.getCpf());
+                tftRG.setText(profissional.getRg());
+                tftEmail.setText(profissional.getEmail());
+                
                 //tratamento data
                 String sdataNascimento = profissional.getNascimento();
                 try {
@@ -116,7 +115,10 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
                 }
                 jspNascimento.setValue(calNascimento);
                 //fim tratamento data
-
+                
+                tctNomeContato.setText(profissional.getContato());
+                tftTelefoneContato.setText(profissional.getTelefoneContato());
+                
                 colocarFotoLabel();
 
                 if (verificarFotoExiste(profissional.getFotoProfissional())) {
@@ -202,7 +204,10 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
                 jspNascimento.setValue(calNascimento);
                 jspNascimento.setEnabled(false);
                 //fim tratamento data
-
+                
+                
+                tctNomeContato.setText(profissional.getContato());
+                tftTelefoneContato.setText(profissional.getTelefoneContato());
                 
                 tctFoto.setText(profissional.getFotoProfissional());
                 
@@ -268,6 +273,7 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnBuscarFoto = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -410,7 +416,7 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 102, 0));
+        btnSalvar.setForeground(new java.awt.Color(156, 116, 64));
         btnSalvar.setText("Salvar Novo");
         btnSalvar.setMargin(new java.awt.Insets(1, 1, 1, 1));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -421,7 +427,7 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
 
         btnAlterar.setBackground(new java.awt.Color(255, 255, 255));
         btnAlterar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        btnAlterar.setForeground(new java.awt.Color(0, 102, 0));
+        btnAlterar.setForeground(new java.awt.Color(156, 116, 64));
         btnAlterar.setText("Alterar");
         btnAlterar.setMargin(new java.awt.Insets(1, 1, 1, 1));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -431,7 +437,7 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
         });
 
         btnExcluir.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        btnExcluir.setForeground(new java.awt.Color(102, 0, 0));
+        btnExcluir.setForeground(new java.awt.Color(156, 116, 64));
         btnExcluir.setText("Excluir");
         btnExcluir.setMargin(new java.awt.Insets(1, 1, 1, 1));
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -442,13 +448,23 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
 
         btnBuscarFoto.setBackground(new java.awt.Color(255, 255, 255));
         btnBuscarFoto.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        btnBuscarFoto.setForeground(new java.awt.Color(102, 102, 0));
+        btnBuscarFoto.setForeground(new java.awt.Color(156, 116, 64));
         btnBuscarFoto.setText("Localizar Foto");
         btnBuscarFoto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnBuscarFoto.setMargin(new java.awt.Insets(1, 1, 1, 1));
         btnBuscarFoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarFotoActionPerformed(evt);
+            }
+        });
+
+        btnVoltar.setBackground(new java.awt.Color(156, 116, 64));
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnVoltar.setForeground(new java.awt.Color(0, 0, 51));
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -479,20 +495,24 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
                             .addComponent(tftEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tftRG, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jspNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tctNomeContato, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tftTelefoneContato, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblFotoProfissional, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                            .addComponent(btnBuscarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tctFoto)))
+                            .addComponent(tftTelefoneContato, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(32, 32, 32)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(71, 71, 71)
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tctNomeContato, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblFotoProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tctFoto))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -547,8 +567,9 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterar)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAlterar, btnExcluir, btnSalvar});
@@ -603,16 +624,22 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
 
         Profissional profissional = new Profissional();
         ProfissionalCtrl cProfissional = new ProfissionalCtrl();
-        // profissionalc = new ProfissionalCtrl();
-        profissional.setIdProfissional(tctProfissionalId.getText());
+        
         profissional.setIdProfissional(tctProfissionalId.getText());
         profissional.setNome(tctNomeProfissional.getText());
+        profissional.setCelular(tftCelular.getText());
+        profissional.setCpf(tftCPF.getText());
+        profissional.setRg(tftRG.getText());
+        profissional.setEmail(tftEmail.getText());
         
 
         dataNascimentoProfissional = Util.DataFormatadaS(jspNascimento.getValue().toString());
         profissional.setNascimento(dataHoje);
         
         profissional.setNascimento(dataNascimentoProfissional);
+        
+        profissional.setContato(tctNomeContato.getText());
+        profissional.setTelefoneContato(tftTelefoneContato.getText());
         
         profissional.setFotoProfissional(tctFoto.getText());
 
@@ -631,12 +658,19 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
         // Botao alterar profissional
         Profissional profissional = new Profissional();
         ProfissionalCtrl cProfissional = new ProfissionalCtrl();
-        // profissionalc = new ProfissionalCtrl();
+        
         profissional.setIdProfissional(tctProfissionalId.getText());
         profissional.setNome(tctNomeProfissional.getText());
+        profissional.setCelular(tftCelular.getText());
+        profissional.setCpf(tftCPF.getText());
+        profissional.setRg(tftRG.getText());
+        profissional.setEmail(tftEmail.getText());
 
         dataNascimentoProfissional = Util.DataFormatadaS(jspNascimento.getValue().toString());
         profissional.setNascimento(dataNascimentoProfissional);
+        
+        profissional.setContato(tctNomeContato.getText());
+        profissional.setTelefoneContato(tftTelefoneContato.getText());
         
         profissional.setFotoProfissional(tctFoto.getText());
 
@@ -664,7 +698,7 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
         jFileChooserFoto = new javax.swing.JFileChooser();
         String fotoSource = null;
 
-        String fotoDestino = System.getProperty("user.dir") + "\\Imagens\\";
+        String fotoDestino = System.getProperty("user.dir") + "\\ImagensPet\\";
         String fotoNome = tctNomeProfissional.getText() + "-" + tctProfissionalId.getText();
 
         int retVal;
@@ -691,6 +725,11 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
     private void tftCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftCPFActionPerformed
 
     }//GEN-LAST:event_tftCPFActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -732,6 +771,7 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarFoto;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -759,7 +799,11 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void desabilitarBotoesProfissional() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         //desabilitar os botoes da tela no método construtor
+        btnSalvar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnAlterar.setEnabled(false);
+        btnBuscarFoto.setEnabled(false);
     }
 
     private void colocarFotoLabelUrl(String urlFoto) {
@@ -795,7 +839,16 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
     }
 
     private void limparTelaProfissional() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tctProfissionalId.setText("");
+       tctNomeProfissional.setText("");
+       tftCelular.setText("");
+       tftCPF.setText("");
+       tftRG.setText("");
+       tftEmail.setText("");
+       jspNascimento.setValue(dtProf);
+       tctNomeContato.setText("");
+       tftTelefoneContato.setText("");
+       tctFoto.setText("");
     }
 
     private void desabilitarEdiçãoTelaProfissional() {
@@ -859,11 +912,16 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
     }
 
     private boolean validarTelaProfissional(Profissional profissional) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resposta = true;
+        
+        
+        
+        
+        return resposta;  
     }
 
     private void copiarFotoTofast(String fonte, String destino, String nomeArquivo) {
-         FileInputStream fis = null;
+        FileInputStream fis = null;
         FileOutputStream fos = null;
         try {
             fis = new FileInputStream(fonte);
@@ -874,19 +932,19 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
             }
             // System.out.println("Arquivo copiado!"); 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaCadastroProfissional.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaCadastroProfissional.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 fis.close();
             } catch (IOException ex) {
-                Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaCadastroProfissional.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
                 fos.close();
             } catch (IOException ex) {
-                Logger.getLogger(TelaAnimal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaCadastroProfissional.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }

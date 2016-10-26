@@ -85,7 +85,7 @@ public class ProfissionalDAO {
         }
 
         try {
-            rs = stmt.executeQuery("SELECT * FROM profisssional ORDER BY 1 DESC"); //select * from DAC.Profissional order BY 1 DESC
+            rs = stmt.executeQuery("SELECT * FROM profissional ORDER BY 1 DESC"); //select * from DAC.Profissional order BY 1 DESC
             System.out.println("ok");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
@@ -103,6 +103,7 @@ public class ProfissionalDAO {
         } catch (SQLException ex) {
             msg = "" + ex;
             JOptionPane.showMessageDialog(null, reduzString(msg));
+            msg = "";
             close();
             resposta = 0;
             Logger.getLogger(ProfissionalDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -488,16 +489,16 @@ public class ProfissionalDAO {
                
                 Profissional prof = new Profissional();
                 
-                prof.setIdProfissional("idprofissional");
-                prof.setNome("nome");
-                prof.setFotoProfissional("fotoprofissional");
-                prof.setCelular("celular");
-                prof.setEmail("email");
-                prof.setCpf("cpf");
-                prof.setRg("rg");
-                prof.setNascimento("nascimento");
-                prof.setContato("contato");
-                prof.setTelefoneContato("telefonecontato");
+                prof.setIdProfissional(rs.getString("idprofissional"));
+                prof.setNome(rs.getString("nome"));
+                prof.setFotoProfissional(rs.getString("fotoprofissional"));
+                prof.setCelular(rs.getString("celular"));
+                prof.setEmail(rs.getString("email"));
+                prof.setCpf(rs.getString("cpf"));
+                prof.setRg(rs.getString("rg"));
+                prof.setNascimento(rs.getString("nascimento"));
+                prof.setContato(rs.getString("contato"));
+                prof.setTelefoneContato(rs.getString("telefonecontato"));
                 //adiciona objeto na lista
                 listaProfissional.add(prof);
 
