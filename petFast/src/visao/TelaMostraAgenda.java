@@ -78,7 +78,7 @@ public class TelaMostraAgenda extends JFrame implements ActionListener {
     JLabel iconHolder = new JLabel(icon);
     JLabel lblDataAgendamento = new JLabel("Dia: ");
     JLabel lblHoraAgendamento = new JLabel("Horario: ");
-    JLabel lblTipoDocumento = new JLabel("Passagem ");
+    JLabel lblTipoDocumento = new JLabel("Agenda");
     JLabel lblServicoPrecoTotal = new JLabel("Preco Total: ");
     JLabel lblQuantidadeServicos = new JLabel("Total dos Serviços: ");
     JLabel lblClientePet = new JLabel("ClientePet");
@@ -557,8 +557,8 @@ public class TelaMostraAgenda extends JFrame implements ActionListener {
 
         // Ask user if they want to restart the program
         Integer a = JOptionPane.showConfirmDialog(getContentPane(),
-                "Compra de passagem efetuada com sucesso\n Deseja efetuar outra compra?",
-                "Compra Efetuada", JOptionPane.YES_NO_OPTION);
+                "Agendamento efetuado com sucesso\n Deseja realizar no agendamento?",
+                "Agendamento Cadastrado", JOptionPane.YES_NO_OPTION);
 
         // If yes, deletes current instance of program then creates a new one
         if (a == 0) {
@@ -569,7 +569,8 @@ public class TelaMostraAgenda extends JFrame implements ActionListener {
         }
         // If no, then instance of program is deleted but no new instance is created, hence ending the program
         if (a == 1) {
-            System.exit(0);
+            this.dispose();
+            //System.exit(0);
         }
     }
 
