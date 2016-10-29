@@ -511,7 +511,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         // Incluir novo profissional na base petfast
         ProfissionalCtrl cProfissional = new ProfissionalCtrl();
         String tituloProfissional;
-        tituloProfissional = "Gestão Pet Inclusão de Novo Profissional";
+        tituloProfissional = "Gestão Profissional Inclusão de Novo Profissional";
         String nome = tctNomeProfissional.getText();
 
         int id = cProfissional.receberIdProfissionalAtual();
@@ -551,21 +551,21 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
         // TBotão Excluir Animal
         //this.dispose();
 
-        /*
-         String tituloPet;
-         tituloPet = "Gestão Pet - Exclusão";
-         String nome = tctPetAnimalCliente.getText();
-         String nomeAnimal = cbxClienteAnimal.getSelectedItem() + "";
+        
+         String tituloProfissional;
+         tituloProfissional = "Gestão Profissional - Exclusão";
+         String nome = tctNomeProfissional.getText();
+         
          int id;
-         id = parseInt(tctIdCliente.getText());
-         TelaAnimal telaAnimal = new TelaAnimal(nome, id, "e", nomeAnimal);
-         telaAnimal.setTitle(tituloPet);
-         telaAnimal.setVisible(true);
+         id = parseInt(tctIdProfissional.getText());
+         TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional(nome, id, "e");
+         telaCadProf.setTitle(tituloProfissional);
+         telaCadProf.setVisible(true);
 
          //add(telaAnimal, JLayeredPane.DRAG_LAYER);
-         telaAnimal.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
-         telaAnimal.setLocation(50, 50);       
-         */
+         telaCadProf.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+         telaCadProf.setLocation(50, 50);       
+         
 
     }//GEN-LAST:event_btnExcluirProfActionPerformed
 
