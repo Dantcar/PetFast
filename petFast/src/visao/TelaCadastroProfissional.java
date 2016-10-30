@@ -37,7 +37,6 @@ import javax.swing.SpinnerDateModel;
  */
 public class TelaCadastroProfissional extends javax.swing.JFrame {
 
-   
     private Date dataNasc, dataInit, dtProf, hoje;
     private Date calNascimento;
     private String dataHoje, dataNascimentoProfissional;
@@ -152,7 +151,10 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
                 
                 tctProfissionalId.setText(id + "");
                 tctNomeProfissional.setText(nomeProfissional);
-
+                tftCelular.setText(profissional.getCelular());
+                tftCPF.setText(profissional.getCpf());
+                tftRG.setText(profissional.getRg());
+                tftEmail.setText(profissional.getEmail());
                 
 
                 tctProfissionalId.setText(profissional.getIdProfissional());
@@ -167,6 +169,15 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
                 jspNascimento.setValue(calNascimento);
                 jspNascimento.setEnabled(false);
                 //fim tratamento data
+                
+                tctNomeContato.setText(profissional.getContato());
+                tftTelefoneContato.setText(profissional.getTelefoneContato());
+                
+                tctFoto.setText(profissional.getFotoProfissional());
+                
+                colocarFotoLabel();
+                desabilitarEdiçãoTelaProfissional();
+                //btnSalvar.setEnabled(true);
 
                 
                 tctFoto.setText(profissional.getFotoProfissional());
@@ -190,8 +201,12 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
                 
                 tctProfissionalId.setText(id + "");
                 tctNomeProfissional.setText(nomeProfissional);
-
+                tftCelular.setText(profissional.getCelular());
+                tftCPF.setText(profissional.getCpf());
+                tftRG.setText(profissional.getRg());
+                tftEmail.setText(profissional.getEmail());
                 
+
                 tctProfissionalId.setText(profissional.getIdProfissional());
 
                 //tratamento data
@@ -213,6 +228,7 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
                 
                 colocarFotoLabel();
                 desabilitarEdiçãoTelaProfissional();
+                desabilitarBotoesProfissional();
                 //btnSalvar.setEnabled(true);
 
             } else {
@@ -222,8 +238,6 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
         } else {
 
         }
-         
-    
     
     }
 
@@ -632,7 +646,6 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
         profissional.setRg(tftRG.getText());
         profissional.setEmail(tftEmail.getText());
         
-
         dataNascimentoProfissional = Util.DataFormatadaS(jspNascimento.getValue().toString());
         profissional.setNascimento(dataHoje);
         
@@ -642,8 +655,6 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
         profissional.setTelefoneContato(tftTelefoneContato.getText());
         
         profissional.setFotoProfissional(tctFoto.getText());
-
-       
 
         boolean resp = validarTelaProfissional(profissional);
 
@@ -729,6 +740,7 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
