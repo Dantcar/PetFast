@@ -114,10 +114,10 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(0, 128, 0));
+        jPanel1.setBackground(new java.awt.Color(208, 201, 82));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jPanelCliente.setBackground(new java.awt.Color(0, 128, 128));
+        jPanelCliente.setBackground(new java.awt.Color(228, 251, 173));
         jPanelCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
         lblTelaPetCodigoCliente.setBackground(new java.awt.Color(102, 102, 102));
@@ -254,14 +254,14 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
 
         jPanelClienteLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tctIdCliente, tctPetAnimalCliente});
 
-        jPanelPet.setBackground(new java.awt.Color(0, 128, 128));
+        jPanelPet.setBackground(new java.awt.Color(228, 251, 173));
         jPanelPet.setBorder(javax.swing.BorderFactory.createTitledBorder("Pet Animal"));
 
         lblTelaPetNomeCliente2.setBackground(new java.awt.Color(102, 102, 102));
         lblTelaPetNomeCliente2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblTelaPetNomeCliente2.setText("Lista Pet");
 
-        btnAlterarPet.setBackground(new java.awt.Color(0, 128, 0));
+        btnAlterarPet.setBackground(new java.awt.Color(165, 216, 160));
         btnAlterarPet.setForeground(new java.awt.Color(0, 0, 51));
         btnAlterarPet.setText("Alterar");
         btnAlterarPet.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +270,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
-        btnExcluirPet.setBackground(new java.awt.Color(0, 128, 0));
+        btnExcluirPet.setBackground(new java.awt.Color(165, 216, 160));
         btnExcluirPet.setForeground(new java.awt.Color(0, 0, 51));
         btnExcluirPet.setText("Excluir");
         btnExcluirPet.addActionListener(new java.awt.event.ActionListener() {
@@ -279,7 +279,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
-        btnConsultarPet.setBackground(new java.awt.Color(0, 128, 0));
+        btnConsultarPet.setBackground(new java.awt.Color(165, 216, 160));
         btnConsultarPet.setForeground(new java.awt.Color(0, 0, 51));
         btnConsultarPet.setText("Consultar");
         btnConsultarPet.addActionListener(new java.awt.event.ActionListener() {
@@ -288,7 +288,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
-        btnVoltarMenu.setBackground(new java.awt.Color(0, 128, 0));
+        btnVoltarMenu.setBackground(new java.awt.Color(165, 216, 160));
         btnVoltarMenu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnVoltarMenu.setForeground(new java.awt.Color(0, 0, 51));
         btnVoltarMenu.setText("Voltar");
@@ -298,7 +298,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
             }
         });
 
-        btnIncluirPet.setBackground(new java.awt.Color(0, 128, 0));
+        btnIncluirPet.setBackground(new java.awt.Color(165, 216, 160));
         btnIncluirPet.setForeground(new java.awt.Color(0, 0, 51));
         btnIncluirPet.setText("Incluir");
         btnIncluirPet.addActionListener(new java.awt.event.ActionListener() {
@@ -384,7 +384,7 @@ public class TelaClientePet extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelTitulo.setBackground(new java.awt.Color(0, 128, 128));
+        jPanelTitulo.setBackground(new java.awt.Color(228, 251, 173));
         jPanelTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         lblTituloPet1.setBackground(new java.awt.Color(102, 102, 102));
