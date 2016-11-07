@@ -83,6 +83,7 @@ public class ClienteDAO {
             rs = stmt.executeQuery("SELECT * FROM cliente ORDER BY 1 DESC"); //select * from DAC.CLIENTE order BY 1 DESC
 
         } catch (SQLException ex) {
+            msg = "" + ex;
             JOptionPane.showMessageDialog(null, reduzString(msg + ex));
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

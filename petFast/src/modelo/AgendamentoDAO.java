@@ -13,7 +13,10 @@ package modelo;
 import static controle.Util.reduzString;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,9 +55,48 @@ public class AgendamentoDAO {
     
     public int buscarIdAgendamentoAtual(){
         int resposta = 0;
+        String msg,sql;
+        msg="";
+        sql="SELECT * FROM agendamento ORDER BY 1 DESC";
+        conexao = DBPetFast.getConnection();
+        ResultSet rs;
+        rs = null;
+        
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,       
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex); 
+        }
+        
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = "" + ex;
+            JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            if (rs.first()) {
+                idAgendamentoNow = rs.getInt(1);
+                resposta = idAgendamentoNow;
+
+                close();
+            }
+        } catch (SQLException ex) {
+            msg = "" + ex;
+            JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            close();
+        }
         
         return resposta;
     }//Final método buscarIdAgendamentoAtual
+    
+    
     
     
     
