@@ -57,6 +57,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         menuAdministrarAtendimento = new javax.swing.JMenu();
         subMenuAgendar = new javax.swing.JMenuItem();
         subMenuConsultarAgenda = new javax.swing.JMenuItem();
+        jMenuAgendarServico = new javax.swing.JMenuItem();
         menuCadastroCliente_Pet = new javax.swing.JMenu();
         subMenuCliente = new javax.swing.JMenuItem();
         subMenuPet = new javax.swing.JMenuItem();
@@ -113,6 +114,18 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
             }
         });
         menuAdministrarAtendimento.add(subMenuConsultarAgenda);
+
+        jMenuAgendarServico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuAgendarServico.setBackground(new java.awt.Color(228, 196, 154));
+        jMenuAgendarServico.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jMenuAgendarServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/IconesPet/iconeAtendimento1.png"))); // NOI18N
+        jMenuAgendarServico.setText("Agendar Serviço");
+        jMenuAgendarServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAgendarServicoActionPerformed(evt);
+            }
+        });
+        menuAdministrarAtendimento.add(jMenuAgendarServico);
 
         menuAtendimento.add(menuAdministrarAtendimento);
 
@@ -463,6 +476,24 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
         
     }//GEN-LAST:event_SubMenuGestaoProfissionalActionPerformed
 
+    private void jMenuAgendarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAgendarServicoActionPerformed
+        // Agendar novo Serviço
+        String tituloAgendamentoServico;
+        tituloAgendamentoServico = "Agendamento Serviço Pet / Cliente";
+
+        TelaAgendamentoClientePet telaAgendamentoClientePet = new TelaAgendamentoClientePet();
+        telaAgendamentoClientePet.setTitle(tituloAgendamentoServico);
+        telaAgendamentoClientePet.pack();
+        telaAgendamentoClientePet.setLocation(50, 50); //(ponto inicial apartir lateral,altura)
+        telaAgendamentoClientePet.setVisible(true);
+        
+        add(telaAgendamentoClientePet, JLayeredPane.DRAG_LAYER);
+
+        telaAgendamentoClientePet.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+        
+        
+    }//GEN-LAST:event_jMenuAgendarServicoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -502,6 +533,7 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuProfissional;
     private javax.swing.JMenuItem SubMenuGestaoProfissional;
+    private javax.swing.JMenuItem jMenuAgendarServico;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuAdministrarAtendimento;
