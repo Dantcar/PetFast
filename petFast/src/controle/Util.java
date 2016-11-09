@@ -234,6 +234,8 @@ public class Util {
             vmes = arg.toString().substring(4,7);
             vano = arg.toString().substring(24,28);
             
+            
+            
             if (vmes.equals("Jan")){
               vmes = "01";   
             }
@@ -270,6 +272,7 @@ public class Util {
             if (vmes.equals("Dec")){
               vmes = "12";   
             }
+           // System.out.println(vano +"-->"+arg.toString() );
             
             data = vdia+"/"+vmes+"/"+vano;
         return data;

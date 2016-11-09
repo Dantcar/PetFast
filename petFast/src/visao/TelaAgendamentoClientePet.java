@@ -7,13 +7,23 @@ package visao;
 
 import controle.AnimalCtrl;
 import controle.ClienteCtrl;
+import controle.Util;
+import static controle.Util.DataFormatada;
+import static controle.Util.DataFormatada1;
+import static controle.Util.DataFormatadaS;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import static java.lang.Integer.parseInt;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
@@ -34,6 +44,9 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
     private List lAnimal;
     private JList listAnimal;
     private String urlMiniFoto, nomeAnimal;
+    private static Date hojeAgendamento;
+    private static SimpleDateFormat sdfDataAgendamento, sdfHojeAgendamento;
+    private static String dataAgendamento, dataHojeAgendamento;
     private static int openFrameCount = 0; //teste
     private static final int xOffset = 30, yOffset = 30; //teste
     /**
@@ -58,6 +71,22 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
         setLocation(new Point((screenSize.width - frameSize.width) / 2,
                               (screenSize.height - frameSize.width) / 2));
         this.repaint();
+        
+        
+        
+        jdpAgendamento.setDate(Calendar.getInstance().getTime());
+        jdpAgendamento.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
+        
+        hojeAgendamento = new Date();
+        dataHojeAgendamento = Util.DataFormatada(hojeAgendamento);
+        sdfHojeAgendamento = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            hojeAgendamento = sdfHojeAgendamento.parse(dataHojeAgendamento);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaAgendamentoClientePet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
         idCliente = "";
         nomeCliente = "";
         tctPetAnimalCpfCliente.setEditable(false);
@@ -104,8 +133,9 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
         lblTituloAgendamentoPet = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblDataAgendamento = new javax.swing.JLabel();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        jdpAgendamento = new org.jdesktop.swingx.JXDatePicker();
         btnAgendar = new javax.swing.JButton();
+        lblProvisorioDataAgendamento = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 128, 0));
         setClosable(true);
@@ -344,7 +374,7 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
                         .addGroup(jPanelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnVoltarMenu)
                             .addComponent(btnConsultarPet))
-                        .addGap(54, 54, 54))
+                        .addGap(21, 21, 21))
                     .addGroup(jPanelPetLayout.createSequentialGroup()
                         .addComponent(lblMiniFotoPet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -365,7 +395,12 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
         lblDataAgendamento.setForeground(new java.awt.Color(102, 102, 102));
         lblDataAgendamento.setText("Data Agendamento : ");
 
-        jXDatePicker1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jdpAgendamento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jdpAgendamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jdpAgendamentoActionPerformed(evt);
+            }
+        });
 
         btnAgendar.setBackground(new java.awt.Color(0, 128, 0));
         btnAgendar.setFont(new java.awt.Font("Tahoma", 3, 10)); // NOI18N
@@ -377,6 +412,13 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
             }
         });
 
+        lblProvisorioDataAgendamento.setBackground(new java.awt.Color(255, 239, 191));
+        lblProvisorioDataAgendamento.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblProvisorioDataAgendamento.setForeground(new java.awt.Color(51, 51, 51));
+        lblProvisorioDataAgendamento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblProvisorioDataAgendamento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblProvisorioDataAgendamento.setOpaque(true);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -385,20 +427,24 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26)
                 .addComponent(lblDataAgendamento)
                 .addGap(18, 18, 18)
-                .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
-                .addComponent(btnAgendar, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblProvisorioDataAgendamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jdpAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(86, 86, 86)
+                .addComponent(btnAgendar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                 .addGap(183, 183, 183))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDataAgendamento)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdpAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgendar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblProvisorioDataAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
@@ -642,7 +688,22 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
 
     private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
         // TODO add your handling code here:
+        String datap = null;
+        
+        datap = DataFormatadaS(jdpAgendamento.getDate().toString());
+        if (datap != null){
+        
+        lblProvisorioDataAgendamento.setText(datap);
+        }else{
+        lblProvisorioDataAgendamento.setText("");
+        }
+        
     }//GEN-LAST:event_btnAgendarActionPerformed
+
+    private void jdpAgendamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdpAgendamentoActionPerformed
+        // TODO add your handling code here:
+        dataAgendamento = jdpAgendamento.getEditor().getText();
+    }//GEN-LAST:event_jdpAgendamentoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -661,9 +722,10 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanelCliente;
     private javax.swing.JPanel jPanelPet;
     private javax.swing.JPanel jPanelTitulo;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private org.jdesktop.swingx.JXDatePicker jdpAgendamento;
     private javax.swing.JLabel lblDataAgendamento;
     private javax.swing.JLabel lblMiniFotoPet;
+    private javax.swing.JLabel lblProvisorioDataAgendamento;
     private javax.swing.JLabel lblQuantidadePetCliente;
     private javax.swing.JLabel lblTelaPetCodigoCliente;
     private javax.swing.JLabel lblTelaPetCodigoCliente1;
