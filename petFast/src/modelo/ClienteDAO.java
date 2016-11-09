@@ -823,4 +823,65 @@ public class ClienteDAO {
         return cl;
     }
 
+    public String buscarClientePorId(String idCliente) {
+    String cli = "";    
+    Cliente cl = new Cliente();
+
+        String msg = "";
+        String sql = "SELECT * FROM cliente WHERE idcliente = idCliente  ";
+        System.out.println(sql);
+        conexao = DBPetFast.getConnection();
+        ResultSet rs;
+        rs = null;
+
+        try {
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            if (rs.first()) {
+                //Cliente cl = new Cliente();
+                cl.setIdCliente(rs.getString("idcliente"));
+                cl.setNome(rs.getString("nome"));
+                cl.setNascimento(rs.getString("nascimento"));
+                cl.setEndereco(rs.getString("endereco"));
+                cl.setNumero(rs.getString("numero"));
+                cl.setBairro(rs.getString("bairro"));
+                cl.setCidade(rs.getString("cidade"));
+                cl.setUf(rs.getString("uf"));
+                cl.setCep(rs.getString("cep"));
+                cl.setEmail(rs.getString("email"));
+                cl.setTelefone(rs.getString("telefone"));
+                cl.setRg(rs.getString("rg"));
+                cl.setCpf(rs.getString("cpf"));
+            } else {
+                msg = msg + "Cliente não encontrado \n";
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        return cl.getNome();
+    
+    
+    }
+
 } // final da classe ClienteDAO

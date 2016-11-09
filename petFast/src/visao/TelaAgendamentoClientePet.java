@@ -8,8 +8,6 @@ package visao;
 import controle.AnimalCtrl;
 import controle.ClienteCtrl;
 import controle.Util;
-import static controle.Util.DataFormatada;
-import static controle.Util.DataFormatada1;
 import static controle.Util.DataFormatadaS;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -389,7 +387,7 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
         lblTituloAgendamentoPet.setText("Agendamento Serviço Pet");
 
         jPanel2.setBackground(new java.awt.Color(228, 251, 173));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Data / Hora Agendamento"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Data Agendamento"));
 
         lblDataAgendamento.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblDataAgendamento.setForeground(new java.awt.Color(102, 102, 102));
@@ -405,7 +403,7 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
         btnAgendar.setBackground(new java.awt.Color(0, 128, 0));
         btnAgendar.setFont(new java.awt.Font("Tahoma", 3, 10)); // NOI18N
         btnAgendar.setForeground(new java.awt.Color(0, 0, 51));
-        btnAgendar.setText("Agendar");
+        btnAgendar.setText("Agendar Horário");
         btnAgendar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgendarActionPerformed(evt);
@@ -431,7 +429,7 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
                     .addComponent(lblProvisorioDataAgendamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jdpAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(86, 86, 86)
-                .addComponent(btnAgendar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(btnAgendar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(183, 183, 183))
         );
         jPanel2Layout.setVerticalGroup(

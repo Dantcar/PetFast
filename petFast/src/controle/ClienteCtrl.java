@@ -123,5 +123,12 @@ public class ClienteCtrl {
        return cli;
     
     }
+
+    public String buscarNomeId(String idCliente) {
+        String cli;
+        ClienteDAO clienteDAO = new ClienteDAO();
+        cli = clienteDAO.buscarClientePorId(idCliente);
+       return cli;   
+    }
         
 }

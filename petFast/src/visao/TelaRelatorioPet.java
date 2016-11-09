@@ -801,10 +801,15 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
         String resultado = "";
         String sexoAnimal = "";
+        String nomeCliente = "";
+        ClienteCtrl cliente = new ClienteCtrl();
+        
         //for (Cliente c : ListaClientes) {
         for (Animal a : ListaAnimais) {
-
+         nomeCliente = cliente.buscarNomeId(a.getIdCliente());   
             resultado += ""
+                    + "\n\tCódigo Cliente: "+ a.getIdCliente() + "\n"
+                    +" \tNome Cliente: "+ nomeCliente +"\n"
                     + "\n\tCódigo Pet: " + a.getIdAnimal() + "\n"
                     + "\n\tNome: " + a.getNome()
                     + "\n\tEspécie: " + a.getEspecie().trim();
