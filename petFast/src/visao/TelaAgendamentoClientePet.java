@@ -38,7 +38,7 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
     private DefaultListModel lista = new DefaultListModel();
     private static ArrayList listaNome, listaAnimal, arrayListAnimal;
     private static int pos = 0, tam = 0;
-    private String idCliente, nomeCliente;
+    private String idCliente, idAnimal, nomeCliente;
     private List lAnimal;
     private JList listAnimal;
     private String urlMiniFoto, nomeAnimal;
@@ -695,7 +695,7 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
         }else{
         lblProvisorioDataAgendamento.setText("");
         }
-        
+        montarTelaAgendaServiço(datap, idAnimal, idCliente);
     }//GEN-LAST:event_btnAgendarActionPerformed
 
     private void jdpAgendamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdpAgendamentoActionPerformed
@@ -808,6 +808,43 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
         //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
         lblMiniFotoPet.setIcon(foto);
         //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
+    }
+
+    private void montarTelaAgendaServiço(String datap, String idAnimal, String idCliente) {
+        /*
+          String tituloProfissional;
+         tituloProfissional = "Gestão Profissional - Consultar ";
+         String nome = tctNomeProfissional.getText();
+         
+         int id;
+         id = parseInt(tctIdProfissional.getText());
+         TelaCadastroProfissional telaCadProf = new TelaCadastroProfissional(nome, id, "c");
+         telaCadProf.setTitle(tituloProfissional);
+         telaCadProf.setVisible(true);
+
+         //add(telaAnimal, JLayeredPane.DRAG_LAYER);
+         telaCadProf.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+         telaCadProf.setLocation(50, 50);   
+        
+        this.limparCampos();
+        this.desabilitarBotoesProf1();
+        */
+        String titulo;
+        titulo = "Agendamento Serviços Petfast";
+        int idClienteInt;
+        idClienteInt = Integer.parseInt(idCliente);
+        int idAnimalInt;
+        idAnimalInt = Integer.parseInt(idAnimal);
+        
+        TelaAgendaServico telaAgenda = new TelaAgendaServico();
+        telaAgenda.setTitle(titulo);
+        telaAgenda.setVisible(true);
+        telaAgenda.setDefaultCloseOperation(1);//DISPOSE_ON_CLOSE
+        telaAgenda.setLocation(50, 50); 
+        
+        
+    
+    
     }
 
 
