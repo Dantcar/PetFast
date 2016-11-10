@@ -74,7 +74,8 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         //Limpar ComboBox
         cbxNomePet.removeAllItems();
         cbxNomePet.setSelectedIndex(-1);
-        String url = System.getProperty("user.dir") + "\\src\\Icones\\clientePet.jpg";
+        /*String url = System.getProperty("user.dir") + "\\src\\Icones\\clientePet.jpg";*/
+        String url = System.getProperty("user.dir") + "\\ImagensPet\\petDono.jpg";
         colocarFotoLabelUrl(url);
         tctCpfCliente.setText("");
         tctCpfCliente.setEditable(false);
@@ -278,7 +279,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         tctNomeCliente.setForeground(new java.awt.Color(51, 51, 51));
         tctNomeCliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        btnPesquisarCliente.setBackground(new java.awt.Color(0, 128, 0));
+        btnPesquisarCliente.setBackground(new java.awt.Color(235, 245, 130));
         btnPesquisarCliente.setFont(new java.awt.Font("Tahoma", 3, 10)); // NOI18N
         btnPesquisarCliente.setForeground(new java.awt.Color(0, 0, 51));
         btnPesquisarCliente.setText("Pesquisar");
@@ -303,7 +304,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
 
         jPanelBotoesMovimentoCliente.setName("PainelBotoes"); // NOI18N
 
-        btnPrevCli.setBackground(new java.awt.Color(0, 128, 0));
+        btnPrevCli.setBackground(new java.awt.Color(235, 245, 130));
         btnPrevCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnPrevCli.setForeground(new java.awt.Color(0, 0, 51));
         btnPrevCli.setText("<");
@@ -313,7 +314,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
             }
         });
 
-        btnNextCli.setBackground(new java.awt.Color(0, 128, 0));
+        btnNextCli.setBackground(new java.awt.Color(235, 245, 130));
         btnNextCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnNextCli.setForeground(new java.awt.Color(0, 0, 51));
         btnNextCli.setText(">");
@@ -323,7 +324,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
             }
         });
 
-        btnLastCli.setBackground(new java.awt.Color(0, 128, 0));
+        btnLastCli.setBackground(new java.awt.Color(235, 245, 130));
         btnLastCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLastCli.setForeground(new java.awt.Color(0, 0, 51));
         btnLastCli.setText(">|");
@@ -333,7 +334,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
             }
         });
 
-        btnInicioCli.setBackground(new java.awt.Color(0, 128, 0));
+        btnInicioCli.setBackground(new java.awt.Color(235, 245, 130));
         btnInicioCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnInicioCli.setForeground(new java.awt.Color(0, 0, 51));
         btnInicioCli.setText("|<");

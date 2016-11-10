@@ -431,9 +431,7 @@ public class TelaProfissional extends javax.swing.JInternalFrame {
             
         } else {
 
-            int respostaDialogo = 0;
-
-            JOptionPane.showConfirmDialog(null, "Profissional " + tctNomeProfissional.getText() + " não localizado!" + "\n"
+            int respostaDialogo = JOptionPane.showConfirmDialog(null, "Profissional " + tctNomeProfissional.getText() + " não localizado!" + "\n"
                     + "deseja incluí-lo? ");
             if (respostaDialogo == JOptionPane.YES_OPTION) {
                 // verifica se o usuário clicou no botão YES
