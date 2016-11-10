@@ -263,7 +263,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
         });
 
         btnListarTodosPets.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnListarTodosPets.setText("Listar todos Pets");
+        btnListarTodosPets.setText("Listar todos Pets do Cliente");
         btnListarTodosPets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarTodosPetsActionPerformed(evt);
@@ -389,9 +389,6 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(tctIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnListarTodosPets, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
@@ -410,7 +407,10 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
                                         .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
                                         .addGap(61, 61, 61)
-                                        .addComponent(jPanelBotoesMovimentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(jPanelBotoesMovimentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnListarTodosPets, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(75, 75, 75))
         );
         PainelRelOpcoesClienteLayout.setVerticalGroup(
@@ -445,7 +445,7 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
                         .addComponent(cbxNomePet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnListarPet)))
                 .addGap(31, 31, 31)
-                .addComponent(btnListarTodosPets)
+                .addComponent(btnListarTodosPets, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -595,13 +595,15 @@ public class TelaRelatorioPet extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnListarPetActionPerformed
 
     private void btnListarTodosPetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarTodosPetsActionPerformed
-        /*
-         String title = "Relatórios Clientes";
-         ClienteCtrl cCliente = new ClienteCtrl();
+       
+         String title = "Relatórios Pets";
+         int id = Integer.parseInt(tctIdCliente.getText());
+         AnimalCtrl cAnimal = new AnimalCtrl();
          PanelTabRelPetImpresso.setSelectedIndex(1);
-         List clientes = cCliente.listarClientes();
-         this.carregarListaCliente2(clientes);
-         */
+         List animal;
+         animal = cAnimal.receberListaAnimaisCliente(id);
+         this.carregarListaAnimal2(animal);
+         
     }//GEN-LAST:event_btnListarTodosPetsActionPerformed
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed

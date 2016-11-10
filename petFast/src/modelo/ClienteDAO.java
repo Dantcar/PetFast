@@ -295,10 +295,12 @@ public class ClienteDAO {
             // JOptionPane.showMessageDialog(null,msg );
         }
         close();
+        /*
         if (conexao.isClosed()) {
             msg = msg + "Conexão ao banco fechada";
             JOptionPane.showMessageDialog(null, msg);
         }
+        */
 
     }//fim inserir cliente
 
@@ -392,10 +394,12 @@ public class ClienteDAO {
             // JOptionPane.showMessageDialog(null,msg );
         }
         close();
+        /*
         if (conexao.isClosed()) {
             msg = msg + "Conexão ao banco fechada";
             JOptionPane.showMessageDialog(null, msg);
         }
+        */
 
     }//fim deletar cliente
 
