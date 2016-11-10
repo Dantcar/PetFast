@@ -828,7 +828,7 @@ public class ClienteDAO {
     Cliente cl = new Cliente();
 
         String msg = "";
-        String sql = "SELECT * FROM cliente WHERE idcliente = idCliente  ";
+        String sql = "SELECT * FROM cliente WHERE idcliente = "+idCliente;
         System.out.println(sql);
         conexao = DBPetFast.getConnection();
         ResultSet rs;
