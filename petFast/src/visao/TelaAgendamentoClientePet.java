@@ -831,10 +831,10 @@ public class TelaAgendamentoClientePet extends javax.swing.JInternalFrame {
         */
         String titulo;
         titulo = "Agendamento Serviços Petfast";
-        int idClienteInt;
-        idClienteInt = Integer.parseInt(idCliente);
-        int idAnimalInt;
-        idAnimalInt = Integer.parseInt(idAnimal);
+       // int idClienteInt;
+       // idClienteInt = Integer.parseInt(idCliente);
+       // int idAnimalInt;
+       //idAnimalInt = Integer.parseInt(idAnimal);
         
         TelaAgendaServico telaAgenda = new TelaAgendaServico();
         telaAgenda.setTitle(titulo);

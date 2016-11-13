@@ -184,13 +184,13 @@ public class AnimalDAO {
      * @return
      */
     public List<Animal> listarAnimaisCliente(int cliente) {
-        Animal animal = new Animal();   //objeto animal que será utilizado para preencher a lista
+        Animal animal;  //objeto animal que será utilizado para preencher a lista
         List<Animal> listaAnimal = new ArrayList<>(); //lista de animais pertencentes ao cliente
 
         //variáveis do método
         String msg = "";
         String sql = "SELECT * FROM animal WHERE idcliente = " + cliente ;
-        System.out.println(sql);
+        //System.out.println(sql);
         conexao = DBPetFast.getConnection();
         ResultSet rs;
         rs = null;
@@ -220,11 +220,9 @@ public class AnimalDAO {
             while (rs.next()) {
                 //usando o objeto animal estanciado no início do método
                 animal = new Animal();
-                animal.setIdAnimal(rs.getString("idanimal"));   
-                System.out.println(animal.getIdAnimal());   //remover           
+                animal.setIdAnimal(rs.getString("idanimal"));
                 animal.setIdCliente(rs.getString("idcliente"));
-                animal.setNome(rs.getString("nome"));
-                System.out.println(animal.getNome());   //remover  
+                animal.setNome(rs.getString("nome")); 
                 animal.setEspecie(rs.getString("especie"));
                 animal.setNascimento(rs.getString("nascimento"));
                 animal.setRaca(rs.getString("raca"));
@@ -233,9 +231,8 @@ public class AnimalDAO {
                 animal.setCor(rs.getString("cor"));
                 animal.setCaracteristica(rs.getString("caracteristica"));
                 animal.setSexo(rs.getString("sexo"));
-                 System.out.println(animal.getSexo());   //remover  
-                animal.setFoto(rs.getString("foto"));
-                 System.out.println(animal.getFoto());   //remover  
+                animal.setFoto(rs.getString("foto")); 
+                
                 listaAnimal.add(animal);
                
             }
@@ -244,6 +241,7 @@ public class AnimalDAO {
             msg = reduzString(msg);
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         if ("".equals(msg)) {
         } else {
             JOptionPane.showMessageDialog(null, msg);
@@ -453,6 +451,7 @@ public class AnimalDAO {
         try {
             stmt = conexao.createStatement();
         } catch (SQLException ex) {
+            msg = msg + ex;
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         String sql = "UPDATE animal SET "
@@ -479,6 +478,8 @@ public class AnimalDAO {
             msg = msg+"Erro de gravação no BD \n";
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        close();
         
         if ("".equals(msg)) {
         } else {

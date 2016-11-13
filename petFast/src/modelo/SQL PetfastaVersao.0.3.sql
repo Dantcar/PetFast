@@ -160,7 +160,7 @@ Create table Agendamento(
     AnimalId int not null,
     ClienteId int not null,
     Serviço varchar(60),
-    IDServiço int not null,
+    IDServico int not null,
     IDProfissional int,
     PRIMARY KEY (IDAgendamento)
 );
