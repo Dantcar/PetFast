@@ -10,14 +10,15 @@
 /**
  * Métodos desta classe
  * 
- * 01 - buscarIdAgendamentoAtual() //retorna int id
- * 02 - inserirAgendamento();
- * 03 - alterarAgendamento();
- * 04 - excluirAgendamento();
- * 05 - contarAgendamentosHorario(); /retorna número de agendamentos no horário
- * 06 - listarAgendamentoHorario();  
+ *  ok  01 - buscarIdAgendamentoAtual() //retorna int id
+ *  ok  02 - inserirAgendamento();
+ *  ok  03 - alterarAgendamento();
+ *  ok  04 - excluirAgendamento();
+ *  ok  05 - contarAgendamentosHorario(); /retorna número de agendamentos no horário
+ *  ok  06 - listarAgendamentoHorario();  
  * 07 - listarAgendamentoSemana()
- * 09 - listarAgendamentoCliente(); //dia ou periodo
+ * 08 -
+ *  ok  09 - listarAgendamentoCliente(); //dia ou periodo
  * 10 - listarAgendamentoAnimalDia();
  * 
  */
@@ -34,7 +35,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import modelo.Agendamento;
 
 /**
  * @version 
@@ -81,7 +81,7 @@ public class AgendamentoDAO {
     }//fim close()  
     
     /**
-     * método que busca o idAtual do agendamento, utilizado para 
+     * método 01 que busca o idAtual do agendamento, utilizado para 
      * serializar a tabela agendamento.
      * @return idAgendamento
      */
@@ -131,7 +131,7 @@ public class AgendamentoDAO {
     }//Final método buscarIdAgendamentoAtual
     
     /**
-     * 
+     * Método 02
      * @param agendamento
      */
     public void inserirAgendamento(Agendamento agendamento){
@@ -184,7 +184,7 @@ public class AgendamentoDAO {
     
     
     /**
-     * Método responsável em realizar a alteração de Agendamento
+     * Método 03 responsável em realizar a alteração de Agendamento
      * @param agendamento
      * @param vid 
      */
@@ -236,6 +236,10 @@ public class AgendamentoDAO {
         
     }//final método alterarAgendamento
     
+    /**
+     * Método 04 excluir agendamento
+     * @param vid 
+     */
     public void excluirAgendamento(int vid){
         String msg, msgOk;
 
@@ -285,7 +289,10 @@ public class AgendamentoDAO {
         
     }//Final método excluirAgendamento
     
-    //retorna número de agendamentos no horário
+    /**
+     * Método 5 contar quantidade de agendamentos determinado horário
+     * retorna número de agendamentos no horário
+     * */
     public int contarAgendamentosHorario(String vData, String vHora){
         String msg, msgOk, sql;
         int resultado=0;
@@ -337,6 +344,12 @@ public class AgendamentoDAO {
         return resultado;
     } //Final método contarAgendamentoHorario
     
+    /**
+     * Método 06 que retorna os agendamentos de uma data e hora específica
+     * @param vData
+     * @param vHora
+     * @return 
+     */
     public List<Agendamento> listarAgendamentoHorario(String vData, String vHora){
         Agendamento agendamento;
                 
@@ -410,6 +423,11 @@ public class AgendamentoDAO {
         return listaAgendamento;   
 }//Final método listarAgendamentoHorario
     
+    /**
+     * Método 09 listar agendamento por cliente
+     * @param vid
+     * @return 
+     */
     public List<Agendamento> listarAgendamentoCliente(String vid){
       Agendamento agendamento;
                 
@@ -486,8 +504,5 @@ public class AgendamentoDAO {
    
     }//Final listarAgendamentoCliente
     
-    
-    
-    
-    
+ 
 }//Final da Classe AgendamentoDAO
