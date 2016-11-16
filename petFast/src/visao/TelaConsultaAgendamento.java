@@ -10,6 +10,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import controle.AgendamentoCtrl;
 import controle.AnimalCtrl;
 import controle.ClienteCtrl;
 import static controle.Util.reduzString;
@@ -25,6 +26,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import modelo.Agendamento;
 import modelo.Animal;
 import modelo.Cliente;
 
@@ -45,6 +47,7 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
     private String urlMiniFoto, nomeAnimal;
     private static int openFrameCount = 0; //teste
     private static final int xOffset = 30, yOffset = 30; //teste
+    private Object a;
 
     /**
      * Creates new form TelaRelatorioCliente
@@ -152,7 +155,7 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
                 .addComponent(lblTelaRelatorioCliente)
                 .addGap(67, 67, 67)
                 .addComponent(lblTituloRelatorioPet, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addContainerGap(441, Short.MAX_VALUE))
         );
         PainelRelTituloClienteLayout.setVerticalGroup(
             PainelRelTituloClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +167,7 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(PainelRelTituloCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 910, -1));
+        getContentPane().add(PainelRelTituloCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 1020, -1));
 
         PanelRelClientesBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -255,7 +258,7 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
 
         btnListarPet.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnListarPet.setMnemonic('E');
-        btnListarPet.setText("<= Mostrar Pet Cliente");
+        btnListarPet.setText("Agendamentos do Pet");
         btnListarPet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarPetActionPerformed(evt);
@@ -263,7 +266,7 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
         });
 
         btnListarTodosPets.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnListarTodosPets.setText("Listar todos Pets do Cliente");
+        btnListarTodosPets.setText("Agendamentos Cliente");
         btnListarTodosPets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarTodosPetsActionPerformed(evt);
@@ -411,7 +414,7 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
                     .addGroup(PainelRelOpcoesClienteLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnListarTodosPets, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(75, 75, 75))
+                .addGap(63, 63, 63))
         );
         PainelRelOpcoesClienteLayout.setVerticalGroup(
             PainelRelOpcoesClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,7 +455,7 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
         PanelTabRelPetImpresso.addTab("Relatórios Pets", PainelRelOpcoesCliente);
 
         txtRelPet.setEditable(false);
-        txtRelPet.setBackground(new java.awt.Color(125, 181, 199));
+        txtRelPet.setBackground(new java.awt.Color(151, 226, 153));
         txtRelPet.setColumns(20);
         txtRelPet.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         txtRelPet.setRows(7);
@@ -464,23 +467,24 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
         PainelRelImpressoLayout.setHorizontalGroup(
             PainelRelImpressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelImpressoLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblFotoPetRel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         PainelRelImpressoLayout.setVerticalGroup(
             PainelRelImpressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelRelImpressoLayout.createSequentialGroup()
-                .addGroup(PainelRelImpressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFotoPetRel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addComponent(lblFotoPetRel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 176, Short.MAX_VALUE))
+            .addGroup(PainelRelImpressoLayout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         PanelTabRelPetImpresso.addTab("Relatório Impresso", PainelRelImpresso);
 
-        getContentPane().add(PanelTabRelPetImpresso, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 680, 340));
+        getContentPane().add(PanelTabRelPetImpresso, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 780, 340));
         PanelTabRelPetImpresso.getAccessibleContext().setAccessibleName("Relatórios Pets");
 
         lblRelatorioPetImagem.setText(" ");
@@ -581,28 +585,28 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbxNomePetActionPerformed
 
-    private void btnListarPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPetActionPerformed
-        String title = "Relatórios Pets";
-        nomeAnimal = cbxNomePet.getSelectedItem().toString();
-        //ClienteCtrl cCliente = new ClienteCtrl();
-        AnimalCtrl cAnimal = new AnimalCtrl();
-        //List cliente = cCliente.listaClientesNome(nomeCliente);
-        List animal = cAnimal.listaAnimaisNome(nomeAnimal);
-        PanelTabRelPetImpresso.setSelectedIndex(1);
-        //this.carregarListaCliente2(animal);
-        this.carregarListaAnimal2(animal);
-        
-    }//GEN-LAST:event_btnListarPetActionPerformed
-
     private void btnListarTodosPetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarTodosPetsActionPerformed
        
-         String title = "Relatórios Pets";
+         String title = "Agendamentos Cliente";
+         
+         /*
          int id = Integer.parseInt(tctIdCliente.getText());
          AnimalCtrl cAnimal = new AnimalCtrl();
+         
          PanelTabRelPetImpresso.setSelectedIndex(1);
          List animal;
          animal = cAnimal.receberListaAnimaisCliente(id);
          this.carregarListaAnimal2(animal);
+         */
+          String id = tctIdCliente.getText();
+          AgendamentoCtrl agendaCtrl = new AgendamentoCtrl();
+          
+          PanelTabRelPetImpresso.setSelectedIndex(1);
+          List agendamento;
+          agendamento = agendaCtrl.listarAgendamentoClienteCtrl(id);
+          this.carregarListaAgendamentoCliente(agendamento);
+          
+         
          
     }//GEN-LAST:event_btnListarTodosPetsActionPerformed
 
@@ -716,6 +720,17 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
        toFront();
     }//GEN-LAST:event_formMouseClicked
+
+    private void btnListarPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPetActionPerformed
+        String id = tctIdCliente.getText();
+        AgendamentoCtrl agendaCtrl = new AgendamentoCtrl();
+
+        PanelTabRelPetImpresso.setSelectedIndex(1);
+        List agendamento;
+        agendamento = agendaCtrl.listarAgendamentoClienteCtrl(id);
+        this.carregarListaAgendamentoCliente(agendamento);
+
+    }//GEN-LAST:event_btnListarPetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -874,6 +889,46 @@ public class TelaConsultaAgendamento extends javax.swing.JInternalFrame {
         //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
         lblFotoPetRel.setIcon(foto);
         //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
+    }
+
+    private void carregarListaAgendamentoCliente(List<Agendamento> ListaAgendamentos) {
+        String newline = System.getProperty("line.separator"); //verificar propriedades de System.getProperty
+        String resultado = "";
+        String nomeAnimal;
+        String nomeCliente = "";
+        ClienteCtrl cliente = new ClienteCtrl();
+        AnimalCtrl canimal = new AnimalCtrl();
+        
+        //for (Cliente c : ListaClientes) {
+       // for (Animal a : ListaAnimais) {
+        for (Agendamento ag : ListaAgendamentos){
+         nomeCliente = cliente.buscarNomeId(ag.getClienteId()+"");
+         Animal animal = canimal.receberAnimaId(ag.getAnimalId());
+         
+        resultado += ""
+                  +"\nId Agendamento: "+ag.getIdAgendamento() +"\n"
+                  +"\nData: " +ag.getDataAgendamento() +" - "
+                  +"Horário: " +ag.getHoraAgendamento() +"\n"
+                  +"\nCódigo Cliente: " +ag.getClienteId() + " - "
+                  +"\tNome Cliente: "+ nomeCliente +"\n"
+                  +"Código Pet: " + ag.getAnimalId() + " - "
+                  +"\tNome Pet: " + animal.getNome() + "\n"
+                  +"Código Serviço: " + ag.getIdServico() + " - "
+                  +"\tDescrição do Serviço: " + ag.getServico() +"\n";
+
+         
+
+            resultado += newline;
+
+        }
+        resultado = "\n\n\t\t\t AGENDAMENTO DE SERVIÇOS - CLIENTE\n" + resultado;
+        txtRelPet.setText(resultado);
+        txtRelPet.setEditable(false);
+        //lblFotoPetRel.setVisible(true);
+        colocarMiniFotoRelLabel();
+        
+    
+    
     }
 
 }//Final da Classe TelaRelatorioPet

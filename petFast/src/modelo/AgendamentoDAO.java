@@ -480,7 +480,7 @@ public class AgendamentoDAO {
                 agendamento.setHoraAgendamento(rs.getString("horaagendamento"));
                 agendamento.setAnimalId(rs.getInt("animalid"));
                 agendamento.setClienteId(rs.getInt("clienteid"));
-                agendamento.setServico(rs.getString("servico"));
+                agendamento.setServico(rs.getString("serviço"));
                 agendamento.setIdServico(rs.getInt("idservico"));
                 agendamento.setIdProfissional(rs.getInt("idprofissional"));
                 
