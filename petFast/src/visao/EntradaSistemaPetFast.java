@@ -427,7 +427,19 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuSairActionPerformed
 
     private void subMenuConsultarAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuConsultarAgendaActionPerformed
-        // TODO add your handling code here:
+        String tituloStatus;
+        tituloStatus = "Consultar Agendamento";
+
+        TelaConsultaAgendamento conPetAgenda = new TelaConsultaAgendamento();
+        conPetAgenda.setTitle(tituloStatus);
+        conPetAgenda.setVisible(true);
+        add(conPetAgenda, JLayeredPane.DEFAULT_LAYER);
+        conPetAgenda.setDefaultCloseOperation(1);
+        conPetAgenda.setLocation(40, 50);
+        
+        
+        
+        
     }//GEN-LAST:event_subMenuConsultarAgendaActionPerformed
 
     private void subMenuAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuAgendarActionPerformed
