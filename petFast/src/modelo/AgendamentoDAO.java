@@ -142,7 +142,7 @@ public class AgendamentoDAO {
       
       conexao = DBPetFast.getConnection();
       
-      sql = "INSERT INTO animal VALUES ("
+      sql = "INSERT INTO agendamento VALUES ("
         + agendamento.getIdAgendamento() +", "
         + "'" + agendamento.getDataAgendamento() + "', "
         + "'" + agendamento.getHoraAgendamento() + "', "

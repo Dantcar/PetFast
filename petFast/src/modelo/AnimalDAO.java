@@ -56,6 +56,7 @@ public class AnimalDAO {
     }//final método close()
 
     /**
+     * 1
      * Método para buscar qual o id atual da tabela Animal
      *
      * @return idanimal atual
@@ -111,7 +112,12 @@ public class AnimalDAO {
     }//final método buscarIdPetAtual
 
     
-    
+    /**
+     * 2
+     * Método para buscar o Animal enviando o nome do animal como parametro
+     * @param nomeAnimal
+     * @return 
+     */
     public Animal buscarAnimalNome(String nomeAnimal) {
         Animal animal = new Animal();
 
@@ -177,6 +183,84 @@ public class AnimalDAO {
 
     }//final método buscarAnimalNome
 
+    
+    /**
+     * 3
+     * Método para buscar o Animal enviando o nome do animal como parametro
+     * @param nomeAnimal
+     * @return 
+     */
+    public Animal buscarAnimalNomeIdCliente (String nomeAnimal, int idCliente) {
+        Animal animal = new Animal();
+
+        //variaveis do método
+        String msg = "";
+        String sql = "SELECT * FROM animal WHERE upper(nome) LIKE upper('" + nomeAnimal + "') "
+                + "AND idcliente = "+idCliente;
+        
+        System.out.println(sql);
+        conexao = DBPetFast.getConnection();
+        ResultSet rs;
+        rs = null;
+
+        try {
+            //preparacao para buscar no banco
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            //
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //Buscando no banco a instrucao/comando
+        try {
+            if (rs.first()) {
+                //utilizando o objeto animal estanciado no início do método
+
+                animal.setIdAnimal(rs.getString("idanimal"));
+                animal.setIdCliente(rs.getString("idcliente"));
+                animal.setNome(rs.getString("nome"));
+                animal.setEspecie(rs.getString("especie"));
+                animal.setNascimento(rs.getString("nascimento"));
+                animal.setRaca(rs.getString("raca"));
+                animal.setPeso(rs.getString("peso"));
+                animal.setAltura(rs.getString("altura"));
+                animal.setCor(rs.getString("cor"));
+                animal.setCaracteristica(rs.getString("caracteristica"));
+                animal.setSexo(rs.getString("sexo"));
+                animal.setFoto(rs.getString("foto"));
+            } else {
+                msg = msg + "Animal Pet não encontrado \n";
+            }
+        } catch (SQLException ex) {
+
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //envia mensagem na tela caso ocorra alguma execessao ou nao encontre o animal
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        return animal;
+
+    }//final método buscarAnimalNomeIdCliente
+    
+    
+    
+    
+    
     /**
      * Método para buscar uma lista de animais fornecendo o idCliente
      *
@@ -320,7 +404,7 @@ public class AnimalDAO {
         msg = "";
         conexao = DBPetFast.getConnection();
         ResultSet rs = null;
-        sql = "SELECT * FROM cliente WHERE idanimal = " + id;
+        sql = "SELECT * FROM animal WHERE idanimal = " + id;
 
         //enviando o comando sql
         try {
@@ -355,6 +439,7 @@ public class AnimalDAO {
                 animal.setCor(rs.getString("cor"));
                 animal.setCaracteristica(rs.getString("caracteristica"));
                 animal.setCaracteristica(rs.getString("sexo"));
+                animal.setFoto(rs.getString("foto"));
 
             } else {
                 msg = msg + "Animal Pet não encontrado \n";

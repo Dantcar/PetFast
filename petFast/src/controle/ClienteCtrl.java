@@ -130,5 +130,12 @@ public class ClienteCtrl {
         cli = clienteDAO.buscarClientePorId(idCliente);
        return cli;   
     }
+    
+    public Cliente buscarNomeIdInt(int idCliente) {
+        Cliente cli;
+        ClienteDAO clienteDAO = new ClienteDAO();
+        cli = clienteDAO.buscarClientePorIdInt(idCliente);
+       return cli;   
+    }
         
 }

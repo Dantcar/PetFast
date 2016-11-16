@@ -5,17 +5,147 @@
  */
 package visao;
 
+import controle.AgendamentoCtrl;
+import controle.AnimalCtrl;
+import controle.ClienteCtrl;
+import modelo.Agendamento;
+import modelo.Animal;
+import modelo.Cliente;
+import controle.Util;
+
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.swing.ImageIcon;
+
+import static controle.Util.DataFormatadaS;
+import static controle.Util.reduzString;
+import controle.ValidaCampos;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerListModel;
+
 /**
  *
  * @author deciodecarvalho
  */
 public class TelaAgendaServico extends javax.swing.JFrame {
 
+    private static final int DT_WIDTH = 700;
+    private static final int DT_HEIGHT = 500;
+    private static final Dimension DESKTOP_SIZE = new Dimension(DT_WIDTH, DT_HEIGHT);
+    private JDesktopPane desktop = new JDesktopPane();
+
+    private Animal animal;
+    private Cliente cliente;
+    private Agendamento agendamento;
+    private String urlMiniFoto, nomeAnimal;
+    private int idServico;
+
+    private static Date hojeAgendamento;
+    private static SimpleDateFormat sdfDataAgendamento, sdfHojeAgendamento;
+    private static String dataAgendamento, dataHojeAgendamento;
+
+    private static int openFrameCount = 0; //teste
+    private static final int xOffset = 30, yOffset = 30; //teste
+
+    /*
+     private static String[] horarioServ = {"08:00",
+     "09:00",
+     "10:00",
+     "11:00",
+     "12:00",
+     "13:00",
+     "14:00",
+     "15:00",
+     "16:00",
+     "17:00",
+     "18:00",            
+     }; //horários disponíveis
+     */
     /**
      * Creates new form TelaAgendaServico
      */
     public TelaAgendaServico() {
+
         initComponents();
+
+        // Center in the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+        //setLocation(new Point((screenSize.width - frameSize.width) / 2,
+        //                     (screenSize.height - frameSize.width) / 2));
+
+        //this.setLocation(50, 100); //(ponto inicial apartir lateral,altura)
+        setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
+        setLocation(new Point((screenSize.width - frameSize.width) / 2,
+                (screenSize.height - frameSize.width) / 2));
+        this.repaint();
+
+        /*
+         configurando formato do calendário
+         */
+        jdpAgendamento.setDate(Calendar.getInstance().getTime());
+        jdpAgendamento.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
+
+        hojeAgendamento = new Date();
+        dataHojeAgendamento = Util.DataFormatada(hojeAgendamento);
+        sdfHojeAgendamento = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            hojeAgendamento = sdfHojeAgendamento.parse(dataHojeAgendamento);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaAgendamentoClientePetOld.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public TelaAgendaServico(int vidAnimal, int vidCliente) {
+        initComponents();
+        desktop.setPreferredSize(DESKTOP_SIZE);
+        String pathProjeto = System.getProperty("user.dir") + "//";
+        String iconPetfast = pathProjeto + "src//Icones//petfastIcone.png";
+        //System.out.println(iconPetfast);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(iconPetfast));
+        // Center in the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+        //setLocation(new Point((screenSize.width - frameSize.width) / 2,
+        //                     (screenSize.height - frameSize.width) / 2));
+
+        //this.setLocation(50, 100); //(ponto inicial apartir lateral,altura)
+        setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
+        setLocation(new Point((screenSize.width - frameSize.width) / 2,
+                (screenSize.height - frameSize.width) / 2));
+        this.repaint();
+
+        /*
+         configurando formato do calendário
+         */
+        jdpAgendamento.setDate(Calendar.getInstance().getTime());
+        jdpAgendamento.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
+
+        hojeAgendamento = new Date();
+        dataHojeAgendamento = Util.DataFormatada(hojeAgendamento);
+        sdfHojeAgendamento = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            hojeAgendamento = sdfHojeAgendamento.parse(dataHojeAgendamento);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaAgendamentoClientePetOld.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //montar os dados iniciais da tela agendamento.
+        montaTelaAGenda(vidAnimal, vidCliente);
+
     }
 
     /**
@@ -28,7 +158,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlAgendaTitulo = new javax.swing.JPanel();
-        lblTituloAgendaPet = new javax.swing.JLabel();
         pnlAgenda = new javax.swing.JPanel();
         pnlAbasAgenda = new javax.swing.JTabbedPane();
         jpnlMesAtual = new javax.swing.JPanel();
@@ -37,41 +166,29 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         lblPetClienteAgenda = new javax.swing.JLabel();
         lbltPetCliente = new javax.swing.JLabel();
         lbltServiço = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cbxServico = new javax.swing.JComboBox();
         lblfotoPetAgenda = new javax.swing.JLabel();
         lbltIdPetClienteAgenda = new javax.swing.JLabel();
         lblIdClienteAgenda = new javax.swing.JLabel();
         lbltidPet = new javax.swing.JLabel();
         lblIdPetAgenda = new javax.swing.JLabel();
-        jpnMesProximo = new javax.swing.JPanel();
-        pnlAgendaBotoes = new javax.swing.JPanel();
+        jdpAgendamento = new org.jdesktop.swingx.JXDatePicker();
+        lblDataAgendamento = new javax.swing.JLabel();
+        btnConfirmar = new javax.swing.JButton();
+        cbxHoraAgendamento = new javax.swing.JComboBox();
+        lbHoraAgendamento = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
+        lblAgendamentoId = new javax.swing.JLabel();
+        tctIdAgendamento = new javax.swing.JLabel();
+        lblServicoId = new javax.swing.JLabel();
+        tctIdServico = new javax.swing.JLabel();
+        lblTituloAgendaPet = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlAgendaTitulo.setBackground(new java.awt.Color(229, 255, 255));
         pnlAgendaTitulo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
         pnlAgendaTitulo.setInheritsPopupMenu(true);
-
-        lblTituloAgendaPet.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
-        lblTituloAgendaPet.setForeground(new java.awt.Color(102, 102, 102));
-        lblTituloAgendaPet.setText("Agenda de Serviços Petfast");
-
-        javax.swing.GroupLayout pnlAgendaTituloLayout = new javax.swing.GroupLayout(pnlAgendaTitulo);
-        pnlAgendaTitulo.setLayout(pnlAgendaTituloLayout);
-        pnlAgendaTituloLayout.setHorizontalGroup(
-            pnlAgendaTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAgendaTituloLayout.createSequentialGroup()
-                .addGap(254, 254, 254)
-                .addComponent(lblTituloAgendaPet)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlAgendaTituloLayout.setVerticalGroup(
-            pnlAgendaTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAgendaTituloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTituloAgendaPet)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         pnlAgenda.setBackground(new java.awt.Color(204, 229, 229));
         pnlAgenda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
@@ -112,10 +229,25 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         lbltServiço.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbltServiço.setText("Serviço Agendado:");
 
-        jComboBox1.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Banho", "Tosagem", "Higienização", " " }));
-        jComboBox1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
+        cbxServico.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        cbxServico.setForeground(new java.awt.Color(102, 102, 102));
+        cbxServico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Banho", "Tosagem", "Higienização", " " }));
+        cbxServico.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
+        cbxServico.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxServicoItemStateChanged(evt);
+            }
+        });
+        cbxServico.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cbxServicoPropertyChange(evt);
+            }
+        });
+        cbxServico.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                cbxServicoVetoableChange(evt);
+            }
+        });
 
         lblfotoPetAgenda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
 
@@ -123,7 +255,7 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         lbltIdPetClienteAgenda.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lbltIdPetClienteAgenda.setForeground(new java.awt.Color(102, 102, 102));
         lbltIdPetClienteAgenda.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbltIdPetClienteAgenda.setText("Cliente:");
+        lbltIdPetClienteAgenda.setText("Cliente id:");
 
         lblIdClienteAgenda.setBackground(new java.awt.Color(204, 204, 204));
         lblIdClienteAgenda.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
@@ -135,7 +267,7 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         lbltidPet.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lbltidPet.setForeground(new java.awt.Color(102, 102, 102));
         lbltidPet.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbltidPet.setText("id Pet");
+        lbltidPet.setText("Pet id");
 
         lblIdPetAgenda.setBackground(new java.awt.Color(204, 204, 204));
         lblIdPetAgenda.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
@@ -143,43 +275,134 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         lblIdPetAgenda.setText(" ");
         lblIdPetAgenda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
 
+        jdpAgendamento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jdpAgendamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jdpAgendamentoActionPerformed(evt);
+            }
+        });
+
+        lblDataAgendamento.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lblDataAgendamento.setForeground(new java.awt.Color(102, 102, 102));
+        lblDataAgendamento.setText("Data Agendamento : ");
+
+        btnConfirmar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        btnConfirmar.setText("Agendar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+
+        cbxHoraAgendamento.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        cbxHoraAgendamento.setModel(new modelo.ModeloCbxHorario());
+        cbxHoraAgendamento.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cbxHoraAgendamentoPropertyChange(evt);
+            }
+        });
+
+        lbHoraAgendamento.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        lbHoraAgendamento.setForeground(new java.awt.Color(102, 102, 102));
+        lbHoraAgendamento.setText("Hora Agendamento : ");
+
+        btnVoltar.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        lblAgendamentoId.setBackground(new java.awt.Color(204, 204, 204));
+        lblAgendamentoId.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblAgendamentoId.setForeground(new java.awt.Color(102, 102, 102));
+        lblAgendamentoId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblAgendamentoId.setText("Agendamento id:");
+
+        tctIdAgendamento.setBackground(new java.awt.Color(204, 204, 204));
+        tctIdAgendamento.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        tctIdAgendamento.setForeground(new java.awt.Color(102, 102, 102));
+        tctIdAgendamento.setText(" ");
+        tctIdAgendamento.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
+
+        lblServicoId.setBackground(new java.awt.Color(204, 204, 204));
+        lblServicoId.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblServicoId.setForeground(new java.awt.Color(140, 140, 140));
+        lblServicoId.setText("Serviço id:");
+
+        tctIdServico.setBackground(new java.awt.Color(51, 51, 51));
+        tctIdServico.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        tctIdServico.setForeground(new java.awt.Color(140, 140, 140));
+
         javax.swing.GroupLayout jpnlMesAtualLayout = new javax.swing.GroupLayout(jpnlMesAtual);
         jpnlMesAtual.setLayout(jpnlMesAtualLayout);
         jpnlMesAtualLayout.setHorizontalGroup(
             jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlMesAtualLayout.createSequentialGroup()
-                .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnlMesAtualLayout.createSequentialGroup()
-                        .addComponent(lbltidPet, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIdPetAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpnlMesAtualLayout.createSequentialGroup()
+                                .addComponent(lblDataAgendamento)
+                                .addGap(18, 18, 18)
+                                .addComponent(jdpAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbHoraAgendamento)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxHoraAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jpnlMesAtualLayout.createSequentialGroup()
                         .addComponent(lbltServiço, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbxServico, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblServicoId)
+                        .addGap(18, 18, 18)
+                        .addComponent(tctIdServico, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpnlMesAtualLayout.createSequentialGroup()
-                        .addComponent(lbltIdPetClienteAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIdClienteAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpnlMesAtualLayout.createSequentialGroup()
-                        .addComponent(lbltPetCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPetClienteAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpnlMesAtualLayout.createSequentialGroup()
-                        .addComponent(lbltCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblClienteAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblfotoPetAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                        .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpnlMesAtualLayout.createSequentialGroup()
+                                .addComponent(lbltidPet, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblIdPetAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnlMesAtualLayout.createSequentialGroup()
+                                .addComponent(lbltPetCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7)
+                                .addComponent(lblPetClienteAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnlMesAtualLayout.createSequentialGroup()
+                                .addComponent(lbltCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblClienteAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jpnlMesAtualLayout.createSequentialGroup()
+                                    .addComponent(lblAgendamentoId, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tctIdAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jpnlMesAtualLayout.createSequentialGroup()
+                                    .addComponent(lbltIdPetClienteAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblIdClienteAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblfotoPetAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+
+        jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbxHoraAgendamento, jdpAgendamento});
+
         jpnlMesAtualLayout.setVerticalGroup(
             jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlMesAtualLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblfotoPetAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jpnlMesAtualLayout.createSequentialGroup()
+                        .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tctIdAgendamento)
+                            .addComponent(lblAgendamentoId))
+                        .addGap(18, 18, 18)
                         .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblIdClienteAgenda)
                             .addComponent(lbltIdPetClienteAgenda))
@@ -194,61 +417,74 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbltPetCliente)
-                            .addComponent(lblPetClienteAgenda))
-                        .addGap(25, 25, 25)
-                        .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbltServiço, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(507, Short.MAX_VALUE))
+                            .addComponent(lblPetClienteAgenda)))
+                    .addComponent(lblfotoPetAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbltServiço, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxServico, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblServicoId)
+                    .addComponent(tctIdServico, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDataAgendamento)
+                    .addComponent(jdpAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxHoraAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbHoraAgendamento))
+                .addGap(18, 18, 18)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
+
+        jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbxHoraAgendamento, jdpAgendamento});
+
+        jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbxServico, tctIdServico});
 
         pnlAbasAgenda.addTab("Mês Atual", jpnlMesAtual);
 
-        jpnMesProximo.setBackground(new java.awt.Color(229, 255, 255));
-
-        javax.swing.GroupLayout jpnMesProximoLayout = new javax.swing.GroupLayout(jpnMesProximo);
-        jpnMesProximo.setLayout(jpnMesProximoLayout);
-        jpnMesProximoLayout.setHorizontalGroup(
-            jpnMesProximoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 837, Short.MAX_VALUE)
-        );
-        jpnMesProximoLayout.setVerticalGroup(
-            jpnMesProximoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 742, Short.MAX_VALUE)
-        );
-
-        pnlAbasAgenda.addTab("Mês Próximo", jpnMesProximo);
+        lblTituloAgendaPet.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        lblTituloAgendaPet.setForeground(new java.awt.Color(102, 102, 102));
+        lblTituloAgendaPet.setText("Agenda de Serviços Petfast");
 
         javax.swing.GroupLayout pnlAgendaLayout = new javax.swing.GroupLayout(pnlAgenda);
         pnlAgenda.setLayout(pnlAgendaLayout);
         pnlAgendaLayout.setHorizontalGroup(
             pnlAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAgendaLayout.createSequentialGroup()
+            .addGroup(pnlAgendaLayout.createSequentialGroup()
+                .addGap(199, 199, 199)
+                .addComponent(lblTituloAgendaPet)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlAgendaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlAbasAgenda)
                 .addContainerGap())
         );
         pnlAgendaLayout.setVerticalGroup(
             pnlAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAgendaLayout.createSequentialGroup()
+            .addGroup(pnlAgendaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlAbasAgenda)
+                .addComponent(lblTituloAgendaPet)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAbasAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        pnlAgendaBotoes.setBackground(new java.awt.Color(178, 204, 204));
-        pnlAgendaBotoes.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
-        pnlAgendaBotoes.setInheritsPopupMenu(true);
-
-        javax.swing.GroupLayout pnlAgendaBotoesLayout = new javax.swing.GroupLayout(pnlAgendaBotoes);
-        pnlAgendaBotoes.setLayout(pnlAgendaBotoesLayout);
-        pnlAgendaBotoesLayout.setHorizontalGroup(
-            pnlAgendaBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnlAgendaTituloLayout = new javax.swing.GroupLayout(pnlAgendaTitulo);
+        pnlAgendaTitulo.setLayout(pnlAgendaTituloLayout);
+        pnlAgendaTituloLayout.setHorizontalGroup(
+            pnlAgendaTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAgendaTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        pnlAgendaBotoesLayout.setVerticalGroup(
-            pnlAgendaBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 68, Short.MAX_VALUE)
+        pnlAgendaTituloLayout.setVerticalGroup(
+            pnlAgendaTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAgendaTituloLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -256,21 +492,83 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlAgendaTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlAgendaBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlAgendaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlAgendaBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jdpAgendamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdpAgendamentoActionPerformed
+        // TODO add your handling code here:
+        dataAgendamento = jdpAgendamento.getEditor().getText();
+    }//GEN-LAST:event_jdpAgendamentoActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+        Agendamento agendar = new Agendamento();
+        AgendamentoCtrl agendarCtrl = new AgendamentoCtrl();
+
+        boolean resp = validarTelaAgendamento();
+
+        if (resp) {
+
+            //montando o objeto agendamento
+            agendar.setIdAgendamento(Integer.parseInt(tctIdAgendamento.getText()));
+
+            //dataAgendamento
+            String datap = null;
+            datap = DataFormatadaS(jdpAgendamento.getDate().toString());
+            agendar.setDataAgendamento(datap);
+            //final dataAgendamento
+            agendar.setHoraAgendamento(cbxHoraAgendamento.getSelectedItem().toString());
+            agendar.setAnimalId(Integer.parseInt(lblIdPetAgenda.getText()));
+            agendar.setClienteId(Integer.parseInt(lblIdClienteAgenda.getText()));
+            agendar.setServico(cbxServico.getSelectedItem().toString());
+            agendar.setIdServico(Integer.parseInt(tctIdServico.getText()));
+            agendar.setIdProfissional(0);
+
+            agendarCtrl.inserirAgendamentoCtrl(agendar);
+            this.dispose();
+        }
+
+       
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void cbxHoraAgendamentoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbxHoraAgendamentoPropertyChange
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_cbxHoraAgendamentoPropertyChange
+
+    private void cbxServicoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbxServicoPropertyChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cbxServicoPropertyChange
+
+    private void cbxServicoVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_cbxServicoVetoableChange
+
+    }//GEN-LAST:event_cbxServicoVetoableChange
+
+    private void cbxServicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxServicoItemStateChanged
+        // TODO add your handling code here:
+        if (cbxServico.getSelectedIndex() == 0) {
+            tctIdServico.setText("1");
+        } else if (cbxServico.getSelectedIndex() == 1) {
+            tctIdServico.setText("2");
+        } else if (cbxServico.getSelectedIndex() == 2) {
+            tctIdServico.setText("3");
+        }
+    }//GEN-LAST:event_cbxServicoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -308,13 +606,20 @@ public class TelaAgendaServico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JPanel jpnMesProximo;
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JComboBox cbxHoraAgendamento;
+    private javax.swing.JComboBox cbxServico;
+    private org.jdesktop.swingx.JXDatePicker jdpAgendamento;
     private javax.swing.JPanel jpnlMesAtual;
+    private javax.swing.JLabel lbHoraAgendamento;
+    private javax.swing.JLabel lblAgendamentoId;
     private javax.swing.JLabel lblClienteAgenda;
+    private javax.swing.JLabel lblDataAgendamento;
     private javax.swing.JLabel lblIdClienteAgenda;
     private javax.swing.JLabel lblIdPetAgenda;
     private javax.swing.JLabel lblPetClienteAgenda;
+    private javax.swing.JLabel lblServicoId;
     private javax.swing.JLabel lblTituloAgendaPet;
     private javax.swing.JLabel lblfotoPetAgenda;
     private javax.swing.JLabel lbltCliente;
@@ -324,7 +629,79 @@ public class TelaAgendaServico extends javax.swing.JFrame {
     private javax.swing.JLabel lbltidPet;
     private javax.swing.JTabbedPane pnlAbasAgenda;
     private javax.swing.JPanel pnlAgenda;
-    private javax.swing.JPanel pnlAgendaBotoes;
     private javax.swing.JPanel pnlAgendaTitulo;
+    private javax.swing.JLabel tctIdAgendamento;
+    private javax.swing.JLabel tctIdServico;
     // End of variables declaration//GEN-END:variables
+
+    private void montaTelaAGenda(int vidAnimal, int vidCliente) {
+        AnimalCtrl animalCtrl = new AnimalCtrl();
+        ClienteCtrl clienteCtrl = new ClienteCtrl();
+        AgendamentoCtrl agendarCtrl = new AgendamentoCtrl();
+        String idAgendamento = Integer.toString(agendarCtrl.receberIdAgendamentoAtual() + 1);
+        tctIdAgendamento.setText(idAgendamento);
+        animal = animalCtrl.receberAnimaId(vidAnimal);
+        cliente = clienteCtrl.buscarNomeIdInt(vidCliente);
+        colocarMiniFotoLabel(animal.getFoto());
+        System.out.println(animal.getFoto());
+        lblIdClienteAgenda.setText(cliente.getIdCliente());
+        lblClienteAgenda.setText(cliente.getNome());
+        lblIdPetAgenda.setText(animal.getIdAnimal());
+        lblPetClienteAgenda.setText(animal.getNome());
+        cbxServico.setSelectedIndex(-1);
+
+    }
+
+    private void colocarMiniFotoLabel(String urlMiniFoto) {
+        nomeAnimal = lblPetClienteAgenda.getText();
+        Dimension d = lblfotoPetAgenda.getSize();
+        //int width = lblfotoPetAgenda.getWidth();
+        // int height = lblfotoPetAgenda.getHeight();
+
+        String urlFoto = urlMiniFoto; //pegar do combobox
+        System.out.println(urlFoto);
+        ImageIcon foto;
+        foto = new ImageIcon(urlFoto);
+
+        foto.setImage(foto.getImage().getScaledInstance(d.width, d.height, 100));
+        //img.setImage(img.getImage().getScaledInstance(xLargura, yAltura, 100));
+        lblfotoPetAgenda.setIcon(foto);
+        //lblFotoPet.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlFoto)));
+    }
+
+    private boolean validarTelaAgendamento() {
+        boolean resposta = true;
+        String msg = "";
+        
+        String datap = null;
+        datap = DataFormatadaS(jdpAgendamento.getDate().toString());
+        String jdpAgendamento = datap;
+
+        boolean validaDataAgendamento = ValidaCampos.validaVazio(jdpAgendamento);
+        
+        if (cbxHoraAgendamento.getSelectedIndex() == -1) {
+            msg = msg + "Campo Hora agendamento Vazio" + "\n";
+            resposta = false;
+        }
+        
+        if (cbxServico.getSelectedIndex() == -1) {
+            msg = msg + "Campo Servico Vazio" + "\n";
+            resposta = false;
+        }
+        
+
+        if (validaDataAgendamento) {
+        } else {
+            msg = msg + "Campo Data agendamento Vazio" + "\n";
+            resposta = false;
+        }
+
+        if (resposta == false) {
+            JOptionPane.showMessageDialog(this, msg);
+            msg = "";
+        }
+        
+        return resposta;
+    }
+
 }

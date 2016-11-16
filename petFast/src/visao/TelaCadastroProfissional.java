@@ -647,7 +647,7 @@ public class TelaCadastroProfissional extends javax.swing.JFrame {
         profissional.setEmail(tftEmail.getText());
         
         dataNascimentoProfissional = Util.DataFormatadaS(jspNascimento.getValue().toString());
-        profissional.setNascimento(dataHoje);
+        //profissional.setNascimento(dataHoje);
         
         profissional.setNascimento(dataNascimentoProfissional);
         

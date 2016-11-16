@@ -33,6 +33,19 @@ public class AnimalCtrl {
     }
     
     /**
+     * 2a
+     * 
+     * @param nomeAnimal
+     * @param IdCliente
+     * @return 
+     */
+    public Animal receberAnimalNomeIdCliente(String nomeAnimal, int IdCliente){
+        AnimalDAO animalDAO = new AnimalDAO();
+        Animal animal = animalDAO.buscarAnimalNome(nomeAnimal);
+        return animal;  
+    }
+    
+    /**
      * 2
      * Método controle receber o id do último animal cadastrado.
      * se não existir o id atual será 0
