@@ -145,7 +145,7 @@ public class Profissional {
                 + ", nascimento=" + nascimento 
                 + ", contato=" + contato 
                 + ", telefoneContato=" + telefoneContato 
-                + '}';
+                + "}";
     }
     
     

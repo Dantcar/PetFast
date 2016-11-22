@@ -17,7 +17,7 @@
  *  ok  05 - contarAgendamentosHorario(); /retorna número de agendamentos no horário
  *  ok  06 - listarAgendamentoHorario();  
  * 07 - listarAgendamentoSemana()
- * 08 -
+ *  ok  08 - listaAgendamentos();
  *  ok  09 - listarAgendamentoCliente(); //dia ou periodo
  * 10 - listarAgendamentoAnimalDia();
  * 
@@ -424,6 +424,87 @@ public class AgendamentoDAO {
 }//Final método listarAgendamentoHorario
     
     /**
+     * Método 08 listar todos agendamentos
+     * @param vid
+     * @return 
+     */
+    public List<Agendamento> listarAgendamentos(){
+      Agendamento agendamento;
+                
+        List<Agendamento> listaAgendamento = new ArrayList<>();
+        //lista de agerndamentos na data e hora
+        
+        String msg, msgOk, sql;
+        msg = "";
+        msgOk = "";
+        sql = "";
+        
+        sql = "SELECT *"
+            + " FROM agendamento";
+        
+        System.out.println(sql);
+        conexao = DBPetFast.getConnection();
+        ResultSet rs;
+        rs = null;
+      
+        
+        //listaAnimal = null;
+        try {
+            //preparando a conexao com o banco Petfast
+            
+            stmt = conexao.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //executando o comando sql
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            while (rs.next()) {
+                //usando o objeto animal estanciado no início do método
+                agendamento = new Agendamento();
+                
+                agendamento.setIdAgendamento(rs.getInt("idagendamento"));
+                agendamento.setDataAgendamento(rs.getString("dataagendamento"));
+                agendamento.setHoraAgendamento(rs.getString("horaagendamento"));
+                agendamento.setAnimalId(rs.getInt("animalid"));
+                agendamento.setClienteId(rs.getInt("clienteid"));
+                agendamento.setServico(rs.getString("serviço"));
+                agendamento.setIdServico(rs.getInt("idservico"));
+                agendamento.setIdProfissional(rs.getInt("idprofissional"));
+                
+                listaAgendamento.add(agendamento);
+                
+                
+            }
+        } catch (SQLException ex) {
+            msg = msg + ex + "\n";
+            msg = reduzString(msg);
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if ("".equals(msg)) {
+        } else {
+            JOptionPane.showMessageDialog(null, msg);
+        }
+        
+        
+        return listaAgendamento;
+   
+    }//Final listarAgendamentos();
+    
+    /**
      * Método 09 listar agendamento por cliente
      * @param vid
      * @return 
@@ -503,6 +584,5 @@ public class AgendamentoDAO {
         return listaAgendamento;
    
     }//Final listarAgendamentoCliente
-    
  
 }//Final da Classe AgendamentoDAO

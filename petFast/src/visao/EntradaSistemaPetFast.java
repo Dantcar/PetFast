@@ -419,6 +419,16 @@ public class EntradaSistemaPetFast extends javax.swing.JFrame {
 
     private void subMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuSobreActionPerformed
         // TODO add your handling code here:
+        String tituloStatus;
+        tituloStatus = "Tabela Agendamento Serviços Pets";
+
+        TelaTabelaAgendamento tabPet = new TelaTabelaAgendamento();
+        tabPet.setTitle(tituloStatus);
+        tabPet.setVisible(true);
+        add(tabPet, JLayeredPane.DEFAULT_LAYER);
+        tabPet.setDefaultCloseOperation(1);
+        tabPet.setLocation(40, 50);
+        
       //  Cadastro.montaTelaAbout();
     }//GEN-LAST:event_subMenuSobreActionPerformed
 

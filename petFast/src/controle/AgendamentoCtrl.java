@@ -18,7 +18,7 @@
  *  05 - contarAgendamentoHorarioCtrl()
  *  06 - listarAgendamentoHorarioCtrl();
  *  07 -
- *  08 -
+ *  08 - listarAgendamentoCtrl();
  *  09 - listarAgendamentoClienteCtrl()
  *  10 - 
  */
@@ -120,13 +120,26 @@ public class AgendamentoCtrl {
      * @param vid
      * @return 
      */
+    public List listarAgendamentosCtrl(){
+     AgendamentoDAO agendamentoDAO;
+     agendamentoDAO = new AgendamentoDAO();
+     List<Agendamento> lista = agendamentoDAO.listarAgendamentos();
+     return lista;
+    }//Final método listarAgendamentosCtrl
+    
+    /**
+     * 9
+     * Método que recebe uma lista de agendamento de determinado
+     * Cliente enviando como parâmetro o seu respectivo id.
+     * @param vid
+     * @return 
+     */
     public List listarAgendamentoClienteCtrl(String vid){
      AgendamentoDAO agendamentoDAO;
      agendamentoDAO = new AgendamentoDAO();
      List<Agendamento> lista = agendamentoDAO.listarAgendamentoCliente(vid);
      return lista;
     }//Final método listarAgendamentoClienteCtrl
-    
     
     
 }//Final classe AgendamentoCtrl
