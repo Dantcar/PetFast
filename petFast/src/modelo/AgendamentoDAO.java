@@ -295,7 +295,8 @@ public class AgendamentoDAO {
      * */
     public int contarAgendamentosHorario(String vData, String vHora){
         String msg, msgOk, sql;
-        int resultado=0;
+        String resultado = "resultado";
+        int vresultado = 0;
         msg = "";
         msgOk = "";
         
@@ -306,8 +307,8 @@ public class AgendamentoDAO {
         */
         
         sql = "SELECT COUNT (*) AS " + resultado
-                + " FROM agendamento WHERE dataAgendamento = " + vData
-                + " horaAgendamento = " + vHora;
+                + " FROM agendamento WHERE dataAgendamento = '" + vData +"'"
+                + " AND horaAgendamento = '" + vHora+"'";
         
         System.out.println(sql);
         conexao = DBPetFast.getConnection();
@@ -328,8 +329,29 @@ public class AgendamentoDAO {
             Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
+        /*
+         try {
+            if (rs.first()) {
+                idAgendamentoNow = rs.getInt(1);
+                resposta = idAgendamentoNow;
+
+                close();
+            }
+        } catch (SQLException ex) {
+            msg = "" + ex;
+            JOptionPane.showMessageDialog(null, reduzString(msg + ex));
+            Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            close();
+        }
+        */
         try {
             rs = stmt.executeQuery(sql);
+            if (rs.first()) {
+                vresultado = rs.getInt(1);
+                
+                close();
+            }
         } catch (SQLException ex) {
             msg = msg + ex + "\n";
             msg = reduzString(msg);
@@ -340,8 +362,8 @@ public class AgendamentoDAO {
         } else {
             JOptionPane.showMessageDialog(null, msg);
         }
-        System.out.println("A quantidade de agendamentos em "+vData+" - "+vHora +" é "+resultado);
-        return resultado;
+        
+        return vresultado;
     } //Final método contarAgendamentoHorario
     
     /**
