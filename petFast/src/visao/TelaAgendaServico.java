@@ -25,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 import modelo.Agendamento;
 import modelo.Animal;
 import modelo.Cliente;
@@ -86,8 +87,7 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                 (screenSize.height - frameSize.width) / 2));
         this.repaint();
 
-        jbpDisponibilidade.setMinimum(0);
-        jbpDisponibilidade.setMaximum(8);
+        
 
         /*
          configurando formato do calendário
@@ -181,7 +181,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         tctIdAgendamento = new javax.swing.JLabel();
         lblServicoId = new javax.swing.JLabel();
         tctIdServico = new javax.swing.JLabel();
-        jbpDisponibilidade = new javax.swing.JProgressBar();
         lblDisponibilidade = new javax.swing.JLabel();
         lblTituloAgendaPet = new javax.swing.JLabel();
 
@@ -351,8 +350,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         tctIdServico.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         tctIdServico.setForeground(new java.awt.Color(140, 140, 140));
 
-        jbpDisponibilidade.setMaximum(8);
-
         lblDisponibilidade.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblDisponibilidade.setForeground(new java.awt.Color(102, 102, 102));
         lblDisponibilidade.setText("Disponibilidade:");
@@ -401,7 +398,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxHoraAgendamento, 0, 126, Short.MAX_VALUE)
-                            .addComponent(jbpDisponibilidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblDisponibilidade))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 21, Short.MAX_VALUE)
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -417,7 +413,7 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbxHoraAgendamento, jbpDisponibilidade, jdpAgendamento});
+        jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbxHoraAgendamento, jdpAgendamento});
 
         jpnlMesAtualLayout.setVerticalGroup(
             jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -462,14 +458,13 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnlMesAtualLayout.createSequentialGroup()
-                        .addComponent(jbpDisponibilidade, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(31, 31, 31)
                         .addComponent(lblDisponibilidade))
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbxHoraAgendamento, jbpDisponibilidade, jdpAgendamento});
+        jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbxHoraAgendamento, jdpAgendamento});
 
         jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbxServico, tctIdServico});
 
@@ -657,7 +652,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox cbxHoraAgendamento;
     private javax.swing.JComboBox cbxServico;
-    private javax.swing.JProgressBar jbpDisponibilidade;
     private org.jdesktop.swingx.JXDatePicker jdpAgendamento;
     private javax.swing.JPanel jpnlMesAtual;
     private javax.swing.JLabel lbHoraAgendamento;
@@ -768,7 +762,7 @@ public class TelaAgendaServico extends javax.swing.JFrame {
 
     private void verificarDisponibilidade() {
         
-        criarBarraProgressoPet();
+        
         
         int setPb = 0;
         String vdata = DataFormatadaS(jdpAgendamento.getDate().toString());
@@ -777,65 +771,79 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         AgendamentoCtrl agendaCtrl = new AgendamentoCtrl();
         totalAgendamentosHora = agendaCtrl.contarAgendamentoHorarioCtrl(vdata, vhora);
         setPb = totalAgendamentosHora;
-        
+        criarBarraProgressoPet(setPb);
         switch (setPb) {
             case 0:
                 lblDisponibilidade.setText("Horários Disponíveis: 8");
-                jbpDisponibilidade.setBackground(Color.green);
+                //jbpDisponibilidade.setBackground(Color.green);
                 break;
                 
             case 1:
                 lblDisponibilidade.setText("Horários Disponíveis: 7");
-                jbpDisponibilidade.setBackground(Color.green);
+                //jbpDisponibilidade.setBackground(Color.green);
                 break;
             case 2:
                 lblDisponibilidade.setText("Horários Disponíveis: 6");
-                jbpDisponibilidade.setBackground(Color.green);
+                //jbpDisponibilidade.setBackground(Color.green);
                 break;
             case 3:
                 lblDisponibilidade.setText("Horários Disponíveis: 5");
-                jbpDisponibilidade.setBackground(Color.green);
+                //jbpDisponibilidade.setBackground(Color.green);
                 break;
             case 4:
                 lblDisponibilidade.setText("Horários Disponíveis: 4");
-                jbpDisponibilidade.setBackground(Color.green);
+                //jbpDisponibilidade.setBackground(Color.green);
                 break;
             case 5:
                 lblDisponibilidade.setText("Horários Disponíveis: 3");
-                jbpDisponibilidade.setBackground(Color.green);
+                //jbpDisponibilidade.setBackground(Color.green);
                 break;
             case 6:
                 lblDisponibilidade.setText("Horários Disponíveis: 2");
-                jbpDisponibilidade.setBackground(Color.yellow);
+                //jbpDisponibilidade.setBackground(Color.yellow);
                 break;
             case 7:
                 lblDisponibilidade.setText("Horários Disponíveis: 1");
-                jbpDisponibilidade.setBackground(Color.yellow);
+                //jbpDisponibilidade.setBackground(Color.yellow);
                 break;
             case 8:
                 lblDisponibilidade.setText("Horário Indisponível");
-                jbpDisponibilidade.setBackground(Color.red);
+                //jbpDisponibilidade.setBackground(Color.red);
                 break;
 
             default:
                 lblDisponibilidade.setText("Horários Disponíveis");
-                jbpDisponibilidade.setBackground(Color.green);
+                //jbpDisponibilidade.setBackground(Color.green);
 
         }
 
-        jbpDisponibilidade.setValue(setPb);
+        //jbpDisponibilidade.setValue(setPb);
 
     }
 
-    private void criarBarraProgressoPet() {
+    private void criarBarraProgressoPet(int value) {
         JProgressBar jPBar_barra;
-        jPBar_barra = new javax.swing.JProgressBar(0,8);  
+        
+        /**
+         * Escolha da Cor
+         */
+        Color cor = new Color(0,0,134);
+        
+        jPBar_barra = new javax.swing.JProgressBar(0,8);
+        jPBar_barra.setUI(new JProgressModelo(cor));
+        
+        
+        //jPBar_barra.setForeground(new java.awt.Color(0, 153, 153)); 
+        
         jPBar_barra.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N  
-        jPBar_barra.setForeground(new java.awt.Color(0, 0, 153));  
+         
         jPBar_barra.setOpaque(true);  
         jPBar_barra.setStringPainted(true);  
-        getContentPane().add(jPBar_barra);  
-        jPBar_barra.setBounds(350, 300, 240, 20);  
+        getContentPane().add(jPBar_barra);
+        jPBar_barra.setValue(value);
+        jPBar_barra.setBounds(500, 350, 240, 20);
+        repaint();
+        
     }
 
 }
