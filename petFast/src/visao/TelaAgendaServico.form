@@ -108,7 +108,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblTituloAgendaPet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="pnlAbasAgenda" min="-2" pref="411" max="-2" attributes="0"/>
+                      <Component id="pnlAbasAgenda" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -191,37 +191,19 @@
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="jdpAgendamento" linkSize="3" min="-2" pref="167" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="lbHoraAgendamento" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblDisponibilidade" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jbpDisponibilidade" linkSize="3" max="32767" attributes="0"/>
-                                                  <Component id="cbxHoraAgendamento" linkSize="3" pref="126" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="separate" max="32767" attributes="0"/>
+                                              <Component id="lbHoraAgendamento" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="btnVoltar" min="-2" pref="130" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="btnDisponibilidade" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="btnVoltar" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="lblDisponibilidade1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="btnConfirmar" linkSize="6" min="-2" pref="130" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lblTotalHora" linkSize="6" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="cbxHoraAgendamento" linkSize="3" pref="126" max="32767" attributes="0"/>
+                                          <Component id="jbpDisponibilidade" linkSize="3" max="32767" attributes="0"/>
+                                          <Component id="lblDisponibilidade" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace type="unrelated" pref="21" max="32767" attributes="0"/>
+                                      <Component id="btnConfirmar" min="-2" pref="130" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lbltServiço" min="-2" pref="146" max="-2" attributes="0"/>
@@ -290,25 +272,13 @@
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jbpDisponibilidade" linkSize="4" pref="25" max="32767" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="btnDisponibilidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblDisponibilidade1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jbpDisponibilidade" linkSize="4" pref="24" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lblDisponibilidade" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="btnVoltar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                              <Component id="lblDisponibilidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="lblTotalHora" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="btnVoltar" min="-2" pref="35" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace pref="19" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -522,6 +492,8 @@
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jdpAgendamentoActionPerformed"/>
+                        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jdpAgendamentoPropertyChange"/>
+                        <EventHandler event="vetoableChange" listener="java.beans.VetoableChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jdpAgendamentoVetoableChange"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="TelaAgendamentoClientePet_jXDatePicker1"/>
@@ -649,6 +621,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JProgressBar" name="jbpDisponibilidade">
+                      <Properties>
+                        <Property name="maximum" type="int" value="8"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblDisponibilidade">
                       <Properties>
@@ -659,30 +634,6 @@
                           <Color blue="66" green="66" red="66" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Disponibilidade:"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblTotalHora">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btnDisponibilidade">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Times New Roman" size="14" style="1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Disponivel?"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDisponibilidadeActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblDisponibilidade1">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Times New Roman" size="14" style="3"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="66" green="66" red="66" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="servi&#xe7;os Agendados "/>
                       </Properties>
                     </Component>
                   </SubComponents>

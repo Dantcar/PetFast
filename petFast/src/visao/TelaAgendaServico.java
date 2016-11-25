@@ -11,6 +11,7 @@ import controle.ClienteCtrl;
 import controle.Util;
 import static controle.Util.DataFormatadaS;
 import controle.ValidaCampos;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import modelo.Agendamento;
 import modelo.Animal;
 import modelo.Cliente;
@@ -83,6 +85,9 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         setLocation(new Point((screenSize.width - frameSize.width) / 2,
                 (screenSize.height - frameSize.width) / 2));
         this.repaint();
+
+        jbpDisponibilidade.setMinimum(0);
+        jbpDisponibilidade.setMaximum(8);
 
         /*
          configurando formato do calendário
@@ -178,9 +183,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         tctIdServico = new javax.swing.JLabel();
         jbpDisponibilidade = new javax.swing.JProgressBar();
         lblDisponibilidade = new javax.swing.JLabel();
-        lblTotalHora = new javax.swing.JLabel();
-        btnDisponibilidade = new javax.swing.JButton();
-        lblDisponibilidade1 = new javax.swing.JLabel();
         lblTituloAgendaPet = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -280,6 +282,16 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                 jdpAgendamentoActionPerformed(evt);
             }
         });
+        jdpAgendamento.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdpAgendamentoPropertyChange(evt);
+            }
+        });
+        jdpAgendamento.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jdpAgendamentoVetoableChange(evt);
+            }
+        });
 
         lblDataAgendamento.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblDataAgendamento.setForeground(new java.awt.Color(102, 102, 102));
@@ -339,21 +351,11 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         tctIdServico.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         tctIdServico.setForeground(new java.awt.Color(140, 140, 140));
 
+        jbpDisponibilidade.setMaximum(8);
+
         lblDisponibilidade.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         lblDisponibilidade.setForeground(new java.awt.Color(102, 102, 102));
         lblDisponibilidade.setText("Disponibilidade:");
-
-        btnDisponibilidade.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnDisponibilidade.setText("Disponivel?");
-        btnDisponibilidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDisponibilidadeActionPerformed(evt);
-            }
-        });
-
-        lblDisponibilidade1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        lblDisponibilidade1.setForeground(new java.awt.Color(102, 102, 102));
-        lblDisponibilidade1.setText("serviços Agendados ");
 
         javax.swing.GroupLayout jpnlMesAtualLayout = new javax.swing.GroupLayout(jpnlMesAtual);
         jpnlMesAtual.setLayout(jpnlMesAtualLayout);
@@ -394,28 +396,16 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jdpAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbHoraAgendamento)
-                                    .addComponent(lblDisponibilidade))
-                                .addGap(18, 18, 18)
-                                .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jbpDisponibilidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbxHoraAgendamento, 0, 126, Short.MAX_VALUE))
-                                .addGap(18, 18, Short.MAX_VALUE))
-                            .addGroup(jpnlMesAtualLayout.createSequentialGroup()
-                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDisponibilidade)
-                                .addGap(61, 61, 61)))
+                                .addComponent(lbHoraAgendamento))
+                            .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpnlMesAtualLayout.createSequentialGroup()
-                                .addComponent(lblDisponibilidade1)
-                                .addGap(74, 74, 74))
-                            .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnlMesAtualLayout.createSequentialGroup()
-                                    .addComponent(lblTotalHora)
-                                    .addGap(14, 14, 14)))))
+                            .addComponent(cbxHoraAgendamento, 0, 126, Short.MAX_VALUE)
+                            .addComponent(jbpDisponibilidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblDisponibilidade))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 21, Short.MAX_VALUE)
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73))
                     .addGroup(jpnlMesAtualLayout.createSequentialGroup()
                         .addComponent(lbltServiço, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -428,8 +418,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         );
 
         jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbxHoraAgendamento, jbpDisponibilidade, jdpAgendamento});
-
-        jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnConfirmar, lblTotalHora});
 
         jpnlMesAtualLayout.setVerticalGroup(
             jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -474,19 +462,11 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnlMesAtualLayout.createSequentialGroup()
-                        .addComponent(jbpDisponibilidade, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDisponibilidade)
-                            .addComponent(lblDisponibilidade1)))
-                    .addGroup(jpnlMesAtualLayout.createSequentialGroup()
-                        .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpnlMesAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblDisponibilidade))
-                            .addComponent(lblTotalHora, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jbpDisponibilidade, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDisponibilidade))
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jpnlMesAtualLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbxHoraAgendamento, jbpDisponibilidade, jdpAgendamento});
@@ -518,7 +498,7 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblTituloAgendaPet)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlAbasAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlAbasAgenda)
                 .addContainerGap())
         );
 
@@ -555,11 +535,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jdpAgendamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdpAgendamentoActionPerformed
-        // TODO add your handling code here:
-        dataAgendamento = jdpAgendamento.getEditor().getText();
-    }//GEN-LAST:event_jdpAgendamentoActionPerformed
-
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -593,11 +568,11 @@ public class TelaAgendaServico extends javax.swing.JFrame {
             this.dispose();
         }
 
-       
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void cbxHoraAgendamentoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbxHoraAgendamentoPropertyChange
-       
+
 
     }//GEN-LAST:event_cbxHoraAgendamentoPropertyChange
 
@@ -607,8 +582,8 @@ public class TelaAgendaServico extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxServicoPropertyChange
 
     private void cbxServicoVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_cbxServicoVetoableChange
- // TODO add your handling code here:
-       
+        // TODO add your handling code here:
+
     }//GEN-LAST:event_cbxServicoVetoableChange
 
     private void cbxServicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxServicoItemStateChanged
@@ -623,15 +598,24 @@ public class TelaAgendaServico extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxServicoItemStateChanged
 
     private void cbxHoraAgendamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxHoraAgendamentoItemStateChanged
+        verificarDisponibilidade();
 
-     
     }//GEN-LAST:event_cbxHoraAgendamentoItemStateChanged
 
-    private void btnDisponibilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisponibilidadeActionPerformed
+    private void jdpAgendamentoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdpAgendamentoPropertyChange
         // TODO add your handling code here:
-        
+        //        verificarDisponibilidade();
+    }//GEN-LAST:event_jdpAgendamentoPropertyChange
+
+    private void jdpAgendamentoVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jdpAgendamentoVetoableChange
+        // TODO add your handling code here:
+        //verificarDisponibilidade();
+    }//GEN-LAST:event_jdpAgendamentoVetoableChange
+
+    private void jdpAgendamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdpAgendamentoActionPerformed
+        // TODO add your handling code here:
         verificarDisponibilidade();
-    }//GEN-LAST:event_btnDisponibilidadeActionPerformed
+    }//GEN-LAST:event_jdpAgendamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -670,7 +654,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnDisponibilidade;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox cbxHoraAgendamento;
     private javax.swing.JComboBox cbxServico;
@@ -682,13 +665,11 @@ public class TelaAgendaServico extends javax.swing.JFrame {
     private javax.swing.JLabel lblClienteAgenda;
     private javax.swing.JLabel lblDataAgendamento;
     private javax.swing.JLabel lblDisponibilidade;
-    private javax.swing.JLabel lblDisponibilidade1;
     private javax.swing.JLabel lblIdClienteAgenda;
     private javax.swing.JLabel lblIdPetAgenda;
     private javax.swing.JLabel lblPetClienteAgenda;
     private javax.swing.JLabel lblServicoId;
     private javax.swing.JLabel lblTituloAgendaPet;
-    private javax.swing.JLabel lblTotalHora;
     private javax.swing.JLabel lblfotoPetAgenda;
     private javax.swing.JLabel lbltCliente;
     private javax.swing.JLabel lbltIdPetClienteAgenda;
@@ -740,23 +721,36 @@ public class TelaAgendaServico extends javax.swing.JFrame {
     private boolean validarTelaAgendamento() {
         boolean resposta = true;
         String msg = "";
-        
+        String vdata = DataFormatadaS(jdpAgendamento.getDate().toString());
+        String vhora = cbxHoraAgendamento.getSelectedItem().toString();
+        int quantidadeAgendamentoHora = 0;
+        AgendamentoCtrl agendaCtrl = new AgendamentoCtrl();
+
+        if (cbxHoraAgendamento.getSelectedIndex() != -1) {
+            quantidadeAgendamentoHora = agendaCtrl.contarAgendamentoHorarioCtrl(vdata, vhora);
+        }
+
         String datap = null;
         datap = DataFormatadaS(jdpAgendamento.getDate().toString());
         String jdpAgendamento = datap;
 
         boolean validaDataAgendamento = ValidaCampos.validaVazio(jdpAgendamento);
-        
+
         if (cbxHoraAgendamento.getSelectedIndex() == -1) {
             msg = msg + "Campo Hora agendamento Vazio" + "\n";
             resposta = false;
+        } else {
+            if (quantidadeAgendamentoHora == 8) {
+                msg = msg + "Todos as vagas esgotadas para este horário \n"
+                        + "Agendamento para o horário: " + vhora + " indisponível" + "\n ";
+                resposta = false;
+            }
         }
-        
+
         if (cbxServico.getSelectedIndex() == -1) {
             msg = msg + "Campo Servico Vazio" + "\n";
             resposta = false;
         }
-        
 
         if (validaDataAgendamento) {
         } else {
@@ -768,20 +762,80 @@ public class TelaAgendaServico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, msg);
             msg = "";
         }
-        
+
         return resposta;
     }
 
     private void verificarDisponibilidade() {
-         
-         String vdata = DataFormatadaS(jdpAgendamento.getDate().toString());
-         String vhora = cbxHoraAgendamento.getSelectedItem().toString();
-         int totalAgendamentosHora = 0;
-         AgendamentoCtrl agendaCtrl = new AgendamentoCtrl();
-         totalAgendamentosHora = agendaCtrl.contarAgendamentoHorarioCtrl(vdata, vhora);
-         lblDisponibilidade.setText(totalAgendamentosHora+"");
-         System.out.println(totalAgendamentosHora);
-    
+        
+        criarBarraProgressoPet();
+        
+        int setPb = 0;
+        String vdata = DataFormatadaS(jdpAgendamento.getDate().toString());
+        String vhora = cbxHoraAgendamento.getSelectedItem().toString();
+        int totalAgendamentosHora = 0;
+        AgendamentoCtrl agendaCtrl = new AgendamentoCtrl();
+        totalAgendamentosHora = agendaCtrl.contarAgendamentoHorarioCtrl(vdata, vhora);
+        setPb = totalAgendamentosHora;
+        
+        switch (setPb) {
+            case 0:
+                lblDisponibilidade.setText("Horários Disponíveis: 8");
+                jbpDisponibilidade.setBackground(Color.green);
+                break;
+                
+            case 1:
+                lblDisponibilidade.setText("Horários Disponíveis: 7");
+                jbpDisponibilidade.setBackground(Color.green);
+                break;
+            case 2:
+                lblDisponibilidade.setText("Horários Disponíveis: 6");
+                jbpDisponibilidade.setBackground(Color.green);
+                break;
+            case 3:
+                lblDisponibilidade.setText("Horários Disponíveis: 5");
+                jbpDisponibilidade.setBackground(Color.green);
+                break;
+            case 4:
+                lblDisponibilidade.setText("Horários Disponíveis: 4");
+                jbpDisponibilidade.setBackground(Color.green);
+                break;
+            case 5:
+                lblDisponibilidade.setText("Horários Disponíveis: 3");
+                jbpDisponibilidade.setBackground(Color.green);
+                break;
+            case 6:
+                lblDisponibilidade.setText("Horários Disponíveis: 2");
+                jbpDisponibilidade.setBackground(Color.yellow);
+                break;
+            case 7:
+                lblDisponibilidade.setText("Horários Disponíveis: 1");
+                jbpDisponibilidade.setBackground(Color.yellow);
+                break;
+            case 8:
+                lblDisponibilidade.setText("Horário Indisponível");
+                jbpDisponibilidade.setBackground(Color.red);
+                break;
+
+            default:
+                lblDisponibilidade.setText("Horários Disponíveis");
+                jbpDisponibilidade.setBackground(Color.green);
+
+        }
+
+        jbpDisponibilidade.setValue(setPb);
+
+    }
+
+    private void criarBarraProgressoPet() {
+        JProgressBar jPBar_barra;
+        jPBar_barra = new javax.swing.JProgressBar(0,8);  
+        jPBar_barra.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N  
+        jPBar_barra.setForeground(new java.awt.Color(0, 0, 153));  
+        jPBar_barra.setOpaque(true);  
+        jPBar_barra.setStringPainted(true);  
+        getContentPane().add(jPBar_barra);  
+        jPBar_barra.setBounds(350, 300, 240, 20);  
     }
 
 }
