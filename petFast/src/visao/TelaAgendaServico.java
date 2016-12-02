@@ -87,8 +87,6 @@ public class TelaAgendaServico extends javax.swing.JFrame {
                 (screenSize.height - frameSize.width) / 2));
         this.repaint();
 
-        
-
         /*
          configurando formato do calendário
          */
@@ -510,7 +508,7 @@ public class TelaAgendaServico extends javax.swing.JFrame {
             pnlAgendaTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAgendaTituloLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -523,7 +521,7 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlAgendaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlAgendaTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
         );
 
@@ -716,11 +714,14 @@ public class TelaAgendaServico extends javax.swing.JFrame {
         boolean resposta = true;
         String msg = "";
         String vdata = DataFormatadaS(jdpAgendamento.getDate().toString());
-        String vhora = cbxHoraAgendamento.getSelectedItem().toString();
+        String vhora ="";
+        
+        
         int quantidadeAgendamentoHora = 0;
         AgendamentoCtrl agendaCtrl = new AgendamentoCtrl();
 
         if (cbxHoraAgendamento.getSelectedIndex() != -1) {
+            vhora = cbxHoraAgendamento.getSelectedItem().toString();
             quantidadeAgendamentoHora = agendaCtrl.contarAgendamentoHorarioCtrl(vdata, vhora);
         }
 
@@ -761,89 +762,89 @@ public class TelaAgendaServico extends javax.swing.JFrame {
     }
 
     private void verificarDisponibilidade() {
-        
-        
-        
-        int setPb = 0;
-        String vdata = DataFormatadaS(jdpAgendamento.getDate().toString());
-        String vhora = cbxHoraAgendamento.getSelectedItem().toString();
-        int totalAgendamentosHora = 0;
-        AgendamentoCtrl agendaCtrl = new AgendamentoCtrl();
-        totalAgendamentosHora = agendaCtrl.contarAgendamentoHorarioCtrl(vdata, vhora);
-        setPb = totalAgendamentosHora;
-        criarBarraProgressoPet(setPb);
-        switch (setPb) {
-            case 0:
-                lblDisponibilidade.setText("Horários Disponíveis: 8");
-                //jbpDisponibilidade.setBackground(Color.green);
-                break;
-                
-            case 1:
-                lblDisponibilidade.setText("Horários Disponíveis: 7");
-                //jbpDisponibilidade.setBackground(Color.green);
-                break;
-            case 2:
-                lblDisponibilidade.setText("Horários Disponíveis: 6");
-                //jbpDisponibilidade.setBackground(Color.green);
-                break;
-            case 3:
-                lblDisponibilidade.setText("Horários Disponíveis: 5");
-                //jbpDisponibilidade.setBackground(Color.green);
-                break;
-            case 4:
-                lblDisponibilidade.setText("Horários Disponíveis: 4");
-                //jbpDisponibilidade.setBackground(Color.green);
-                break;
-            case 5:
-                lblDisponibilidade.setText("Horários Disponíveis: 3");
-                //jbpDisponibilidade.setBackground(Color.green);
-                break;
-            case 6:
-                lblDisponibilidade.setText("Horários Disponíveis: 2");
-                //jbpDisponibilidade.setBackground(Color.yellow);
-                break;
-            case 7:
-                lblDisponibilidade.setText("Horários Disponíveis: 1");
-                //jbpDisponibilidade.setBackground(Color.yellow);
-                break;
-            case 8:
-                lblDisponibilidade.setText("Horário Indisponível");
-                //jbpDisponibilidade.setBackground(Color.red);
-                break;
 
-            default:
-                lblDisponibilidade.setText("Horários Disponíveis");
-                //jbpDisponibilidade.setBackground(Color.green);
+        if (cbxHoraAgendamento.getSelectedIndex() != -1) {
+            int setPb = 0;
+            String vdata = DataFormatadaS(jdpAgendamento.getDate().toString());
+            String vhora = cbxHoraAgendamento.getSelectedItem().toString();
 
+            cbxHoraAgendamento.getSelectedItem().toString();
+
+            int totalAgendamentosHora = 0;
+            AgendamentoCtrl agendaCtrl = new AgendamentoCtrl();
+            totalAgendamentosHora = agendaCtrl.contarAgendamentoHorarioCtrl(vdata, vhora);
+            setPb = totalAgendamentosHora;
+            criarBarraProgressoPet(setPb);
+            switch (setPb) {
+                case 0:
+                    lblDisponibilidade.setText("Horários Disponíveis: 8");
+                    //jbpDisponibilidade.setBackground(Color.green);
+                    break;
+
+                case 1:
+                    lblDisponibilidade.setText("Horários Disponíveis: 7");
+                    //jbpDisponibilidade.setBackground(Color.green);
+                    break;
+                case 2:
+                    lblDisponibilidade.setText("Horários Disponíveis: 6");
+                    //jbpDisponibilidade.setBackground(Color.green);
+                    break;
+                case 3:
+                    lblDisponibilidade.setText("Horários Disponíveis: 5");
+                    //jbpDisponibilidade.setBackground(Color.green);
+                    break;
+                case 4:
+                    lblDisponibilidade.setText("Horários Disponíveis: 4");
+                    //jbpDisponibilidade.setBackground(Color.green);
+                    break;
+                case 5:
+                    lblDisponibilidade.setText("Horários Disponíveis: 3");
+                    //jbpDisponibilidade.setBackground(Color.green);
+                    break;
+                case 6:
+                    lblDisponibilidade.setText("Horários Disponíveis: 2");
+                    //jbpDisponibilidade.setBackground(Color.yellow);
+                    break;
+                case 7:
+                    lblDisponibilidade.setText("Horários Disponíveis: 1");
+                    //jbpDisponibilidade.setBackground(Color.yellow);
+                    break;
+                case 8:
+                    lblDisponibilidade.setText("Horário Indisponível");
+                    //jbpDisponibilidade.setBackground(Color.red);
+                    break;
+
+                default:
+                    lblDisponibilidade.setText("Horários Disponíveis");
+                //jbpDisponibilidade.setBackground(Color.green);
+            }
+
+        //jbpDisponibilidade.setValue(setPb);  
         }
 
-        //jbpDisponibilidade.setValue(setPb);
-
-    }
+    }//final método verificarDisponibilidade
 
     private void criarBarraProgressoPet(int value) {
         JProgressBar jPBar_barra;
-        
+
         /**
          * Escolha da Cor
          */
-        Color cor = new Color(0,0,134);
-        
-        jPBar_barra = new javax.swing.JProgressBar(0,8);
-        jPBar_barra.setUI(new JProgressModelo(cor));
-        
-        
+        Color cor = new Color(0, 0, 134);
+
+        jPBar_barra = new javax.swing.JProgressBar(0, 8);
+        //jPBar_barra.setUI(new JProgressModelo(cor));
+
         //jPBar_barra.setForeground(new java.awt.Color(0, 153, 153)); 
-        
         jPBar_barra.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N  
-         
-        jPBar_barra.setOpaque(true);  
-        jPBar_barra.setStringPainted(true);  
+
+        jPBar_barra.setOpaque(true);
+        jPBar_barra.setStringPainted(true);
         getContentPane().add(jPBar_barra);
         jPBar_barra.setValue(value);
-        jPBar_barra.setBounds(500, 350, 240, 20);
+        jPBar_barra.setBounds(100, 100, 240, 20);
         repaint();
-        
+
     }
 
 }
